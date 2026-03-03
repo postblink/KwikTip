@@ -71,7 +71,7 @@ function KwikTip:UpdateVisibility()
     end
 
     local inInstance, instanceType = IsInInstance()
-    local inContent = inInstance and (instanceType == "party" or instanceType == "raid")
+    local inContent = inInstance and (instanceType == "party" or instanceType == "raid" or instanceType == "scenario")
 
     if self.moveMode or inContent then
         hud:Show()

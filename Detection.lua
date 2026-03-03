@@ -40,7 +40,7 @@ end
 -- Called on zone transitions and login.
 function KwikTip:UpdateContent()
     local inInstance, instanceType = IsInInstance()
-    if not inInstance or (instanceType ~= "party" and instanceType ~= "raid") then
+    if not inInstance or (instanceType ~= "party" and instanceType ~= "raid" and instanceType ~= "scenario") then
         self:SetContent("")
         return
     end

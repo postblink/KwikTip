@@ -75,7 +75,7 @@ end
 -- Config Window
 -- ============================================================
 local cfg = CreateFrame("Frame", "KwikTipConfig", UIParent, "BasicFrameTemplate")
-cfg:SetSize(280, 490)
+cfg:SetSize(280, 512)
 cfg:SetPoint("CENTER")
 cfg:SetFrameStrata("HIGH")
 cfg:SetMovable(true)
@@ -110,9 +110,92 @@ moveBtn:SetScript("OnClick", function()
     KwikTip:ToggleMoveMode()
 end)
 
+-- X/Y position rows with pixel nudge and manual entry
+local posXEdit, posYEdit  -- forward-declared so ApplyXY closure can reference them
+
+local function ApplyXY(x, y)
+    x = math.floor(tonumber(x) or KwikTipDB.x or 0)
+    y = math.floor(tonumber(y) or KwikTipDB.y or 0)
+    KwikTipDB.x = x
+    KwikTipDB.y = y
+    KwikTip.HUD:ClearAllPoints()
+    KwikTip.HUD:SetPoint(KwikTipDB.point or "CENTER", UIParent, "CENTER", x, y)
+    posXEdit:SetText(tostring(x))
+    posYEdit:SetText(tostring(y))
+end
+
+local function MakeNudgeRow(label, parent, anchor)
+    local wrap = CreateFrame("Frame", nil, parent)
+    wrap:SetSize(256, 24)
+    wrap:SetPoint("TOPLEFT", anchor, "BOTTOMLEFT", 0, -6)
+
+    local lbl = wrap:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    lbl:SetPoint("LEFT", wrap, "LEFT", 0, 0)
+    lbl:SetText(label)
+    lbl:SetWidth(18)
+
+    local minusBtn = CreateFrame("Button", nil, wrap, "UIPanelButtonTemplate")
+    minusBtn:SetSize(24, 22)
+    minusBtn:SetPoint("LEFT", lbl, "RIGHT", 4, 0)
+    minusBtn:SetText("-")
+
+    local ebBg = CreateFrame("Frame", nil, wrap, "BackdropTemplate")
+    ebBg:SetSize(72, 22)
+    ebBg:SetPoint("LEFT", minusBtn, "RIGHT", 2, 0)
+    ebBg:SetBackdrop({
+        bgFile   = "Interface\\Tooltips\\UI-Tooltip-Background",
+        edgeFile = "Interface\\Buttons\\WHITE8x8",
+        edgeSize = 1,
+        insets   = { left = 2, right = 2, top = 2, bottom = 2 },
+    })
+    ebBg:SetBackdropColor(0.1, 0.1, 0.1, 0.9)
+    ebBg:SetBackdropBorderColor(0.4, 0.4, 0.4, 1)
+
+    local eb = CreateFrame("EditBox", nil, ebBg)
+    eb:SetSize(66, 18)
+    eb:SetPoint("CENTER", ebBg, "CENTER")
+    eb:SetFontObject(GameFontNormal)
+    eb:SetAutoFocus(false)
+    eb:SetMaxLetters(8)
+    eb:SetJustifyH("CENTER")
+
+    local plusBtn = CreateFrame("Button", nil, wrap, "UIPanelButtonTemplate")
+    plusBtn:SetSize(24, 22)
+    plusBtn:SetPoint("LEFT", ebBg, "RIGHT", 2, 0)
+    plusBtn:SetText("+")
+
+    return wrap, eb, minusBtn, plusBtn
+end
+
+local posXRow, posXMinus, posXPlus
+posXRow, posXEdit, posXMinus, posXPlus = MakeNudgeRow("X:", cfg, moveBtn)
+posXEdit:SetScript("OnEnterPressed", function(self)
+    ApplyXY(self:GetText(), KwikTipDB.y)
+    self:ClearFocus()
+end)
+posXEdit:SetScript("OnEscapePressed", function(self)
+    self:SetText(tostring(math.floor(KwikTipDB.x or 0)))
+    self:ClearFocus()
+end)
+posXMinus:SetScript("OnClick", function() ApplyXY((KwikTipDB.x or 0) - 1, KwikTipDB.y) end)
+posXPlus:SetScript("OnClick",  function() ApplyXY((KwikTipDB.x or 0) + 1, KwikTipDB.y) end)
+
+local posYRow, posYMinus, posYPlus
+posYRow, posYEdit, posYMinus, posYPlus = MakeNudgeRow("Y:", cfg, posXRow)
+posYEdit:SetScript("OnEnterPressed", function(self)
+    ApplyXY(KwikTipDB.x, self:GetText())
+    self:ClearFocus()
+end)
+posYEdit:SetScript("OnEscapePressed", function(self)
+    self:SetText(tostring(math.floor(KwikTipDB.y or 0)))
+    self:ClearFocus()
+end)
+posYMinus:SetScript("OnClick", function() ApplyXY(KwikTipDB.x, (KwikTipDB.y or 0) - 1) end)
+posYPlus:SetScript("OnClick",  function() ApplyXY(KwikTipDB.x, (KwikTipDB.y or 0) + 1) end)
+
 -- ---- DISPLAY section -----------------------------------------
 local dispHeader = cfg:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
-dispHeader:SetPoint("TOPLEFT", moveBtn, "BOTTOMLEFT", 0, -14)
+dispHeader:SetPoint("TOPLEFT", posYRow, "BOTTOMLEFT", 0, -14)
 dispHeader:SetText("DISPLAY")
 dispHeader:SetTextColor(0.6, 0.6, 0.6)
 
@@ -217,31 +300,48 @@ opacitySlider:SetScript("OnValueChanged", function(self, value)
     self._lbl:SetText(string.format("Opacity: %d%%", value))
 end)
 
--- Width slider
-local widthSlider = MakeSlider(
-    "KwikTipWidthSlider", cfg, opacitySlider._wrap,
-    100, 500, 10, "Width", "100", "500"
-)
-widthSlider:SetScript("OnValueChanged", function(self, value)
-    KwikTipDB.width = value
-    KwikTip.HUD:SetWidth(value)
-    self._lbl:SetText("Width: " .. value)
-end)
+-- Width/height nudge rows
+local widthEdit, heightEdit  -- forward-declared for ApplySize closure
 
--- Height slider
-local heightSlider = MakeSlider(
-    "KwikTipHeightSlider", cfg, widthSlider._wrap,
-    40, 300, 10, "Height", "40", "300"
-)
-heightSlider:SetScript("OnValueChanged", function(self, value)
-    KwikTipDB.height = value
-    KwikTip.HUD:SetHeight(value)
-    self._lbl:SetText("Height: " .. value)
+local function ApplySize(w, h)
+    w = math.max(100, math.min(600, math.floor(tonumber(w) or KwikTipDB.width or 220)))
+    h = math.max(40,  math.min(400, math.floor(tonumber(h) or KwikTipDB.height or 80)))
+    KwikTipDB.width  = w
+    KwikTipDB.height = h
+    KwikTip.HUD:SetSize(w, h)
+    widthEdit:SetText(tostring(w))
+    heightEdit:SetText(tostring(h))
+end
+
+local widthRow, widthMinus, widthPlus
+widthRow, widthEdit, widthMinus, widthPlus = MakeNudgeRow("W:", cfg, opacitySlider._wrap)
+widthEdit:SetScript("OnEnterPressed", function(self)
+    ApplySize(self:GetText(), KwikTipDB.height)
+    self:ClearFocus()
 end)
+widthEdit:SetScript("OnEscapePressed", function(self)
+    self:SetText(tostring(KwikTipDB.width or 220))
+    self:ClearFocus()
+end)
+widthMinus:SetScript("OnClick", function() ApplySize((KwikTipDB.width or 220) - 1, KwikTipDB.height) end)
+widthPlus:SetScript("OnClick",  function() ApplySize((KwikTipDB.width or 220) + 1, KwikTipDB.height) end)
+
+local heightRow, heightMinus, heightPlus
+heightRow, heightEdit, heightMinus, heightPlus = MakeNudgeRow("H:", cfg, widthRow)
+heightEdit:SetScript("OnEnterPressed", function(self)
+    ApplySize(KwikTipDB.width, self:GetText())
+    self:ClearFocus()
+end)
+heightEdit:SetScript("OnEscapePressed", function(self)
+    self:SetText(tostring(KwikTipDB.height or 80))
+    self:ClearFocus()
+end)
+heightMinus:SetScript("OnClick", function() ApplySize(KwikTipDB.width, (KwikTipDB.height or 80) - 1) end)
+heightPlus:SetScript("OnClick",  function() ApplySize(KwikTipDB.width, (KwikTipDB.height or 80) + 1) end)
 
 -- ---- DEBUG section -------------------------------------------
 local debugHeader = cfg:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
-debugHeader:SetPoint("TOPLEFT", heightSlider._wrap, "BOTTOMLEFT", -8, -14)
+debugHeader:SetPoint("TOPLEFT", heightRow, "BOTTOMLEFT", -8, -14)
 debugHeader:SetText("DEBUG")
 debugHeader:SetTextColor(0.6, 0.6, 0.6)
 
@@ -283,9 +383,11 @@ local function PopulateConfig()
     showMinimapCB:SetChecked(db.showMinimapButton)
     hideHUDCB:SetChecked(db.persistentHide)
     opacitySlider:SetValue(math.floor(db.alpha * 100 + 0.5))
-    widthSlider:SetValue(db.width)
-    heightSlider:SetValue(db.height)
+    widthEdit:SetText(tostring(db.width or 220))
+    heightEdit:SetText(tostring(db.height or 80))
     debugLogCB:SetChecked(db.debugLog)
+    posXEdit:SetText(tostring(math.floor(db.x or 0)))
+    posYEdit:SetText(tostring(math.floor(db.y or 0)))
     KwikTip:_UpdateConfigMoveBtn()
 end
 

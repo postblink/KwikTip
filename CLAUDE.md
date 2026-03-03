@@ -73,8 +73,9 @@ See `DungeonData.lua` for the full data table.
 ## Slash Commands
 | Command | Action |
 |---|---|
-| `/kt` or `/kt config` | Open/close settings window |
-| `/kt move` | Toggle move mode on the HUD |
+| `/kwiktip` or `/kwik` | Open/close settings window |
+| `/kwik move` | Toggle move mode on the HUD |
+| `/kwik debug` | Print current instance detection state to chat |
 
 ## TODO / Known Gaps
 - Legacy dungeon `uiMapID`s are set to `0` — original zone IDs may have changed when re-tuned for Midnight; verify in-game with `/run print(C_Map.GetBestMapForUnit("player"))`

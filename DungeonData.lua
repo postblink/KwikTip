@@ -58,7 +58,8 @@ KwikTip.DUNGEONS = {
         },
     },
     {
-        uiMapID    = 2825,
+        uiMapID    = 2514,
+        altMapIDs  = { 2564 },  -- 2564 = entrance/antechamber sub-zone
         name       = "Den of Nalorakk",
         location   = "Zul'Aman",
         season     = "midnight",
@@ -88,7 +89,8 @@ KwikTip.DUNGEONS = {
     -- NEW MIDNIGHT DUNGEONS — Max Level (88–90)
     -- --------------------------------------------------------
     {
-        uiMapID    = 2811,
+        uiMapID    = 2511,
+        altMapIDs  = { 2424, 2515, 2519, 2520 },  -- antechamber, entrance, sub-zones
         name       = "Magisters' Terrace",
         location   = "Isle of Quel'Danas",
         season     = "midnight",
@@ -212,5 +214,10 @@ KwikTip.DUNGEON_BY_UIMAPID = {}
 for _, dungeon in ipairs(KwikTip.DUNGEONS) do
     if dungeon.uiMapID ~= 0 then
         KwikTip.DUNGEON_BY_UIMAPID[dungeon.uiMapID] = dungeon
+    end
+    if dungeon.altMapIDs then
+        for _, id in ipairs(dungeon.altMapIDs) do
+            KwikTip.DUNGEON_BY_UIMAPID[id] = dungeon
+        end
     end
 end

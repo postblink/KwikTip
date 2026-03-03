@@ -54,6 +54,9 @@ function KwikTip:OnLoad()
             KwikTipDB[k] = v
         end
     end
+    -- Apply saved settings now so position is restored on /reload.
+    -- (PLAYER_LOGIN does not fire on reload, so OnLogin's call is not enough.)
+    self:ApplySettings()
 end
 
 function KwikTip:OnLogin()
@@ -71,7 +74,7 @@ end
 function KwikTip:LogMapID()
     if not KwikTipDB or not KwikTipDB.debugLog then return end
     local inInstance, instanceType = IsInInstance()
-    if not inInstance then return end
+    if not inInstance or (instanceType ~= "party" and instanceType ~= "raid" and instanceType ~= "scenario") then return end
     local mapID = C_Map.GetBestMapForUnit("player")
     local instanceName = GetInstanceInfo()
     table.insert(KwikTipDB.mapIDLog, {

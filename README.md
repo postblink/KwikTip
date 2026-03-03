@@ -57,7 +57,7 @@ Inspired by **QE Dungeon Tips** by QEdev (no longer maintained).
 
 | Command | Action |
 |---|---|
-| `/kwik` | Open/close settings |
+| `/kwiktip` or `/kwik` | Open/close settings |
 | `/kwik move` | Toggle move mode (drag the HUD) |
 | `/kwik debug` | Print current instance detection state to chat |
 
