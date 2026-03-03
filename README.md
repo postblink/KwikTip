@@ -1,4 +1,6 @@
-# KwikTip
+<p align="center">
+  <img src="assets/ktlogo.png" alt="KwikTip" />
+</p>
 
 A World of Warcraft: Midnight addon that displays contextual tips for dungeons and raids. As your group moves through an instance, KwikTip surfaces relevant boss and trash tips in a small, unobtrusive HUD — no interaction required mid-pull.
 
@@ -10,9 +12,6 @@ Inspired by **QE Dungeon Tips** by QEdev (no longer maintained).
 
 - **Area-aware HUD** — automatically shows and hides based on whether you're in a supported instance
 - **Boss tips** — concise, actionable guidance for every boss in the Season 1 M+ rotation
-- **Draggable overlay** — reposition the HUD anywhere on screen; position is saved between sessions
-- **Minimap button** — quick access to settings; draggable around the minimap edge
-- **Fully configurable** — opacity, width, height, and visibility controls in a clean settings panel
 
 ---
 
@@ -62,15 +61,3 @@ Inspired by **QE Dungeon Tips** by QEdev (no longer maintained).
 | `/kwik debug` | Print current instance detection state to chat |
 
 The HUD is hidden outside of instances. Use `/kwik move` to show and reposition it at any time.
-
----
-
-## Requirements
-
-- **WoW: Midnight** — Interface `120001`
-
----
-
-## Project Status
-
-Early development. Boss tips are written for all Season 1 dungeons. Area-based tip switching (swapping content as the group moves through dungeon sub-zones) is planned but not yet implemented.
