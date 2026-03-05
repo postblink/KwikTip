@@ -33,13 +33,10 @@ local ADDON_NAME, KwikTip = ...
 --     npcID     : numeric NPC ID extracted from UnitGUID("target"):match("-(%d+)-%x+$")
 --     name      : mob display name
 --     tip       : contextual tip shown in HUD when this mob is targeted
---   areas       : optional list; if present, HUD switches to area mode during trash
---     name      : display name shown in HUD header
---     tip       : contextual tip for this area
---     x1        : left bound   (0.0–1.0, C_Map.GetPlayerMapPosition — origin is top-left)
---     y1        : top bound    (y increases downward)
---     x2        : right bound
---     y2        : bottom bound
+--   areas       : optional list; if present, HUD switches to area-based tips
+--                 matched against GetSubZoneText() as the player moves through the dungeon
+--     subzone   : exact string returned by GetSubZoneText() for this area (verify in-game)
+--     tip       : contextual tip shown in HUD when the player is in this sub-zone
 --
 -- Season 1 M+ rotation (8 dungeons total):
 --   New Midnight: Magisters' Terrace, Maisara Caverns, Nexus-Point Xenas, Windrunner Spire

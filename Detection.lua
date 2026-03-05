@@ -2,28 +2,6 @@
 local ADDON_NAME, KwikTip = ...
 
 -- ============================================================
--- Position helper
--- ============================================================
-
--- Try GetPlayerMapPosition on mapID first. If it returns nil (common for
--- top-level zone maps), scan direct children via GetMapChildrenInfo and
--- return the first child that yields a valid position.
--- Returns: pos, workingMapID  (nil, nil if nothing works)
-function KwikTip:GetPlayerPosition(mapID)
-    if not mapID then return nil, nil end
-    local pos = C_Map.GetPlayerMapPosition(mapID, "player")
-    if pos then return pos, mapID end
-    local children = C_Map.GetMapChildrenInfo(mapID)
-    if children then
-        for _, child in ipairs(children) do
-            pos = C_Map.GetPlayerMapPosition(child.mapID, "player")
-            if pos then return pos, child.mapID end
-        end
-    end
-    return nil, nil
-end
-
--- ============================================================
 -- Content formatting
 -- ============================================================
 
@@ -50,88 +28,64 @@ local function FormatTrashContent(dungeon, mob)
     return header
 end
 
--- Build the HUD string for a named area. Returns nil if the player isn't in any defined area.
-local function FormatAreaContent(dungeon, mapID)
-    local pos = KwikTip:GetPlayerPosition(mapID)
-    if not pos then return nil end
+-- Build the HUD string for the current sub-zone area.
+-- Matches GetSubZoneText() against dungeon.areas[].subzone.
+-- Returns nil if the current sub-zone has no defined tip.
+local function FormatAreaContent(dungeon)
+    local subzone = GetSubZoneText()
+    if not subzone or subzone == "" then return nil end
     for _, a in ipairs(dungeon.areas) do
-        if pos.x >= a.x1 and pos.x <= a.x2 and pos.y >= a.y1 and pos.y <= a.y2 then
+        if a.subzone == subzone then
             return GOLD .. dungeon.name .. RESET .. "\n"
-                .. WHITE .. a.name .. RESET .. "\n"
-                .. a.tip
+                .. WHITE .. subzone .. RESET .. "\n"
+                .. GRAY .. a.tip .. RESET
         end
     end
     return nil
 end
 
 -- ============================================================
--- Area ticker — polls position every 2 s when in an area-mapped dungeon
--- ============================================================
-
-local areaTicker
-
-local function StartAreaTicker()
-    if not areaTicker then
-        areaTicker = C_Timer.NewTicker(2, function()
-            KwikTip:UpdateContent()
-        end)
-    end
-end
-
-local function StopAreaTicker()
-    if areaTicker then
-        areaTicker:Cancel()
-        areaTicker = nil
-    end
-end
-
--- ============================================================
--- Debug position ticker — auto-logs position when the player
--- moves significantly (>5% of map width). Gated on debugLog setting.
+-- Debug sub-zone ticker
+-- Logs when the player enters a new sub-zone inside an instance.
+-- Fires on a 2 s poll as a safety net; ZONE_CHANGED events handle
+-- most transitions and drive UpdateContent directly.
+-- Gated on the debugLog setting.
 -- ============================================================
 
 local debugTicker
-local _lastLogX, _lastLogY = -1, -1
-local DEBUG_DIST_SQ = 0.05 * 0.05
+local _lastLoggedSubzone = nil
 
 local function StopDebugTicker()
     if debugTicker then
         debugTicker:Cancel()
         debugTicker = nil
     end
-    _lastLogX, _lastLogY = -1, -1
+    _lastLoggedSubzone = nil
 end
 
 local function StartDebugTicker()
     if not KwikTipDB or not KwikTipDB.debugLog then return end
     if debugTicker then return end
-    _lastLogX, _lastLogY = -1, -1
+    _lastLoggedSubzone = nil
     debugTicker = C_Timer.NewTicker(2, function()
-        local mapID = C_Map.GetBestMapForUnit("player")
-        if not mapID then return end
-        local pos, workingMapID = KwikTip:GetPlayerPosition(mapID)
-        if not pos then return end
-        local dx = pos.x - _lastLogX
-        local dy = pos.y - _lastLogY
-        if (dx * dx + dy * dy) < DEBUG_DIST_SQ then return end
-        _lastLogX, _lastLogY = pos.x, pos.y
+        local subzone = GetSubZoneText() or ""
+        if subzone == _lastLoggedSubzone then return end
+        _lastLoggedSubzone = subzone
         local instanceName, instanceType, _, _, _, _, _, instanceID = GetInstanceInfo()
+        local mapID  = C_Map.GetBestMapForUnit("player")
         local dungeon = instanceID and KwikTip.DUNGEON_BY_INSTANCEID[instanceID]
-        local mapNote = (workingMapID ~= mapID) and ("  posMapID=" .. workingMapID) or ""
-        print(string.format("|cff00ff00KwikTip|r pos=%.4f, %.4f  %s  mapID=%d%s  instanceID=%s",
-            pos.x, pos.y,
+        print(string.format("|cff00ff00KwikTip|r subzone=%q  %s  mapID=%s  instanceID=%s",
+            subzone,
             dungeon and dungeon.name or (instanceName or "unknown"),
-            mapID, mapNote,
+            tostring(mapID),
             tostring(instanceID)))
         table.insert(KwikTipDB.mapIDLog, {
             mapID        = mapID,
-            workingMapID = (workingMapID ~= mapID) and workingMapID or nil,
             instanceID   = instanceID,
             instanceName = instanceName,
             instanceType = instanceType,
+            subzone      = subzone,
             time         = date("%Y-%m-%d %H:%M:%S"),
-            x            = string.format("%.4f", pos.x),
-            y            = string.format("%.4f", pos.y),
         })
         if #KwikTipDB.mapIDLog > 2000 then
             table.remove(KwikTipDB.mapIDLog, 1)
@@ -143,10 +97,9 @@ end
 -- Boss encounter state
 -- ============================================================
 
--- Called by ENCOUNTER_START. Locks the HUD to boss tip for the fight duration.
+-- Called by ENCOUNTER_START. Locks the HUD to the boss tip for the fight duration.
 function KwikTip:OnEncounterStart(encounterID)
     self.bossActive = true
-    StopAreaTicker()
     StopDebugTicker()
     local entry = KwikTip.BOSS_BY_ENCOUNTERID[encounterID]
     if entry then
@@ -161,34 +114,28 @@ end
 function KwikTip:OnEncounterEnd()
     self.bossActive = false
     self:SetContent("")
-    self:UpdateContent()   -- refreshes areaActive and tickers
+    self:UpdateContent()
     self:UpdateVisibility()
 end
 
 -- ============================================================
--- Mob position logging
+-- Mob logging
 -- ============================================================
--- Logs the player's position when targeting or mousing over a hostile NPC inside
--- an instance, for later use in proximity-based trash tip triggering.
+-- Logs the NPC name, sub-zone, and instance context when targeting or
+-- mousing over a hostile NPC, for future trash tip data collection.
 
 local _lastLoggedNpcID = nil  -- deduplicate mouseover spam
 
 local function LogMobPosition(npcID, unitToken)
     if not KwikTipDB or not KwikTipDB.debugLog then return end
-    local mapID = C_Map.GetBestMapForUnit("player")
-    if not mapID then return end
-    local pos, workingMapID = KwikTip:GetPlayerPosition(mapID)
-    if not pos then return end
     local instanceName, _, _, _, _, _, _, instanceID = GetInstanceInfo()
     table.insert(KwikTipDB.mobLog, {
         npcID        = npcID,
         npcName      = UnitName(unitToken),
-        mapID        = mapID,
-        workingMapID = (workingMapID ~= mapID) and workingMapID or nil,
+        mapID        = C_Map.GetBestMapForUnit("player"),
         instanceID   = instanceID,
         instanceName = instanceName,
-        x            = string.format("%.4f", pos.x),
-        y            = string.format("%.4f", pos.y),
+        subzone      = GetSubZoneText(),
         time         = date("%Y-%m-%d %H:%M:%S"),
     })
     if #KwikTipDB.mobLog > 5000 then
@@ -201,7 +148,7 @@ end
 -- Trash target state
 -- ============================================================
 
--- Called by PLAYER_TARGET_CHANGED. Logs mob position and shows a tip if known.
+-- Called by PLAYER_TARGET_CHANGED. Logs the mob and shows a tip if known.
 function KwikTip:OnTargetChanged()
     if self.bossActive then return end
 
@@ -238,7 +185,7 @@ function KwikTip:OnTargetChanged()
     end
 end
 
--- Called by UPDATE_MOUSEOVER_UNIT. Logs mob position; deduplicates against last logged npcID.
+-- Called by UPDATE_MOUSEOVER_UNIT. Logs NPC; deduplicates against last logged npcID.
 function KwikTip:OnMouseoverUnit()
     if not KwikTipDB or not KwikTipDB.debugLog then return end
     if self.bossActive then return end
@@ -251,7 +198,7 @@ function KwikTip:OnMouseoverUnit()
     local npcID = tonumber(guid:match("-(%d+)-%x+$"))
     if not npcID then return end
     if not UnitCanAttack("player", "mouseover") then return end
-    if npcID == _lastLoggedNpcID then return end  -- already logged from target or recent mouseover
+    if npcID == _lastLoggedNpcID then return end
 
     LogMobPosition(npcID, "mouseover")
 end
@@ -260,14 +207,15 @@ end
 -- Detection
 -- ============================================================
 
--- Identify the current dungeon and manage area/ticker/dungeon-default state.
--- No-op during boss encounters or while a trash mob is targeted.
+-- Identify the current dungeon and update HUD content.
+-- Area detection uses GetSubZoneText() matched against dungeon.areas[].subzone.
+-- ZONE_CHANGED fires on sub-zone transitions so no polling ticker is needed
+-- for area updates — events drive UpdateContent directly.
 function KwikTip:UpdateContent()
     if self.bossActive then return end
 
     local inInstance, instanceType = IsInInstance()
     if not inInstance or (instanceType ~= "party" and instanceType ~= "raid" and instanceType ~= "scenario") then
-        StopAreaTicker()
         StopDebugTicker()
         self.areaActive    = false
         self.dungeonActive = false
@@ -293,32 +241,20 @@ function KwikTip:UpdateContent()
         StopDebugTicker()
     end
 
-    -- Trash target takes priority over area/dungeon content; still manage area ticker.
-    if self.trashActive then
-        if dungeon and dungeon.areas then StartAreaTicker() else StopAreaTicker() end
-        return
-    end
-
-    -- Try area content first (position-based, when dungeon has named areas).
-    local areaContent = nil
-    if dungeon and dungeon.areas then
-        StartAreaTicker()
-        local mapID = C_Map.GetBestMapForUnit("player")
-        areaContent = mapID and FormatAreaContent(dungeon, mapID)
-    else
-        StopAreaTicker()
-    end
+    -- Trash target takes priority over area/dungeon content.
+    if self.trashActive then return end
 
     local prevAreaActive    = self.areaActive
     local prevDungeonActive = self.dungeonActive
 
+    local areaContent = dungeon and dungeon.areas and FormatAreaContent(dungeon)
+
     if areaContent then
-        -- Inside a named area — show area tip.
         self.areaActive    = true
         self.dungeonActive = false
         self:SetContent(areaContent)
     elseif dungeon and KwikTipDB.showInDungeon and dungeon.bosses and dungeon.bosses[1] then
-        -- No area match, but "show during dungeon" is on — default to first boss tip.
+        -- No area match — default to first boss tip when showInDungeon is on.
         self.areaActive    = false
         self.dungeonActive = true
         self:SetContent(FormatBossContent(dungeon, dungeon.bosses[1]))

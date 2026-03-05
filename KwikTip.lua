@@ -91,16 +91,13 @@ function KwikTip:LogMapID()
     if not inInstance or (instanceType ~= "party" and instanceType ~= "raid" and instanceType ~= "scenario") then return end
     local mapID = C_Map.GetBestMapForUnit("player")
     local instanceName, _, _, _, _, _, _, instanceID = GetInstanceInfo()
-    local pos, workingMapID = mapID and KwikTip:GetPlayerPosition(mapID)
     table.insert(KwikTipDB.mapIDLog, {
         mapID        = mapID,
-        workingMapID = (workingMapID and workingMapID ~= mapID) and workingMapID or nil,
         instanceID   = instanceID,
         instanceName = instanceName,
         instanceType = instanceType,
+        subzone      = GetSubZoneText(),
         time         = date("%Y-%m-%d %H:%M:%S"),
-        x            = pos and string.format("%.4f", pos.x) or nil,
-        y            = pos and string.format("%.4f", pos.y) or nil,
     })
     -- Cap log size to avoid SavedVariables bloat
     if #KwikTipDB.mapIDLog > 2000 then
@@ -232,6 +229,7 @@ SlashCmdList["KWIKTIP"] = function(msg)
         local _, _, _, _, _, _, _, instanceID = GetInstanceInfo()
         local dungeon = (instanceID and KwikTip.DUNGEON_BY_INSTANCEID[instanceID])
             or (mapID and KwikTip.DUNGEON_BY_UIMAPID[mapID])
+        local subzone = GetSubZoneText()
         print("|cff00ff00KwikTip|r debug:")
         print(string.format("  inInstance=%s  type=%s  boss=%s  trash=%s  area=%s  dungeon=%s",
             tostring(inInstance), tostring(instanceType),
@@ -239,27 +237,10 @@ SlashCmdList["KWIKTIP"] = function(msg)
             tostring(KwikTip.areaActive), tostring(KwikTip.dungeonActive)))
         print(string.format("  instanceID=%s  mapID=%s  dungeon=%s",
             tostring(instanceID), tostring(mapID), dungeon and dungeon.name or "none"))
+        print(string.format("  subzone=%q", subzone or ""))
         print(string.format("  mapIDLog=%d  mobLog=%d",
             KwikTipDB.mapIDLog and #KwikTipDB.mapIDLog or 0,
             KwikTipDB.mobLog   and #KwikTipDB.mobLog   or 0))
-        local pos, workingMapID = mapID and KwikTip:GetPlayerPosition(mapID)
-        if workingMapID and workingMapID ~= mapID then
-            print(string.format("  posMapID=%d (child of mapID %d)", workingMapID, mapID))
-        end
-        if pos then
-            local areaName = "none"
-            if dungeon and dungeon.areas then
-                for _, a in ipairs(dungeon.areas) do
-                    if pos.x >= a.x1 and pos.x <= a.x2 and pos.y >= a.y1 and pos.y <= a.y2 then
-                        areaName = a.name
-                        break
-                    end
-                end
-            end
-            print(string.format("  pos=%.4f, %.4f  area=%s", pos.x, pos.y, areaName))
-        else
-            print("  pos=unavailable")
-        end
     elseif cmd == "export" then
         KwikTip:ShowDataDialog()
     elseif cmd == "clearlog" then
