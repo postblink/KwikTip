@@ -127,8 +127,8 @@ KwikTip.DUNGEONS = {
         },
     },
     {
-        instanceID = 2915,  -- BigWigs, unverified in-game
-        uiMapID    = 2556,
+        instanceID = 2915,  -- confirmed in-game
+        uiMapID    = 2556,  -- confirmed in-game
         name       = "Nexus-Point Xenas",
         location   = "Voidstorm",
         season     = "midnight",
@@ -138,6 +138,12 @@ KwikTip.DUNGEONS = {
             { encounterID = 3328, name = "Chief Corewright Kasreth", tip = "Never cross active Leyline Arrays — lethal. When targeted by Reflux Charge, use it to destroy a nearby array for bonus damage." },
             { encounterID = 3332, name = "Corewarden Nysarra",       tip = "Kill Null Vanguard adds before Lightscar Flare; then stand in the wound during 18s stun for 300% damage." },
             { encounterID = 3333, name = "Lothraxion",               tip = "At 100 energy, find and interrupt the real Lothraxion among his images; wrong target = Core Exposure (group damage + 20% increased Holy damage taken for 1 min)." },
+        },
+        areas = {
+            { subzone = "The Bazaar",           tip = "" },
+            { subzone = "Corespark Engineway",  tip = "" },
+            { subzone = "Core Defense Nullward", tip = "" },
+            { subzone = "The Nexus Core",        tip = "" },
         },
     },
     {
