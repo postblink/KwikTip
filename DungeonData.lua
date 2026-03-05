@@ -57,7 +57,7 @@ KwikTip.DUNGEONS = {
         mythicPlus = true,
         bosses = {
             { encounterID = 3056, name = "Emberdawn",          tip = "Tank in corner; players hit by Flaming Updraft drop it near the corner and use a personal defensive; dodge Twisters spawned from puddles; healer major CDs on Burning Gale." },
-            { encounterID = 3057, name = "Derelict Duo",       tip = "Keep both at equal health throughout — Broken Bond stacks if they're uneven and enrages the survivor; interrupt Kalis's Shadow Bolt; tank use active mitigation for Latch's Bone Hack." },
+            { encounterID = 3057, name = "Derelict Duo",       tip = "Keep both at equal health — Broken Bond enrages the survivor if one dies first; interrupt Shadow Bolt and dispel Curse of Darkness; tank active mitigation for Bone Hack; Latch's Heaving Yank auto-cancels Kalis's Debilitating Shriek (you can't interrupt it yourself)." },
             { encounterID = 3058, name = "Commander Kroluk",   tip = "Burn adds at 66%/33%; boss immune (Shield Wall) until warparty dies; stay grouped — Intimidating Shout fears isolated players." },
             { encounterID = 3059, name = "The Restless Heart", tip = "Dodge Arrow Rain; sidestep targeted Bolt Gale; at 100 energy, boss fires wind arrow spawning expanding Billowing Wind rings — stay out; never touch Turbulent Arrows (knockup + removes Squall Leap)." },
         },
@@ -88,7 +88,7 @@ KwikTip.DUNGEONS = {
         mythicPlus = false,
         bosses = {
             { encounterID = 3207, name = "The Hoardmonger",    tip = "At 90%/60%/30%, boss retreats to empower; destroy Rotten Mushrooms before burst (Toxic Spores debuff); dodge frontals." },
-            { encounterID = 3208, name = "Sentinel of Winter", tip = "Dodge Raging Squalls; stand in Snowdrift zones to resist the Eternal Winter knockback." },
+            { encounterID = 3208, name = "Sentinel of Winter", tip = "Dodge Raging Squalls and Snowdrift pools; major healer CDs for Eternal Winter — sustained group damage and pushback." },
             { encounterID = 3209, name = "Nalorakk",           tip = "Fury of the War God: intercept charging echoes to protect Zul'jarra; spread when Echoing Maul marks you." },
         },
     },
@@ -102,7 +102,7 @@ KwikTip.DUNGEONS = {
         mythicPlus = true,
         bosses = {
             { encounterID = 3212, name = "Muro'jin and Nekraxx",     tip = "Kill simultaneously — Muro'jin dies first: Nekraxx enrages (Bestial Wrath); Nekraxx dies first: Muro'jin revives him. Use Freezing Trap victims to interrupt Nekraxx's Carrion Swoop." },
-            { encounterID = 3213, name = "Vordaza",                  tip = "Vordaza is immune during Necrotic Convergence — use healer CDs for the damage; kill phantoms (Lingering Dread damages group); dodge Unmake." },
+            { encounterID = 3213, name = "Vordaza",                  tip = "Burst the Deathshroud shield during Necrotic Convergence with damage CDs; kite Unstable Phantoms into each other to detonate them — killing them directly applies Lingering Dread to the group; dodge Unmake line." },
             { encounterID = 3214, name = "Rak'tul, Vessel of Souls", tip = "In spirit realm: interrupt Malignant Souls for Spectral Residue (+25% dmg/heal/speed); avoid Restless Masses roots. Destroy Crush Souls totems before returning." },
         },
     },
@@ -140,10 +140,10 @@ KwikTip.DUNGEONS = {
             { encounterID = 3333, name = "Lothraxion",               tip = "At 100 energy, find and interrupt the real Lothraxion among his images; wrong target = Core Exposure (group damage + 20% increased Holy damage taken for 1 min)." },
         },
         areas = {
-            { subzone = "The Bazaar",           tip = "" },
-            { subzone = "Corespark Engineway",  tip = "" },
-            { subzone = "Core Defense Nullward", tip = "" },
-            { subzone = "The Nexus Core",        tip = "" },
+            { subzone = "The Bazaar",            tip = "Central hub. Corespark Conduits grant an offensive buff — use with cooldowns, but manage the stacking DoT they apply." },
+            { subzone = "Corespark Engineway",   tip = "Interrupt Circuit Seers before they activate Mana Batteries (group DoT channel). Sidestep Erratic Surge skillshots. Interrupt Nexus Adepts' Umbra Bolt." },
+            { subzone = "Core Defense Nullward", tip = "Dodge Duskfright Herald's Dark Beckoning frontal — lethal. Interrupt Grand Nullifier. Tank: manage stacking Null Sunder from Shadowguard Defenders; control pull size." },
+            { subzone = "The Nexus Core",        tip = "Lothraxion's wing. Fractured Image adds use Mirrored Rend — avoid clustering near them. Save cooldowns for the boss." },
         },
     },
     {
