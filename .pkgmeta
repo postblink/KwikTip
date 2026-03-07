@@ -2,3 +2,6 @@ package-as: KwikTip
 curse-id: 1478824
 wago-id: QN53W7KB
 wowi-id: 27074
+
+ignore:
+  - CLAUDE.md

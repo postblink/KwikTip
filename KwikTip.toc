@@ -2,10 +2,14 @@
 ## Title: KwikTip
 ## Notes: A custom UI/HUD element addon
 ## Author:
-## Version: 1.5.2
+## Version: 1.5.3
 ## DefaultState: enabled
 
 ## SavedVariables: KwikTipDB
+
+## X-Curse-Project-ID: 1478824
+## X-Wago-ID: QN53W7KB
+## X-WoWI-ID: 27074
 
 Init.lua
 DungeonData.lua

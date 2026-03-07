@@ -11,6 +11,11 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
+      CF_API_KEY: ${{ secrets.CF_API_KEY }}
+      WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
+      WOWI_API_TOKEN: ${{ secrets.WOWI_API_TOKEN }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -18,8 +23,3 @@ jobs:
 
       - name: Package and upload to CurseForge, Wago, WoWInterface, and GitHub
         uses: BigWigsMods/packager@v2
-        env:
-          GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
-          CF_API_KEY: ${{ secrets.CF_API_KEY }}
-          WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
-          WOWI_API_TOKEN: ${{ secrets.WOWI_API_TOKEN }}
