@@ -60,12 +60,9 @@ The only reliable method is running this command while standing inside the dunge
 - **Instance detection**: `IsInInstance()` for show/hide; `C_Map.GetBestMapForUnit("player")` for dungeon identification
 
 ## Instance / Area Detection
-Detect which dungeon the player is in:
-```lua
-local uiMapID = C_Map.GetBestMapForUnit("player")
-local dungeon = KwikTip.DUNGEON_BY_UIMAPID[uiMapID]
-```
-Get the player's position within an instance for area-specific tips (future):
+Primary lookup uses `GetInstanceInfo()` (8th return = instanceID); fallback uses `C_Map.GetBestMapForUnit("player")` (uiMapID). Area tips use `GetSubZoneText()` matched against `dungeon.areas[].subzone`, or `mapID` for zones without subzone text.
+
+Position-based detection (future; not yet used):
 ```lua
 local uiMapID = C_Map.GetBestMapForUnit("player")
 local pos = C_Map.GetPlayerMapPosition(uiMapID, "player")
@@ -93,8 +90,11 @@ See `DungeonData.lua` for the full data table.
 | `/kwiktip` or `/kwik` | Open/close settings window |
 | `/kwik move` | Toggle move mode on the HUD |
 | `/kwik debug` | Print current instance detection state to chat |
+| `/kwik clearlog` | Clear mapIDLog and mobLog saved data |
+
+A minimap button (when enabled in settings) provides quick access: left-click opens settings, right-click toggles move mode, drag to reposition.
 
 ## TODO / Known Gaps
-- Legacy dungeon `uiMapID`s are set to `0` — original zone IDs may have changed when re-tuned for Midnight; verify in-game with `/run print(C_Map.GetBestMapForUnit("player"))`
-- `tip` fields in `DungeonData.lua` are empty — content pass needed for all bosses and key trash pulls
-- Area-based tip switching (swap HUD content as the group moves through dungeon zones) not yet implemented
+- Legacy dungeon `uiMapID`s are set to `0` — verify in-game with `/run print(C_Map.GetBestMapForUnit("player"))` and update `DungeonData.lua`
+- Legacy dungeons lack `areas` entries — add subzone/bossIndex mappings once uiMapIDs are confirmed
+- Trash tips missing for Murder Row, Den of Nalorakk, The Blinding Vale, Voidscar Arena — collect NPC IDs via debug mobLog, then add `trash` entries
