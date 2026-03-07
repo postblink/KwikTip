@@ -121,7 +121,7 @@ function KwikTip:UpdateVisibility()
         return
     end
 
-    if self.moveMode or self.bossActive or self.trashActive or self.areaActive or self.dungeonActive then
+    if self.moveMode or self.bossActive or self.bossTargetActive or self.trashActive or self.areaActive or self.dungeonActive then
         self:InitHUD()
         hud:Show()
     else

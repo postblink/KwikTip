@@ -27,6 +27,8 @@ local ADDON_NAME, KwikTip = ...
 --   mythicPlus  : true if in the Season 1 Mythic+ key rotation, false = Mythic 0 only
 --   bosses      : ordered list; each entry has:
 --     encounterID : ENCOUNTER_START event ID (from LittleWigs SetEncounterID). 0 = unknown.
+--     npcID       : (optional) NPC ID from UnitGUID; enables tip on targeting before ENCOUNTER_START fires.
+--                   Source from Wowhead. Required for boss rooms with no subzone text.
 --     name        : boss name as shown in the game
 --     tip         : short contextual tip shown in the HUD during the boss fight
 --   trash       : optional list of notable trash mobs; PLAYER_TARGET_CHANGED shows tip on match
@@ -71,6 +73,7 @@ KwikTip.DUNGEONS = {
             { npcID = 232067, name = "Creeping Spindleweb", tip = "Poison Spray — use a personal defensive." },
         },
         areas = {
+            { subzone = "Vereesa's Repose",    bossIndex = 1 },  -- wing bosses (Emberdawn + Derelict Duo share this subzone); confirmed in-game; bossIndex=1 shows Emberdawn tip on entry — ENCOUNTER_START overrides for Derelict Duo
             { subzone = "Windrunner Vault",    bossIndex = 3 },  -- Commander Kroluk's arena; confirmed in-game
             { subzone = "The Pinnacle",        bossIndex = 4 },  -- The Restless Heart; confirmed in-game
         },
@@ -112,6 +115,7 @@ KwikTip.DUNGEONS = {
             { encounterID = 3209, name = "Nalorakk",           tip = "Fury of the War God: intercept charging echoes to protect Zul'jarra; spread when Echoing Maul marks you." },
         },
         areas = {
+            { subzone = "Enduring Winter",   bossIndex = 1 },  -- first two bosses share this subzone (Hoardmonger + Sentinel of Winter); confirmed in-game (mapID 2514); bossIndex=1 shows Hoardmonger tip on entry — ENCOUNTER_START overrides for Sentinel of Winter
             { subzone = "The Heart of Rage", bossIndex = 3 },  -- Nalorakk's arena; confirmed in-game (mapIDs 2564, 2513)
         },
     },
@@ -144,6 +148,7 @@ KwikTip.DUNGEONS = {
             { npcID = 249024, name = "Hollow Soulrender",  tip = "Interrupt Shadowfrost Blast. Step away from allies before Frost Nova hits — it chains to nearby players." },
         },
         areas = {
+            { subzone = "Wailing Depths",    bossIndex = 1 },  -- Muro'jin and Nekraxx; confirmed in-game
             { subzone = "Dais of Suffering", bossIndex = 2 },  -- Vordaza's arena; confirmed in-game
             { subzone = "Echoing Span",      bossIndex = 3 },  -- Rak'tul's arena; gauntlet runs during the fight (spirit realm bridge); confirmed in-game
         },
@@ -198,7 +203,9 @@ KwikTip.DUNGEONS = {
             { npcID = 251024, name = "Dreadflail",             tip = "Corewarden Nysarra add — kill before burning the boss; Lightscar wound opens the 18s vulnerability window after." },
         },
         areas = {
-            { subzone = "The Nexus Core",        bossIndex = 3 },  -- Lothraxion's boss room; confirmed in-game
+            { subzone = "Corespark Engineway",    bossIndex = 1 },  -- Chief Corewright Kasreth; confirmed in-game
+            { subzone = "Core Defense Nullward",  bossIndex = 2 },  -- Corewarden Nysarra; confirmed in-game
+            { subzone = "The Nexus Core",         bossIndex = 3 },  -- Lothraxion's boss room; confirmed in-game
         },
     },
     {
@@ -233,8 +240,8 @@ KwikTip.DUNGEONS = {
         mythicPlus = false,
         bosses = {
             { encounterID = 3285, name = "Taz'Rah",  tip = "Stay out of Dark Rift gravity pull; dodge shade Nether Dash lines." },
-            { encounterID = 3286, name = "Atroxus",  tip = "Avoid Noxious Breath frontal; when Toxic Creepers fixate on a player, that player and nearby allies spread out to avoid the 8-yard toxic aura." },
-            { encounterID = 3287, name = "Charonus", tip = "Lead Gravitic Orbs into Singularities to consume them; avoid the Unstable Singularity gravity well." },
+            { encounterID = 3286, name = "Atroxus",  npcID = 239008, tip = "Avoid Noxious Breath frontal; when Toxic Creepers fixate on a player, that player and nearby allies spread out to avoid the 8-yard toxic aura." },
+            { encounterID = 3287, name = "Charonus", npcID = 248015, tip = "Lead Gravitic Orbs into Singularities to consume them; avoid the Unstable Singularity gravity well." },
         },
         areas = {
             { subzone = "The Den", bossIndex = 1 },  -- Taz'Rah's arena; confirmed in-game
@@ -347,6 +354,18 @@ for _, dungeon in ipairs(KwikTip.DUNGEONS) do
     for _, boss in ipairs(dungeon.bosses) do
         if boss.encounterID ~= 0 then
             KwikTip.BOSS_BY_ENCOUNTERID[boss.encounterID] = { dungeon = dungeon, boss = boss }
+        end
+    end
+end
+
+-- Boss NPC lookup: npcID → { dungeon, boss }
+-- Fallback for rooms where ENCOUNTER_START hasn't fired yet and no subzone text exists.
+-- Populated from boss entries that have an npcID field (sourced from Wowhead).
+KwikTip.BOSS_BY_NPCID = {}
+for _, dungeon in ipairs(KwikTip.DUNGEONS) do
+    for _, boss in ipairs(dungeon.bosses) do
+        if boss.npcID and boss.npcID ~= 0 then
+            KwikTip.BOSS_BY_NPCID[boss.npcID] = { dungeon = dungeon, boss = boss }
         end
     end
 end

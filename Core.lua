@@ -137,6 +137,7 @@ function KwikTip:OnEncounterEnd(success)
         self:UpdateVisibility()
     else
         -- Wipe or reset — clear and return to normal detection.
+        self.bossTargetActive = false
         self:SetContent("")
         self:UpdateContent()
         self:UpdateVisibility()
@@ -183,21 +184,32 @@ function KwikTip:OnTargetChanged()
 
     local inInstance, instanceType = IsInInstance()
     if not inInstance or (instanceType ~= "party" and instanceType ~= "raid" and instanceType ~= "scenario") then
-        if self.trashActive then
+        if self.trashActive or self.bossTargetActive then
             self.trashActive = false
+            self.bossTargetActive = false
             self:UpdateVisibility()
         end
         return
     end
     if guid then
-        local npcID = guid:sub(1, 9) == "Creature-" and tonumber(guid:match("-(%d+)-%x+$"))
+        local npcID = C_CreatureInfo.GetCreatureID(guid)
         if npcID then
             LogMobPosition(npcID, "target")  -- log dead or alive; areaActive must not gate this
         end
         if npcID and UnitCanAttack("player", "target") then
+            -- Boss NPC check — shows tip before ENCOUNTER_START fires (e.g. rooms with no subzone text).
+            local bossEntry = KwikTip.BOSS_BY_NPCID[npcID]
+            if bossEntry then
+                self.bossTargetActive = true
+                self.trashActive = false
+                self:SetContent(FormatBossContent(bossEntry.dungeon, bossEntry.boss))
+                self:UpdateVisibility()
+                return
+            end
             if not self.areaActive then
                 local entry = KwikTip.TRASH_BY_NPCID[npcID]
                 if entry then
+                    self.bossTargetActive = false
                     self.trashActive = true
                     self:SetContent(FormatTrashContent(entry.dungeon, entry.mob))
                     self:UpdateVisibility()
@@ -207,9 +219,10 @@ function KwikTip:OnTargetChanged()
         end
     end
 
-    -- No known trash target (or area tip is active) — clear trash state.
-    if self.trashActive then
+    -- No known target — clear boss target and trash state.
+    if self.trashActive or self.bossTargetActive then
         self.trashActive = false
+        self.bossTargetActive = false
         self:SetContent("")
         self:UpdateContent()
         self:UpdateVisibility()
@@ -226,7 +239,7 @@ function KwikTip:OnMouseoverUnit()
 
     local guid = UnitGUID("mouseover")
     if not guid then return end
-    local npcID = tonumber(guid:match("-(%d+)-%x+$"))
+    local npcID = C_CreatureInfo.GetCreatureID(guid)
     if not npcID then return end
     if not UnitCanAttack("player", "mouseover") then return end
     if npcID == _lastLoggedNpcID then return end
@@ -243,7 +256,7 @@ end
 -- ZONE_CHANGED fires on sub-zone transitions so no polling ticker is needed
 -- for area updates — events drive UpdateContent directly.
 function KwikTip:UpdateContent()
-    if self.bossActive then return end
+    if self.bossActive or self.bossTargetActive then return end
 
     local inInstance, instanceType = IsInInstance()
     if not inInstance or (instanceType ~= "party" and instanceType ~= "raid" and instanceType ~= "scenario") then
@@ -385,9 +398,10 @@ SlashCmdList["KWIKTIP"] = function(msg)
             or (mapID and KwikTip.DUNGEON_BY_UIMAPID[mapID])
         local subzone = GetSubZoneText()
         print("|cff00ff00KwikTip|r debug:")
-        print(string.format("  inInstance=%s  type=%s  boss=%s  trash=%s  area=%s  dungeon=%s",
+        print(string.format("  inInstance=%s  type=%s  boss=%s  bossTarget=%s  trash=%s  area=%s  dungeon=%s",
             tostring(inInstance), tostring(instanceType),
-            tostring(KwikTip.bossActive), tostring(KwikTip.trashActive),
+            tostring(KwikTip.bossActive), tostring(KwikTip.bossTargetActive),
+            tostring(KwikTip.trashActive),
             tostring(KwikTip.areaActive), tostring(KwikTip.dungeonActive)))
         print(string.format("  instanceID=%s  mapID=%s  dungeon=%s",
             tostring(instanceID), tostring(mapID), dungeon and dungeon.name or "none"))
