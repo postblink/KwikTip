@@ -210,7 +210,8 @@ function KwikTip:OnTargetChanged()
         return
     end
     if guid then
-        local npcID = C_CreatureInfo.GetCreatureID(guid)
+        local _ok, npcID = pcall(C_CreatureInfo.GetCreatureID, guid)
+        if not _ok then npcID = nil end
         if npcID then
             LogMobPosition(npcID, "target")  -- log dead or alive; areaActive must not gate this
         end
@@ -257,8 +258,8 @@ function KwikTip:OnMouseoverUnit()
 
     local guid = UnitGUID("mouseover")
     if not guid then return end
-    local npcID = C_CreatureInfo.GetCreatureID(guid)
-    if not npcID then return end
+    local ok, npcID = pcall(C_CreatureInfo.GetCreatureID, guid)
+    if not ok or not npcID then return end
     if not UnitCanAttack("player", "mouseover") then return end
     if npcID == _lastLoggedNpcID then return end
 
