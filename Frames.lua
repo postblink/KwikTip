@@ -90,7 +90,8 @@ function KwikTip:InitHUD()
                 lines[#lines + 1] = line
             end
         end
-        local channel = KwikTipDB.printChannel or "INSTANCE_CHAT"
+        local channel = KwikTipDB.printChannel or "NONE"
+        if channel == "NONE" then return end
         for i = 2, #lines do
             SendChatMessage(lines[i], channel)
         end

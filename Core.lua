@@ -9,7 +9,23 @@ frame:RegisterEvent("ENCOUNTER_START")
 frame:RegisterEvent("ENCOUNTER_END")
 -- PLAYER_TARGET_CHANGED and UPDATE_MOUSEOVER_UNIT are registered dynamically
 -- inside UpdateContent() only while the player is inside a supported instance.
-frame:SetScript("OnEvent", function(self, event, ...)     if event == "PLAYER_ENTERING_WORLD" or event == "ZONE_CHANGED_NEW_AREA" or event == "ZONE_CHANGED" then         KwikTip:UpdateContent()         KwikTip:UpdateVisibility()         KwikTip:LogMapID()     elseif event == "ENCOUNTER_START" then         local encounterID = ...         KwikTip:OnEncounterStart(encounterID)     elseif event == "ENCOUNTER_END" then         local _, _, _, _, success = ...         KwikTip:OnEncounterEnd(success)     elseif event == "PLAYER_TARGET_CHANGED" then         KwikTip:OnTargetChanged()     elseif event == "UPDATE_MOUSEOVER_UNIT" then         KwikTip:OnMouseoverUnit()     end end)
+frame:SetScript("OnEvent", function(self, event, ...)
+    if event == "PLAYER_ENTERING_WORLD" or event == "ZONE_CHANGED_NEW_AREA" or event == "ZONE_CHANGED" then
+        KwikTip:UpdateContent()
+        KwikTip:UpdateVisibility()
+        KwikTip:LogMapID()
+    elseif event == "ENCOUNTER_START" then
+        local encounterID = ...
+        KwikTip:OnEncounterStart(encounterID)
+    elseif event == "ENCOUNTER_END" then
+        local _, _, _, _, success = ...
+        KwikTip:OnEncounterEnd(success)
+    elseif event == "PLAYER_TARGET_CHANGED" then
+        KwikTip:OnTargetChanged()
+    elseif event == "UPDATE_MOUSEOVER_UNIT" then
+        KwikTip:OnMouseoverUnit()
+    end
+end)
 
 local GOLD  = "|cffffcc00"
 local WHITE = "|cffffffff"
