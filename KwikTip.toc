@@ -2,8 +2,9 @@
 ## Title: KwikTip
 ## Notes: A custom UI/HUD element addon
 ## Author:
-## Version: 1.5.11
+## Version: 1.5.12
 ## DefaultState: enabled
+## OptionalDeps: LibSharedMedia-3.0
 
 ## SavedVariables: KwikTipDB
 

@@ -32,6 +32,7 @@ Inspired by **QE Dungeon Tips** by QEdev (no longer maintained).
 - **Sub-zone aware HUD** — tips update automatically as your group moves through each area; boss room tips surface on entry, before the encounter starts
 - **Keep Open Through Instance** — optionally keep the HUD visible throughout a run
 - **Resizable, draggable HUD** — drag to reposition, drag corners to resize; locks in place when done
+- **LibSharedMedia-3.0 support** — font picker lists all fonts registered by your other addons if LSM is present; falls back to three built-in WoW fonts otherwise
 
 ---
 

@@ -12,6 +12,7 @@ KwikTip.DEFAULTS = {
     showMinimapBtn = true,
     printChannel   = "NONE",
     fontPath       = "Fonts\\FRIZQT__.TTF",
+    fontName       = "Friz Quadrata",
     fontSize       = 11,
     minimapAngle   = 0,      -- radians; position around minimap
     debugLog       = false,

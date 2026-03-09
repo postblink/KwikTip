@@ -376,39 +376,54 @@ function KwikTip:CreateConfigWindow()
         self._lbl:SetText(string.format("Opacity: %d%%", value))
     end)
 
-    -- Font selector
+    -- Font selector (LibSharedMedia-3.0 aware; falls back to 3 built-in fonts)
     local fontHeader = cfg:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
     fontHeader:SetPoint("TOPLEFT", opacitySlider._wrap, "BOTTOMLEFT", -8, -12)
     fontHeader:SetText("FONT")
     fontHeader:SetTextColor(0.6, 0.6, 0.6)
 
-    local FONT_OPTIONS = {
-        { label = "Friz Quadrata", path = "Fonts\\FRIZQT__.TTF"  },
-        { label = "Arial Narrow",  path = "Fonts\\ARIALN.TTF"    },
-        { label = "Morpheus",      path = "Fonts\\MORPHEUS.TTF"  },
+    local LSM = LibStub and LibStub("LibSharedMedia-3.0", true)
+
+    local FONT_FALLBACK = {
+        ["Friz Quadrata"] = "Fonts\\FRIZQT__.TTF",
+        ["Arial Narrow"]  = "Fonts\\ARIALN.TTF",
+        ["Morpheus"]      = "Fonts\\MORPHEUS.TTF",
     }
+
+    local fontNames
+    if LSM then
+        fontNames = LSM:List("font")
+        table.sort(fontNames)
+    else
+        fontNames = { "Arial Narrow", "Friz Quadrata", "Morpheus" }
+    end
+
+    local function ResolveFontPath(name)
+        if LSM then return LSM:Fetch("font", name) or FONT_FALLBACK[name] or "Fonts\\FRIZQT__.TTF" end
+        return FONT_FALLBACK[name] or "Fonts\\FRIZQT__.TTF"
+    end
 
     local fontDropBtn, fontDropList  -- forward-declared so SetFont can reference them
 
-    local function SetFont(path)
-        KwikTipDB.fontPath = path
-        for _, opt in ipairs(FONT_OPTIONS) do
-            if opt.path == path then
-                if fontDropBtn then fontDropBtn:SetText(opt.label) end
-                break
-            end
-        end
+    local function SetFont(name)
+        KwikTipDB.fontName = name
+        KwikTipDB.fontPath = ResolveFontPath(name)
+        if fontDropBtn then fontDropBtn:SetText(name) end
         KwikTip:ApplySettings()
     end
 
+    local DROP_W   = 200
+    local ROW_H    = 20
+    local MAX_ROWS = 10
+
     -- Dropdown button
     fontDropBtn = CreateFrame("Button", nil, cfg, "UIPanelButtonTemplate")
-    fontDropBtn:SetSize(160, 22)
+    fontDropBtn:SetSize(DROP_W, 22)
     fontDropBtn:SetPoint("TOPLEFT", fontHeader, "BOTTOMLEFT", 0, -6)
 
-    -- Dropdown list — floats above all config UI on TOOLTIP strata
+    -- Dropdown list — scrollable, floats on TOOLTIP strata
     fontDropList = CreateFrame("Frame", nil, UIParent, "BackdropTemplate")
-    fontDropList:SetSize(160, #FONT_OPTIONS * 22)
+    fontDropList:SetSize(DROP_W, math.min(#fontNames, MAX_ROWS) * ROW_H + 2)
     fontDropList:SetFrameStrata("TOOLTIP")
     fontDropList:SetBackdrop({
         bgFile   = "Interface\\Tooltips\\UI-Tooltip-Background",
@@ -420,10 +435,18 @@ function KwikTip:CreateConfigWindow()
     fontDropList:SetBackdropBorderColor(0.4, 0.4, 0.4, 1)
     fontDropList:Hide()
 
-    for i, opt in ipairs(FONT_OPTIONS) do
-        local row = CreateFrame("Button", nil, fontDropList)
-        row:SetSize(158, 20)
-        row:SetPoint("TOPLEFT", fontDropList, "TOPLEFT", 1, -(i - 1) * 20 - 1)
+    local fontScroll = CreateFrame("ScrollFrame", nil, fontDropList)
+    fontScroll:SetPoint("TOPLEFT",     fontDropList, "TOPLEFT",     1, -1)
+    fontScroll:SetPoint("BOTTOMRIGHT", fontDropList, "BOTTOMRIGHT", -1, 1)
+
+    local fontScrollChild = CreateFrame("Frame")
+    fontScrollChild:SetSize(DROP_W - 2, #fontNames * ROW_H)
+    fontScroll:SetScrollChild(fontScrollChild)
+
+    for i, name in ipairs(fontNames) do
+        local row = CreateFrame("Button", nil, fontScrollChild)
+        row:SetSize(DROP_W - 2, ROW_H)
+        row:SetPoint("TOPLEFT", fontScrollChild, "TOPLEFT", 0, -(i - 1) * ROW_H)
 
         local hl = row:CreateTexture(nil, "HIGHLIGHT")
         hl:SetColorTexture(1, 1, 1, 0.08)
@@ -431,14 +454,21 @@ function KwikTip:CreateConfigWindow()
 
         local rowLbl = row:CreateFontString(nil, "OVERLAY", "GameFontNormal")
         rowLbl:SetPoint("LEFT", row, "LEFT", 6, 0)
-        rowLbl:SetText(opt.label)
+        rowLbl:SetText(name)
 
-        local path = opt.path
+        local n = name
         row:SetScript("OnClick", function()
-            SetFont(path)
+            SetFont(n)
             fontDropList:Hide()
         end)
     end
+
+    fontDropList:EnableMouseWheel(true)
+    fontDropList:SetScript("OnMouseWheel", function(self, delta)
+        local cur = fontScroll:GetVerticalScroll()
+        local max = fontScroll:GetVerticalScrollRange()
+        fontScroll:SetVerticalScroll(math.max(0, math.min(max, cur - delta * ROW_H)))
+    end)
 
     fontDropBtn:SetScript("OnClick", function()
         if fontDropList:IsShown() then
@@ -482,7 +512,7 @@ function KwikTip:CreateConfigWindow()
         showInDungeonCB:SetChecked(db.showInDungeon)
         SetChatChannel(db.printChannel or "NONE")
         opacitySlider:SetValue(math.floor(db.alpha * 100 + 0.5))
-        SetFont(db.fontPath or "Fonts\\FRIZQT__.TTF")
+        SetFont(db.fontName or "Friz Quadrata")
         fontSizeSlider:SetValue(db.fontSize or 11)
         widthEdit:SetText(tostring(db.width or 220))
         heightEdit:SetText(tostring(db.height or 80))

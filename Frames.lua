@@ -164,7 +164,10 @@ function KwikTip:ApplySettings()
     hud:ClearAllPoints()
     hud:SetPoint("CENTER", UIParent, "CENTER", db.x or 0, db.y or 0)
     if contentText then
-        contentText:SetFont(db.fontPath or "Fonts\\FRIZQT__.TTF", db.fontSize or 11, "")
+        local LSM  = LibStub and LibStub("LibSharedMedia-3.0", true)
+        local path = (LSM and db.fontName and LSM:Fetch("font", db.fontName))
+                  or db.fontPath or "Fonts\\FRIZQT__.TTF"
+        contentText:SetFont(path, db.fontSize or 11, "")
     end
 end
 
