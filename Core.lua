@@ -489,6 +489,12 @@ SlashCmdList["KWIKTIP"] = function(msg)
                 KwikTipDB.debugSnapshots = KwikTip:PruneArray(KwikTipDB.debugSnapshots, 100)
             end
         end
+    elseif cmd == "debuglog" then
+        KwikTipDB.debugLog = not KwikTipDB.debugLog
+        KwikTip:UpdateContent()
+        print(string.format("|cff00ff00KwikTip|r debug logging %s.", KwikTipDB.debugLog and "enabled" or "disabled"))
+    elseif cmd == "preview" then
+        KwikTip:TogglePreview()
     elseif cmd == "clearlog" then
         KwikTipDB.mapIDLog      = {}
         KwikTipDB.mobLog        = {}
@@ -499,9 +505,11 @@ SlashCmdList["KWIKTIP"] = function(msg)
         KwikTip:ToggleConfig()
     else
         print("|cff00ff00KwikTip|r commands:")
-        print("  /kwik          — open settings")
-        print("  /kwik move     — toggle move/lock mode")
-        print("  /kwik debug    — print detection state and position")
-        print("  /kwik clearlog — clear all debug logs")
+        print("  /kwik           — open settings")
+        print("  /kwik move      — toggle move/lock mode")
+        print("  /kwik debug     — print detection state to chat")
+        print("  /kwik debuglog  — toggle map/mob ID logging to SavedVariables")
+        print("  /kwik preview   — toggle role notes preview in the HUD")
+        print("  /kwik clearlog  — clear all debug logs")
     end
 end

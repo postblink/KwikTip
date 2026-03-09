@@ -32,7 +32,6 @@ Inspired by **QE Dungeon Tips** by QEdev (no longer maintained).
 - **Sub-zone aware HUD** — tips update automatically as your group moves through each area; boss room tips surface on entry, before the encounter starts
 - **Keep Open Through Instance** — optionally keep the HUD visible throughout a run
 - **Resizable, draggable HUD** — drag to reposition, drag corners to resize; locks in place when done
-- **Preview Notes** — settings window includes a live preview of the role note format so you can check sizing and positioning outside of an instance
 
 ---
 
@@ -82,6 +81,9 @@ All bosses across all listed dungeons have tips. Trash tips are filled in for th
 | `/kwiktip` or `/kwik` | Open/close settings |
 | `/kwik move` | Toggle move mode (drag and resize the HUD) |
 | `/kwik debug` | Print current instance detection state to chat |
+| `/kwik debuglog` | Toggle map/mob ID logging to SavedVariables |
+| `/kwik preview` | Toggle role notes preview in the HUD |
+| `/kwik clearlog` | Clear all debug logs from SavedVariables |
 
 The HUD is hidden outside of instances. Use `/kwik move` to show and reposition it at any time.
 

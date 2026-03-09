@@ -90,7 +90,7 @@ function KwikTip:CreateConfigWindow()
     if self.Config then return end
 
     local cfg = CreateFrame("Frame", "KwikTipConfig", UIParent, "BasicFrameTemplate")
-    cfg:SetSize(280, 520)
+    cfg:SetSize(280, 630)
     cfg:SetPoint("CENTER")
     cfg:SetFrameStrata("HIGH")
     cfg:SetMovable(true)
@@ -116,20 +116,9 @@ function KwikTip:CreateConfigWindow()
     titleIcon:SetSize(16, 16)
     titleIcon:SetPoint("RIGHT", cfg.TitleText, "LEFT", -4, 0)
 
-    -- ---- POSITION section ----------------------------------------
-    local posHeader = cfg:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
-    posHeader:SetPoint("TOPLEFT", cfg, "TOPLEFT", 12, -32)
-    posHeader:SetText("POSITION")
-    posHeader:SetTextColor(0.6, 0.6, 0.6)
-
-    local moveBtn = CreateFrame("Button", "KwikTipConfigMoveBtn", cfg, "UIPanelButtonTemplate")
-    moveBtn:SetSize(110, 22)
-    moveBtn:SetPoint("TOPLEFT", posHeader, "BOTTOMLEFT", 0, -6)
-    moveBtn:SetText("Move Window")
-
-    moveBtn:SetScript("OnClick", function()
-        KwikTip:ToggleMoveMode()
-    end)
+    -- ============================================================
+    -- Shared helpers
+    -- ============================================================
 
     local function MakeNudgeRow(label, parent, anchor)
         local wrap = CreateFrame("Frame", nil, parent)
@@ -173,62 +162,6 @@ function KwikTip:CreateConfigWindow()
 
         return wrap, eb, minusBtn, plusBtn
     end
-
-    -- ---- DISPLAY section -----------------------------------------
-    local dispHeader = cfg:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
-    dispHeader:SetPoint("TOPLEFT", moveBtn, "BOTTOMLEFT", 0, -14)
-    dispHeader:SetText("DISPLAY")
-    dispHeader:SetTextColor(0.6, 0.6, 0.6)
-
-    -- Checkbox: Show Minimap Button
-    local minimapBtnCB = CreateFrame("CheckButton", "KwikTipMinimapBtnCB", cfg, "UICheckButtonTemplate")
-    minimapBtnCB:SetSize(24, 24)
-    minimapBtnCB:SetPoint("TOPLEFT", dispHeader, "BOTTOMLEFT", 0, -4)
-
-    local minimapBtnLbl = cfg:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    minimapBtnLbl:SetPoint("LEFT", minimapBtnCB, "RIGHT", 2, 0)
-    minimapBtnLbl:SetText("Show Minimap Button")
-
-    minimapBtnCB:SetScript("OnClick", function(self)
-        KwikTipDB.showMinimapBtn = self:GetChecked()
-        if KwikTip._PlaceMinimapBtn then KwikTip:_PlaceMinimapBtn() end
-        if KwikTip._UpdateMinimapButton then KwikTip:_UpdateMinimapButton() end
-    end)
-
-    -- Checkbox: Hide Info Window
-    local hideHUDCB = CreateFrame("CheckButton", "KwikTipHideHUDCB", cfg, "UICheckButtonTemplate")
-    hideHUDCB:SetSize(24, 24)
-    hideHUDCB:SetPoint("TOPLEFT", minimapBtnCB, "BOTTOMLEFT", 0, -2)
-
-    local hideHUDLbl = cfg:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    hideHUDLbl:SetPoint("LEFT", hideHUDCB, "RIGHT", 2, 0)
-    hideHUDLbl:SetText("Hide Info Window")
-
-    hideHUDCB:SetScript("OnClick", function(self)
-        KwikTipDB.persistentHide = self:GetChecked()
-        KwikTip:UpdateVisibility()
-    end)
-
-    -- Checkbox: Keep Open Through Instance
-    local showInDungeonCB = CreateFrame("CheckButton", "KwikTipShowInDungeonCB", cfg, "UICheckButtonTemplate")
-    showInDungeonCB:SetSize(24, 24)
-    showInDungeonCB:SetPoint("TOPLEFT", hideHUDCB, "BOTTOMLEFT", 0, -2)
-
-    local showInDungeonLbl = cfg:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    showInDungeonLbl:SetPoint("LEFT", showInDungeonCB, "RIGHT", 2, 0)
-    showInDungeonLbl:SetText("Keep Open Through Instance")
-
-    showInDungeonCB:SetScript("OnClick", function(self)
-        KwikTipDB.showInDungeon = self:GetChecked()
-        KwikTip:UpdateContent()
-        KwikTip:UpdateVisibility()
-    end)
-
-    -- ---- APPEARANCE section ---------------------------------------
-    local appHeader = cfg:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
-    appHeader:SetPoint("TOPLEFT", showInDungeonCB, "BOTTOMLEFT", 0, -14)
-    appHeader:SetText("APPEARANCE")
-    appHeader:SetTextColor(0.6, 0.6, 0.6)
 
     local function MakeSlider(name, parent, anchor, minVal, maxVal, step, initLabel, lowText, highText)
         local W = 230
@@ -276,21 +209,40 @@ function KwikTip:CreateConfigWindow()
         return s
     end
 
-    local opacitySlider = MakeSlider(
-        "KwikTipOpacitySlider", cfg, appHeader,
-        10, 100, 5, "Opacity", "10%", "100%"
-    )
-    opacitySlider:SetScript("OnValueChanged", function(self, value)
-        local alpha = value / 100
-        KwikTipDB.alpha = alpha
-        KwikTip.HUD:SetBackdropColor(0, 0, 0, alpha)
-        self._lbl:SetText(string.format("Opacity: %d%%", value))
-    end)
+    local function MakeSectionHeader(text, anchor, yOffset)
+        local h = cfg:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+        h:SetPoint("TOPLEFT", anchor, "BOTTOMLEFT", 0, yOffset or -14)
+        h:SetText(text)
+        h:SetTextColor(0.6, 0.6, 0.6)
+        return h
+    end
+
+    local function MakeCheckbox(name, parent, anchor, labelText, yGap)
+        local cb = CreateFrame("CheckButton", name, parent, "UICheckButtonTemplate")
+        cb:SetSize(24, 24)
+        cb:SetPoint("TOPLEFT", anchor, "BOTTOMLEFT", 0, yGap or -2)
+        local lbl = parent:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+        lbl:SetPoint("LEFT", cb, "RIGHT", 2, 0)
+        lbl:SetText(labelText)
+        return cb
+    end
+
+    -- ============================================================
+    -- POSITION
+    -- ============================================================
+    local posHeader = MakeSectionHeader("POSITION", cfg, nil)
+    posHeader:SetPoint("TOPLEFT", cfg, "TOPLEFT", 12, -32)
+
+    local moveBtn = CreateFrame("Button", "KwikTipConfigMoveBtn", cfg, "UIPanelButtonTemplate")
+    moveBtn:SetSize(110, 22)
+    moveBtn:SetPoint("TOPLEFT", posHeader, "BOTTOMLEFT", 0, -6)
+    moveBtn:SetText("Move Window")
+    moveBtn:SetScript("OnClick", function() KwikTip:ToggleMoveMode() end)
 
     local widthEdit, heightEdit
 
     local function ApplySize(w, h)
-        w = math.max(100, math.min(600, math.floor(tonumber(w) or KwikTipDB.width or 220)))
+        w = math.max(100, math.min(600, math.floor(tonumber(w) or KwikTipDB.width  or 220)))
         h = math.max(40,  math.min(400, math.floor(tonumber(h) or KwikTipDB.height or 80)))
         KwikTipDB.width  = w
         KwikTipDB.height = h
@@ -300,72 +252,227 @@ function KwikTip:CreateConfigWindow()
     end
 
     local widthRow, widthMinus, widthPlus
-    widthRow, widthEdit, widthMinus, widthPlus = MakeNudgeRow("W:", cfg, opacitySlider._wrap)
-    widthEdit:SetScript("OnEnterPressed", function(self)
-        ApplySize(self:GetText(), KwikTipDB.height)
-        self:ClearFocus()
-    end)
-    widthEdit:SetScript("OnEscapePressed", function(self)
-        self:SetText(tostring(KwikTipDB.width or 220))
-        self:ClearFocus()
-    end)
-    widthMinus:SetScript("OnClick", function() ApplySize((KwikTipDB.width or 220) - 1, KwikTipDB.height) end)
-    widthPlus:SetScript("OnClick",  function() ApplySize((KwikTipDB.width or 220) + 1, KwikTipDB.height) end)
+    widthRow, widthEdit, widthMinus, widthPlus = MakeNudgeRow("W:", cfg, moveBtn)
+    widthEdit:SetScript("OnEnterPressed", function(self) ApplySize(self:GetText(), KwikTipDB.height) self:ClearFocus() end)
+    widthEdit:SetScript("OnEscapePressed", function(self) self:SetText(tostring(KwikTipDB.width or 220)) self:ClearFocus() end)
+    widthMinus:SetScript("OnClick", function() ApplySize((KwikTipDB.width  or 220) - 1, KwikTipDB.height) end)
+    widthPlus:SetScript("OnClick",  function() ApplySize((KwikTipDB.width  or 220) + 1, KwikTipDB.height) end)
 
     local heightRow, heightMinus, heightPlus
     heightRow, heightEdit, heightMinus, heightPlus = MakeNudgeRow("H:", cfg, widthRow)
-    heightEdit:SetScript("OnEnterPressed", function(self)
-        ApplySize(KwikTipDB.width, self:GetText())
-        self:ClearFocus()
-    end)
-    heightEdit:SetScript("OnEscapePressed", function(self)
-        self:SetText(tostring(KwikTipDB.height or 80))
-        self:ClearFocus()
-    end)
+    heightEdit:SetScript("OnEnterPressed", function(self) ApplySize(KwikTipDB.width, self:GetText()) self:ClearFocus() end)
+    heightEdit:SetScript("OnEscapePressed", function(self) self:SetText(tostring(KwikTipDB.height or 80)) self:ClearFocus() end)
     heightMinus:SetScript("OnClick", function() ApplySize(KwikTipDB.width, (KwikTipDB.height or 80) - 1) end)
     heightPlus:SetScript("OnClick",  function() ApplySize(KwikTipDB.width, (KwikTipDB.height or 80) + 1) end)
 
-    -- ---- DEBUG section -------------------------------------------
-    local debugHeader = cfg:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
-    debugHeader:SetPoint("TOPLEFT", heightRow, "BOTTOMLEFT", -8, -14)
-    debugHeader:SetText("DEBUG")
-    debugHeader:SetTextColor(0.6, 0.6, 0.6)
+    -- ============================================================
+    -- DISPLAY
+    -- ============================================================
+    local dispHeader = MakeSectionHeader("DISPLAY", heightRow)
 
-    local debugLogCB = CreateFrame("CheckButton", "KwikTipDebugLogCB", cfg, "UICheckButtonTemplate")
-    debugLogCB:SetSize(24, 24)
-    debugLogCB:SetPoint("TOPLEFT", debugHeader, "BOTTOMLEFT", 0, -4)
+    local minimapBtnCB = MakeCheckbox("KwikTipMinimapBtnCB",   cfg, dispHeader, "Show Minimap Button",        -4)
+    local hideHUDCB    = MakeCheckbox("KwikTipHideHUDCB",      cfg, minimapBtnCB, "Hide Info Window")
+    local showInDungeonCB = MakeCheckbox("KwikTipShowInDungeonCB", cfg, hideHUDCB, "Keep Open Through Instance")
 
-    local debugLogLbl = cfg:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    debugLogLbl:SetPoint("LEFT", debugLogCB, "RIGHT", 2, 0)
-    debugLogLbl:SetText("Log Map IDs to SavedVariables")
-
-    debugLogCB:SetScript("OnClick", function(self)
-        KwikTipDB.debugLog = self:GetChecked()
+    minimapBtnCB:SetScript("OnClick", function(self)
+        KwikTipDB.showMinimapBtn = self:GetChecked()
+        if KwikTip._PlaceMinimapBtn    then KwikTip:_PlaceMinimapBtn()    end
+        if KwikTip._UpdateMinimapButton then KwikTip:_UpdateMinimapButton() end
+    end)
+    hideHUDCB:SetScript("OnClick", function(self)
+        KwikTipDB.persistentHide = self:GetChecked()
+        KwikTip:UpdateVisibility()
+    end)
+    showInDungeonCB:SetScript("OnClick", function(self)
+        KwikTipDB.showInDungeon = self:GetChecked()
         KwikTip:UpdateContent()
+        KwikTip:UpdateVisibility()
     end)
 
-    local previewBtn = CreateFrame("Button", "KwikTipPreviewBtn", cfg, "UIPanelButtonTemplate")
-    previewBtn:SetSize(130, 22)
-    previewBtn:SetPoint("TOPLEFT", debugLogCB, "BOTTOMLEFT", 0, -6)
-    previewBtn:SetText("Preview Notes")
-    previewBtn:SetScript("OnClick", function()
-        KwikTip:TogglePreview()
+    -- ============================================================
+    -- SEND TO CHAT
+    -- ============================================================
+    local chatHeader = MakeSectionHeader("SEND TO CHAT", showInDungeonCB)
+
+    local CHAT_OPTIONS = {
+        { label = "None",     value = "NONE"          },
+        { label = "Say",      value = "SAY"           },
+        { label = "Instance", value = "INSTANCE_CHAT" },
+        { label = "Party",    value = "PARTY"         },
+        { label = "Raid",     value = "RAID"          },
+    }
+
+    local chatDropBtn, chatDropList  -- forward-declared so SetChatChannel can reference them
+
+    local function SetChatChannel(value)
+        KwikTipDB.printChannel = value
+        for _, opt in ipairs(CHAT_OPTIONS) do
+            if opt.value == value then
+                if chatDropBtn then chatDropBtn:SetText(opt.label) end
+                break
+            end
+        end
+        if KwikTip._UpdatePrintBtn then KwikTip:_UpdatePrintBtn() end
+    end
+
+    chatDropBtn = CreateFrame("Button", nil, cfg, "UIPanelButtonTemplate")
+    chatDropBtn:SetSize(160, 22)
+    chatDropBtn:SetPoint("TOPLEFT", chatHeader, "BOTTOMLEFT", 0, -6)
+
+    chatDropList = CreateFrame("Frame", nil, UIParent, "BackdropTemplate")
+    chatDropList:SetSize(160, #CHAT_OPTIONS * 22)
+    chatDropList:SetFrameStrata("TOOLTIP")
+    chatDropList:SetBackdrop({
+        bgFile   = "Interface\\Tooltips\\UI-Tooltip-Background",
+        edgeFile = "Interface\\Buttons\\WHITE8x8",
+        edgeSize = 1,
+        insets   = { left = 1, right = 1, top = 1, bottom = 1 },
+    })
+    chatDropList:SetBackdropColor(0.08, 0.08, 0.08, 0.97)
+    chatDropList:SetBackdropBorderColor(0.4, 0.4, 0.4, 1)
+    chatDropList:Hide()
+
+    for i, opt in ipairs(CHAT_OPTIONS) do
+        local row = CreateFrame("Button", nil, chatDropList)
+        row:SetSize(158, 20)
+        row:SetPoint("TOPLEFT", chatDropList, "TOPLEFT", 1, -(i - 1) * 20 - 1)
+
+        local hl = row:CreateTexture(nil, "HIGHLIGHT")
+        hl:SetColorTexture(1, 1, 1, 0.08)
+        hl:SetAllPoints(row)
+
+        local rowLbl = row:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+        rowLbl:SetPoint("LEFT", row, "LEFT", 6, 0)
+        rowLbl:SetText(opt.label)
+
+        local value = opt.value
+        row:SetScript("OnClick", function()
+            SetChatChannel(value)
+            chatDropList:Hide()
+        end)
+    end
+
+    chatDropBtn:SetScript("OnClick", function()
+        if chatDropList:IsShown() then
+            chatDropList:Hide()
+        else
+            chatDropList:ClearAllPoints()
+            chatDropList:SetPoint("TOPLEFT", chatDropBtn, "BOTTOMLEFT", 0, -2)
+            chatDropList:Show()
+        end
     end)
 
+    cfg:HookScript("OnHide", function() chatDropList:Hide() end)
+
+    -- ============================================================
+    -- APPEARANCE
+    -- ============================================================
+    local appHeader = MakeSectionHeader("APPEARANCE", chatDropBtn)
+
+    local opacitySlider = MakeSlider("KwikTipOpacitySlider", cfg, appHeader, 10, 100, 5, "Opacity", "10%", "100%")
+    opacitySlider:SetScript("OnValueChanged", function(self, value)
+        KwikTipDB.alpha = value / 100
+        if KwikTip.HUD then KwikTip.HUD:SetBackdropColor(0, 0, 0, KwikTipDB.alpha) end
+        self._lbl:SetText(string.format("Opacity: %d%%", value))
+    end)
+
+    -- Font selector
+    local fontHeader = cfg:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    fontHeader:SetPoint("TOPLEFT", opacitySlider._wrap, "BOTTOMLEFT", -8, -12)
+    fontHeader:SetText("FONT")
+    fontHeader:SetTextColor(0.6, 0.6, 0.6)
+
+    local FONT_OPTIONS = {
+        { label = "Friz Quadrata", path = "Fonts\\FRIZQT__.TTF"  },
+        { label = "Arial Narrow",  path = "Fonts\\ARIALN.TTF"    },
+        { label = "Morpheus",      path = "Fonts\\MORPHEUS.TTF"  },
+    }
+
+    local fontDropBtn, fontDropList  -- forward-declared so SetFont can reference them
+
+    local function SetFont(path)
+        KwikTipDB.fontPath = path
+        for _, opt in ipairs(FONT_OPTIONS) do
+            if opt.path == path then
+                if fontDropBtn then fontDropBtn:SetText(opt.label) end
+                break
+            end
+        end
+        KwikTip:ApplySettings()
+    end
+
+    -- Dropdown button
+    fontDropBtn = CreateFrame("Button", nil, cfg, "UIPanelButtonTemplate")
+    fontDropBtn:SetSize(160, 22)
+    fontDropBtn:SetPoint("TOPLEFT", fontHeader, "BOTTOMLEFT", 0, -6)
+
+    -- Dropdown list — floats above all config UI on TOOLTIP strata
+    fontDropList = CreateFrame("Frame", nil, UIParent, "BackdropTemplate")
+    fontDropList:SetSize(160, #FONT_OPTIONS * 22)
+    fontDropList:SetFrameStrata("TOOLTIP")
+    fontDropList:SetBackdrop({
+        bgFile   = "Interface\\Tooltips\\UI-Tooltip-Background",
+        edgeFile = "Interface\\Buttons\\WHITE8x8",
+        edgeSize = 1,
+        insets   = { left = 1, right = 1, top = 1, bottom = 1 },
+    })
+    fontDropList:SetBackdropColor(0.08, 0.08, 0.08, 0.97)
+    fontDropList:SetBackdropBorderColor(0.4, 0.4, 0.4, 1)
+    fontDropList:Hide()
+
+    for i, opt in ipairs(FONT_OPTIONS) do
+        local row = CreateFrame("Button", nil, fontDropList)
+        row:SetSize(158, 20)
+        row:SetPoint("TOPLEFT", fontDropList, "TOPLEFT", 1, -(i - 1) * 20 - 1)
+
+        local hl = row:CreateTexture(nil, "HIGHLIGHT")
+        hl:SetColorTexture(1, 1, 1, 0.08)
+        hl:SetAllPoints(row)
+
+        local rowLbl = row:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+        rowLbl:SetPoint("LEFT", row, "LEFT", 6, 0)
+        rowLbl:SetText(opt.label)
+
+        local path = opt.path
+        row:SetScript("OnClick", function()
+            SetFont(path)
+            fontDropList:Hide()
+        end)
+    end
+
+    fontDropBtn:SetScript("OnClick", function()
+        if fontDropList:IsShown() then
+            fontDropList:Hide()
+        else
+            fontDropList:ClearAllPoints()
+            fontDropList:SetPoint("TOPLEFT", fontDropBtn, "BOTTOMLEFT", 0, -2)
+            fontDropList:Show()
+        end
+    end)
+
+    cfg:HookScript("OnHide", function() fontDropList:Hide() end)
+
+    -- Font size slider
+    local fontSizeSlider = MakeSlider("KwikTipFontSizeSlider", cfg, fontDropBtn, 9, 18, 1, "Size: 11", "9", "18")
+    fontSizeSlider:SetScript("OnValueChanged", function(self, value)
+        KwikTipDB.fontSize = value
+        KwikTip:ApplySettings()
+        self._lbl:SetText(string.format("Size: %d", value))
+    end)
+
+    -- Logo
     local cfgLogo = cfg:CreateTexture(nil, "ARTWORK")
     cfgLogo:SetTexture("Interface\\AddOns\\KwikTip\\assets\\ktlogo.tga")
     cfgLogo:SetBlendMode("BLEND")
     cfgLogo:SetSize(220, 120)
     cfgLogo:SetPoint("BOTTOM", cfg, "BOTTOM", 0, 16)
 
+    -- ============================================================
     -- Internal helpers bound to KwikTip namespace
+    -- ============================================================
     function self:_UpdateConfigMoveBtn()
         if not moveBtn then return end
-        if self.moveMode then
-            moveBtn:SetText("Lock Window")
-        else
-            moveBtn:SetText("Move Window")
-        end
+        moveBtn:SetText(self.moveMode and "Lock Window" or "Move Window")
     end
 
     function self:PopulateConfig()
@@ -373,10 +480,12 @@ function KwikTip:CreateConfigWindow()
         minimapBtnCB:SetChecked(db.showMinimapBtn ~= false)
         hideHUDCB:SetChecked(db.persistentHide)
         showInDungeonCB:SetChecked(db.showInDungeon)
+        SetChatChannel(db.printChannel or "NONE")
         opacitySlider:SetValue(math.floor(db.alpha * 100 + 0.5))
+        SetFont(db.fontPath or "Fonts\\FRIZQT__.TTF")
+        fontSizeSlider:SetValue(db.fontSize or 11)
         widthEdit:SetText(tostring(db.width or 220))
         heightEdit:SetText(tostring(db.height or 80))
-        debugLogCB:SetChecked(db.debugLog)
         self:_UpdateConfigMoveBtn()
     end
 end

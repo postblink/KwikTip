@@ -2,7 +2,7 @@
 ## Title: KwikTip
 ## Notes: A custom UI/HUD element addon
 ## Author:
-## Version: 1.5.10
+## Version: 1.5.11
 ## DefaultState: enabled
 
 ## SavedVariables: KwikTipDB

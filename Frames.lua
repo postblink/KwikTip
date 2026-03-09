@@ -6,6 +6,7 @@ local ADDON_NAME, KwikTip = ...
 -- ============================================================
 local hud
 local contentText
+local printBtn
 local cornerHandles = {}
 
 -- ============================================================
@@ -51,6 +52,59 @@ function KwikTip:InitHUD()
     contentText:SetWordWrap(true)
     contentText:SetText("")
     KwikTip.HUDText = contentText
+
+    -- Print-to-chat button — small, sits in the bottom-right corner of the HUD.
+    -- Always has EnableMouse(true) independently of the parent's mouse passthrough state.
+    printBtn = CreateFrame("Button", "KwikTipPrintBtn", hud)
+    printBtn:SetSize(16, 16)
+    printBtn:SetPoint("BOTTOMRIGHT", hud, "BOTTOMRIGHT", -3, 3)
+    printBtn:SetFrameLevel(hud:GetFrameLevel() + 3)
+    printBtn:EnableMouse(true)
+    printBtn:Hide()
+    KwikTip.PrintBtn = printBtn
+
+    local printBtnTex = printBtn:CreateTexture(nil, "OVERLAY")
+    printBtnTex:SetTexture("Interface\\GossipFrame\\GossipGossipIcon")
+    printBtnTex:SetAllPoints(printBtn)
+    printBtnTex:SetAlpha(0.7)
+
+    local printBtnHL = printBtn:CreateTexture(nil, "HIGHLIGHT")
+    printBtnHL:SetColorTexture(1, 1, 1, 0.2)
+    printBtnHL:SetAllPoints(printBtn)
+
+    printBtn:SetScript("OnClick", function()
+        local content = KwikTip._lastContent
+        if not content or content == "" then return end
+
+        -- Strip color codes and texture references — SendChatMessage requires plain text.
+        local plain = content
+        plain = plain:gsub("|c%x%x%x%x%x%x%x%x", "")
+        plain = plain:gsub("|r", "")
+        plain = plain:gsub("|T.-|t", "")
+
+        -- Collect non-empty lines and skip only the first (dungeon name); keep boss/entity name.
+        local lines = {}
+        for line in plain:gmatch("[^\n]+") do
+            line = line:match("^%s*(.-)%s*$")
+            if line ~= "" then
+                lines[#lines + 1] = line
+            end
+        end
+        local channel = KwikTipDB.printChannel or "INSTANCE_CHAT"
+        for i = 2, #lines do
+            SendChatMessage(lines[i], channel)
+        end
+    end)
+
+    printBtn:SetScript("OnEnter", function(self)
+        GameTooltip:SetOwner(self, "ANCHOR_LEFT")
+        GameTooltip:SetText("Print tip to instance chat", 1, 1, 1)
+        GameTooltip:Show()
+    end)
+
+    printBtn:SetScript("OnLeave", function()
+        GameTooltip:Hide()
+    end)
 
     hud:SetScript("OnMouseDown", function(self, button)
         if button == "LeftButton" then
@@ -108,6 +162,19 @@ function KwikTip:ApplySettings()
     hud:SetBackdropColor(0, 0, 0, db.alpha)
     hud:ClearAllPoints()
     hud:SetPoint("CENTER", UIParent, "CENTER", db.x or 0, db.y or 0)
+    if contentText then
+        contentText:SetFont(db.fontPath or "Fonts\\FRIZQT__.TTF", db.fontSize or 11, "")
+    end
+end
+
+-- Show or hide the print button based on the showPrintBtn setting and HUD visibility.
+function KwikTip:_UpdatePrintBtn()
+    if not printBtn then return end
+    if KwikTipDB.printChannel and KwikTipDB.printChannel ~= "NONE" and hud and hud:IsShown() then
+        printBtn:Show()
+    else
+        printBtn:Hide()
+    end
 end
 
 -- Show the HUD when any active state warrants it, or when move mode is active.
@@ -127,6 +194,7 @@ function KwikTip:UpdateVisibility()
     else
         if hud then hud:Hide() end
     end
+    self:_UpdatePrintBtn()
 end
 
 -- Toggle between move mode (draggable, gold border) and locked mode.
