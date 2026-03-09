@@ -507,8 +507,9 @@ KwikTip.DUNGEONS = {
     -- SEASON 1 MYTHIC+ — Legacy Dungeons
     -- --------------------------------------------------------
     {
-        instanceID = 2526,  -- BigWigs Loader.lua
-        uiMapID    = 0,     -- TODO: verify in-game with /run print(C_Map.GetBestMapForUnit("player"))
+        instanceID = 2526,  -- confirmed in-game
+        uiMapID    = 2097,  -- confirmed in-game
+        altMapIDs  = { 2025, 2098 },  -- 2025 = entrance antechamber; 2098 = upper floor (The Pitch); confirmed in-game
         name       = "Algeth'ar Academy",
         location   = "Thaldraszus",
         season     = "legacy",
@@ -516,7 +517,7 @@ KwikTip.DUNGEONS = {
         mythicPlus = true,
         bosses = {
             {
-                encounterID = 0,
+                encounterID = 2563,  -- confirmed in-game
                 name        = "Overgrown Ancient",
                 tip         = "Dodge Burst Pods; free allies from Germinate roots; interrupt Lumbering Swipe.",
                 notes = {
@@ -525,7 +526,7 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 0,
+                encounterID = 2564,  -- confirmed in-game
                 name        = "Crawth",
                 tip         = "Interrupt Screech; spread for quill barrage; kill wind adds quickly.",
                 notes = {
@@ -534,7 +535,7 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 0,
+                encounterID = 2562,  -- confirmed in-game
                 name        = "Vexamus",
                 tip         = "Interrupt Spellvoid; dodge Overloaded explosions; spread Arcane Puddle soaks.",
                 notes = {
@@ -543,7 +544,7 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 0,
+                encounterID = 2565,  -- confirmed in-game
                 name        = "Echo of Doragosa",
                 tip         = "Spread for Astral Breath; interrupt Nullifying Pulse; dodge Arcane Rifts.",
                 notes = {
@@ -552,10 +553,16 @@ KwikTip.DUNGEONS = {
                 },
             },
         },
+        areas = {
+            { subzone = "Terrace of Lectures",      bossIndex = 3 },  -- Vexamus; confirmed in-game
+            { subzone = "The Botanica",              bossIndex = 1 },  -- Overgrown Ancient; confirmed in-game
+            { subzone = "The Pitch",                 bossIndex = 2 },  -- Crawth; spans mapIDs 2097+2098; confirmed in-game
+            { subzone = "The Headteacher's Enclave", bossIndex = 4 },  -- Echo of Doragosa; confirmed in-game
+        },
     },
     {
-        instanceID = 658,  -- BigWigs Loader.lua
-        uiMapID    = 0,    -- TODO: verify in-game with /run print(C_Map.GetBestMapForUnit("player"))
+        instanceID = 658,   -- BigWigs Loader.lua
+        uiMapID    = 184,   -- confirmed in-game
         name       = "Pit of Saron",
         location   = "Icecrown",
         season     = "legacy",
@@ -563,7 +570,7 @@ KwikTip.DUNGEONS = {
         mythicPlus = true,
         bosses = {
             {
-                encounterID = 0,
+                encounterID = 1999,  -- confirmed in-game
                 name        = "Forgemaster Garfrost",
                 tip         = "LoS boss behind ice boulders to shed Permafrost stacks before they stack too high.",
                 notes = {
@@ -571,7 +578,7 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 0,
+                encounterID = 2001,  -- confirmed in-game
                 name        = "Ick & Krick",
                 tip         = "Run from Ick during Pursuit; spread for Explosive Barrage.",
                 notes = {
@@ -579,13 +586,18 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 0,
+                encounterID = 2000,  -- confirmed in-game
                 name        = "Scourgelord Tyrannus",
                 tip         = "Dodge Overlord's Brand; spread to avoid chained Unholy Power debuffs.",
                 notes = {
                     { role = "general",   text = "Dodge Overlord's Brand; spread to avoid chained Unholy Power debuffs." },
                 },
             },
+        },
+        areas = {
+            -- Garfrost and Ick & Krick have no named subzone (empty string throughout).
+            -- Only Tyrannus has a distinct boss room subzone.
+            { subzone = "Scourgelord's Command", bossIndex = 3 },  -- Scourgelord Tyrannus; confirmed in-game
         },
     },
     {
@@ -634,7 +646,8 @@ KwikTip.DUNGEONS = {
     },
     {
         instanceID = 1209,  -- BigWigs Loader.lua
-        uiMapID    = 0,     -- TODO: verify in-game with /run print(C_Map.GetBestMapForUnit("player"))
+        uiMapID    = 601,   -- confirmed in-game
+        altMapIDs  = { 602 },  -- upper tier; confirmed in-game
         name       = "Skyreach",
         location   = "Spires of Arak",
         season     = "legacy",
@@ -642,7 +655,7 @@ KwikTip.DUNGEONS = {
         mythicPlus = true,
         bosses = {
             {
-                encounterID = 0,
+                encounterID = 1698,  -- confirmed in-game
                 name        = "Ranjit",
                 tip         = "Hide behind wind barriers for Fan of Blades; interrupt Four Winds.",
                 notes = {
@@ -651,7 +664,7 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 0,
+                encounterID = 1699,  -- confirmed in-game
                 name        = "Araknath",
                 tip         = "Dodge Burn ground fissures; spread to reduce Solarflare chain damage.",
                 notes = {
@@ -659,7 +672,7 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 0,
+                encounterID = 1700,  -- confirmed in-game
                 name        = "Rukhran",
                 tip         = "Burn Spire Eagle adds fast; stay out of Solar Breath frontal cone.",
                 notes = {
@@ -668,7 +681,7 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 0,
+                encounterID = 1701,  -- confirmed in-game
                 name        = "High Sage Viryx",
                 tip         = "Interrupt Lens Flare; kill Initiates before they carry players off the platform.",
                 notes = {
@@ -676,6 +689,15 @@ KwikTip.DUNGEONS = {
                     { role = "interrupt", text = "Lens Flare." },
                 },
             },
+        },
+        areas = {
+            -- "Grand Spire" appears on both mapID 601 (Araknath) and 602 (High Sage Viryx).
+            -- mapID=602 entry must come first — it matches only on that specific map.
+            -- The subzone-only entry below it catches mapID 601 without ambiguity.
+            { mapID = 602,                    bossIndex = 4 },  -- High Sage Viryx; confirmed in-game
+            { subzone = "Lower Quarter",      bossIndex = 1 },  -- Ranjit; confirmed in-game
+            { subzone = "Grand Spire",        bossIndex = 2 },  -- Araknath (mapID 601); confirmed in-game
+            { subzone = "The Overlook",       bossIndex = 3 },  -- Rukhran; confirmed in-game
         },
     },
 }
