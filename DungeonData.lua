@@ -390,7 +390,7 @@ KwikTip.DUNGEONS = {
             },
         },
         trash = {
-            { npcID = 241643, name = "Shadowguard Defender",  tip = "Null Sunder stacks per Defender active — control pull size; tank rotate or pop a cooldown on high-stack groups." },
+            { npcID = 241643, name = "Shadowguard Defender",  tip = "Null Sunder stacks per Defender active — control pull size; tank move or pop a cooldown on high-stack groups." },
             { npcID = 241647, name = "Flux Engineer",          tip = "Suppression Field: spread to avoid cleaving the random target, then move as little as possible (movement increases damage taken). Drops a live Mana Battery on death — destroy it before it finishes its 12s cast." },
             { npcID = 248708, name = "Nexus Adept",            tip = "Interrupt Umbra Bolt — high-damage shadow nuke; use a stun or stop if interrupt is on cooldown." },
             { npcID = 248373, name = "Circuit Seer",           tip = "Immune to CC. Defensives and healing CDs for Arcing Mana channel; avoid Erratic Zap and Power Flux circles; watch for nearby Mana Batteries it activates — swap and destroy them before the 12s cast completes." },
@@ -435,9 +435,9 @@ KwikTip.DUNGEONS = {
             {
                 encounterID = 3201,
                 name        = "Lightwarden Ruia",
-                tip         = "Heal players to full to clear Grievous Thrash bleeds; at 40%, Ruia enters Haranir form (Spirits of the Vale) and rapidly cycles all abilities — tank rotate to avoid stacking Pulverizing Strikes damage-taken debuff.",
+                tip         = "Heal players to full to clear Grievous Thrash bleeds; at 40%, Ruia enters Haranir form (Spirits of the Vale) and rapidly cycles all abilities — tank moves to avoid stacking Pulverizing Strikes damage-taken debuff.",
                 notes = {
-                    { role = "tank",      text = "At 40%, Ruia enters Haranir form — rotate tank swaps to avoid stacking Pulverizing Strikes damage-taken debuff." },
+                    { role = "tank",      text = "At 40%, Ruia enters Haranir form — tank moves to avoid stacking Pulverizing Strikes damage-taken debuff." },
                     { role = "healer",    text = "Heal players to full to clear Grievous Thrash bleeds." },
                 },
             },
