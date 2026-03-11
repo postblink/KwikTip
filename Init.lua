@@ -52,8 +52,7 @@ function KwikTip:OnLoad()
             KwikTipDB[k] = type(v) == "table" and {} or v
         end
     end
-    if self.InitHUD then self:InitHUD() end
-    if self.ApplySettings then self:ApplySettings() end
+    -- InitHUD/ApplySettings deferred to OnLogin — player data is guaranteed available there.
 end
 
 function KwikTip:OnLogin()

@@ -9,6 +9,13 @@ local contentText
 local printBtn
 local cornerHandles = {}
 
+-- Single reusable frame for deferring SendChatMessage past combat lockdown.
+-- Allocated once on first use; re-registered each time a send is queued.
+-- Multiple clicks during combat overwrite _pendingSend* — last content wins.
+local _combatSendFrame
+local _pendingSendLines
+local _pendingSendChannel
+
 -- ============================================================
 -- Drag and resize support
 -- ============================================================
@@ -97,8 +104,30 @@ function KwikTip:InitHUD()
         end
         local channel = KwikTipDB.printChannel or "NONE"
         if channel == "NONE" then return end
-        for i = 2, #lines do
-            SendChatMessage(lines[i], channel)
+        if InCombatLockdown() then
+            -- SendChatMessage is protected during combat; defer until PLAYER_REGEN_ENABLED.
+            -- Reuse a single module-level frame to avoid permanent per-click allocations.
+            -- Multiple clicks during combat overwrite the pending data — last content wins.
+            _pendingSendLines   = lines
+            _pendingSendChannel = channel
+            if not _combatSendFrame then
+                _combatSendFrame = CreateFrame("Frame")
+                _combatSendFrame:SetScript("OnEvent", function(self)
+                    self:UnregisterEvent("PLAYER_REGEN_ENABLED")
+                    if _pendingSendLines and _pendingSendChannel then
+                        for i = 2, #_pendingSendLines do
+                            SendChatMessage(_pendingSendLines[i], _pendingSendChannel)
+                        end
+                        _pendingSendLines   = nil
+                        _pendingSendChannel = nil
+                    end
+                end)
+            end
+            _combatSendFrame:RegisterEvent("PLAYER_REGEN_ENABLED")
+        else
+            for i = 2, #lines do
+                SendChatMessage(lines[i], channel)
+            end
         end
     end)
 
