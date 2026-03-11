@@ -70,7 +70,7 @@ KwikTip.DUNGEONS = {
         mythicPlus = true,
         bosses = {
             {
-                encounterID = 3056,
+                encounterID = 3056,  -- confirmed in-game
                 name        = "Emberdawn",
                 tip         = "Drop Flaming Updraft puddles at the room's outer edges; play close to the boss during Burning Gale (16s) to minimize movement when dodging Twisters and Fire Breath frontals; healer major CDs on Burning Gale.",
                 notes = {
@@ -80,7 +80,7 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 3057,
+                encounterID = 3057,  -- confirmed in-game
                 name        = "Derelict Duo",
                 tip         = "Keep both at equal health — Broken Bond enrages the survivor; interrupt Shadow Bolt; dispel Curse of Darkness to despawn Dark Entity adds; tank defensive for Bone Hack and Splattering Spew (drops puddles — spread loosely); stand behind Kalis so Latch's Heaving Yank pulls her and cancels Debilitating Shriek.",
                 notes = {
@@ -92,7 +92,7 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 3058,
+                encounterID = 3058,  -- confirmed in-game
                 name        = "Commander Kroluk",
                 tip         = "Reckless Leap targets furthest player — stack in melee with one defensive player baiting it; stay near an ally or Intimidating Shout fears you; at 66%/33% kill adds (interrupt Phantasmal Mystic at 50% or it enrages the pull).",
                 notes = {
@@ -103,7 +103,7 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 3059,
+                encounterID = 3059,  -- confirmed in-game
                 name        = "The Restless Heart",
                 tip         = "Manage Squall Leap DoT stacks — step on Turbulent Arrows to clear them and to vault over Bullseye Windblast shockwave at 100 energy; dodge Bolt Gale frontal; tank use defensive for Tempest Slash knockback and damage-taken amp.",
                 notes = {
@@ -135,7 +135,7 @@ KwikTip.DUNGEONS = {
         mythicPlus = false,
         bosses = {
             {
-                encounterID = 3101,
+                encounterID = 3101,  -- confirmed in-game
                 name        = "Kystia Manaheart",
                 tip         = "Dispel Illicit Infusion from Nibbles for 15s stun + 100% dmg window — Kystia radiates Chaos AoE during this phase so healer CDs needed; dodge Nibbles' Fel Spray cone while she's hostile; interrupt Mirror Images.",
                 notes = {
@@ -145,7 +145,7 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 3102,
+                encounterID = 3102,  -- confirmed in-game
                 name        = "Zaen Bladesorrow",
                 tip         = "Stand behind Forbidden Freight during Murder in a Row; move Fire Bomb away from freight (it destroys cover); Heartstop Poison halves tank max health — prioritize tank healing.",
                 notes = {
@@ -155,7 +155,7 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 3103,
+                encounterID = 3103,  -- confirmed in-game
                 name        = "Xathuux the Annihilator",
                 tip         = "At 100 energy, Demonic Rage pulses heavy group AoE and buffs boss attack speed — use defensives and healer CDs. Dodge Axe Toss impact zones (Fel Light persists on ground); avoid Burning Steps hazards. Tank: Legion Strike applies 80% healing reduction — call for an external.",
                 notes = {
@@ -165,7 +165,7 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 3105,
+                encounterID = 3105,  -- confirmed in-game
                 name        = "Lithiel Cinderfury",
                 tip         = "Kill Wild Imps before Malefic Wave reaches them (they gain haste if hit); use Gateways to avoid the wave; interrupt Chaos Bolt.",
                 notes = {
@@ -300,7 +300,7 @@ KwikTip.DUNGEONS = {
         mythicPlus = true,
         bosses = {
             {
-                encounterID = 3071,
+                encounterID = 3071,  -- confirmed in-game
                 name        = "Arcanotron Custos",
                 tip         = "Intercept orbs before they reach the boss; avoid Arcane Residue zones left after the knockback.",
                 notes = {
@@ -308,7 +308,7 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 3072,
+                encounterID = 3072,  -- confirmed in-game
                 name        = "Seranel Sunlash",
                 tip         = "At 100 energy, be inside a Suppression Zone or Wave of Silence pacifies you for 8s (unable to cast); also step into a zone to resolve Runic Mark (Feedback) — but zones purge your buffs.",
                 notes = {
@@ -317,7 +317,7 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 3073,
+                encounterID = 3073,  -- confirmed in-game
                 name        = "Gemellus",
                 tip         = "All copies share health; touch correct clone to clear Neural Link.",
                 notes = {
@@ -325,7 +325,7 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 3074,
+                encounterID = 3074,  -- confirmed in-game
                 name        = "Degentrius",
                 tip         = "One player per quadrant soaks Unstable Void Essence as it bounces — missing applies a 40s DoT to the group. Tank: step back out of melee for Hulking Fragment DoT dispel (drops a puddle). Never stand in Void Torrent beams — they stun.",
                 notes = {
@@ -362,7 +362,7 @@ KwikTip.DUNGEONS = {
         mythicPlus = true,
         bosses = {
             {
-                encounterID = 3328,
+                encounterID = 3328,  -- confirmed in-game
                 name        = "Chief Corewright Kasreth",
                 tip         = "Don't cross Leyline Arrays (damage + slow). When targeted by Reflux Charge, touch an array intersection to destroy it and open space. At full energy: Corespark Detonation hits a player with a massive knockback and healing absorb DoT — watch positioning to avoid being knocked into puddles.",
                 notes = {
@@ -371,7 +371,7 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 3332,
+                encounterID = 3332,  -- confirmed in-game
                 name        = "Corewarden Nysarra",
                 tip         = "Avoid Lothraxion's beam during Lightscar Flare; stand in the boss's frontal cone during the 18s stun for 300% damage amp (30% healing amp too). Kill Null Vanguard adds before the stun ends — surviving adds get consumed and buff the boss.",
                 notes = {
@@ -381,7 +381,7 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 3333,
+                encounterID = 3333,  -- confirmed in-game
                 name        = "Lothraxion",
                 tip         = "At 100 energy, find and interrupt the real Lothraxion among his images — he's the only one without glowing horns; wrong target = Core Exposure (group damage + 20% increased Holy damage taken for 1 min).",
                 notes = {
@@ -415,7 +415,7 @@ KwikTip.DUNGEONS = {
         mythicPlus = false,
         bosses = {
             {
-                encounterID = 3199,
+                encounterID = 3199,  -- confirmed in-game
                 name        = "Lightblossom Trinity",
                 tip         = "Block Lightblossom Beams to prevent Light-Gorged stacks on flowers before they detonate; interrupt Lightsower Dash to stop seed planting; all three bosses share damage.",
                 notes = {
@@ -424,7 +424,7 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 3200,
+                encounterID = 3200,  -- confirmed in-game
                 name        = "Ikuzz the Light Hunter",
                 tip         = "Destroy Bloodthorn Roots quickly — rooted players are also hit by Crushing Footfalls; Bloodthirsty Gaze fixates Ikuzz on a player for 10s — maintain distance or be Incised.",
                 notes = {
@@ -433,7 +433,7 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 3201,
+                encounterID = 3201,  -- confirmed in-game
                 name        = "Lightwarden Ruia",
                 tip         = "Heal players to full to clear Grievous Thrash bleeds; at 40%, Ruia enters Haranir form (Spirits of the Vale) and rapidly cycles all abilities — tank moves to avoid stacking Pulverizing Strikes damage-taken debuff.",
                 notes = {
@@ -442,7 +442,7 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 3202,
+                encounterID = 3202,  -- confirmed in-game
                 name        = "Ziekket",
                 tip         = "Intercept Lightbloom's Essence globules before the boss absorbs them — each absorbed globule grants a Florescent Outburst stack (stacking shield); touching them yourself grants Lightbloom's Might (+dmg/healing). Position boss's Lightbeam sweep over Dormant Lashers to vaporize them; dodge the beam and Lightsap puddles.",
                 notes = {
@@ -561,7 +561,7 @@ KwikTip.DUNGEONS = {
         },
     },
     {
-        instanceID = 658,   -- BigWigs Loader.lua
+        instanceID = 658,   -- confirmed in-game
         uiMapID    = 184,   -- confirmed in-game
         name       = "Pit of Saron",
         location   = "Icecrown",
@@ -645,7 +645,7 @@ KwikTip.DUNGEONS = {
         },
     },
     {
-        instanceID = 1209,  -- BigWigs Loader.lua
+        instanceID = 1209,  -- confirmed in-game
         uiMapID    = 601,   -- confirmed in-game
         altMapIDs  = { 602 },  -- upper tier; confirmed in-game
         name       = "Skyreach",

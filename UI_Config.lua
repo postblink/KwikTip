@@ -239,6 +239,12 @@ function KwikTip:CreateConfigWindow()
     moveBtn:SetText("Move Window")
     moveBtn:SetScript("OnClick", function() KwikTip:ToggleMoveMode() end)
 
+    local previewBtn = CreateFrame("Button", "KwikTipConfigPreviewBtn", cfg, "UIPanelButtonTemplate")
+    previewBtn:SetSize(110, 22)
+    previewBtn:SetPoint("TOPLEFT", moveBtn, "BOTTOMLEFT", 0, -4)
+    previewBtn:SetText("Preview")
+    previewBtn:SetScript("OnClick", function() KwikTip:TogglePreview() end)
+
     local widthEdit, heightEdit
 
     local function ApplySize(w, h)
@@ -252,7 +258,7 @@ function KwikTip:CreateConfigWindow()
     end
 
     local widthRow, widthMinus, widthPlus
-    widthRow, widthEdit, widthMinus, widthPlus = MakeNudgeRow("W:", cfg, moveBtn)
+    widthRow, widthEdit, widthMinus, widthPlus = MakeNudgeRow("W:", cfg, previewBtn)
     widthEdit:SetScript("OnEnterPressed", function(self) ApplySize(self:GetText(), KwikTipDB.height) self:ClearFocus() end)
     widthEdit:SetScript("OnEscapePressed", function(self) self:SetText(tostring(KwikTipDB.width or 220)) self:ClearFocus() end)
     widthMinus:SetScript("OnClick", function() ApplySize((KwikTipDB.width  or 220) - 1, KwikTipDB.height) end)
@@ -292,7 +298,7 @@ function KwikTip:CreateConfigWindow()
     -- ============================================================
     -- SEND TO CHAT
     -- ============================================================
-    local chatHeader = MakeSectionHeader("SEND TO CHAT", showInDungeonCB)
+    local chatHeader = MakeSectionHeader("SEND TO.. (Choose)", showInDungeonCB)
 
     local CHAT_OPTIONS = {
         { label = "None",     value = "NONE"          },

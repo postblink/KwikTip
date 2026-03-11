@@ -76,11 +76,16 @@ function KwikTip:InitHUD()
         local content = KwikTip._lastContent
         if not content or content == "" then return end
 
-        -- Strip color codes and texture references — SendChatMessage requires plain text.
+        -- Replace role icon textures with text labels, then strip remaining escapes.
+        -- SendChatMessage requires plain text — the server strips everything else.
         local plain = content
+        plain = plain:gsub("|T[^|]*Ability_Warrior_DefensiveStance[^|]*|t%s*", "[Tank] ")
+        plain = plain:gsub("|T[^|]*Spell_Holy_Renew[^|]*|t%s*",               "[Heal] ")
+        plain = plain:gsub("|T[^|]*Ability_DualWield[^|]*|t%s*",               "[DPS] ")
+        plain = plain:gsub("|T[^|]*Ability_Kick[^|]*|t%s*",                    "[INT] ")
+        plain = plain:gsub("|T.-|t", "")
         plain = plain:gsub("|c%x%x%x%x%x%x%x%x", "")
         plain = plain:gsub("|r", "")
-        plain = plain:gsub("|T.-|t", "")
 
         -- Collect non-empty lines and skip only the first (dungeon name); keep boss/entity name.
         local lines = {}
