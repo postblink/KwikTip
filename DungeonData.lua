@@ -632,34 +632,42 @@ KwikTip.DUNGEONS = {
             {
                 encounterID = 0,
                 name        = "Zuraal the Ascended",
-                tip         = "Step through void portals immediately when teleported to avoid damage.",
+                -- Tips sourced from journal API (static-12.0.1); unverified in-game (dungeon locked until M+ S1 launch)
+                tip         = "Kill Coalesced Void adds before they reach Zuraal — each one empowers his abilities. Spread for Decimate to minimise pool overlap. Tank: face Null Palm away from the group.",
                 notes = {
-                    { role = "general",   text = "Step through void portals immediately when teleported to avoid damage." },
+                    { role = "dps",       text = "Kill Coalesced Void adds immediately — each one that reaches Zuraal empowers his abilities." },
+                    { role = "general",   text = "Spread for Decimate to minimise void pool overlap." },
+                    { role = "tank",      text = "Face Null Palm away from the group." },
                 },
             },
             {
                 encounterID = 0,
                 name        = "Saprish",
-                tip         = "Kill Darkfang before Saprish's energy caps; boss is vulnerable without his pet.",
+                -- Tips sourced from journal API (static-12.0.1); unverified in-game (dungeon locked until M+ S1 launch)
+                tip         = "Kill Darkfang before Saprish hits 100 energy. Spread Void Bombs — at 100 energy Overload ignites all of them simultaneously.",
                 notes = {
-                    { role = "dps",       text = "Kill Darkfang before Saprish's energy caps — boss is vulnerable without his pet." },
+                    { role = "dps",       text = "Burn Darkfang down — Saprish is weakened without his raptor." },
+                    { role = "general",   text = "Spread Void Bombs so Overload doesn't chain-detonate a stack." },
                 },
             },
             {
                 encounterID = 0,
                 name        = "Viceroy Nezhar",
-                tip         = "Interrupt Dark Bulwark; dodge Void Lashing tentacle swipes.",
+                -- Tips sourced from journal API (static-12.0.1); unverified in-game (dungeon locked until M+ S1 launch)
+                tip         = "Move out of Collapsing Void rings before they become Void Storm. Kill Umbral Tentacles to stop Mind Flay.",
                 notes = {
-                    { role = "general",   text = "Dodge Void Lashing tentacle swipes." },
-                    { role = "interrupt", text = "Dark Bulwark." },
+                    { role = "general",   text = "Move out of Collapsing Void rings immediately — they expand into an inescapable Void Storm." },
+                    { role = "dps",       text = "Kill Umbral Tentacles — their Mind Flay deals continuous damage to a fixated target." },
                 },
             },
             {
                 encounterID = 0,
                 name        = "L'ura",
-                tip         = "Collect soul fragments promptly; avoid standing in void pools.",
+                -- Tips sourced from journal API (static-12.0.1); unverified in-game (dungeon locked until M+ S1 launch)
+                tip         = "Don't overlap Notes of Despair — their Dirge of Despair zones stack. Discordant Beam silences them; once all are silenced, Alleria destroys them with Shattering Shot.",
                 notes = {
-                    { role = "general",   text = "Collect soul fragments promptly; avoid standing in void pools." },
+                    { role = "general",   text = "Spread Notes of Despair — overlapping Dirge of Despair zones stack damage." },
+                    { role = "general",   text = "Discordant Beam silences Notes of Despair. Once all are silenced, Alleria destroys them — don't just burn the adds." },
                 },
             },
         },
