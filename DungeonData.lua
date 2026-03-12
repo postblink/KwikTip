@@ -136,11 +136,12 @@ KwikTip.DUNGEONS = {
         bosses = {
             {
                 encounterID = 3101,  -- confirmed in-game
+                npcID       = 252458,
                 name        = "Kystia Manaheart",
-                tip         = "Dispel Illicit Infusion from Nibbles for 15s stun + 100% dmg window — Kystia radiates Chaos AoE during this phase so healer CDs needed; dodge Nibbles' Fel Spray cone while she's hostile; interrupt Mirror Images.",
+                tip         = "Dispel Illicit Infusion from Nibbles for 15s stun + 100% dmg window — Kystia radiates Chaos AoE during this phase so healer CDs needed; dodge Nibbles' Fel Spray cone while she's hostile; purge Felshield (80% DR) when Kystia casts it; interrupt Mirror Images.",
                 notes = {
                     { role = "healer",    text = "Dispel Illicit Infusion from Nibbles — triggers 15s stun and 100% dmg window; major CDs during this phase (Chaos AoE)." },
-                    { role = "general",   text = "Dodge Nibbles' Fel Spray cone while she's hostile." },
+                    { role = "general",   text = "Dodge Nibbles' Fel Spray cone while she's hostile; purge Felshield when Kystia casts it (80% DR)." },
                     { role = "interrupt", text = "Mirror Images." },
                 },
             },
@@ -183,7 +184,7 @@ KwikTip.DUNGEONS = {
         },
     },
     {
-        instanceID = 2825,  -- BigWigs, unverified in-game
+        instanceID = 2825,  -- confirmed in-game
         uiMapID    = 2514,
         altMapIDs  = { 2564, 2513 },  -- 2564 = Dreamer's Passage/Heart of Rage; 2513 = Heart of Rage (confirmed in-game)
         name       = "Den of Nalorakk",
@@ -193,16 +194,19 @@ KwikTip.DUNGEONS = {
         mythicPlus = false,
         bosses = {
             {
-                encounterID = 3207,
+                encounterID = 3207,  -- confirmed in-game
+                npcID       = 248710,
                 name        = "The Hoardmonger",
-                tip         = "At 90%/60%/30%, boss retreats to empower; destroy Rotten Mushrooms before burst (Toxic Spores debuff); dodge frontals.",
+                tip         = "At 90%/60%/30%, boss retreats to empower; destroy Rotten Mushrooms before burst; healer dispel Toxic Spores; dodge frontals.",
                 notes = {
                     { role = "general",   text = "At 90%/60%/30% boss retreats to empower — dodge frontals." },
-                    { role = "dps",       text = "Destroy Rotten Mushrooms before each burst phase (Toxic Spores debuff)." },
+                    { role = "dps",       text = "Destroy Rotten Mushrooms before each burst phase." },
+                    { role = "healer",    text = "Dispel Toxic Spores debuff." },
                 },
             },
             {
-                encounterID = 3208,
+                encounterID = 3208,  -- confirmed in-game
+                npcID       = 261053,
                 name        = "Sentinel of Winter",
                 tip         = "Dodge Raging Squalls and Snowdrift pools; at 100 energy boss channels Eternal Winter (shields self + heavy group damage) — use damage CDs to break the shield fast, healer CDs to survive.",
                 notes = {
@@ -212,11 +216,11 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 3209,
+                encounterID = 3209,  -- confirmed in-game
                 name        = "Nalorakk",
-                tip         = "Fury of the War God: intercept charging echoes to protect Zul'jarra; spread when Echoing Maul marks you.",
+                tip         = "Fury of the War God: intercept charging echoes to protect Zul'jarra — echoes that reach her deal massive group damage; spread when Echoing Maul marks you.",
                 notes = {
-                    { role = "general",   text = "Intercept charging echoes (Fury of the War God) to protect Zul'jarra." },
+                    { role = "general",   text = "Intercept charging echoes (Fury of the War God) — echoes reaching Zul'jarra deal massive group damage." },
                     { role = "general",   text = "Spread when Echoing Maul marks you." },
                 },
             },
@@ -238,28 +242,31 @@ KwikTip.DUNGEONS = {
             {
                 encounterID = 3212,
                 name        = "Muro'jin and Nekraxx",
-                tip         = "Keep equal health — if Nekraxx dies first Muro'jin revives him at 35%; if Muro'jin dies first Nekraxx gains 20% dmg every 4s. Carrion Swoop target: step into a Freezing Trap to block the charge and stun Nekraxx 5s. Dispel Infected Pinions disease.",
+                tip         = "Keep equal health — if Nekraxx dies first Muro'jin revives him at 35%; if Muro'jin dies first Nekraxx gains 20% dmg every 4s (stacking). Carrion Swoop target: step into a Freezing Trap to block the charge and stun Nekraxx 5s. Barrage: targeted player stand still. Dispel Infected Pinions disease.",
                 notes = {
-                    { role = "general",   text = "Keep equal health — if Nekraxx dies first Muro'jin revives him at 35%; if Muro'jin dies first Nekraxx gains 20% dmg every 4s." },
+                    { role = "general",   text = "Keep equal health — if Nekraxx dies first Muro'jin revives him at 35%; if Muro'jin dies first Nekraxx gains +20% damage every 4s (continuously stacking)." },
                     { role = "general",   text = "Carrion Swoop target: step into a Freezing Trap to block the charge and stun Nekraxx 5s." },
+                    { role = "general",   text = "Barrage targets a player — that player stands still." },
                     { role = "healer",    text = "Dispel Infected Pinions disease." },
                 },
             },
             {
                 encounterID = 3213,
                 name        = "Vordaza",
-                tip         = "Burst the Deathshroud shield during Necrotic Convergence with damage CDs; kite Unstable Phantoms into each other to detonate them — killing them directly applies Lingering Dread to the group; dodge Unmake line.",
+                tip         = "Burst the Deathshroud shield during Necrotic Convergence with damage CDs; kite Unstable Phantoms into each other to detonate them — killing them directly applies Lingering Dread to the group; dodge Unmake line. Tank: defensive for Drain Soul channel.",
                 notes = {
                     { role = "general",   text = "Kite Unstable Phantoms into each other to detonate — killing directly applies Lingering Dread to the group; dodge Unmake line." },
                     { role = "dps",       text = "Burst the Deathshroud shield during Necrotic Convergence with damage CDs." },
+                    { role = "tank",      text = "Defensive for Drain Soul channel." },
                 },
             },
             {
                 encounterID = 3214,
                 name        = "Rak'tul, Vessel of Souls",
-                tip         = "In spirit realm: interrupt Malignant Souls for Spectral Residue (+25% dmg/heal/speed); avoid Restless Masses roots. Destroy Crush Souls totems before returning.",
+                tip         = "In spirit realm: interrupt Malignant Souls for Spectral Residue (+25% dmg/heal/speed) — kill the first 5 quickly, then delay the 6th soul to maximize buff duration back in the boss phase; avoid Restless Masses roots; cleave Crush Souls totems before returning.",
                 notes = {
-                    { role = "general",   text = "In spirit realm: avoid Restless Masses roots; destroy Crush Souls totems before returning." },
+                    { role = "general",   text = "In spirit realm: kill first 5 Malignant Souls quickly, then delay the 6th to maximize Spectral Residue buff duration on return." },
+                    { role = "general",   text = "Avoid Restless Masses roots; cleave Crush Souls totems before returning." },
                     { role = "interrupt", text = "Malignant Souls (spirit realm) — grants Spectral Residue (+25% dmg/heal/speed)." },
                 },
             },
@@ -302,26 +309,30 @@ KwikTip.DUNGEONS = {
             {
                 encounterID = 3071,  -- confirmed in-game
                 name        = "Arcanotron Custos",
-                tip         = "Intercept orbs before they reach the boss; avoid Arcane Residue zones left after the knockback.",
+                tip         = "Intercept orbs before they reach the boss — boss is 20% more vulnerable during intermission; save offensive CDs for this window. Avoid Arcane Residue zones; tank defensive for Repulsing Slam.",
                 notes = {
-                    { role = "general",   text = "Intercept orbs before they reach the boss; avoid Arcane Residue zones after the knockback." },
+                    { role = "general",   text = "Intercept orbs before they reach the boss; avoid Arcane Residue zones." },
+                    { role = "dps",       text = "Boss takes 20% increased damage during intermission — save offensive CDs for this window." },
+                    { role = "tank",      text = "Defensive for Repulsing Slam." },
                 },
             },
             {
                 encounterID = 3072,  -- confirmed in-game
                 name        = "Seranel Sunlash",
-                tip         = "At 100 energy, be inside a Suppression Zone or Wave of Silence pacifies you for 8s (unable to cast); also step into a zone to resolve Runic Mark (Feedback) — but zones purge your buffs.",
+                tip         = "Purge Hastening Ward magic buff from the boss when it appears. At 100 energy, step inside a Suppression Zone before Wave of Silence finishes or you're pacified for 8s. Step into a zone to resolve Runic Mark (Feedback) — but zones purge your buffs.",
                 notes = {
-                    { role = "general",   text = "At 100 energy, be inside a Suppression Zone or Wave of Silence pacifies you for 8s." },
-                    { role = "general",   text = "Step into a zone to resolve Runic Mark (Feedback) — but zones purge your buffs." },
+                    { role = "general",   text = "At 100 energy, be inside a Suppression Zone before Wave of Silence finishes or you're pacified for 8s." },
+                    { role = "general",   text = "Step into a zone to resolve Runic Mark (Feedback) — zones purge your buffs." },
+                    { role = "general",   text = "Purge Hastening Ward from the boss." },
                 },
             },
             {
                 encounterID = 3073,  -- confirmed in-game
                 name        = "Gemellus",
-                tip         = "All copies share health; touch correct clone to clear Neural Link.",
+                tip         = "All copies share health. Neural Link: follow the arrow indicator to your correct clone and touch it — Astral Grasp pulls you toward the clones so you must fight the pull-in.",
                 notes = {
-                    { role = "general",   text = "All copies share health; touch the correct clone to clear Neural Link." },
+                    { role = "general",   text = "All copies share health; follow Neural Link's arrow indicator to find your correct clone and touch it." },
+                    { role = "general",   text = "Astral Grasp pulls players toward the clones — fight the pull-in while navigating." },
                 },
             },
             {
@@ -364,28 +375,30 @@ KwikTip.DUNGEONS = {
             {
                 encounterID = 3328,  -- confirmed in-game
                 name        = "Chief Corewright Kasreth",
-                tip         = "Don't cross Leyline Arrays (damage + slow). When targeted by Reflux Charge, touch an array intersection to destroy it and open space. At full energy: Corespark Detonation hits a player with a massive knockback and healing absorb DoT — watch positioning to avoid being knocked into puddles.",
+                tip         = "Don't cross Leyline Arrays (damage + slow). When targeted by Reflux Charge, touch an array intersection to destroy it and open space. At full energy: Corespark Detonation — massive knockback + healing absorb DoT on target; party-wide Sparkburn follows — healer CDs.",
                 notes = {
                     { role = "general",   text = "Don't cross Leyline Arrays (damage + slow); if targeted by Reflux Charge, touch an intersection to destroy it and open space." },
                     { role = "general",   text = "At full energy: Corespark Detonation — massive knockback + healing absorb DoT; don't get knocked into puddles." },
+                    { role = "healer",    text = "CDs after Corespark Detonation — party-wide Sparkburn DoT follows immediately." },
                 },
             },
             {
                 encounterID = 3332,  -- confirmed in-game
                 name        = "Corewarden Nysarra",
-                tip         = "Avoid Lothraxion's beam during Lightscar Flare; stand in the boss's frontal cone during the 18s stun for 300% damage amp (30% healing amp too). Kill Null Vanguard adds before the stun ends — surviving adds get consumed and buff the boss.",
+                tip         = "Avoid Lothraxion's beam during Lightscar Flare; stand in the boss's frontal cone during the 18s stun for 300% damage amp (30% healing amp too). Kill Null Vanguard adds before the stun ends — add kill order: Dreadflail first, then interrupt Grand Nullifiers (Nullify), then cleave Haunting Grunts.",
                 notes = {
                     { role = "general",   text = "Avoid Lothraxion's beam during Lightscar Flare." },
-                    { role = "dps",       text = "Stand in the boss's frontal cone during the 18s stun for 300% damage amp; kill Null Vanguard adds before the stun ends." },
+                    { role = "dps",       text = "Stand in the boss's frontal cone during the 18s stun for 300% damage amp; kill adds before stun ends — Dreadflail → interrupt Grand Nullifiers → cleave Haunting Grunts." },
                     { role = "healer",    text = "30% healing amp is active during the stun — use CDs." },
                 },
             },
             {
                 encounterID = 3333,  -- confirmed in-game
                 name        = "Lothraxion",
-                tip         = "At 100 energy, find and interrupt the real Lothraxion among his images — he's the only one without glowing horns; wrong target = Core Exposure (group damage + 20% increased Holy damage taken for 1 min).",
+                tip         = "At 100 energy, find and interrupt the real Lothraxion among his images — he's the only one without glowing horns; wrong target = Core Exposure (group damage + 20% increased Holy damage taken for 1 min). Spread 8 yards for Brilliant Dispersion.",
                 notes = {
                     { role = "interrupt", text = "At 100 energy, find and interrupt the real Lothraxion — no glowing horns; wrong target = Core Exposure (group damage + 20% Holy taken for 1 min)." },
+                    { role = "general",   text = "Spread 8 yards for Brilliant Dispersion." },
                 },
             },
         },
@@ -417,10 +430,11 @@ KwikTip.DUNGEONS = {
             {
                 encounterID = 3199,  -- confirmed in-game
                 name        = "Lightblossom Trinity",
-                tip         = "Block Lightblossom Beams to prevent Light-Gorged stacks on flowers before they detonate; interrupt Lightsower Dash to stop seed planting; all three bosses share damage.",
+                tip         = "Block Lightblossom Beams to prevent Light-Gorged stacks on flowers before they detonate; all three bosses share damage. Avoid Fertile Loam puddles (50% slow). Interrupt Lightsower Dash and Thornblade (Lekshi bleeds).",
                 notes = {
                     { role = "general",   text = "Block Lightblossom Beams to prevent Light-Gorged stacks on flowers; all three bosses share damage." },
-                    { role = "interrupt", text = "Lightsower Dash — stops seed planting." },
+                    { role = "general",   text = "Avoid Fertile Loam puddles — 50% movement speed slow." },
+                    { role = "interrupt", text = "Lightsower Dash — stops seed planting. Thornblade (Lekshi) — stops bleed application." },
                 },
             },
             {
@@ -435,19 +449,21 @@ KwikTip.DUNGEONS = {
             {
                 encounterID = 3201,  -- confirmed in-game
                 name        = "Lightwarden Ruia",
-                tip         = "Heal players to full to clear Grievous Thrash bleeds; at 40%, Ruia enters Haranir form (Spirits of the Vale) and rapidly cycles all abilities — tank moves to avoid stacking Pulverizing Strikes damage-taken debuff.",
+                tip         = "Heal players to full to clear Grievous Thrash bleeds. Pulverizing Strikes marks several players — spread marked players apart (100% increased damage taken from subsequent strikes). Don't stand in Lightfire Beams (6s silence). At 40%, Ruia enters Haranir form and rapidly cycles all abilities.",
                 notes = {
-                    { role = "tank",      text = "At 40%, Ruia enters Haranir form — tank moves to avoid stacking Pulverizing Strikes damage-taken debuff." },
-                    { role = "healer",    text = "Heal players to full to clear Grievous Thrash bleeds." },
+                    { role = "general",   text = "Pulverizing Strikes marks several players — spread marked players apart (100% increased damage taken from subsequent strikes)." },
+                    { role = "general",   text = "Don't stand in Lightfire Beams — 6s silence." },
+                    { role = "healer",    text = "Heal players to full to clear Grievous Thrash bleeds; at 40% Haranir form cycles all abilities rapidly — use CDs." },
                 },
             },
             {
                 encounterID = 3202,  -- confirmed in-game
                 name        = "Ziekket",
-                tip         = "Intercept Lightbloom's Essence globules before the boss absorbs them — each absorbed globule grants a Florescent Outburst stack (stacking shield); touching them yourself grants Lightbloom's Might (+dmg/healing). Position boss's Lightbeam sweep over Dormant Lashers to vaporize them; dodge the beam and Lightsap puddles.",
+                tip         = "Intercept Lightbloom's Essence globules before the boss absorbs them — each absorbed globule grants a Florescent Outburst stack (stacking shield); touching them yourself grants Lightbloom's Might (+dmg/healing). Position boss's Lightbeam sweep over Dormant Lashers to vaporize them; dodge the beam and Lightsap puddles. Tank: taunt-swap on Thornspike.",
                 notes = {
                     { role = "general",   text = "Intercept Lightbloom's Essence globules — each one the boss absorbs grants a stacking shield (Florescent Outburst); touching them yourself grants Lightbloom's Might." },
                     { role = "general",   text = "Position boss's Lightbeam sweep over Dormant Lashers to vaporize them; dodge the beam and Lightsap puddles." },
+                    { role = "tank",      text = "Taunt-swap on Thornspike — it applies a stacking impale + bleed." },
                 },
             },
         },
@@ -470,29 +486,33 @@ KwikTip.DUNGEONS = {
         bosses = {
             {
                 encounterID = 3285,
+                npcID       = 238887,
                 name        = "Taz'Rah",
-                tip         = "Stay out of Dark Rift gravity pull; dodge shade Nether Dash lines.",
+                tip         = "Stay out of Dark Rift gravity pull; kill Ethereal Shades quickly to stop Nether Dash chain lines.",
                 notes = {
-                    { role = "general",   text = "Stay out of Dark Rift gravity pull; dodge shade Nether Dash lines." },
+                    { role = "general",   text = "Stay out of Dark Rift gravity pull." },
+                    { role = "dps",       text = "Kill Ethereal Shades quickly — each active shade triggers Nether Dash lines." },
                 },
             },
             {
                 encounterID = 3286,
-                name        = "Atroxus",
                 npcID       = 239008,
-                tip         = "Avoid Noxious Breath frontal; when Toxic Creepers fixate on a player, that player and nearby allies spread out to avoid the 8-yard toxic aura.",
+                name        = "Atroxus",
+                tip         = "Avoid Noxious Breath frontal; when Toxic Creepers fixate on a player, spread out to avoid the 8-yard toxic aura. Tank: defensive for Hulking Claw — applies a 10s nature DoT.",
                 notes = {
                     { role = "general",   text = "Avoid Noxious Breath frontal." },
                     { role = "general",   text = "When Toxic Creepers fixate, spread to avoid the 8-yard toxic aura." },
+                    { role = "tank",      text = "Defensive for Hulking Claw — applies a 10s nature DoT." },
                 },
             },
             {
                 encounterID = 3287,
-                name        = "Charonus",
                 npcID       = 248015,
-                tip         = "Lead Gravitic Orbs into Singularities to consume them; avoid the Unstable Singularity gravity well.",
+                name        = "Charonus",
+                tip         = "Lead Gravitic Orbs into Singularities to consume them before stacks get too high; avoid the gravity well. Cosmic Blast hits the whole group — healer CDs.",
                 notes = {
-                    { role = "general",   text = "Lead Gravitic Orbs into Singularities to consume them; avoid the Unstable Singularity gravity well." },
+                    { role = "general",   text = "Lead Gravitic Orbs into Singularities to consume them before stacks get too high; avoid the Unstable Singularity gravity well." },
+                    { role = "healer",    text = "CDs for Cosmic Blast — raid-wide shadow damage + knockback." },
                 },
             },
         },

@@ -7,16 +7,16 @@ frame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 frame:RegisterEvent("ZONE_CHANGED")
 frame:RegisterEvent("ENCOUNTER_START")
 frame:RegisterEvent("ENCOUNTER_END")
--- PLAYER_TARGET_CHANGED and UPDATE_MOUSEOVER_UNIT are registered dynamically
--- inside UpdateContent() only while the player is inside a supported instance.
+-- PLAYER_TARGET_CHANGED, UPDATE_MOUSEOVER_UNIT, and UNIT_SPELLCAST_START are registered
+-- dynamically inside UpdateContent() only while the player is inside a supported instance.
 frame:SetScript("OnEvent", function(self, event, ...)
     if event == "PLAYER_ENTERING_WORLD" or event == "ZONE_CHANGED_NEW_AREA" or event == "ZONE_CHANGED" then
         KwikTip:UpdateContent()
         KwikTip:UpdateVisibility()
         KwikTip:LogMapID()
     elseif event == "ENCOUNTER_START" then
-        local encounterID = ...
-        KwikTip:OnEncounterStart(encounterID)
+        local encounterID, encounterName = ...
+        KwikTip:OnEncounterStart(encounterID, encounterName)
     elseif event == "ENCOUNTER_END" then
         local _, _, _, _, success = ...
         KwikTip:OnEncounterEnd(success)
@@ -24,6 +24,9 @@ frame:SetScript("OnEvent", function(self, event, ...)
         KwikTip:OnTargetChanged()
     elseif event == "UPDATE_MOUSEOVER_UNIT" then
         KwikTip:OnMouseoverUnit()
+    elseif event == "UNIT_SPELLCAST_START" then
+        local unit, _, spellID = ...
+        KwikTip:OnSpellCastStart(unit, spellID)
     end
 end)
 
@@ -129,17 +132,18 @@ end
 -- Called by ENCOUNTER_START. Locks the HUD to the boss tip for the fight duration.
 -- Always logs the encounterID to encounterLog (not gated on debugLog) so legacy
 -- dungeon encounter IDs can be collected without enabling full debug mode.
-function KwikTip:OnEncounterStart(encounterID)
+function KwikTip:OnEncounterStart(encounterID, encounterName)
     self.bossActive = true
 
     -- Always-on encounter logging — used to resolve encounterID = 0 stubs in DungeonData.
     if KwikTipDB then
-        local _, instanceName, _, _, _, _, _, instanceID = GetInstanceInfo()
+        local instanceName, _, _, _, _, _, _, instanceID = GetInstanceInfo()
         table.insert(KwikTipDB.encounterLog, {
-            encounterID  = encounterID,
-            instanceID   = instanceID,
-            instanceName = instanceName,
-            time         = date("%Y-%m-%d %H:%M:%S"),
+            encounterID   = encounterID,
+            encounterName = encounterName,
+            instanceID    = instanceID,
+            instanceName  = instanceName,
+            time          = date("%Y-%m-%d %H:%M:%S"),
         })
         if #KwikTipDB.encounterLog > 500 then
             KwikTipDB.encounterLog = self:PruneArray(KwikTipDB.encounterLog, 500)
@@ -187,12 +191,16 @@ local function LogMobPosition(npcID, unitToken)
     -- Skip mobs already covered in DungeonData — log is for discovery only.
     if KwikTip.TRASH_BY_NPCID[npcID] or KwikTip.BOSS_BY_NPCID[npcID] then return end
     local instanceName, _, _, _, _, _, _, instanceID = GetInstanceInfo()
+    local mapID = C_Map.GetBestMapForUnit("player")
+    local pos   = mapID and C_Map.GetPlayerMapPosition(mapID, "player")
     table.insert(KwikTipDB.mobLog, {
         npcID              = npcID,
         npcName            = UnitName(unitToken),
         npcLevel           = UnitLevel(unitToken),
         npcClassification  = UnitClassification(unitToken),
-        mapID              = C_Map.GetBestMapForUnit("player"),
+        mapID              = mapID,
+        x                  = pos and pos.x,
+        y                  = pos and pos.y,
         instanceID         = instanceID,
         instanceName       = instanceName,
         subzone            = GetSubZoneText(),
@@ -226,12 +234,11 @@ function KwikTip:OnTargetChanged()
         return
     end
     if guid then
-        local _ok, npcID = pcall(C_CreatureInfo.GetCreatureID, guid)
-        if not _ok then npcID = nil end
-        if npcID then
+        local npcID = C_CreatureInfo.GetCreatureID(guid)
+        if npcID and npcID ~= 0 then
             LogMobPosition(npcID, "target")  -- log dead or alive; areaActive must not gate this
         end
-        if npcID and UnitCanAttack("player", "target") then
+        if npcID and npcID ~= 0 and UnitCanAttack("player", "target") then
             -- Boss NPC check — shows tip before ENCOUNTER_START fires (e.g. rooms with no subzone text).
             local bossEntry = KwikTip.BOSS_BY_NPCID[npcID]
             if bossEntry then
@@ -274,12 +281,59 @@ function KwikTip:OnMouseoverUnit()
 
     local guid = UnitGUID("mouseover")
     if not guid then return end
-    local ok, npcID = pcall(C_CreatureInfo.GetCreatureID, guid)
-    if not ok or not npcID then return end
+    local npcID = C_CreatureInfo.GetCreatureID(guid)
+    if not npcID or npcID == 0 then return end
     if not UnitCanAttack("player", "mouseover") then return end
     if npcID == _lastLoggedNpcID then return end
 
     LogMobPosition(npcID, "mouseover")
+end
+
+-- ============================================================
+-- Spell cast logging
+-- ============================================================
+-- Logs hostile NPC spell casts from the current target.
+-- Gated on debugLog. Deduplicates per (npcID, spellID) pair so each unique
+-- cast is only recorded once per session.
+-- Purpose: surface interrupt priorities and dangerous mechanics for tip writing.
+
+local _loggedSpells = {}  -- [npcID..":"..spellID] = true; reset on /kwik clearlog
+
+function KwikTip:OnSpellCastStart(unit, spellID)
+    if not KwikTipDB or not KwikTipDB.debugLog then return end
+    if unit ~= "target" then return end
+    local inInstance, instanceType = IsInInstance()
+    if not inInstance or (instanceType ~= "party" and instanceType ~= "raid") then return end
+    if not spellID then return end
+    if not UnitCanAttack("player", "target") then return end
+    if UnitIsPlayer("target") then return end
+
+    local guid = UnitGUID("target")
+    if not guid then return end
+    local npcID = C_CreatureInfo.GetCreatureID(guid)
+    if not npcID or npcID == 0 then return end
+
+    local key = npcID .. ":" .. spellID
+    if _loggedSpells[key] then return end
+    _loggedSpells[key] = true
+
+    local spellInfo = C_Spell.GetSpellInfo(spellID)
+    local spellName = spellInfo and spellInfo.name or ("spell:"..spellID)
+    local instanceName, _, _, _, _, _, _, instanceID = GetInstanceInfo()
+    table.insert(KwikTipDB.spellLog, {
+        spellID      = spellID,
+        spellName    = spellName,
+        npcID        = npcID,
+        npcName      = UnitName("target"),
+        instanceID   = instanceID,
+        instanceName = instanceName,
+        mapID        = C_Map.GetBestMapForUnit("player"),
+        subzone      = GetSubZoneText(),
+        time         = date("%Y-%m-%d %H:%M:%S"),
+    })
+    if #KwikTipDB.spellLog > 2000 then
+        KwikTipDB.spellLog = self:PruneArray(KwikTipDB.spellLog, 2000)
+    end
 end
 
 -- ============================================================
@@ -302,6 +356,7 @@ function KwikTip:UpdateContent()
         if self._targetEventsRegistered then
             frame:UnregisterEvent("PLAYER_TARGET_CHANGED")
             frame:UnregisterEvent("UPDATE_MOUSEOVER_UNIT")
+            frame:UnregisterEvent("UNIT_SPELLCAST_START")
             self._targetEventsRegistered = false
         end
         return
@@ -310,6 +365,7 @@ function KwikTip:UpdateContent()
     if not self._targetEventsRegistered then
         frame:RegisterEvent("PLAYER_TARGET_CHANGED")
         frame:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
+        frame:RegisterEvent("UNIT_SPELLCAST_START")
         self._targetEventsRegistered = true
     end
 
@@ -375,12 +431,16 @@ function KwikTip:LogMapID()
     self._lastInstanceID = instanceID
     self._lastSubzone = subzone
 
+    local pos = mapID and C_Map.GetPlayerMapPosition(mapID, "player")
     table.insert(KwikTipDB.mapIDLog, {
         mapID        = mapID,
+        x            = pos and pos.x,
+        y            = pos and pos.y,
         instanceID   = instanceID,
         instanceName = instanceName,
         instanceType = instanceType,
         subzone      = subzone,
+        noSubzone    = (subzone == "") or nil,  -- flag transitions where subzone text is absent; omitted when false to keep log tidy
         time         = date("%Y-%m-%d %H:%M:%S"),
     })
     
@@ -461,7 +521,7 @@ SlashCmdList["KWIKTIP"] = function(msg)
     elseif cmd == "debug" then
         local inInstance, instanceType = IsInInstance()
         local mapID = C_Map.GetBestMapForUnit("player")
-        local _, instanceName, _, _, _, _, _, instanceID = GetInstanceInfo()
+        local instanceName, _, _, _, _, _, _, instanceID = GetInstanceInfo()
         local dungeon = (instanceID and KwikTip.DUNGEON_BY_INSTANCEID[instanceID])
             or (mapID and KwikTip.DUNGEON_BY_UIMAPID[mapID])
         local subzone = GetSubZoneText()
@@ -469,6 +529,7 @@ SlashCmdList["KWIKTIP"] = function(msg)
         local mapIDCount     = KwikTipDB.mapIDLog     and #KwikTipDB.mapIDLog     or 0
         local mobCount       = KwikTipDB.mobLog       and #KwikTipDB.mobLog       or 0
         local encounterCount = KwikTipDB.encounterLog and #KwikTipDB.encounterLog or 0
+        local spellCount     = KwikTipDB.spellLog     and #KwikTipDB.spellLog     or 0
         local snapshotCount  = KwikTipDB.debugSnapshots and #KwikTipDB.debugSnapshots or 0
         print("|cff00ff00KwikTip|r debug:")
         print(string.format("  inInstance=%s  type=%s  boss=%s  bossTarget=%s  trash=%s  area=%s  dungeon=%s",
@@ -479,8 +540,8 @@ SlashCmdList["KWIKTIP"] = function(msg)
         print(string.format("  instanceID=%s  mapID=%s  dungeon=%s",
             tostring(instanceID), tostring(mapID), dungeonName))
         print(string.format("  subzone=%q", subzone or ""))
-        print(string.format("  mapIDLog=%d  mobLog=%d  encounterLog=%d  snapshots=%d",
-            mapIDCount, mobCount, encounterCount, snapshotCount))
+        print(string.format("  mapIDLog=%d  mobLog=%d  encounterLog=%d  spellLog=%d  snapshots=%d",
+            mapIDCount, mobCount, encounterCount, spellCount, snapshotCount))
         -- Save snapshot to SavedVariables for post-session inspection.
         if KwikTipDB then
             table.insert(KwikTipDB.debugSnapshots, {
@@ -497,9 +558,10 @@ SlashCmdList["KWIKTIP"] = function(msg)
                 trashActive      = KwikTip.trashActive,
                 areaActive       = KwikTip.areaActive,
                 dungeonActive    = KwikTip.dungeonActive,
-                mapIDLogCount    = mapIDCount,
-                mobLogCount      = mobCount,
+                mapIDLogCount     = mapIDCount,
+                mobLogCount       = mobCount,
                 encounterLogCount = encounterCount,
+                spellLogCount     = spellCount,
             })
             if #KwikTipDB.debugSnapshots > 100 then
                 KwikTipDB.debugSnapshots = KwikTip:PruneArray(KwikTipDB.debugSnapshots, 100)
@@ -512,11 +574,13 @@ SlashCmdList["KWIKTIP"] = function(msg)
     elseif cmd == "preview" then
         KwikTip:TogglePreview()
     elseif cmd == "clearlog" then
-        KwikTipDB.mapIDLog      = {}
-        KwikTipDB.mobLog        = {}
-        KwikTipDB.encounterLog  = {}
+        KwikTipDB.mapIDLog       = {}
+        KwikTipDB.mobLog         = {}
+        KwikTipDB.encounterLog   = {}
+        KwikTipDB.spellLog       = {}
         KwikTipDB.debugSnapshots = {}
-        print("|cff00ff00KwikTip|r mapIDLog, mobLog, encounterLog, and debugSnapshots cleared.")
+        _loggedSpells = {}
+        print("|cff00ff00KwikTip|r mapIDLog, mobLog, encounterLog, spellLog, and debugSnapshots cleared.")
     elseif cmd == "feedback" then
         print("|cff00ff00KwikTip|r Tips feel off? Open an issue at: https://github.com/postblink/KwikTip/issues")
     elseif cmd == "config" or cmd == "" then

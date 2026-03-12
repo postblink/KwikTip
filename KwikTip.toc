@@ -2,7 +2,7 @@
 ## Title: KwikTip
 ## Notes: Contextual boss and trash tips for M+ dungeons. Tips feel off? https://github.com/postblink/KwikTip/issues
 ## Author:
-## Version: 1.5.18
+## Version: 1.5.19
 ## DefaultState: enabled
 ## OptionalDeps: LibSharedMedia-3.0
 
