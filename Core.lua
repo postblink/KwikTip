@@ -30,6 +30,15 @@ frame:SetScript("OnEvent", function(self, event, ...)
     end
 end)
 
+-- Returns true if the current instance type should be handled by KwikTip.
+-- Delves return instanceType "scenario" and are opt-in via KwikTipDB.delves.
+local function IsSupportedInstance(inInstance, instanceType)
+    if not inInstance then return false end
+    if instanceType == "party" or instanceType == "raid" then return true end
+    if instanceType == "scenario" and KwikTipDB and KwikTipDB.delves then return true end
+    return false
+end
+
 local GOLD  = "|cffffcc00"
 local WHITE = "|cffffffff"
 local GRAY  = "|cffbbbbbb"
@@ -225,7 +234,7 @@ function KwikTip:OnTargetChanged()
     if self.bossActive then return end
 
     local inInstance, instanceType = IsInInstance()
-    if not inInstance or (instanceType ~= "party" and instanceType ~= "raid") then
+    if not IsSupportedInstance(inInstance, instanceType) then
         if self.trashActive or self.bossTargetActive then
             self.trashActive = false
             self.bossTargetActive = false
@@ -281,7 +290,7 @@ function KwikTip:OnMouseoverUnit()
     if self.bossActive then return end
 
     local inInstance, instanceType = IsInInstance()
-    if not inInstance or (instanceType ~= "party" and instanceType ~= "raid") then return end
+    if not IsSupportedInstance(inInstance, instanceType) then return end
 
     local guid = UnitGUID("mouseover")
     if not guid then return end
@@ -309,7 +318,7 @@ function KwikTip:OnSpellCastStart(unit, spellID)
     if not KwikTipDB or not KwikTipDB.debugLog then return end
     if unit ~= "target" then return end
     local inInstance, instanceType = IsInInstance()
-    if not inInstance or (instanceType ~= "party" and instanceType ~= "raid") then return end
+    if not IsSupportedInstance(inInstance, instanceType) then return end
     if not spellID then return end
     if not UnitCanAttack("player", "target") then return end
     if UnitIsPlayer("target") then return end
@@ -356,7 +365,7 @@ function KwikTip:UpdateContent()
     if self.bossActive or self.bossTargetActive or self.previewActive then return end
 
     local inInstance, instanceType = IsInInstance()
-    if not inInstance or (instanceType ~= "party" and instanceType ~= "raid") then
+    if not IsSupportedInstance(inInstance, instanceType) then
         self.areaActive    = false
         self.dungeonActive = false
         self.trashActive   = false
@@ -425,7 +434,7 @@ end
 function KwikTip:LogMapID()
     if not KwikTipDB or not KwikTipDB.debugLog then return end
     local inInstance, instanceType = IsInInstance()
-    if not inInstance or (instanceType ~= "party" and instanceType ~= "raid") then return end
+    if not IsSupportedInstance(inInstance, instanceType) then return end
 
     local mapID = C_Map.GetBestMapForUnit("player")
     local instanceName, _, _, _, _, _, _, instanceID = GetInstanceInfo()

@@ -9,6 +9,7 @@ KwikTip.DEFAULTS = {
     y              = -200,
     persistentHide = false,
     showInDungeon  = false,
+    delves         = false,
     showMinimapBtn = true,
     printChannel   = "NONE",
     fontPath       = "Fonts\\FRIZQT__.TTF",

@@ -289,6 +289,7 @@ function KwikTip:CreateConfigWindow()
     local minimapBtnCB = MakeCheckbox("KwikTipMinimapBtnCB",   cfg, dispHeader, "Show Minimap Button",        -4)
     local hideHUDCB    = MakeCheckbox("KwikTipHideHUDCB",      cfg, minimapBtnCB, "Hide Info Window")
     local showInDungeonCB = MakeCheckbox("KwikTipShowInDungeonCB", cfg, hideHUDCB, "Keep Open Through Instance")
+    local delveCB      = MakeCheckbox("KwikTipDelveCB",        cfg, showInDungeonCB, "Enable in Delves")
 
     minimapBtnCB:SetScript("OnClick", function(self)
         KwikTipDB.showMinimapBtn = self:GetChecked()
@@ -304,11 +305,21 @@ function KwikTip:CreateConfigWindow()
         KwikTip:UpdateContent()
         KwikTip:UpdateVisibility()
     end)
+    delveCB:SetScript("OnClick", function(self)
+        KwikTipDB.delves = self:GetChecked()
+        KwikTip:UpdateContent()
+        KwikTip:UpdateVisibility()
+    end)
+
+    local delveCaution = cfg:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    delveCaution:SetPoint("TOPLEFT", delveCB, "BOTTOMLEFT", 26, -2)
+    delveCaution:SetText("CAUTION: Preliminary Release")
+    delveCaution:SetTextColor(1, 0.8, 0, 1)
 
     -- ============================================================
     -- SEND TO CHAT
     -- ============================================================
-    local chatHeader = MakeSectionHeader("SEND TO CHAT", showInDungeonCB)
+    local chatHeader = MakeSectionHeader("SEND TO CHAT", delveCaution)
 
     local CHAT_OPTIONS = {
         { label = "None",     value = "NONE"          },
@@ -660,6 +671,7 @@ function KwikTip:CreateConfigWindow()
         minimapBtnCB:SetChecked(db.showMinimapBtn ~= false)
         hideHUDCB:SetChecked(db.persistentHide)
         showInDungeonCB:SetChecked(db.showInDungeon)
+        delveCB:SetChecked(db.delves)
         SetChatChannel(db.printChannel or "NONE")
         opacitySlider:SetValue(math.floor(db.alpha * 100 + 0.5))
         SetFont(db.fontName or "Friz Quadrata")

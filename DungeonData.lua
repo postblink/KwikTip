@@ -26,8 +26,10 @@ local ADDON_NAME, KwikTip = ...
 --   type        : "level" = leveling (81-88)  |  "max" = max-level (88-90)
 --   mythicPlus  : true if in the Season 1 Mythic+ key rotation, false = Mythic 0 only
 --   bosses      : ordered list; each entry has:
---     encounterID : ENCOUNTER_START event ID (from LittleWigs SetEncounterID). 0 = unknown.
---     npcID       : (optional) NPC ID from UnitGUID; enables tip on targeting before ENCOUNTER_START fires.
+--     encounterID    : ENCOUNTER_START event ID (from LittleWigs SetEncounterID). 0 = unknown.
+--     altEncounterIDs: (optional) additional encounterIDs that map to the same boss tip (e.g. per-variant
+--                      delve bosses that share mechanics but fire different encounterIDs per event type).
+--     npcID          : (optional) NPC ID from UnitGUID; enables tip on targeting before ENCOUNTER_START fires.
 --                   Source from Wowhead. Required for boss rooms with no subzone text.
 --     name        : boss name as shown in the game
 --     tip         : short contextual tip shown in the HUD during the boss fight (flat string; legacy/fallback)
@@ -672,6 +674,263 @@ KwikTip.DUNGEONS = {
             },
         },
     },
+    -- --------------------------------------------------------
+    -- MIDNIGHT DELVES
+    -- All uiMapIDs are 0 — verify in-game with /run print(C_Map.GetBestMapForUnit("player"))
+    -- instanceIDs sourced from LittleWigs Midnight/Delves/ — unverified in-game.
+    -- encounterIDs sourced from LittleWigs SetEncounterID() calls — unverified in-game.
+    -- Tip content sourced from Icy Veins (primary for non-M+ content).
+    -- --------------------------------------------------------
+    {
+        instanceID = 2933,
+        uiMapID    = 0,  -- TODO: verify in-game
+        name       = "Collegiate Calamity",
+        location   = "Eversong Woods",
+        season     = "midnight",
+        type       = "delve",
+        mythicPlus = false,
+        bosses = {
+            {
+                encounterID = 3367,
+                name        = "Hydrangea",
+                tip         = "Break Wildroot Weave roots immediately — being rooted when Lightbloom Salvo fires makes the zones unavoidable. Dodge Lightbloom Salvo light zones.",
+                notes = {
+                    { role = "general",   text = "Break Wildroot Weave roots immediately — being rooted when Lightbloom Salvo fires makes the zones unavoidable." },
+                    { role = "general",   text = "Dodge Lightbloom Salvo light zones." },
+                },
+            },
+            {
+                encounterID = 3405,
+                name        = "Infiltrator Garand",
+                tip         = "Step out of melee range before Shadow Laceration hits to avoid the DoT. When Twilight Crash is cast, move away from your position — Garand leaps to where you were standing.",
+                notes = {
+                    { role = "general",   text = "Step out of melee range before Shadow Laceration hits to avoid the bleed DoT." },
+                    { role = "general",   text = "Move away from your position after Twilight Crash is cast — Garand leaps to your location." },
+                },
+            },
+            {
+                encounterID = 3404,
+                name        = "Voidscorned Vagrant",
+                tip         = "Interrupt Terrifying Power — fears everyone and deals damage. Sidestep Void Eruption zones.",
+                notes = {
+                    { role = "interrupt", text = "Terrifying Power — fears everyone and deals damage." },
+                    { role = "general",   text = "Sidestep Void Eruption zones." },
+                },
+            },
+        },
+    },
+    {
+        instanceID = 2952,
+        uiMapID    = 0,  -- TODO: verify in-game
+        name       = "The Shadow Enclave",
+        location   = "Eversong Woods",
+        season     = "midnight",
+        type       = "delve",
+        mythicPlus = false,
+        bosses = {
+            {
+                encounterID = 3368,
+                name        = "Lord Antenorian",
+                tip         = "Interrupt Shadow Bolt on cooldown. During Shadowveil Annihilation, Antenorian is immune — kill all three Shadow Orbs before the channel ends to break his shield and increase his damage taken.",
+                notes = {
+                    { role = "interrupt", text = "Shadow Bolt — priority interrupt, do not let casts land." },
+                    { role = "dps",       text = "During Shadowveil Annihilation, kill all three Shadow Orbs before the channel ends — breaks his immunity and increases his damage taken." },
+                },
+            },
+        },
+    },
+    {
+        instanceID = 2953,
+        uiMapID    = 0,  -- TODO: verify in-game (Parhelion Plaza activates week of March 31, 2026)
+        name       = "Parhelion Plaza",
+        location   = "Isle of Quel'Danas",
+        season     = "midnight",
+        type       = "delve",
+        mythicPlus = false,
+        bosses = {
+            {
+                encounterID = 3307,
+                name        = "Gladius Slaurna",
+                tip         = "Kill Sacrificial Voidcallers before Devouring Nova fires — surviving adds empower Slaurna with more damage out and less damage taken. Interrupt Void Bolt on the adds. Dodge Voidscar Raze line attack.",
+                notes = {
+                    { role = "dps",       text = "Kill Sacrificial Voidcallers before Devouring Nova fires — surviving adds empower Slaurna (more damage out, less in)." },
+                    { role = "interrupt", text = "Void Bolt on Sacrificial Voidcallers." },
+                    { role = "general",   text = "Dodge Voidscar Raze directional line attack." },
+                },
+            },
+        },
+    },
+    {
+        instanceID = 2961,
+        uiMapID    = 0,  -- TODO: verify in-game
+        name       = "Twilight Crypts",
+        location   = "Zul'Aman",
+        season     = "midnight",
+        type       = "delve",
+        mythicPlus = false,
+        bosses = {
+            {
+                encounterID = 3360,
+                name        = "Blademaster Darza",
+                tip         = "Stay in close melee range to prevent Dark Pursuit. Sidestep Shade Cleave cone. Reposition Darza out of Bask in the Twilight void zones — she gains 30% increased damage while standing in them.",
+                notes = {
+                    { role = "general",   text = "Stay in close melee range — proximity prevents Dark Pursuit." },
+                    { role = "general",   text = "Sidestep Shade Cleave cone." },
+                    { role = "general",   text = "Reposition Darza out of Bask in the Twilight void zones — she gains 30% increased damage while standing in them." },
+                },
+            },
+        },
+    },
+    {
+        instanceID = 2962,
+        uiMapID    = 0,  -- TODO: verify in-game
+        name       = "Atal'Aman",
+        location   = "Zul'Aman",
+        season     = "midnight",
+        type       = "delve",
+        mythicPlus = false,
+        bosses = {
+            {
+                -- Three encounterIDs — one per event variant (Ritual Interrupted, Toadly Unbecoming, Totem Annihilation)
+                encounterID     = 3433,
+                altEncounterIDs = { 3434, 3435 },
+                name            = "Spiritflayer Jin'Ma",
+                tip             = "Collect spirits from Flaying Knife — each gives a 10% damage buff. Prioritise spirits inside Raging Spirits zones before they are destroyed. Collect all before Claim Spirits completes — each uncollected spirit gives Jin'Ma a stacking damage buff.",
+                notes = {
+                    { role = "general",   text = "Collect spirits spawned by Flaying Knife — each gives a 10% damage buff. Prioritise spirits inside Raging Spirits zones first." },
+                    { role = "general",   text = "Collect all spirits before Claim Spirits completes — each uncollected spirit gives Jin'Ma a stacking damage buff." },
+                },
+            },
+        },
+    },
+    {
+        instanceID = 3003,
+        uiMapID    = 0,  -- TODO: verify in-game
+        name       = "The Darkway",
+        location   = "Zul'Aman",
+        season     = "midnight",
+        type       = "delve",
+        mythicPlus = false,
+        bosses = {
+            {
+                encounterID = 3361,
+                name        = "Infiltrator Gulkat",
+                tip         = "Interrupt Twilight Seekers. Dodge Abyssal Burst cone frontal. Keep distance from Illusory Deceit illusions before they explode.",
+                notes = {
+                    { role = "interrupt", text = "Twilight Seekers." },
+                    { role = "general",   text = "Dodge Abyssal Burst cone frontal." },
+                    { role = "general",   text = "Keep distance from Illusory Deceit illusions before they explode." },
+                },
+            },
+        },
+    },
+    {
+        instanceID = 2963,
+        uiMapID    = 0,  -- TODO: verify in-game
+        name       = "The Grudge Pit",
+        location   = "Harandar",
+        season     = "midnight",
+        type       = "delve",
+        mythicPlus = false,
+        bosses = {
+            {
+                encounterID = 3364,
+                name        = "Brightthorn",
+                tip         = "Interrupt Bloom Thorn. Turn away before Blinding Burst resolves to avoid disorientation. Sidestep Solar Charge and avoid the lingering void zones.",
+                notes = {
+                    { role = "interrupt", text = "Bloom Thorn." },
+                    { role = "general",   text = "Turn away before Blinding Burst resolves to avoid disorientation." },
+                    { role = "general",   text = "Sidestep Solar Charge; avoid the lingering void zones it leaves behind." },
+                },
+            },
+            {
+                encounterID = 3363,
+                name        = "Gyrospore",
+                tip         = "Avoid void zones during Fungalstorm spin — burn the boss hard during the 10s vulnerability window after. Step back from melee before Fungsplosion. Sidestep Fungal Charge.",
+                notes = {
+                    { role = "general",   text = "Avoid void zones during Fungalstorm spin." },
+                    { role = "dps",       text = "Burn the boss during the 10s vulnerability window after Fungalstorm ends." },
+                    { role = "general",   text = "Step back from melee before Fungsplosion. Sidestep Fungal Charge." },
+                },
+            },
+            {
+                encounterID = 3362,
+                name        = "Mycomight",
+                tip         = "",  -- TODO: Icy Veins page truncated — mechanics unconfirmed; source separately
+                notes       = {},
+            },
+        },
+    },
+    {
+        instanceID = 2964,
+        uiMapID    = 0,  -- TODO: verify in-game
+        name       = "Gulf of Memory",
+        location   = "Harandar",
+        season     = "midnight",
+        type       = "delve",
+        mythicPlus = false,
+        bosses = {
+            {
+                encounterID = 3416,
+                name        = "Lumenia",
+                tip         = "Kill Radiant Command adds before they reach you — kite them into Searing Light patches to disorient them. Dodge Searing Light patches. Defensive for Malignant Gleam.",
+                notes = {
+                    { role = "dps",       text = "Kill Radiant Command adds before they reach you — kite them into Searing Light patches to disorient them." },
+                    { role = "general",   text = "Dodge Searing Light patches." },
+                    { role = "general",   text = "Defensive for Malignant Gleam — holy damage hit." },
+                },
+            },
+            {
+                encounterID = 3359,
+                name        = "Mul'tha'ul",
+                tip         = "",  -- TODO: Icy Veins page truncated — mechanics unconfirmed; source separately
+                notes       = {},
+            },
+        },
+    },
+    {
+        instanceID = 2965,
+        uiMapID    = 0,  -- TODO: verify in-game
+        name       = "Sunkiller Sanctum",
+        location   = "Harandar",
+        season     = "midnight",
+        type       = "delve",
+        mythicPlus = false,
+        bosses = {
+            {
+                encounterID = 3398,
+                name        = "Esuritus",
+                tip         = "Interrupt Calling Bolt to prevent Voidcaller spawns. Dodge Crushing Rift — being hit spawns 4 Voidcallers. Kill all Voidcallers before Gorge — each consumed gives Esuritus a damage buff. Interrupt their Commune with the Void channel.",
+                notes = {
+                    { role = "interrupt", text = "Calling Bolt — spawns a Voidcaller if it lands." },
+                    { role = "general",   text = "Dodge Crushing Rift — being hit spawns 4 Voidcallers at once." },
+                    { role = "dps",       text = "Kill all Voidcallers before Gorge — each consumed gives Esuritus a damage buff. Interrupt their Commune with the Void channel." },
+                },
+            },
+        },
+    },
+    {
+        instanceID = 2979,
+        uiMapID    = 0,  -- TODO: verify in-game
+        name       = "Shadowguard Point",
+        location   = "Voidstorm",
+        season     = "midnight",
+        type       = "delve",
+        mythicPlus = false,
+        bosses = {
+            {
+                encounterID = 3365,
+                name        = "Chief-Arcanist Patram",
+                tip         = "Interrupt Void Bolt. Kill the Void Emissary before Dark Communion finishes — success gives you the Versatility + CDR buff; failure gives it to Patram. Dodge Discordant Hymn void zones (damage + slow).",
+                notes = {
+                    { role = "interrupt", text = "Void Bolt." },
+                    { role = "dps",       text = "Kill the Void Emissary before Dark Communion finishes — success grants the Versatility + CDR buff to you; failure grants it to Patram." },
+                    { role = "general",   text = "Dodge Discordant Hymn void zones — deal damage and apply a slow." },
+                },
+            },
+        },
+    },
+
     {
         instanceID = 1209,  -- confirmed in-game
         uiMapID    = 601,   -- confirmed in-game
@@ -767,11 +1026,20 @@ for _, dungeon in ipairs(KwikTip.DUNGEONS) do
 end
 
 -- Boss lookup: encounterID (ENCOUNTER_START event) → { dungeon, boss }
+-- altEncounterIDs handles bosses that fire different encounterIDs per variant (e.g. delve event types).
 KwikTip.BOSS_BY_ENCOUNTERID = {}
 for _, dungeon in ipairs(KwikTip.DUNGEONS) do
     for _, boss in ipairs(dungeon.bosses) do
+        local entry = { dungeon = dungeon, boss = boss }
         if boss.encounterID ~= 0 then
-            KwikTip.BOSS_BY_ENCOUNTERID[boss.encounterID] = { dungeon = dungeon, boss = boss }
+            KwikTip.BOSS_BY_ENCOUNTERID[boss.encounterID] = entry
+        end
+        if boss.altEncounterIDs then
+            for _, id in ipairs(boss.altEncounterIDs) do
+                if id ~= 0 then
+                    KwikTip.BOSS_BY_ENCOUNTERID[id] = entry
+                end
+            end
         end
     end
 end
