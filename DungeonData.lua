@@ -459,11 +459,11 @@ KwikTip.DUNGEONS = {
             {
                 encounterID = 3202,  -- confirmed in-game
                 name        = "Ziekket",
-                tip         = "Intercept Lightbloom's Essence globules before the boss absorbs them — each absorbed globule grants a Florescent Outburst stack (stacking shield); touching them yourself grants Lightbloom's Might (+dmg/healing). Position boss's Lightbeam sweep over Dormant Lashers to vaporize them; dodge the beam and Lightsap puddles. Tank: taunt-swap on Thornspike.",
+                tip         = "Intercept Lightbloom's Essence globules before the boss absorbs them — each absorbed globule grants a Florescent Outburst stack (stacking shield); touching them yourself grants Lightbloom's Might (+dmg/healing). Position boss's Lightbeam sweep over Dormant Lashers to vaporize them; dodge the beam and Lightsap puddles. Tank: defensive on Thornspike — stacking impale + bleed.",
                 notes = {
                     { role = "general",   text = "Intercept Lightbloom's Essence globules — each one the boss absorbs grants a stacking shield (Florescent Outburst); touching them yourself grants Lightbloom's Might." },
                     { role = "general",   text = "Position boss's Lightbeam sweep over Dormant Lashers to vaporize them; dodge the beam and Lightsap puddles." },
-                    { role = "tank",      text = "Taunt-swap on Thornspike — it applies a stacking impale + bleed." },
+                    { role = "tank",      text = "Use a defensive on Thornspike — it applies a stacking impale + bleed." },
                 },
             },
         },
@@ -512,7 +512,7 @@ KwikTip.DUNGEONS = {
                 tip         = "Lead Gravitic Orbs into Singularities to consume them before stacks get too high; avoid the gravity well. Cosmic Blast hits the whole group — healer CDs.",
                 notes = {
                     { role = "general",   text = "Lead Gravitic Orbs into Singularities to consume them before stacks get too high; avoid the Unstable Singularity gravity well." },
-                    { role = "healer",    text = "CDs for Cosmic Blast — raid-wide shadow damage + knockback." },
+                    { role = "healer",    text = "CDs for Cosmic Blast — group-wide shadow damage + knockback." },
                 },
             },
         },

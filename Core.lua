@@ -234,7 +234,11 @@ function KwikTip:OnTargetChanged()
         return
     end
     if guid then
-        local npcID = C_CreatureInfo.GetCreatureID(guid)
+        -- pcall required: GUIDs obtained during tainted execution (e.g. mouse-click path via
+        -- CameraOrSelectOrMoveStop) are "secret values" — truthy but rejected by GetCreatureID.
+        -- A nil check alone is NOT sufficient. Do not replace with a direct call.
+        local ok, npcID = pcall(C_CreatureInfo.GetCreatureID, guid)
+        if not ok then return end
         if npcID and npcID ~= 0 then
             LogMobPosition(npcID, "target")  -- log dead or alive; areaActive must not gate this
         end
@@ -281,7 +285,9 @@ function KwikTip:OnMouseoverUnit()
 
     local guid = UnitGUID("mouseover")
     if not guid then return end
-    local npcID = C_CreatureInfo.GetCreatureID(guid)
+    -- pcall required: see OnTargetChanged comment — tainted GUIDs are truthy but rejected by GetCreatureID.
+    local ok, npcID = pcall(C_CreatureInfo.GetCreatureID, guid)
+    if not ok then return end
     if not npcID or npcID == 0 then return end
     if not UnitCanAttack("player", "mouseover") then return end
     if npcID == _lastLoggedNpcID then return end
@@ -310,7 +316,9 @@ function KwikTip:OnSpellCastStart(unit, spellID)
 
     local guid = UnitGUID("target")
     if not guid then return end
-    local npcID = C_CreatureInfo.GetCreatureID(guid)
+    -- pcall required: see OnTargetChanged comment — tainted GUIDs are truthy but rejected by GetCreatureID.
+    local ok, npcID = pcall(C_CreatureInfo.GetCreatureID, guid)
+    if not ok then return end
     if not npcID or npcID == 0 then return end
 
     local key = npcID .. ":" .. spellID
