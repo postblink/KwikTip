@@ -142,8 +142,6 @@ end
 -- Always logs the encounterID to encounterLog (not gated on debugLog) so legacy
 -- dungeon encounter IDs can be collected without enabling full debug mode.
 function KwikTip:OnEncounterStart(encounterID, encounterName)
-    self.bossActive = true
-
     -- Always-on encounter logging — used to resolve encounterID = 0 stubs in DungeonData.
     if KwikTipDB then
         local instanceName, _, _, _, _, _, _, instanceID = GetInstanceInfo()
@@ -160,11 +158,10 @@ function KwikTip:OnEncounterStart(encounterID, encounterName)
     end
 
     local entry = KwikTip.BOSS_BY_ENCOUNTERID[encounterID]
-    if entry then
-        self:SetContent(FormatBossContent(entry.dungeon, entry.boss))
-    else
-        self:SetContent(GRAY .. "No tip for this boss." .. RESET)
-    end
+    if not entry then return end
+
+    self.bossActive = true
+    self:SetContent(FormatBossContent(entry.dungeon, entry.boss))
     self:UpdateVisibility()
 end
 
@@ -175,6 +172,7 @@ function KwikTip:OnEncounterEnd(success)
     self.bossActive = false
     if success == 1 then
         -- Boss killed — leave current tip up until next natural trigger.
+        self.bossTargetActive = false
         self:UpdateVisibility()
     else
         -- Wipe or reset — clear and return to normal detection.
