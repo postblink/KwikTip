@@ -4,7 +4,7 @@
 ## Notes: Contextual boss and trash tips for M+ dungeons. Tips feel off? https://github.com/postblink/KwikTip/issues
 ## Notes-deDE: Kontextuelle Boss- und Trash-Tipps für M+-Dungeons. Feedback: https://github.com/postblink/KwikTip/issues
 ## Author: Lucas Boyles
-## Version: 3.4.0
+## Version: 3.4.1
 ## X-License: GPL-3.0-or-later
 ## DefaultState: enabled
 ## OptionalDeps: LibSharedMedia-3.0

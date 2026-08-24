@@ -129,7 +129,7 @@ def validate(dungeons):
             results.append({"severity": "warning", "check": "s2_coverage",
                           "msg": f"S2 M+ dungeon missing: {name}"})
     # S2 raid
-    va = name_index.get("Venomous Abyss")
+    va = name_index.get("The Venomous Abyss") or name_index.get("Venomous Abyss")
     if va:
         if len(va.get("bosses", [])) != 8:
             results.append({"severity": "warning", "check": "s2_raid",

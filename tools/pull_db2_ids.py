@@ -236,7 +236,8 @@ def apply_changes(src, dungeons):
     for d in dungeons:
         new_iid = d.get("_new_instanceID")
         new_uid = d.get("_new_uiMapID")
-        if not (new_iid or new_uid):
+        has_boss_fills = any(b.get("_new_encounterID") for b in d["bosses"])
+        if not (new_iid or new_uid or has_boss_fills):
             continue
         # locate the dungeon block by its name line (flexible spacing)
         name_idx = None
@@ -261,7 +262,7 @@ def apply_changes(src, dungeons):
                 continue
             # find boss name line, then look backward for encounterID = 0
             boss_idx = None
-            for j in range(name_idx, min(name_idx + 80, len(lines))):
+            for j in range(name_idx, min(name_idx + 200, len(lines))):
                 if re.search(r'name\s*=\s*"' + re.escape(boss["name"]) + r'"', lines[j]):
                     boss_idx = j
                     break

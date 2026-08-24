@@ -1201,28 +1201,37 @@ KwikTip.DUNGEONS = {
 
     -- --------------------------------------------------------
     -- MIDNIGHT SEASON 2 DELVES (new in 12.1)
-    -- Located on the Coiled Isle. All IDs are 0 — verify in-game
-    -- with /run print(C_Map.GetBestMapForUnit("player")).
-    -- Tip content TODO: source from Icy Veins + Wowhead S2 delve guides.
+    -- Located on the Coiled Isle. Delves are Map.db2 InstanceType=5 — no
+    -- instanceID exists; detection rides on uiMapID + encounterID.
+    -- uiMapIDs synced from wago.tools UiMap.db2; Ring of Glory needs in-game
+    -- confirm (/run print(C_Map.GetBestMapForUnit("player"))).
+    -- Tip content sourced from Icy Veins delve guides + Wowhead Nemesis guide.
     -- --------------------------------------------------------
     {
-        instanceID = 0,  -- TODO: verify in-game
-        uiMapID    = 0,  -- TODO: verify in-game (delves are Type-3 zones, not Type-4 instance maps)
-                name       = "The Ring of Glory",
+        instanceID = 0,  -- delve: Map.db2 InstanceType=5 (not a standard instance); detection via encounterID
+        uiMapID    = 0,  -- UiMap.db2 has only a Type-3 zone map (2633) for this delve; verify in-game
+        name       = "The Ring of Glory",
         location   = "The Coiled Isle",
         season     = "midnight",
         type       = "delve",
         mythicPlus = false,
         bosses = {
             {
+                -- No LittleWigs module yet for this delve — encounterIDs unknown.
+                -- Variant bosses: Drakta (Open Night / Game Day), Gnok (Adopt-a-thon).
                 encounterID = 0,
-                name        = "(TODO — new S2 delve; verify boss name from Icy Veins S2 guide)",
-                tip         = "(TODO — source from Icy Veins + Wowhead S2 delve guides)",
+                name        = "Drakta",
+                tip         = "Move out of Soul Cleave's AOE after the wild swings. Roar of the Champion massively buffs Drakta's damage but slows him — stay away until it ends.",
+            },
+            {
+                encounterID = 0,
+                name        = "Gnok",
+                tip         = "Phase 1: dodge Upheaval's AOE after the jump (jump itself undodgeable) and position away from mobs before Pulverize knockback. Kill him again as an undead monstrosity: dodge Ejecting Decay projectiles and Necrotic Upheaval (turns old pools into decay).",
             },
         },
     },
     {
-        instanceID = 0,  -- TODO: verify in-game
+        instanceID = 0,  -- delve: Map.db2 InstanceType=5 (not a standard instance); detection via encounterID
         uiMapID    = 2635,  -- synced from wago.tools UiMap.db2
         name       = "Gnarldor Isle",
         location   = "The Coiled Isle",
@@ -1231,14 +1240,22 @@ KwikTip.DUNGEONS = {
         mythicPlus = false,
         bosses = {
             {
+                -- No LittleWigs module yet for this delve — encounterIDs unknown.
+                -- Variant bosses: Gralka Snake-Eater (Olds and Ends / Speaking Their Language),
+                -- The Osseous Amalgamation (Minchi's Osseous Adventurer).
                 encounterID = 0,
-                name        = "(TODO — new S2 delve; verify boss name from Icy Veins S2 guide)",
-                tip         = "(TODO — source from Icy Veins + Wowhead S2 delve guides)",
+                name        = "Gralka Snake-Eater",
+                tip         = "Kite Gralka away from her own poison — each snake eaten by Snake Eater raises her damage taken 15%. Heal through Venomblade Slash poison stacks. During Purging Breath she is stationary and breathes 2s per stack — move away.",
+            },
+            {
+                encounterID = 0,
+                name        = "Osseous Amalgamation",
+                tip         = "Marrowgar-style fight. Kite during Bone Storm (heavy melee damage); sidestep Bone Spikes (stun). Frost Strike slows — sidestep indicators. Watch for Bone Armor absorption shield.",
             },
         },
     },
     {
-        instanceID = 0,  -- TODO: verify in-game
+        instanceID = 0,  -- delve: Map.db2 InstanceType=5 (not a standard instance); detection via encounterID
         uiMapID    = 2634,  -- synced from wago.tools UiMap.db2
         name       = "Venomfall Deeps",
         location   = "The Coiled Isle",
@@ -1247,9 +1264,11 @@ KwikTip.DUNGEONS = {
         mythicPlus = false,
         bosses = {
             {
-                encounterID = 0,
-                name        = "(TODO — Nemesis delve; verify boss name from Icy Veins S2 guide)",
-                tip         = "(TODO — source from Icy Veins + Wowhead S2 Nemesis delve guide)",
+                -- S2 Nemesis delve boss (replaces S1 Nullaeus). Two difficulty tiers fire different IDs.
+                encounterID     = 3508,  -- LittleWigs SetEncounterID: Tier 8
+                altEncounterIDs = { 3525 },  -- Tier 11
+                name            = "Azta'rec",
+                tip             = "Dodge Noxious Bile frontal (leaves puddles); dispel Void Toxin fast (40% damage reduction DoT); interrupt Soul Extinction (~2M damage); dodge Venom Storm waves. Intermissions at 90/60/30%: memory game — Sermon of Ula'tek telegraphs 3-of-4 quadrants, then Echo repeats the SAME safe spot with no telegraph. Remember the pattern. ?? adds Echo of Azta'rec clone — kill it.",
             },
         },
     },
@@ -1829,16 +1848,17 @@ KwikTip.DUNGEONS = {
     -- RF wings 2-4 unlock Aug 25, Sep 1, Sep 8.
     -- --------------------------------------------------------
     {
-        instanceID = 0,  -- TODO: verify in-game (opens Week of Aug 18)
-        uiMapID    = 0,  -- TODO: verify in-game (Vaults of Atal'Utek subzone)
-        name       = "Venomous Abyss",
+        instanceID = 3004,  -- synced from wago.tools Map.db2
+        uiMapID    = 2606,  -- synced from wago.tools UiMap.db2
+        altMapIDs  = { 2607, 2608, 2609, 2610 },  -- wago.tools: per-wing sub-maps referenced by VA encounters (in-game confirm pending)
+        name       = "The Venomous Abyss",  -- matches wago.tools Map/JournalInstance name for ID sync
         location   = "The Coiled Isle",
         season     = "midnight",
         type       = "raid",
         mythicPlus = false,
         bosses = {
             {
-                encounterID = 0,  -- TODO: verify in-game (raid opened Aug 18)
+                encounterID = 3470,  -- synced from wago.tools JournalEncounter.db2
                 npcID       = 0,
                 name        = "Nek'zali the Soulcoiler",
                 tip         = "Kill Raised Amani adds before Gravebound Advance shields land. Avoid Soulcoil Wells and Corpse Blight zones. Tank: swap on Sever → Hollowed (stacking DoT). Soak/heal through Possession Barrage between add waves. Soft enrage: Uncoiling → Uncoiled Rage — push DPS. Intermission (Ritual of Awakening): break Summoner Jawae's Tethers, handle Echoes, and stay out of Hungering Pyre and Cremation.",
@@ -1851,7 +1871,7 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 0,  -- TODO: verify in-game
+                encounterID = 3445,  -- synced from wago.tools JournalEncounter.db2
                 npcID       = 0,
                 name        = "Entombed Sentinels",
                 tip         = "Two golems (Breath of Ula'tek + Blood of Ula'tek). Ula'tek's Dominance: both gain 99% damage reduction within 25 yards of each other — tanks keep them permanently apart. Marks (Acid + Blood) build Helical Toxins — stack EXACTLY 4 (2+2 or 1+3) for a controlled Cultivated Burst; wrong math = raid damage. Dodge Toxic Droplets → Noxious Blast; kill Living Venom/Blighted Blood adds; avoid Unstable Miasma → Clinging Murk. Tank: defensive for Empowering Slam. Kill Venom Coagulation before Contaminate. Healer: Vitriolic Stasis.",
@@ -1865,7 +1885,7 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 0,  -- TODO: verify in-game
+                encounterID = 3497,  -- synced from wago.tools JournalEncounter.db2
                 npcID       = 0,
                 name        = "The Lost Explorers",
                 tip         = "Council fight: four possessed Tortollans (Mor'zahi). Coordinate CC on the quartet and spread pressure — never tunnel one target while the others free-cast. Abilities to manage: Evil Eyes, Dark Whispers, Malevolent Presence, Mor'zahi's Command, and the Final Ascension cast that ends the possession arc. CC assignments matter more than the damage plan.",
@@ -1876,7 +1896,7 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 0,  -- TODO: verify in-game
+                encounterID = 3455,  -- synced from wago.tools JournalEncounter.db2
                 npcID       = 0,
                 name        = "Vashnik the Malignant",
                 tip         = "The raid's alchemist — Vashnik combines venoms mid-fight to brew a world-ending toxin. Interrupt and control his ritual-crafting windows; if a brew completes, the raid eats the consequences. Expect dispel discipline and tank-swap timing to decide the fight.",
@@ -1887,7 +1907,7 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 0,  -- TODO: verify in-game
+                encounterID = 3420,  -- synced from wago.tools JournalEncounter.db2
                 npcID       = 0,
                 name        = "Sszorak",  -- corrected: double-S per Wowhead (Sszorak); was Ssorak
                 tip         = "Raw-damage check + wind caller. Plan healer cooldowns for Raging Crosswinds, Turbulent Gusts, Howling Maelstrom, and Tempest phases; reposition cleanly through the wind. Tank/heal through the raw hits: Mutilate, Apex Predator, and To the Slaughter. If throughput is honest this boss confirms it — if not, Heroic groups stall here.",
@@ -1898,7 +1918,7 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 0,  -- TODO: verify in-game
+                encounterID = 3421,  -- synced from wago.tools JournalEncounter.db2
                 npcID       = 0,
                 name        = "The Twin Fangs",
                 tip         = "Dual boss — Vexhul (venom) and Ithraz (blood). Split positioning and tank-swap between them; their frontals punish stacking. Vexhul: Caustic Deluge, Vile Flood, Venomous Emergence. Ithraz: Blood Torrent, Ravenous Feast, Sanguine Storm, Submerge, and Rouse the Brood add calls.",
@@ -1909,7 +1929,7 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 0,  -- TODO: verify in-game
+                encounterID = 3429,  -- synced from wago.tools JournalEncounter.db2
                 npcID       = 0,
                 name        = "The Coiled Altar",
                 tip         = "The ritual gate before Ula'tek — an add-control encounter. Control and burn the adds while keeping the raid alive; losing players here stalls the final-boss unlock. Full ability list pending live testing.",
@@ -1919,7 +1939,7 @@ KwikTip.DUNGEONS = {
                 },
             },
             {
-                encounterID = 0,  -- TODO: verify in-game
+                encounterID = 3492,  -- synced from wago.tools JournalEncounter.db2
                 npcID       = 0,
                 name        = "Ula'tek",
                 tip         = "Final boss — five-headed serpent goddess, three phases with an intermission. Area denial: dodge Caustic Waves and Circling Prey. Blightscale Spawn hatch into Blightscale Vipers on venom contact (each applies Putrid Membrane raid-wide) — kill them and the Blightscale Clutch. Doomscale Wardens cast Writhing Gestation on Spawn; Doomscale Eggs hatch. Spectral Coils: stack at impact to reduce raid damage. Tank: Unchecked Rage / Rattler Slam when not in melee; Mother's Wrath hits raid if no one is in its zone. Burn during Rage of the Shackled (+100% damage window).",
