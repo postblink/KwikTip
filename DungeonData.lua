@@ -1201,14 +1201,13 @@ KwikTip.DUNGEONS = {
 
     -- --------------------------------------------------------
     -- MIDNIGHT SEASON 2 DELVES (new in 12.1)
-    -- Located on the Coiled Isle. Delves are Map.db2 InstanceType=5 — no
-    -- instanceID exists; detection rides on uiMapID + encounterID.
-    -- uiMapIDs synced from wago.tools UiMap.db2; Ring of Glory needs in-game
-    -- confirm (/run print(C_Map.GetBestMapForUnit("player"))).
+    -- Located on the Coiled Isle. Delves are Map.db2 InstanceType=5 —
+    -- they DO have instanceIDs (used by LittleWigs LoadOn-InstanceId).
+    -- Ring of Glory has no Type-4 UiMap yet (only zone map 2633 Type-3).
     -- Tip content sourced from Icy Veins delve guides + Wowhead Nemesis guide.
     -- --------------------------------------------------------
     {
-        instanceID = 0,  -- delve: Map.db2 InstanceType=5 (not a standard instance); detection via encounterID
+        instanceID = 3077,  -- LittleWigs LoadOn-InstanceId (InstanceType=5, but instanceID exists)
         uiMapID    = 0,  -- UiMap.db2 has only a Type-3 zone map (2633) for this delve; verify in-game
         name       = "The Ring of Glory",
         location   = "The Coiled Isle",
@@ -1231,7 +1230,7 @@ KwikTip.DUNGEONS = {
         },
     },
     {
-        instanceID = 0,  -- delve: Map.db2 InstanceType=5 (not a standard instance); detection via encounterID
+        instanceID = 3038,  -- LittleWigs LoadOn-InstanceId
         uiMapID    = 2635,  -- synced from wago.tools UiMap.db2
         name       = "Gnarldor Isle",
         location   = "The Coiled Isle",
@@ -1255,7 +1254,7 @@ KwikTip.DUNGEONS = {
         },
     },
     {
-        instanceID = 0,  -- delve: Map.db2 InstanceType=5 (not a standard instance); detection via encounterID
+        instanceID = 3079,  -- LittleWigs LoadOn-InstanceId
         uiMapID    = 2634,  -- synced from wago.tools UiMap.db2
         name       = "Venomfall Deeps",
         location   = "The Coiled Isle",
@@ -1888,22 +1887,22 @@ KwikTip.DUNGEONS = {
                 encounterID = 3497,  -- synced from wago.tools JournalEncounter.db2
                 npcID       = 0,
                 name        = "The Lost Explorers",
-                tip         = "Council fight: four possessed Tortollans (Mor'zahi). Coordinate CC on the quartet and spread pressure — never tunnel one target while the others free-cast. Abilities to manage: Evil Eyes, Dark Whispers, Malevolent Presence, Mor'zahi's Command, and the Final Ascension cast that ends the possession arc. CC assignments matter more than the damage plan.",
+                tip         = "Three-target fight: First Mate Nama, Scrollsage Iku, Trader Gebbo. Tank two together; Gebbo wanders counter-clockwise. Mor'zahi wipes the raid at 100 energy — feed him Disgusting Fish (hidden in Gebbo's crates) to reset it; each boss can be fed once. Nama: dodge Shell Spin frontal shells. Iku: move Blink Nova away from group to control teleport. Gebbo: soak crates but stagger bleed stacks. Extra abilities when fed: Nama = group soaks, Iku = Fire/Frost circles (walk into opposite puddle to clear), Gebbo = bomb with expanding ring (bounce over with mushroom).",
                 notes = {
-                    { role = "general",   text = "Council rules — spread pressure across all four possessed Tortollans; don't tunnel one." },
-                    { role = "general",   text = "Assign CC chains: Evil Eyes, Dark Whispers, Malevolent Presence, Mor'zahi's Command." },
-                    { role = "general",   text = "Handle Final Ascension — the cast that closes the possession arc." },
+                    { role = "general",   text = "Three-target rules: tank two together, spread pressure, never tunnel one. Heroic: only two can be tanked together or they take 99% reduced damage." },
+                    { role = "general",   text = "Disgusting Fish: pick up from Gebbo's crates, feed to a boss to reset Mor'zahi's energy. Each boss fed once — plan the order." },
+                    { role = "general",   text = "Nama: dodge Shell Spin frontal shells. Iku: move Blink Nova away from group. Gebbo: soak crates, stagger bleed stacks." },
                 },
             },
             {
                 encounterID = 3455,  -- synced from wago.tools JournalEncounter.db2
                 npcID       = 0,
                 name        = "Vashnik the Malignant",
-                tip         = "The raid's alchemist — Vashnik combines venoms mid-fight to brew a world-ending toxin. Interrupt and control his ritual-crafting windows; if a brew completes, the raid eats the consequences. Expect dispel discipline and tank-swap timing to decide the fight.",
+                tip         = "Arena split into thirds with colored altars (Red, Purple, Orange). Imbibe: tank moves boss to a different third each cast — summons adds from the two closest fountains. Purple altar: 5 slimes (AoE down), when defeated spawn swirlies. Orange altar: 2 slimes (CC for 60s), explode with stacking DoT — stagger kills. Red altar: 1 large slow slime (immune to CC), when defeated spawns smaller slimes to AoE. Plague Froth: spread and stand still so others dodge waves. Heroic: Malignant Catalyst — soak green circles. Additional boss abilities by altar: Red = Siphon Blood (healing absorb, stand close to siphon health off another player), Purple = Stygian Infection (targets burst void zones), Orange = Exploding Infection (dispellable, AoE on dispel — stagger dispels).",
                 notes = {
-                    { role = "general",   text = "Interrupt/control Vashnik's venom-combining ritual windows — a completed brew is heavily punishing." },
-                    { role = "healer",    text = "Dispel discipline is the core check; watch for stacked toxin debuffs." },
-                    { role = "tank",      text = "Tank-swap timing around brew phases." },
+                    { role = "general",   text = "Move boss to a different third for each Imbibe. Purple: AoE slimes. Orange: CC slimes, stagger kills. Red: kill big slime, AoE small ones." },
+                    { role = "healer",    text = "Stagger Orange slime kills (stacking DoT). Stagger Exploding Infection dispels. Siphon Blood needs coordinated soaks." },
+                    { role = "tank",      text = "Reposition boss each Imbube. Plague Froth: spread and stand still." },
                 },
             },
             {
@@ -1921,21 +1920,23 @@ KwikTip.DUNGEONS = {
                 encounterID = 3421,  -- synced from wago.tools JournalEncounter.db2
                 npcID       = 0,
                 name        = "The Twin Fangs",
-                tip         = "Dual boss — Vexhul (venom) and Ithraz (blood). Split positioning and tank-swap between them; their frontals punish stacking. Vexhul: Caustic Deluge, Vile Flood, Venomous Emergence. Ithraz: Blood Torrent, Ravenous Feast, Sanguine Storm, Submerge, and Rouse the Brood add calls.",
+                tip         = "Dual boss — Vexhul (venom) and Ithraz (blood). Split positioning and tank-swap between them; their frontals punish stacking. Eternal Venom: the core mechanic — avoid reaching 11 stacks (10 on Heroic). Vexhul: Caustic Globule (soak orbs, +1 stack), Venomous Emergence (kill adds before they give more stacks), Stir the Depths (dodge waves, +1 stack). Ithraz: Ravenous Feast (soak to reduce stacks by 1; Heroic: three groups), Coiling Ichor (stand at edge before debuff expires to drop pool safely), Stone Breaker (tank — remember soak order, stand in soaks in correct order to negate raid damage). Phase 2: Submerge — watch ring of orbs, avoid laser beam.",
                 notes = {
-                    { role = "tank",      text = "Split the twins and swap per plan; never stack both frontals on the group." },
-                    { role = "general",   text = "Vexhul (venom): avoid Caustic Deluge/Vile Flood. Ithraz (blood): avoid Blood Torrent/Sanguine Storm." },
-                    { role = "dps",       text = "Kill Rouse the Brood adds; handle Venomous Emergence." },
+                    { role = "tank",      text = "Split the twins and swap per plan; never stack both frontals on the group. Stone Breaker: remember soak order." },
+                    { role = "general",   text = "Eternal Venom stack management: Vexhul adds stacks (Caustic Globule, Stir the Depths, Venomous Emergence), Ithraz removes them (Ravenous Feast). Don't hit 11." },
+                    { role = "dps",       text = "Kill Venomous Emergence adds fast. Soak Caustic Globules. Phase 2: dodge Submerge laser." },
                 },
             },
             {
                 encounterID = 3429,  -- synced from wago.tools JournalEncounter.db2
                 npcID       = 0,
                 name        = "The Coiled Altar",
-                tip         = "The ritual gate before Ula'tek — an add-control encounter. Control and burn the adds while keeping the raid alive; losing players here stalls the final-boss unlock. Full ability list pending live testing.",
+                tip         = "Three phases plus intermission. P1 (Zul'jan): orb-carrying loop — pick up Coalesced Venom, pile in middle, tank clears with Sever. Guillotine: 5+ soakers (alternate groups on Heroic), then run out for Widow's Kiss. Dodge Axegrinder axes + Venomfang poison (dispel). P2 (Malacrass): Dreadmarch MC — break shield before edge, face Manifestation ghosts to freeze them, tank deletes with Soul Sever. Interrupt Spiritcackle Wail of Terror, kill before 100 energy. Gloombomb: spread, collect Soul Fragments. Eternal Nightfall: break Veil of Twilight shield. Intermission (Soulbinding): Zul'jan takes 100% more damage — Hero/Lust. Block Fragment of Malacrass orbs but stagger Spirit Erasure soaks. P3 (both): combined mechanics, kill evenly or Soulbound berserks survivor. Ignore orbs after first Defilement.",
                 notes = {
-                    { role = "general",   text = "Add-control fight — priority-interrupt and burn adds." },
-                    { role = "healer",    text = "Sustained raid healing through the add waves." },
+                    { role = "general",   text = "P1: Coalesced Venom orb loop — carry to middle, tank Sever-clears. Guillotine needs 5+ soakers, alternate groups Heroic. Dodge Axegrinder axes and Venomfang (dispel)." },
+                    { role = "tank",      text = "P1: Sever the orb pile. P2: Soul Sever to delete ghosts. P3: keep bosses together, cleave, die evenly." },
+                    { role = "healer",    text = "Intermission: stagger Fragment soaks (Spirit Erasure stacks). Defilement of the Coiled Altar hits hard — raid cooldowns ready." },
+                    { role = "general",   text = "P2: Dreadmarch — break MC shields fast, face ghosts to freeze. Interrupt Spiritcackle, burn before 100 energy. Break Eternal Nightfall shield." },
                 },
             },
             {
