@@ -1351,8 +1351,7 @@ KwikTip.DUNGEONS = {
 
     -- --------------------------------------------------------
     -- SEASON 2 MYTHIC+ — Returning Legacy Dungeons
-    -- instanceIDs/encounterIDs/uiMapIDs = 0 — TODO: verify in-game
-    -- Tip content sourced from method.gg + Wowhead guides (pre-launch research)
+    -- IDs synced from wago.tools DB2; tips verified against live guides.
     -- --------------------------------------------------------
 
     {
@@ -1837,14 +1836,40 @@ KwikTip.DUNGEONS = {
     },
 
     -- --------------------------------------------------------
+    -- MIDNIGHT SEASON 2 LAIR — Tidebound Grotto (1 boss)
+    -- Flexible-scaling world-boss encounter. Uses the existing raid data shape;
+    -- Core behavior is controlled by mythicPlus, not the type label.
+    -- IDs synced from wago.tools DB2; mechanics sourced from Method's live guide.
+    -- --------------------------------------------------------
+    {
+        instanceID = 2987,  -- synced from wago.tools Map.db2
+        uiMapID    = 2632,  -- synced from wago.tools UiMap.db2
+        name       = "The Tidebound Grotto",
+        location   = "The Coiled Isle",
+        season     = "midnight",
+        type       = "raid",
+        mythicPlus = false,
+        bosses = {
+            {
+                encounterID = 2849,  -- synced from wago.tools JournalEncounter.db2
+                npcID       = 252959,  -- Wowhead NPC: Nymrissa Wavecaller
+                name        = "Nymrissa Wavecaller",
+                tip         = "Core loop: stop Bubblefin murlocs reaching Alluring Bubble — failures become Berserkers that pulse raid damage; kill them immediately. Swirling Whirlpools leave one safe gap: stack there, then use a healing cooldown for Pop! knockback. Heroic/Mythic: soak Frost Orbs (unsoaked = Shatter); keep Lingering Frost out of paths. Tank: swap Water Jet stacks and aim it through Lingering Frost to clear patches. Heal through Abyssal Rain. Mythic: kill Bubblefin Frostscale first — its shield gives nearby murlocs 99% damage reduction. Soft enrage: Wavecaller's Might; hard enrage: Unending Tides.",
+                notes = {
+                    { role = "dps",       text = "Stop Bubblefin murlocs before Alluring Bubble; any that enter become Berserkers — kill those immediately. Mythic: Bubblefin Frostscale first, or nearby murlocs take 99% less damage." },
+                    { role = "general",   text = "Swirling Whirlpools have one safe gap — stack in it. Heroic/Mythic Frost Orbs must be soaked; place Lingering Frost away from paths and the bubble." },
+                    { role = "healer",    text = "Plan a cooldown for Pop! knockback and Abyssal Rain. On Mythic, stagger Frost Orb soaks — each causes raid-wide Frost Burst." },
+                    { role = "tank",      text = "Swap Water Jet stacks. Aim the jet through Lingering Frost to clear icy patches." },
+                },
+            },
+        },
+    },
+
+    -- --------------------------------------------------------
     -- MIDNIGHT SEASON 2 RAID — Venomous Abyss (8 bosses)
     -- Opens Aug 18, 2026 (Patch 12.1 "Curse of Ula'tek").
     -- Located in the Vaults of Atal'Utek, the Coiled Isle.
-    -- All instanceID/uiMapID/encounterIDs/boss names are TODO — verify
-    -- in-game after Aug 18, and source mechanics from:
-    --   Tier 1: Wowhead Venomous Abyss raid guide + Tactyks YouTube
-    --   Tier 2: Icy Veins Venomous Abyss guide
-    -- RF wings 2-4 unlock Aug 25, Sep 1, Sep 8.
+    -- IDs synced from wago.tools DB2; boss names and mechanics verified live.
     -- --------------------------------------------------------
     {
         instanceID = 3004,  -- synced from wago.tools Map.db2
@@ -1931,9 +1956,9 @@ KwikTip.DUNGEONS = {
                 encounterID = 3429,  -- synced from wago.tools JournalEncounter.db2
                 npcID       = 0,
                 name        = "The Coiled Altar",
-                tip         = "Three phases plus intermission. P1 (Zul'jan): orb-carrying loop — pick up Coalesced Venom, pile in middle, tank clears with Sever. Guillotine: 5+ soakers (alternate groups on Heroic), then run out for Widow's Kiss. Dodge Axegrinder axes + Venomfang poison (dispel). P2 (Malacrass): Dreadmarch MC — break shield before edge, face Manifestation ghosts to freeze them, tank deletes with Soul Sever. Interrupt Spiritcackle Wail of Terror, kill before 100 energy. Gloombomb: spread, collect Soul Fragments. Eternal Nightfall: break Veil of Twilight shield. Intermission (Soulbinding): Zul'jan takes 100% more damage — Hero/Lust. Block Fragment of Malacrass orbs but stagger Spirit Erasure soaks. P3 (both): combined mechanics, kill evenly or Soulbound berserks survivor. Ignore orbs after first Defilement.",
+                tip         = "Three phases plus intermission. P1 (Zul'jan): orb-carrying loop — pick up Coalesced Venom, pile in middle, tank clears with Sever. On Raid Finder/Normal/Heroic, Guillotine and Grim Guillotine need 3 soakers to avoid failure damage; then run out for Widow's Kiss. Dodge Axegrinder axes + Venomfang poison (dispel). P2 (Malacrass): Dreadmarch MC — break shield before edge, face Manifestation ghosts to freeze them, tank deletes with Soul Sever. Interrupt Spiritcackle Wail of Terror, kill before 100 energy. Gloombomb: spread, collect Soul Fragments. Eternal Nightfall: break Veil of Twilight shield. Intermission (Soulbinding): Zul'jan takes 100% more damage — Hero/Lust. Block Fragment of Malacrass orbs but stagger Spirit Erasure soaks. P3 (both): combined mechanics, kill evenly or Soulbound berserks survivor. Ignore orbs after first Defilement.",
                 notes = {
-                    { role = "general",   text = "P1: Coalesced Venom orb loop — carry to middle, tank Sever-clears. Guillotine needs 5+ soakers, alternate groups Heroic. Dodge Axegrinder axes and Venomfang (dispel)." },
+                    { role = "general",   text = "P1: Coalesced Venom orb loop — carry to middle, tank Sever-clears. On Raid Finder/Normal/Heroic, Guillotine needs 3 soakers; then run out for Widow's Kiss. Dodge Axegrinder axes and Venomfang (dispel)." },
                     { role = "tank",      text = "P1: Sever the orb pile. P2: Soul Sever to delete ghosts. P3: keep bosses together, cleave, die evenly." },
                     { role = "healer",    text = "Intermission: stagger Fragment soaks (Spirit Erasure stacks). Defilement of the Coiled Altar hits hard — raid cooldowns ready." },
                     { role = "general",   text = "P2: Dreadmarch — break MC shields fast, face ghosts to freeze. Interrupt Spiritcackle, burn before 100 energy. Break Eternal Nightfall shield." },
