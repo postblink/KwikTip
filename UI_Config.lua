@@ -3,6 +3,50 @@ local ADDON_NAME, KwikTip = ...
 local L = KwikTip.L
 
 -- ============================================================
+-- Support link
+-- ============================================================
+-- The client cannot open a browser, so the only useful thing a "support" button
+-- can do is hand over selectable text. The popup's edit box is read-only by way
+-- of rewriting any edit straight back to the URL, so a stray keypress cannot
+-- leave the player copying something broken.
+local SUPPORT_URL = "https://ko-fi.com/postblink"
+
+local function SupportEditBox(dialog)
+    return dialog.editBox or dialog.EditBox
+end
+
+StaticPopupDialogs["KWIKTIP_SUPPORT"] = {
+    text         = "%s",
+    button1      = CLOSE,
+    hasEditBox   = true,
+    editBoxWidth = 250,
+    timeout      = 0,
+    whileDead    = true,
+    hideOnEscape = true,
+    preferredIndex = 3,  -- avoids tainting Blizzard's own popup slots
+    OnShow = function(self)
+        local eb = SupportEditBox(self)
+        if not eb then return end
+        eb:SetText(SUPPORT_URL)
+        eb:HighlightText()
+        eb:SetFocus()
+    end,
+    EditBoxOnTextChanged = function(self)
+        if self:GetText() ~= SUPPORT_URL then
+            self:SetText(SUPPORT_URL)
+            self:HighlightText()
+        end
+    end,
+    EditBoxOnEscapePressed = function(self)
+        self:GetParent():Hide()
+    end,
+}
+
+function KwikTip:ShowSupportPopup()
+    StaticPopup_Show("KWIKTIP_SUPPORT", L.SUPPORT_POPUP .. "\n\n" .. L.SUPPORT_COPY_HINT)
+end
+
+-- ============================================================
 -- Minimap Button
 -- ============================================================
 function KwikTip:_PlaceMinimapBtn()
@@ -159,6 +203,21 @@ function KwikTip:CreateConfigWindow()
     navLogo:SetBlendMode("BLEND")
     navLogo:SetSize(110, 60)
     navLogo:SetPoint("BOTTOM", navPane, "BOTTOM", 0, 12)
+
+    -- Support link, sitting just above the logo: present for anyone who goes
+    -- looking, silent otherwise. Never gated, never nagged in chat.
+    local supportBtn = CreateFrame("Button", nil, navPane)
+    supportBtn:SetSize(NAV_W - 16, 16)
+    supportBtn:SetPoint("BOTTOM", navLogo, "TOP", 0, 4)
+
+    local supportText = supportBtn:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    supportText:SetPoint("CENTER", supportBtn, "CENTER")
+    supportText:SetText(L.SUPPORT_LABEL)
+    supportText:SetTextColor(0.55, 0.55, 0.58)
+
+    supportBtn:SetScript("OnEnter", function() supportText:SetTextColor(1, 0.82, 0) end)
+    supportBtn:SetScript("OnLeave", function() supportText:SetTextColor(0.55, 0.55, 0.58) end)
+    supportBtn:SetScript("OnClick", function() KwikTip:ShowSupportPopup() end)
 
     -- ============================================================
     -- Shared helpers

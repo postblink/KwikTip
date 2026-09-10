@@ -875,6 +875,8 @@ SlashCmdList["KWIKTIP"] = function(msg)
         print("|cff00ff00KwikTip|r " .. L.LOGS_CLEARED)
     elseif cmd == "feedback" then
         print("|cff00ff00KwikTip|r " .. L.FEEDBACK_MSG)
+    elseif cmd == "support" then
+        print("|cff00ff00KwikTip|r " .. L.SUPPORT_MSG)
     elseif cmd == "config" or cmd == "" then
         KwikTip:ToggleConfig()
     elseif cmd == "help" then
@@ -886,6 +888,7 @@ SlashCmdList["KWIKTIP"] = function(msg)
         print(L.CMD_DEBUGLOG)
         print(L.CMD_CLEARLOG)
         print(L.CMD_FEEDBACK)
+        print(L.CMD_SUPPORT)
         print(L.CMD_HELP)
     else
         print("|cff00ff00KwikTip|r " .. L.CMD_UNKNOWN)

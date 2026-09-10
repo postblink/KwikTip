@@ -400,6 +400,12 @@ ok(contains(table.concat(printed, "\n"), "Debug-Protokollierung aktiviert."),
 SlashCmdList.KWIKTIP("feedback")
 ok(contains(table.concat(printed, "\n"), "Tipps passen nicht?"),
     "production feedback message is localized")
+SlashCmdList.KWIKTIP("support")
+local supportText = table.concat(printed, "\n")
+ok(contains(supportText, "KwikTip ist kostenlos"),
+    "production support message is localized")
+ok(contains(supportText, "https://ko-fi.com/postblink"),
+    "support message carries the tip URL in every locale")
 
 io.write(string.format("\n=== RESULTS: %d passed, %d failed (of %d total) ===\n",
     PASS, FAIL, PASS + FAIL))
