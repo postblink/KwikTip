@@ -14,3 +14,5 @@ tools/.monitor/
 IDEAS.md
 AGENTS.md
 .codex/
+__pycache__/
+*.pyc
