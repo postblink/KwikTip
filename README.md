@@ -6,7 +6,7 @@
   World of Warcraft: Midnight — Patch 12.1 (Season 2)
 </p>
 
-A World of Warcraft: Midnight addon that displays contextual tips for dungeons, raids, delves, and Timewalking. As your group moves through an instance, KwikTip surfaces relevant boss and trash tips in a small, unobtrusive HUD — no interaction required mid-pull. **Day-one ready for Midnight Season 2.**
+A World of Warcraft: Midnight addon that displays contextual tips for dungeons, raids, delves, and Timewalking. As your group moves through an instance, KwikTip surfaces relevant boss and trash tips in a small, unobtrusive HUD — no interaction required mid-pull. **Built for Midnight Season 2; coverage and remaining content gaps are documented below.**
 
 Inspired by **QE Dungeon Tips** by QEdev (no longer maintained).
 
