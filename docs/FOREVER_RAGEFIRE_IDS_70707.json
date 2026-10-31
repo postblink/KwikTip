@@ -1,0 +1,167 @@
+{
+  "fetched_at_utc": "2026-10-31T21:38:14.643424+00:00",
+  "client_metadata": [
+    {
+      "Active": "1",
+      "Version": "1.60.1.70707",
+      "Product": "wowf"
+    }
+  ],
+  "forever_executable_exists": true,
+  "scope": "Wago-hosted raw DB2 exact-build Ragefire Chasm static identity; no local-client extraction or game execution.",
+  "sources": [
+    {
+      "table": "Map",
+      "build": "1.60.1.70707",
+      "requested_url": "https://wago.tools/db2/Map/csv?build=1.60.1.70707",
+      "final_url": "https://wago.tools/db2/Map/csv?build=1.60.1.70707",
+      "status": 200,
+      "content_type": "text/csv; charset=UTF-8",
+      "sha256": "63e3681e1d37c2860ed4744511201121dd1391b8351ecb97d41ece33dc7b4f24",
+      "bytes": 11744,
+      "rows": 73,
+      "ragefire_rows": [
+        {
+          "ID": "389",
+          "MapName_lang": "Ragefire Chasm",
+          "InstanceType": "1",
+          "MaxPlayers": "10"
+        }
+      ]
+    },
+    {
+      "table": "DungeonEncounter",
+      "build": "1.60.1.70707",
+      "requested_url": "https://wago.tools/db2/DungeonEncounter/csv?build=1.60.1.70707",
+      "final_url": "https://wago.tools/db2/DungeonEncounter/csv?build=1.60.1.70707",
+      "status": 200,
+      "content_type": "text/csv; charset=UTF-8",
+      "sha256": "626223c1a6c021f81ed36ed374d796522730be777eb9233ec848788e916758ff",
+      "bytes": 17624,
+      "rows": 342,
+      "ragefire_rows": [
+        {
+          "Name_lang": "Oggleflint",
+          "ID": "2732",
+          "MapID": "389",
+          "DifficultyID": "0",
+          "OrderIndex": "0"
+        },
+        {
+          "Name_lang": "Taragaman the Hungerer",
+          "ID": "2733",
+          "MapID": "389",
+          "DifficultyID": "0",
+          "OrderIndex": "1000"
+        },
+        {
+          "Name_lang": "Jergosh the Invoker",
+          "ID": "2734",
+          "MapID": "389",
+          "DifficultyID": "0",
+          "OrderIndex": "2000"
+        },
+        {
+          "Name_lang": "Bazzalan",
+          "ID": "2735",
+          "MapID": "389",
+          "DifficultyID": "0",
+          "OrderIndex": "3000"
+        }
+      ]
+    },
+    {
+      "table": "AreaTable",
+      "build": "1.60.1.70707",
+      "requested_url": "https://wago.tools/db2/AreaTable/csv?build=1.60.1.70707",
+      "final_url": "https://wago.tools/db2/AreaTable/csv?build=1.60.1.70707",
+      "status": 200,
+      "content_type": "text/csv; charset=UTF-8",
+      "sha256": "e7ccbde2cd084329ff0cccaa5af7f33facc42079d410bb1d2569dc9bce10a379",
+      "bytes": 149095,
+      "rows": 1375,
+      "ragefire_rows": [
+        {
+          "ID": "2437",
+          "AreaName_lang": "Ragefire Chasm",
+          "ContinentID": "389"
+        }
+      ]
+    },
+    {
+      "table": "UiMap",
+      "build": "1.60.1.70707",
+      "requested_url": "https://wago.tools/db2/UiMap/csv?build=1.60.1.70707",
+      "final_url": "https://wago.tools/db2/UiMap/csv?build=1.60.1.70707",
+      "status": 200,
+      "content_type": "text/csv; charset=UTF-8",
+      "sha256": "1f4aac70eaac015b1d2d0ea0faf6e3d7fb2cf7afdf45e5bb6772d9b80a72346b",
+      "bytes": 3097,
+      "rows": 60,
+      "ragefire_rows": []
+    },
+    {
+      "table": "UiMapAssignment",
+      "build": "1.60.1.70707",
+      "requested_url": "https://wago.tools/db2/UiMapAssignment/csv?build=1.60.1.70707",
+      "final_url": "https://wago.tools/db2/UiMapAssignment/csv?build=1.60.1.70707",
+      "status": 200,
+      "content_type": "text/csv; charset=UTF-8",
+      "sha256": "79267e8be8034e47daab14350411b3acc0b1f64e86efc9d821a217497254ca0a",
+      "bytes": 6778,
+      "rows": 61,
+      "ragefire_rows": []
+    },
+    {
+      "table": "MapDifficulty",
+      "build": "1.60.1.70707",
+      "requested_url": "https://wago.tools/db2/MapDifficulty/csv?build=1.60.1.70707",
+      "final_url": "https://wago.tools/db2/MapDifficulty/csv?build=1.60.1.70707",
+      "status": 200,
+      "content_type": "text/csv; charset=UTF-8",
+      "sha256": "18efa9c5823859f0bc91a6650f987f97635f64b864d1c88b95364cbb3471a2cb",
+      "bytes": 5242,
+      "rows": 142,
+      "ragefire_rows": [
+        {
+          "ID": "33",
+          "DifficultyID": "1",
+          "MaxPlayers": "5",
+          "MapID": "389"
+        },
+        {
+          "ID": "5250",
+          "DifficultyID": "201",
+          "MaxPlayers": "10",
+          "MapID": "389"
+        }
+      ]
+    }
+  ],
+  "guide_sources": [
+    {
+      "name": "method",
+      "requested_url": "https://www.method.gg/wow-forever/dungeons/ragefire-chasm",
+      "final_url": "https://www.method.gg/wow-forever/dungeons/ragefire-chasm",
+      "status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "sha256": "4e714d87349c2e643669faec7cb7fd4f4f54aaf8ab5cc8759acd19fd1a75fcf3",
+      "bytes": 244349
+    },
+    {
+      "name": "icy-veins",
+      "requested_url": "https://www.icy-veins.com/wow-forever/ragefire-chasm-guide",
+      "final_url": "https://www.icy-veins.com/wow-forever/ragefire-chasm-guide",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "284df4e432784b3cbac1c83fb1ed9e1f93bdca377b906d05a254565bf7f58706",
+      "bytes": 182421
+    }
+  ],
+  "limits": [
+    "Static exported IDs and source-backed prose, not an in-game pass",
+    "Normal difficulty1 only; alternate201 excluded",
+    "No UiMap, NPC or subzone detector",
+    "Encounter order is not compulsory live route; next-boss preview disabled"
+  ]
+}

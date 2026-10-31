@@ -1,0 +1,182 @@
+{
+  "fetched_at_utc": "2026-10-31T21:51:17.177482+00:00",
+  "client_metadata": [
+    {
+      "Active": "1",
+      "Version": "1.60.1.70707",
+      "Product": "wowf"
+    }
+  ],
+  "scope": "Wago raw exact-build Stockade static identifiers; no direct local-client extraction or runtime observations.",
+  "sources": [
+    {
+      "table": "Map",
+      "build": "1.60.1.70707",
+      "requested_url": "https://wago.tools/db2/Map/csv?build=1.60.1.70707",
+      "final_url": "https://wago.tools/db2/Map/csv?build=1.60.1.70707",
+      "status": 200,
+      "content_type": "text/csv; charset=UTF-8",
+      "sha256": "63e3681e1d37c2860ed4744511201121dd1391b8351ecb97d41ece33dc7b4f24",
+      "bytes": 11744,
+      "rows": 73,
+      "stockade_rows": [
+        {
+          "ID": "34",
+          "MapName_lang": "Stormwind Stockade",
+          "InstanceType": "1",
+          "MaxPlayers": "10"
+        }
+      ]
+    },
+    {
+      "table": "DungeonEncounter",
+      "build": "1.60.1.70707",
+      "requested_url": "https://wago.tools/db2/DungeonEncounter/csv?build=1.60.1.70707",
+      "final_url": "https://wago.tools/db2/DungeonEncounter/csv?build=1.60.1.70707",
+      "status": 200,
+      "content_type": "text/csv; charset=UTF-8",
+      "sha256": "626223c1a6c021f81ed36ed374d796522730be777eb9233ec848788e916758ff",
+      "bytes": 17624,
+      "rows": 342,
+      "stockade_rows": [
+        {
+          "Name_lang": "Targorr the Dread",
+          "ID": "2756",
+          "MapID": "34",
+          "DifficultyID": "0",
+          "OrderIndex": "0"
+        },
+        {
+          "Name_lang": "Kam Deepfury",
+          "ID": "2757",
+          "MapID": "34",
+          "DifficultyID": "0",
+          "OrderIndex": "1000"
+        },
+        {
+          "Name_lang": "Hamhock",
+          "ID": "2758",
+          "MapID": "34",
+          "DifficultyID": "0",
+          "OrderIndex": "2000"
+        },
+        {
+          "Name_lang": "Dextren Ward",
+          "ID": "2759",
+          "MapID": "34",
+          "DifficultyID": "0",
+          "OrderIndex": "3000"
+        },
+        {
+          "Name_lang": "Bazil Thredd",
+          "ID": "2760",
+          "MapID": "34",
+          "DifficultyID": "0",
+          "OrderIndex": "4000"
+        }
+      ],
+      "bruegal_or_ironknuckle_name_matches": []
+    },
+    {
+      "table": "AreaTable",
+      "build": "1.60.1.70707",
+      "requested_url": "https://wago.tools/db2/AreaTable/csv?build=1.60.1.70707",
+      "final_url": "https://wago.tools/db2/AreaTable/csv?build=1.60.1.70707",
+      "status": 200,
+      "content_type": "text/csv; charset=UTF-8",
+      "sha256": "e7ccbde2cd084329ff0cccaa5af7f33facc42079d410bb1d2569dc9bce10a379",
+      "bytes": 149095,
+      "rows": 1375,
+      "stockade_rows": [
+        {
+          "ID": "717",
+          "AreaName_lang": "The Stockade",
+          "ContinentID": "34"
+        }
+      ]
+    },
+    {
+      "table": "UiMap",
+      "build": "1.60.1.70707",
+      "requested_url": "https://wago.tools/db2/UiMap/csv?build=1.60.1.70707",
+      "final_url": "https://wago.tools/db2/UiMap/csv?build=1.60.1.70707",
+      "status": 200,
+      "content_type": "text/csv; charset=UTF-8",
+      "sha256": "1f4aac70eaac015b1d2d0ea0faf6e3d7fb2cf7afdf45e5bb6772d9b80a72346b",
+      "bytes": 3097,
+      "rows": 60,
+      "stockade_rows": []
+    },
+    {
+      "table": "UiMapAssignment",
+      "build": "1.60.1.70707",
+      "requested_url": "https://wago.tools/db2/UiMapAssignment/csv?build=1.60.1.70707",
+      "final_url": "https://wago.tools/db2/UiMapAssignment/csv?build=1.60.1.70707",
+      "status": 200,
+      "content_type": "text/csv; charset=UTF-8",
+      "sha256": "79267e8be8034e47daab14350411b3acc0b1f64e86efc9d821a217497254ca0a",
+      "bytes": 6778,
+      "rows": 61,
+      "stockade_rows": [],
+      "selection": "MapID=34 OR AreaID=717"
+    },
+    {
+      "table": "MapDifficulty",
+      "build": "1.60.1.70707",
+      "requested_url": "https://wago.tools/db2/MapDifficulty/csv?build=1.60.1.70707",
+      "final_url": "https://wago.tools/db2/MapDifficulty/csv?build=1.60.1.70707",
+      "status": 200,
+      "content_type": "text/csv; charset=UTF-8",
+      "sha256": "18efa9c5823859f0bc91a6650f987f97635f64b864d1c88b95364cbb3471a2cb",
+      "bytes": 5242,
+      "rows": 142,
+      "stockade_rows": [
+        {
+          "ID": "8",
+          "DifficultyID": "1",
+          "MaxPlayers": "5",
+          "MapID": "34"
+        },
+        {
+          "ID": "5238",
+          "DifficultyID": "201",
+          "MaxPlayers": "10",
+          "MapID": "34"
+        },
+        {
+          "ID": "5477",
+          "DifficultyID": "214",
+          "MaxPlayers": "5",
+          "MapID": "34"
+        }
+      ]
+    }
+  ],
+  "guide_sources": [
+    {
+      "name": "method",
+      "requested_url": "https://www.method.gg/wow-forever/dungeons/the-stockade",
+      "final_url": "https://www.method.gg/wow-forever/dungeons/the-stockade",
+      "status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "sha256": "c1334b7c33f538ceac7255162ca5bb1322e1fa1ac9b0ac987c0691039c1cf807",
+      "bytes": 251314
+    },
+    {
+      "name": "icy-veins",
+      "requested_url": "https://www.icy-veins.com/wow-forever/the-stockade-guide",
+      "final_url": "https://www.icy-veins.com/wow-forever/the-stockade-guide",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "4f17ba731fd12278e5a5d7231612bb85f590f95a07761d88e8d86d2ff01f4904",
+      "bytes": 187182
+    }
+  ],
+  "limits": [
+    "Five verified DungeonEncounter records only; rare Bruegal automatic tips excluded",
+    "Normal1 only; modes201 and214 untested/excluded",
+    "No UiMap, NPC or subzone detector",
+    "Hosted export and source-backed prose, no in-game pass",
+    "Enrage thresholds, Bazil add claims and exact trash stun duration omitted due source uncertainty"
+  ]
+}
