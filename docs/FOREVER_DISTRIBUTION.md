@@ -3,7 +3,7 @@
 Status (2026-10-31): implemented for review with offline validation. Review-branch
 and GitHub build results are recorded in the PR/checks; no publishing tag is
 approved. No addon release has been published. The installed local addon
-remains the separately verified `0.1.0-test`; source candidate `0.1.0-test.2`
+remains the separately verified `0.1.0-test`; source candidate `0.1.0-alpha.1`
 is not installed. No client load or in-game test is established before November 4.
 
 ## Existing Retail flow
@@ -32,7 +32,7 @@ build, then the publication job only if the tag passes strict validation:
 - The packaged README must identify the same version as the Forever TOC.
 - The builder uses only the explicit Forever package file list, not root pkgmeta,
   Retail data or Retail tip overlays. It produces the standalone ZIP, SHA256SUMS,
-  source evidence, authored release notes and BigWigs-compatible `release.json`.
+  source evidence for both dungeons, `coverage.json`, authored notes and BigWigs-compatible `release.json`.
 - The release metadata maps interface `16001` to flavor `forever`, not `wowf`
   (the latter is the local Blizzard product identifier).
 - Build jobs have read permission. Only the publication job has contents write,
@@ -96,16 +96,16 @@ workflow is on the repository's default branch.
 
 For a proposed first public `0.1.0-alpha.1`, review actual coverage/client status,
 set the Forever TOC and README version together, update the authored notes, and
-rerun the gates. Current `0.1.0-test.2` intentionally cannot pass a public alpha
-tag check. Obtain approval before pushing `forever-v0.1.0-alpha.1`: that tag is
+rerun the gates. The reviewed candidate now has `0.1.0-alpha.1` metadata prepared;
+this does not authorize publication. Obtain approval before pushing `forever-v0.1.0-alpha.1`: that tag is
 the concrete publication trigger. Do not use `v0.1.0-alpha.1`, which belongs to
 the Retail workflow's tag space. No tag or push was performed here.
 
 That publishing tag will upload to the existing CF/Wago pages and create the
 GitHub prerelease. A review-branch push and draft PR run build checks only.
 
-Alpha notes must say Hall encounter tips plus optional dungeon overview only;
-no per-pull/NPC/subzone detection and no full Classic-plus-nine coverage. The
+Alpha notes must say Hall and Ragefire, eight boss records and optional dungeon
+overviews, normal mode only; no per-pull/NPC/subzone detection or full coverage. The
 Infurnus/Magmatus guide association remains provisional. In-game results stay
 pending until actually observed; offline tests are not a client pass.
 

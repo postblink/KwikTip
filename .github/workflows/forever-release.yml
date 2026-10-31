@@ -55,6 +55,7 @@ jobs:
             dist/release.json
             dist/release-notes.md
             dist/source-evidence.json
+            dist/coverage.json
             dist/SHA256SUMS
 
   publish:
@@ -88,6 +89,6 @@ jobs:
           VERSION: ${{ needs.build.outputs.version }}
           ARCHIVE_NAME: ${{ needs.build.outputs.archive_name }}
         run: |
-          gh release create "$TAG" "dist/$ARCHIVE_NAME" dist/release.json dist/SHA256SUMS dist/source-evidence.json dist/release-notes.md \
+          gh release create "$TAG" "dist/$ARCHIVE_NAME" dist/release.json dist/SHA256SUMS dist/source-evidence.json dist/coverage.json dist/release-notes.md \
             --repo "$GITHUB_REPOSITORY" --verify-tag --prerelease --latest=false \
             --title "KwikTip Forever $VERSION" --notes-file dist/release-notes.md

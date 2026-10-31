@@ -199,16 +199,34 @@ for _, name in ipairs({ "DUNGEON_BY_INSTANCEID", "DUNGEON_BY_UIMAPID", "BOSS_BY_
     check(type(addon[name]) == "table", "package initializes " .. name)
 end
 check(type(addon.DUNGEONS) == "table", "Forever data table exists")
-check(#addon.DUNGEONS == 1 and addon.DUNGEONS[1].instanceID == 3065,
-    "local test contains Hall of Thanes only")
-local hall = addon.DUNGEONS[1]
+check(#addon.DUNGEONS == 2, "alpha manifest contains exactly two dungeon records")
+local hall = addon.DUNGEON_BY_INSTANCEID[3065]
+local ragefire = addon.DUNGEON_BY_INSTANCEID[389]
+check(hall ~= nil and ragefire ~= nil, "alpha manifest indexes Hall and Ragefire by verified instance identity")
 local expectedIDs = { 3493, 3495, 3494, 3496 } -- Wago build 70707 OrderIndex
-check(#hall.bosses == #expectedIDs, "all four source-backed encounter records are present")
+check(#hall.bosses == #expectedIDs, "all four Hall encounter records are present")
 for i, encounterID in ipairs(expectedIDs) do
     check(hall.bosses[i].encounterID == encounterID, "Hall encounter order matches raw DB2")
 end
+local expectedRagefireIDs = { 2732, 2733, 2734, 2735 }
+local expectedRagefireNames = { "Oggleflint", "Taragaman the Hungerer", "Jergosh the Invoker", "Bazzalan" }
+check(#ragefire.bosses == #expectedRagefireIDs, "all four Ragefire encounter records are present")
+for i, encounterID in ipairs(expectedRagefireIDs) do
+    check(ragefire.bosses[i].encounterID == encounterID, "Ragefire encounter identity matches raw DB2")
+    check(ragefire.bosses[i].name == expectedRagefireNames[i], "Ragefire encounter name matches verified source record")
+end
+local encounterCount = 0
+for _ in pairs(addon.BOSS_BY_ENCOUNTERID) do encounterCount = encounterCount + 1 end
+check(encounterCount == 8, "alpha manifest indexes exactly eight encounter records")
+for _, dungeon in ipairs({ hall, ragefire }) do
+    check(type(dungeon.difficultyIDs) == "table" and #dungeon.difficultyIDs == 1
+        and dungeon.difficultyIDs[1] == 1,
+        "shipped dungeon explicitly restricts sourced advice to Normal difficulty")
+end
 check(hall.uiMapID == nil and hall.areas == nil and next(addon.DUNGEON_BY_UIMAPID) == nil,
     "no guessed Hall city-map or subzone fallback is shipped")
+check(ragefire.uiMapID == nil and ragefire.areas == nil,
+    "no guessed Ragefire city-map or subzone fallback is shipped")
 check(contains(hall.bosses[2].tip, "Provisional"), "unverified guide-name association stays visible")
 check(next(addon.SUBZONE_LOCALE_BY_AREA_ID or {}) == nil,
     "scaffold does not import Retail subzone aliases")
@@ -273,6 +291,103 @@ for _, shippedDungeon in ipairs(addon.DUNGEONS) do
             "shipped encounter renders its authored tip")
         emit("ENCOUNTER_END", shippedBoss.encounterID, "Localized shipped boss", 1, 5, 0)
     end
+
+    for _, shippedBoss in ipairs(shippedDungeon.bosses or {}) do
+        state.instanceID, state.mapID = 990001, nil
+        state.instanceName = "Unrelated synthetic party instance"
+        emit("PLAYER_ENTERING_WORLD")
+        emit("ENCOUNTER_START", shippedBoss.encounterID, "Wrong-instance shipped boss", 1, 5)
+        check(not addon.bossActive and addon._activeBossEntry == nil
+            and addon._lastContent == "" and not addon.HUD:IsShown(),
+            "each shipped encounter fails closed in an unrelated instance")
+
+        local otherDungeon = shippedDungeon == hall and ragefire or hall
+        state.instanceID, state.mapID = otherDungeon.instanceID, otherDungeon.uiMapID
+        state.instanceName = "Localized other shipped dungeon"
+        emit("PLAYER_ENTERING_WORLD")
+        emit("ENCOUNTER_START", shippedBoss.encounterID, "Cross-dungeon shipped boss", 1, 5)
+        check(not addon.bossActive and addon._activeBossEntry == nil
+            and addon._lastContent == "" and not addon.HUD:IsShown(),
+            "each shipped encounter is rejected in the other shipped dungeon")
+    end
+
+    state.instanceID, state.mapID = shippedDungeon.instanceID, shippedDungeon.uiMapID
+    state.instanceName = "Localized current shipped dungeon"
+    emit("PLAYER_ENTERING_WORLD")
+    local ownBoss = shippedDungeon.bosses[1]
+    local foreignDungeon = shippedDungeon == hall and ragefire or hall
+    emit("ENCOUNTER_START", ownBoss.encounterID, "Legitimate current encounter", 1, 5)
+    emit("ENCOUNTER_START", foreignDungeon.bosses[1].encounterID, "Rejected foreign encounter", 1, 5)
+    check(addon.bossActive and addon._activeBossEntry.boss == ownBoss
+        and contains(addon._lastContent, "Legitimate current encounter")
+        and not contains(addon._lastContent, "Rejected foreign encounter"),
+        "a foreign dungeon event cannot replace the current dungeon's active boss tip")
+    emit("ENCOUNTER_END", ownBoss.encounterID, "Legitimate current encounter", 1, 5, 0)
+
+    -- MapDifficulty also exposes an alternate mode; Normal-only guide text
+    -- must stay hidden there rather than silently promise identical mechanics.
+    KwikTipDB.showInDungeon = true
+    state.instanceID, state.mapID, state.difficultyID = shippedDungeon.instanceID, nil, 201
+    emit("PLAYER_ENTERING_WORLD")
+    check(addon._lastContent == "" and not addon.HUD:IsShown(),
+        "alternate difficulty 201 cannot activate shipped dungeon content")
+    for _, shippedBoss in ipairs(shippedDungeon.bosses) do
+        emit("ENCOUNTER_START", shippedBoss.encounterID, "Unsupported alternate-mode boss", 201, 5)
+        check(not addon.bossActive and addon._activeBossEntry == nil
+            and addon._lastContent == "" and not addon.HUD:IsShown(),
+            "each shipped boss fails closed in unsupported alternate difficulty 201")
+    end
+    for _, unknownDifficulty in ipairs({ "nil", "zero" }) do
+        state.difficultyID = unknownDifficulty == "zero" and 0 or nil
+        emit("PLAYER_ENTERING_WORLD")
+        check(addon._lastContent == "" and not addon.HUD:IsShown(),
+            "unknown or zero difficulty cannot activate shipped dungeon content")
+        emit("ENCOUNTER_START", ownBoss.encounterID, "Unknown-difficulty boss", state.difficultyID, 5)
+        check(not addon.bossActive and addon._activeBossEntry == nil
+            and addon._lastContent == "" and not addon.HUD:IsShown(),
+            "known encounter with unknown or zero difficulty fails closed")
+    end
+    KwikTipDB.showInDungeon = false
+    state.difficultyID = 1
+    emit("PLAYER_ENTERING_WORLD")
+    emit("ENCOUNTER_START", ownBoss.encounterID, "Normal-mode recovery boss", 1, 5)
+    check(addon.bossActive and contains(addon._lastContent, ownBoss.tip),
+        "returning to Normal difficulty restores the sourced encounter tip")
+    emit("ENCOUNTER_END", ownBoss.encounterID, "Normal-mode recovery boss", 1, 5, 0)
+
+    -- The event mode is a separate client signal. A Normal instance cannot
+    -- make an alternate/unknown encounter mode safe by implication, and a
+    -- rejected event must not retain the previous fight's lock or text.
+    for _, eventModeCase in ipairs({ "alternate", "nil", "zero" }) do
+        local eventMode = eventModeCase == "alternate" and 201
+            or eventModeCase == "zero" and 0 or nil
+        for _, showOverview in ipairs({ false, true }) do
+            KwikTipDB.showInDungeon = showOverview
+            state.difficultyID = 1
+            emit("PLAYER_ENTERING_WORLD")
+            emit("ENCOUNTER_START", ownBoss.encounterID, "Valid Normal fight before contradictory event", 1, 5)
+            check(addon.bossActive and addon._activeBossEntry.boss == ownBoss,
+                "Normal instance and matching Normal event establish a valid fight")
+            emit("ENCOUNTER_START", ownBoss.encounterID, "Contradictory event mode", eventMode, 5)
+            check(not addon.bossActive and addon._activeBossEntry == nil
+                and addon._activeEncounterID == nil,
+                "alternate or unknown event mode clears the old Normal fight lock")
+            if showOverview then
+                check(contains(addon._lastContent, shippedDungeon.overview)
+                    and not contains(addon._lastContent, "Valid Normal fight before contradictory event"),
+                    "rejected event mode restores the opted-in overview instead of stale fight text")
+            else
+                check(addon._lastContent == "" and not addon.HUD:IsShown(),
+                    "rejected event mode clears fight text and hides HUD when overview is off")
+            end
+            emit("ENCOUNTER_START", ownBoss.encounterID, "Recovered matching Normal event", 1, 5)
+            check(addon.bossActive and addon._activeBossEntry.boss == ownBoss
+                and contains(addon._lastContent, "Recovered matching Normal event"),
+                "a matching Normal event recovers after the rejected event mode")
+            emit("ENCOUNTER_END", ownBoss.encounterID, "Recovered matching Normal event", 1, 5, 0)
+        end
+    end
+    KwikTipDB.showInDungeon = false
 end
 
 -- The Hall overview is an explicit instance-wide option, not inferred area or
@@ -333,6 +448,14 @@ check(not addon.bossActive and contains(addon._lastContent, hallSecondBoss.tip)
     and not contains(addon._lastContent, hall.overview),
     "successful Hall boss completion shows the next-boss preview before the overview")
 
+emit("ENCOUNTER_START", hallFirstBoss.encounterID, "Hall before mode transition", 1, 5)
+state.difficultyID = 201
+emit("ENCOUNTER_END", hallFirstBoss.encounterID, "Hall before mode transition", 1, 5, 1)
+check(not addon.bossActive and addon._lastContent == "" and not addon.HUD:IsShown(),
+    "encounter end after an unsupported mode transition cannot leak a next-boss preview")
+state.difficultyID = 1
+emit("PLAYER_ENTERING_WORLD")
+
 emit("ENCOUNTER_START", hallFirstBoss.encounterID, "Known Hall boss before unrelated event", 1, 5)
 emit("ENCOUNTER_START", 993001, "Unrelated synthetic encounter", 1, 5)
 check(not addon.bossActive and addon._activeBossEntry == nil,
@@ -385,6 +508,61 @@ check(contains(addon._lastContent, hall.overview),
     "verified Hall party instance restores overview without a UI map or target fallback")
 UnitName, UnitGUID = previousUnitName, previousUnitGUID
 KwikTipDB.notes["3065"] = nil
+KwikTipDB.showInDungeon = false
+state.inInstance, state.instanceType, state.instanceID, state.mapID = false, "none", 0, nil
+emit("PLAYER_ENTERING_WORLD")
+
+-- Ragefire's roster order is not an asserted player route. After a kill, the
+-- alpha returns to the user's overview choice instead of predicting a boss.
+check(ragefire.previewNextBoss == false, "Ragefire explicitly disables route-order boss previews")
+check(type(ragefire.overview) == "string" and ragefire.overview ~= "",
+    "Ragefire ships a nonempty optional instance overview")
+state.inInstance, state.instanceType = true, "party"
+state.instanceID, state.mapID = 389, nil
+state.instanceName, state.subzone = "Localized Ragefire alpha test", ""
+check(KwikTipDB.showInDungeon == false, "Ragefire overview is quiet by default")
+emit("PLAYER_ENTERING_WORLD")
+check(addon._lastContent == "" and not addon.HUD:IsShown(),
+    "Ragefire entry remains hidden without an opted-in overview")
+for _, boss in ipairs(ragefire.bosses) do
+    emit("ENCOUNTER_START", boss.encounterID, "Localized Ragefire boss", 1, 5)
+    check(addon.bossActive and contains(addon._lastContent, boss.tip),
+        "Ragefire encounter tips still activate with overview disabled")
+    emit("ENCOUNTER_END", boss.encounterID, "Localized Ragefire boss", 1, 5, 1)
+    check(not addon.bossActive and addon._activeBossEntry == nil
+        and addon._lastContent == "" and not addon.HUD:IsShown(),
+        "each Ragefire kill clears the fight without guessing a next boss")
+end
+KwikTipDB.showInDungeon = true
+emit("ZONE_CHANGED")
+check(contains(addon._lastContent, ragefire.overview) and addon.HUD:IsShown(),
+    "Ragefire overview renders only after the existing setting is enabled")
+check(contains(addon._lastContent, state.instanceName),
+    "Ragefire overview uses the localized instance header")
+KwikTipDB.notes["389"] = "RAGEFIRE_ALPHA_PERSONAL_NOTE"
+emit("ZONE_CHANGED")
+check(contains(addon._lastContent, "RAGEFIRE_ALPHA_PERSONAL_NOTE")
+    and KwikTipDB.notes["389"] == "RAGEFIRE_ALPHA_PERSONAL_NOTE",
+    "Ragefire overview preserves and displays the player's own note")
+emit("ENCOUNTER_START", ragefire.bosses[1].encounterID, "Ragefire fight overrides overview", 1, 5)
+check(addon.bossActive and contains(addon._lastContent, ragefire.bosses[1].tip)
+    and not contains(addon._lastContent, ragefire.overview),
+    "Ragefire boss tip takes priority over the opted-in overview")
+emit("ENCOUNTER_END", ragefire.bosses[1].encounterID, "Ragefire fight overrides overview", 1, 5, 1)
+check(not addon.bossActive and addon._activeBossEntry == nil
+    and contains(addon._lastContent, ragefire.overview)
+    and contains(addon._lastContent, "RAGEFIRE_ALPHA_PERSONAL_NOTE"),
+    "Ragefire kill returns to overview and personal note instead of a route prediction")
+state.instanceType = "raid"
+emit("PLAYER_ENTERING_WORLD")
+check(addon._lastContent == "" and not addon.HUD:IsShown(),
+    "Ragefire overview fails closed in unsupported raid mode")
+state.instanceType, state.instanceID, state.mapID = "party", nil, 389
+state.instanceName, state.subzone = "Ragefire Chasm", "Ragefire Chasm"
+emit("PLAYER_ENTERING_WORLD")
+check(addon._lastContent == "" and not addon.HUD:IsShown(),
+    "Ragefire map and names cannot substitute for its verified instance identity")
+KwikTipDB.notes["389"] = nil
 KwikTipDB.showInDungeon = false
 state.inInstance, state.instanceType, state.instanceID, state.mapID = false, "none", 0, nil
 emit("PLAYER_ENTERING_WORLD")

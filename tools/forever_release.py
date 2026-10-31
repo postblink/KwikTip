@@ -7,7 +7,6 @@ import hashlib
 import json
 from pathlib import Path
 import re
-import shutil
 import zipfile
 
 import package_forever
@@ -28,6 +27,9 @@ def metadata() -> tuple[str, int]:
     first_line = (ROOT / "Forever/README.txt").read_text(encoding="utf-8").splitlines()[0]
     if not first_line.startswith(f"KwikTip Forever {versions[0]} --"):
         raise ValueError("Packaged README must identify the same Forever version as the TOC")
+    coverage = json.loads((ROOT / "Forever/Coverage.json").read_text())
+    if coverage.get("version") != versions[0] or coverage.get("interface") != int(interfaces[0]):
+        raise ValueError("Coverage ledger version/interface must match the Forever TOC")
     return versions[0], int(interfaces[0])
 
 
@@ -63,8 +65,16 @@ def prepare(output: Path, tag: str | None = None) -> dict[str, str]:
     (output / "release.json").write_text(json.dumps(release, indent=2) + "\n", encoding="utf-8")
     notes = (ROOT / "Forever/RELEASE_NOTES.txt").read_text(encoding="utf-8")
     (output / "release-notes.md").write_text(notes.replace("@VERSION@", version), encoding="utf-8")
-    shutil.copy2(ROOT / "docs/FOREVER_HALL_OF_THANES_IDS_70707.json", output / "source-evidence.json")
-    assets = [archive_name, "release.json", "release-notes.md", "source-evidence.json"]
+    coverage = json.loads((ROOT / "Forever/Coverage.json").read_text())
+    (output / "coverage.json").write_text(json.dumps(coverage, indent=2) + "\n", encoding="utf-8")
+    evidence = {"data_build": coverage["data_build"], "client_tested": coverage["client_tested"], "dungeons": []}
+    for dungeon in coverage["included_dungeons"]:
+        path = Path(dungeon["evidence"])
+        if path.is_absolute() or ".." in path.parts or path.parts[0] != "docs":
+            raise ValueError("Coverage evidence must be an explicit repository doc")
+        evidence["dungeons"].append({"instanceID": dungeon["instanceID"], "sources": json.loads((ROOT / path).read_text())})
+    (output / "source-evidence.json").write_text(json.dumps(evidence, indent=2) + "\n", encoding="utf-8")
+    assets = [archive_name, "release.json", "release-notes.md", "source-evidence.json", "coverage.json"]
     checksums = [f"{hashlib.sha256((output / name).read_bytes()).hexdigest()}  {name}\n" for name in assets]
     (output / "SHA256SUMS").write_text("".join(checksums), encoding="utf-8")
     return {"version": version, "archive_name": archive_name}

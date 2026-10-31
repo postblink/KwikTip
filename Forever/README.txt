@@ -1,8 +1,9 @@
-KwikTip Forever 0.1.0-test.2 -- local engineering candidate
+KwikTip Forever 0.1.0-alpha.1 -- early alpha candidate
 
-This is the first Hall of Thanes encounter test, not a full-coverage release.
-The full project scope remains all Classic dungeon units/wings plus the nine
-new Forever dungeons. No target-client test has passed yet.
+Included: Hall of Thanes and Ragefire Chasm, four boss encounter tips each,
+plus optional dungeon-wide preparation overviews. Normal difficulty 1 only.
+This is not full dungeon coverage. The roadmap remains all Classic dungeon
+units/wings plus nine new Forever dungeons. No target-client test has passed.
 
 Target: Forever product wowf, build 1.60.1.70707, interface 16001.
 The current install is World of Warcraft/_forever_/Wow.exe; the older
@@ -12,7 +13,7 @@ No automatic installation is performed by the builder. For a controlled manual
 test, close the game, copy only the KwikTip_Forever folder into the Forever
 client's Interface/AddOns directory, and enable it. Do not enable the Retail
 KwikTip addon in the same client. Removing this folder reverses the install;
-it does not erase SavedVariables. No public upload or release is approved.
+it does not erase SavedVariables. Disable the addon if you encounter Lua errors.
 
 Expected behavior:
 - /kwik opens settings; the minimap icon and settings logo should appear.
@@ -22,8 +23,12 @@ Expected behavior:
   Tip Window enabled, a successful kill may preview the next ordered encounter.
   The expected IDs in route order are 3493, 3495, 3494, 3496 on instance 3065.
 - Enable the existing Persistent Tip Window setting for an optional dungeon-wide
-  preparation/trash overview in Hall. It is not a current-pull detector. Boss and
+  preparation/trash overview in either dungeon. It is not a current-pull detector. Boss and
   explicit demo previews take priority; the default remains quiet between fights.
+- Ragefire uses instance 389 and encounters 2732/2733/2734/2735. It does not guess
+  the next boss after a kill; it returns to the overview or quiet state. Skipped
+  or reordered bosses are identified only by their actual encounter event.
+- Alternate difficulty 201 and other unsupported modes do not activate these tips.
 - Area/trash triggers, NPC targeting, and pre-pull room routing are not implemented.
   There is no guessed city-map fallback. A quiet HUD before a boss is expected.
 
@@ -36,12 +41,14 @@ Durgen add-versus-boss kill order is omitted because current guides disagree.
 In-game acceptance:
 1. Record /run print(GetBuildInfo()) and confirm clean login with no Lua errors.
 2. Check settings, icon/logo, move mode, preview, mouse passthrough when locked.
-3. In Hall, use /kwik debug and confirm instance 3065. Observe all four boss
+3. In Hall (3065) and Ragefire (389), use /kwik debug and observe all eight boss
    events, displayed names and tips, success/wipe handling, and zone exits.
    Check the provisional second-boss association before relying on that tip.
-4. Confirm no Hall tip appears in another dungeon or after leaving the instance.
+   Check Ragefire with skipped/reordered bosses; no guessed next-boss tip is expected.
+4. Confirm no tip leaks into another dungeon or after leaving the instance.
    Check the opt-in overview and its personal note; disable Persistent Tip Window
-   and confirm ordinary Hall entry is quiet again.
+   and confirm ordinary entry is quiet again. Record actual difficulty IDs;
+   this alpha targets normal difficulty 1 and does not claim alternate-mode support.
 5. Change a setting, /reload, then log out/in and confirm it persists. Memory-only
    automated preference checks do not establish client persistence.
 6. Report the tested build, locale, encounter IDs/names, and any Lua error.
@@ -53,3 +60,8 @@ https://wago.tools/db2/Map/csv?build=1.60.1.70707
 https://wago.tools/db2/DungeonEncounter/csv?build=1.60.1.70707
 https://www.method.gg/wow-forever/dungeons/hall-of-thanes
 https://www.icy-veins.com/wow-forever/hall-of-thanes-guide
+https://www.method.gg/wow-forever/dungeons/ragefire-chasm
+https://www.icy-veins.com/wow-forever/ragefire-chasm-guide
+
+The release assets include coverage.json and source-evidence.json for the exact
+candidate scope and static-data provenance. These are not client test results.

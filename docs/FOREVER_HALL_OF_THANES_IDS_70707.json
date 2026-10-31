@@ -4,7 +4,8 @@
     "Wago-hosted raw DB2 export for explicit exact build; not direct extraction from installed local client and not in-game evidence.",
     "No Hall UiMap name or assignment returned; no dungeon uiMap fallback inferred.",
     "Encounter display Magmatus appears in guides, while raw client record is Infurnus.",
-    "Spell text names Magmatus, but these tables contain no direct DungeonEncounter3495 or NPC link. Infurnus/Magmatus alias remains unverified."
+    "Spell text names Magmatus, but these tables contain no direct DungeonEncounter3495 or NPC link. Infurnus/Magmatus alias remains unverified.",
+    "Normal difficulty1 is the alpha target; alternate201 is present in static data but excluded and untested."
   ],
   "sources": [
     {
@@ -137,6 +138,31 @@
         {
           "ID": "1293228",
           "Name_lang": "Combust"
+        }
+      ]
+    },
+    {
+      "table": "MapDifficulty",
+      "build": "1.60.1.70707",
+      "requested_url": "https://wago.tools/db2/MapDifficulty/csv?build=1.60.1.70707",
+      "final_url": "https://wago.tools/db2/MapDifficulty/csv?build=1.60.1.70707",
+      "status": 200,
+      "content_type": "text/csv; charset=UTF-8",
+      "sha256": "18efa9c5823859f0bc91a6650f987f97635f64b864d1c88b95364cbb3471a2cb",
+      "bytes": 5242,
+      "rows": 142,
+      "hall_rows": [
+        {
+          "ID": "6226",
+          "DifficultyID": "1",
+          "MaxPlayers": "5",
+          "MapID": "3065"
+        },
+        {
+          "ID": "6339",
+          "DifficultyID": "201",
+          "MaxPlayers": "5",
+          "MapID": "3065"
         }
       ]
     }

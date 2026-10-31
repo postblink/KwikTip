@@ -60,7 +60,7 @@ def verified_inputs(directory: Path, tag: str) -> tuple[str, Path, str]:
     archive = f"KwikTip_Forever-{version}.zip"
     if item["filename"] != archive or item["metadata"] != [{"flavor": "forever", "interface": 16001}]:
         raise ValueError("Only the declared Forever archive/interface may be uploaded")
-    expected = {archive, "release.json", "release-notes.md", "source-evidence.json"}
+    expected = {archive, "release.json", "release-notes.md", "source-evidence.json", "coverage.json"}
     seen = set()
     for line in (directory / "SHA256SUMS").read_text().splitlines():
         digest, name = line.split("  ", 1)

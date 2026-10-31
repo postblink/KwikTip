@@ -34,8 +34,7 @@ def alpha_source():
             destination.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(ROOT / relative, destination)
         shutil.copytree(ROOT / "assets", root / "assets")
-        (root / "docs").mkdir()
-        shutil.copy2(ROOT / "docs/FOREVER_HALL_OF_THANES_IDS_70707.json", root / "docs")
+        shutil.copytree(ROOT / "docs", root / "docs")
         with patch.object(forever_release, "ROOT", root), patch.object(forever_release.package_forever, "ROOT", root):
             yield root
 
@@ -79,6 +78,13 @@ class ForeverReleaseTests(unittest.TestCase):
             notes = (output / "release-notes.md").read_text()
             self.assertIn("0.1.0-alpha.1", notes)
             self.assertIn("Client validation: pending", notes)
+            coverage = json.loads((output / "coverage.json").read_text())
+            self.assertEqual(coverage["version"], result["version"])
+            self.assertFalse(coverage["client_tested"])
+            self.assertEqual(coverage["complete_dungeons"], 0)
+            self.assertEqual({d["instanceID"] for d in coverage["included_dungeons"]}, {3065, 389})
+            evidence = json.loads((output / "source-evidence.json").read_text())
+            self.assertEqual({d["instanceID"] for d in evidence["dungeons"]}, {3065, 389})
             with self.assertRaises(FileExistsError):
                 forever_release.prepare(output)
 
@@ -87,6 +93,20 @@ class ForeverReleaseTests(unittest.TestCase):
             (root / "Forever/README.txt").write_text("Wrong version\n")
             with self.assertRaises(ValueError):
                 forever_release.prepare(root.parent / "dist")
+
+    def test_coverage_version_and_evidence_paths_fail_closed(self):
+        with alpha_source() as root:
+            path = root / "Forever/Coverage.json"
+            coverage = json.loads(path.read_text())
+            coverage["version"] = "0.1.0-alpha.999"
+            path.write_text(json.dumps(coverage))
+            with self.assertRaises(ValueError):
+                forever_release.prepare(root.parent / "version-mismatch")
+            coverage["version"] = "0.1.0-alpha.1"
+            coverage["included_dungeons"][0]["evidence"] = "../outside.json"
+            path.write_text(json.dumps(coverage))
+            with self.assertRaises(ValueError):
+                forever_release.prepare(root.parent / "invalid-evidence")
 
     def test_workflow_publishes_only_forever_tag_builds_with_scoped_token(self):
         workflow = yaml.load((ROOT / ".github/workflows/forever-release.yml").read_text(), Loader=yaml.BaseLoader)
@@ -106,7 +126,7 @@ class ForeverReleaseTests(unittest.TestCase):
         command = token_steps[0]["run"]
         for option in ["--verify-tag", "--prerelease", "--latest=false", "--notes-file"]:
             self.assertIn(option, command)
-        for asset in ["dist/release.json", "dist/SHA256SUMS", "dist/source-evidence.json", "dist/release-notes.md"]:
+        for asset in ["dist/release.json", "dist/SHA256SUMS", "dist/source-evidence.json", "dist/coverage.json", "dist/release-notes.md"]:
             self.assertIn(asset, command.split("--repo", 1)[0])
         self.assertNotIn("--clobber", command)
         source = (ROOT / ".github/workflows/forever-release.yml").read_text()

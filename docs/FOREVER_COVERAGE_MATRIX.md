@@ -1,6 +1,6 @@
 # KwikTip Forever — full dungeon coverage matrix
 
-Status (2026-10-31): **Hall has isolated encounter tips and a candidate opt-in dungeon-wide preparation/trash overview; zero dungeons meet complete coverage below.** Static IDs are verified from Wago exports; client runtime, actual area/NPC triggers, and Infurnus/Magmatus identity remain pending. Candidate `0.1.0-test.2` is not installed; installed `0.1.0-test` stays unchanged. No supported release or release approval. Full scope is preserved; later-dungeon research dates remain historical.
+Status (2026-10-31): **Alpha candidate `0.1.0-alpha.1` includes Hall of Thanes and Ragefire Chasm: eight boss records and opt-in dungeon overviews, normal difficulty 1 only. Zero dungeons meet complete coverage below.** Static IDs are verified from exact-build exports; runtime, area/NPC triggers and Infurnus/Magmatus identity remain pending. Installed `0.1.0-test` stays unchanged. No release approval. See `FOREVER_ALPHA_COVERAGE.md` and `Forever/Coverage.json` for exact alpha scope; full scope is preserved.
 
 ## Release scope
 
@@ -14,7 +14,7 @@ Raids are not silently included in this dungeon scope. Upper Blackrock Spire is 
 
 - `DungeonData.lua` is the Midnight dataset. Its six `season = "legacy"` entries are Algeth'ar Academy, Pit of Saron, Seat of the Triumvirate, Skyreach, Kings' Rest, and Temple of Sethraliss—not Vanilla dungeons.
 - `DungeonData_Timewalking.lua` has 33 entries, beginning with the Burning Crusade pool and continuing through Legion. It has no Vanilla/Classic pool. Some of its boss tips are still empty; it is not a source of complete Forever coverage.
-- `Forever/DungeonData.lua` contains one Hall test entry with four encounters and an optional instance-wide overview. No Classic/Vanilla units are implemented. **Complete, client-tested coverage remains 0/26 Classic units and 0/9 new dungeons**; one new dungeon is in implementation, not complete.
+- `Forever/DungeonData.lua` contains two normal-mode alpha entries: Hall (four encounters) and returning Ragefire (four), each with an optional instance-wide overview. **Complete, client-tested coverage remains 0/26 Classic units and 0/9 new dungeons**; one Classic and one new dungeon are in implementation, not complete.
 - Forever data, indexes, guards and tip overlays are separate from Retail. The current install manifest identifies `wowf` build `1.60.1.70707` at `_forever_/Wow.exe`; interface `16001` is the package target, corroborated by installed addon TOCs. No target-client load is established.
 
 ## Classic dungeon inventory — 26 units
@@ -23,7 +23,7 @@ Classic boss/route/trash guides exist as a research baseline for the old instanc
 
 | # | Forever coverage unit | Current KwikTip data | Forever validation |
 |---:|---|---|---|
-| 1 | Ragefire Chasm | Missing | Pending |
+| 1 | Ragefire Chasm | Four encounter records and optional overview; exact-build provenance recorded | Normal 1 candidate; live test pending; alternate 201 and per-area routing excluded |
 | 2 | Wailing Caverns | Missing | Pending |
 | 3 | The Deadmines | Missing | Pending |
 | 4 | Shadowfang Keep | Missing | Pending |

@@ -1,0 +1,48 @@
+{
+  "version": "0.1.0-alpha.1",
+  "data_build": "1.60.1.70707",
+  "interface": 16001,
+  "client_tested": false,
+  "complete_dungeons": 0,
+  "full_scope": "All Classic dungeon units/wings plus nine new Forever dungeons; 34/35 total pending UBRS classification",
+  "included_dungeons": [
+    {
+      "instanceID": 3065,
+      "name": "The Hall of Thanes",
+      "encounterIDs": [
+        3493,
+        3495,
+        3494,
+        3496
+      ],
+      "status": "source-backed encounter alpha with optional instance-wide overview",
+      "provisional": "Infurnus/Magmatus guide association",
+      "evidence": "docs/FOREVER_HALL_OF_THANES_IDS_70707.json",
+      "difficultyIDs": [
+        1
+      ]
+    },
+    {
+      "instanceID": 389,
+      "name": "Ragefire Chasm",
+      "encounterIDs": [
+        2732,
+        2733,
+        2734,
+        2735
+      ],
+      "status": "source-backed encounter alpha with optional instance-wide overview; no assumed next-boss routing",
+      "evidence": "docs/FOREVER_RAGEFIRE_IDS_70707.json",
+      "difficultyIDs": [
+        1
+      ]
+    }
+  ],
+  "not_included": [
+    "All other dungeons",
+    "Raids",
+    "Per-room or per-pull routing",
+    "NPC target detection"
+  ],
+  "live_acceptance": "Pending November 4: actual load, event IDs/names, HUD, success/wipe/exit behavior and settings persistence"
+}

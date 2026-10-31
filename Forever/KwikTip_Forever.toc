@@ -1,8 +1,8 @@
 ## Interface: 16001
-## Title: KwikTip: Forever (Local Test)
-## Notes: Hall encounters and optional dungeon overview; in-game validation pending. Not a full-coverage release.
+## Title: KwikTip: Forever (Alpha)
+## Notes: Hall of Thanes and Ragefire Chasm encounter alpha; in-game validation pending. Not full dungeon coverage.
 ## Author: Lucas Boyles
-## Version: 0.1.0-test.2
+## Version: 0.1.0-alpha.1
 ## DefaultState: enabled
 ## OptionalDeps: LibSharedMedia-3.0
 
