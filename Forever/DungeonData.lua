@@ -2,8 +2,8 @@
 local ADDON_NAME, KwikTip = ...
 
 -- IDs: Wago Map/DungeonEncounter CSVs for build 1.60.1.70707.
--- Strategy: current Forever Method/Icy Veins guides. See Hall research and
--- docs/FOREVER_RAGEFIRE_READINESS.md for dates, conflicts and provenance.
+-- Strategy: current Forever Method/Icy Veins guides. See the per-dungeon
+-- readiness/provenance documents listed in Forever/Coverage.json.
 -- These static IDs do not establish an in-game pass. UiMap/NPC/subzone
 -- identifiers remain unverified and are deliberately omitted, not set to 0.
 KwikTip.DUNGEONS = {
@@ -74,6 +74,44 @@ KwikTip.DUNGEONS = {
                 encounterID = 2735,
                 name = "Bazzalan",
                 tip = "Control the two adds and focus the boss. Healers watch tank damage from poison and Sinister Strike.",
+            },
+        },
+    },
+    {
+        instanceID = 34,
+        name = "Stormwind Stockade",
+        season = "forever",
+        type = "dungeon",
+        difficultyIDs = { 1 },
+        previewNextBoss = false, -- wing order is not assumed from DB2 OrderIndex
+        -- Rare Bruegal has no verified DungeonEncounter mapping and is excluded.
+        overview = "Clear nearby cells before boss pulls and control accompanying prisoners.\n"
+            .. "Keep pulls small: prisoner stuns and bleeds can compound tank damage.",
+        bosses = {
+            {
+                encounterID = 2756,
+                name = "Targorr the Dread",
+                tip = "Control or kill the accompanying prisoners. Healers prepare for fast tank hits and an enrage late in the fight.",
+            },
+            {
+                encounterID = 2757,
+                name = "Kam Deepfury",
+                tip = "Control or kill nearby prisoners first. Watch the tank during Shield Slam's stun.",
+            },
+            {
+                encounterID = 2758,
+                name = "Hamhock",
+                tip = "Control the two accompanying prisoners. Spread out to reduce Chain Lightning jumps.",
+            },
+            {
+                encounterID = 2759,
+                name = "Dextren Ward",
+                tip = "Clear nearby cells before pulling so Intimidating Shout cannot fear players into additional packs.",
+            },
+            {
+                encounterID = 2760,
+                name = "Bazil Thredd",
+                tip = "Ranged players stay away from Smoke Bomb. Keep the tank healthy before its nearby stun and watch for heavy melee damage.",
             },
         },
     },

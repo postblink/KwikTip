@@ -82,9 +82,12 @@ class ForeverReleaseTests(unittest.TestCase):
             self.assertEqual(coverage["version"], result["version"])
             self.assertFalse(coverage["client_tested"])
             self.assertEqual(coverage["complete_dungeons"], 0)
-            self.assertEqual({d["instanceID"] for d in coverage["included_dungeons"]}, {3065, 389})
+            self.assertEqual({d["instanceID"] for d in coverage["included_dungeons"]}, {3065, 389, 34})
             evidence = json.loads((output / "source-evidence.json").read_text())
-            self.assertEqual({d["instanceID"] for d in evidence["dungeons"]}, {3065, 389})
+            self.assertEqual({d["instanceID"] for d in evidence["dungeons"]}, {3065, 389, 34})
+            stockade = next(d for d in coverage["included_dungeons"] if d["instanceID"] == 34)
+            self.assertEqual(stockade["encounterIDs"], [2756, 2757, 2758, 2759, 2760])
+            self.assertIn("Bruegal Ironknuckle", str(stockade["excluded_encounters"]))
             with self.assertRaises(FileExistsError):
                 forever_release.prepare(output)
 

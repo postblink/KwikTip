@@ -32,7 +32,7 @@ build, then the publication job only if the tag passes strict validation:
 - The packaged README must identify the same version as the Forever TOC.
 - The builder uses only the explicit Forever package file list, not root pkgmeta,
   Retail data or Retail tip overlays. It produces the standalone ZIP, SHA256SUMS,
-  source evidence for both dungeons, `coverage.json`, authored notes and BigWigs-compatible `release.json`.
+  source evidence for all included dungeons, `coverage.json`, authored notes and BigWigs-compatible `release.json`.
 - The release metadata maps interface `16001` to flavor `forever`, not `wowf`
   (the latter is the local Blizzard product identifier).
 - Build jobs have read permission. Only the publication job has contents write,
@@ -104,8 +104,8 @@ the Retail workflow's tag space. No tag or push was performed here.
 That publishing tag will upload to the existing CF/Wago pages and create the
 GitHub prerelease. A review-branch push and draft PR run build checks only.
 
-Alpha notes must say Hall and Ragefire, eight boss records and optional dungeon
-overviews, normal mode only; no per-pull/NPC/subzone detection or full coverage. The
+Alpha notes must say Hall, Ragefire and Stockade: 13 registered encounters and optional
+overviews, normal only; rare Bruegal excluded; no per-pull/NPC/subzone/full coverage. The
 Infurnus/Magmatus guide association remains provisional. In-game results stay
 pending until actually observed; offline tests are not a client pass.
 

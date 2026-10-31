@@ -1,6 +1,6 @@
 ## Interface: 16001
 ## Title: KwikTip: Forever (Alpha)
-## Notes: Hall of Thanes and Ragefire Chasm encounter alpha; in-game validation pending. Not full dungeon coverage.
+## Notes: Hall, Ragefire and Stockade encounter alpha; in-game validation pending. Not full dungeon coverage.
 ## Author: Lucas Boyles
 ## Version: 0.1.0-alpha.1
 ## DefaultState: enabled

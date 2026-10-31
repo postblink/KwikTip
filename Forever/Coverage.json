@@ -36,6 +36,28 @@
       "difficultyIDs": [
         1
       ]
+    },
+    {
+      "instanceID": 34,
+      "name": "Stormwind Stockade",
+      "encounterIDs": [
+        2756,
+        2757,
+        2758,
+        2759,
+        2760
+      ],
+      "status": "five regular encounter records and optional instance-wide overview; no assumed wing route",
+      "evidence": "docs/FOREVER_STOCKADE_IDS_70707.json",
+      "difficultyIDs": [
+        1
+      ],
+      "excluded_encounters": [
+        {
+          "name": "Bruegal Ironknuckle",
+          "reason": "rare spawn has no verified DungeonEncounter mapping; no automatic tip or name/NPC fallback"
+        }
+      ]
     }
   ],
   "not_included": [
