@@ -1,8 +1,13 @@
 # Forever distribution through GitHub Actions
 
-Status (2026-10-31): implemented for review with offline validation. Review-branch
-and GitHub build results are recorded in the PR/checks; no publishing tag is
-approved. No addon release has been published. The installed local addon
+Status (2026-10-31): PR #3 merged as `3ea8afa`; the approved immutable tag
+`forever-v0.1.0-alpha.1` targets that merge. Its build passed and the
+[GitHub prerelease](https://github.com/postblink/KwikTip/releases/tag/forever-v0.1.0-alpha.1)
+is published. The first marketplace attempt failed HTTP 403 without a provider
+success receipt; destination acceptance must be reconciled before retrying.
+Wago's public metadata rejects urllib's default user agent but accepts the
+truthful KwikTip application identifier now supplied by the helper.
+The installed local addon
 remains the separately verified `0.1.0-test`; source candidate `0.1.0-alpha.1`
 is not installed. No client load or in-game test is established before November 4.
 
@@ -67,8 +72,8 @@ Its multipart payloads follow the exact pinned packager implementation: CF
 All checksums/tag/flavor/patch validations and both token-presence checks complete
 before the first upload. No credentials are given to PR/manual builds.
 
-Actual project token permissions and provider acceptance remain untested until
-an approved publication. WoWInterface Forever is disabled pending provider
+Project token permissions and provider acceptance must be confirmed from actual
+publication results. WoWInterface Forever is disabled pending provider
 support; no `WOWI_API_TOKEN` is used in this workflow. The standalone folder stays
 `KwikTip_Forever`; no speculative rename was made. Addon-manager acceptance still
 needs testing. No marketplace project, token, permission or paid service was created.
@@ -76,6 +81,15 @@ needs testing. No marketplace project, token, permission or paid service was cre
 Uploads across providers are not atomic. The uploader does not retry POSTs and
 reports each completed provider. If a later step fails, inspect the existing
 files before rerunning; do not blindly duplicate a successful upload.
+
+`forever-marketplace-recovery.yml` provides a manual, default-branch-only recovery
+path. It requires an already published Forever alpha prerelease, downloads its
+existing ZIP and metadata, and verifies their checksums/tag/flavor before any
+upload. It never rebuilds, retags, overwrites GitHub assets, or creates another
+release. The default is GET-only metadata preflight. After reconciling prior
+outcomes, select only providers still needing the file and explicitly enable
+upload. Stage logs identify the failing GET or POST; successful provider file
+IDs are retained when supplied. POSTs are never automatically retried.
 
 ## Review and first alpha
 
@@ -97,9 +111,11 @@ workflow is on the repository's default branch.
 For a proposed first public `0.1.0-alpha.1`, review actual coverage/client status,
 set the Forever TOC and README version together, update the authored notes, and
 rerun the gates. The reviewed candidate now has `0.1.0-alpha.1` metadata prepared;
-this does not authorize publication. Obtain approval before pushing `forever-v0.1.0-alpha.1`: that tag is
+publication still requires explicit owner authorization. The owner approved and
+published `forever-v0.1.0-alpha.1`; for future versions, obtain approval before
+pushing a publishing tag: that tag is
 the concrete publication trigger. Do not use `v0.1.0-alpha.1`, which belongs to
-the Retail workflow's tag space. No tag or push was performed here.
+the Retail workflow's tag space.
 
 That publishing tag will upload to the existing CF/Wago pages and create the
 GitHub prerelease. A review-branch push and draft PR run build checks only.

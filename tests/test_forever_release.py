@@ -5,7 +5,9 @@ import fnmatch
 import hashlib
 import json
 from pathlib import Path
+import re
 import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -40,6 +42,123 @@ def alpha_source():
 
 
 class ForeverReleaseTests(unittest.TestCase):
+    def recovery_workflow(self):
+        return yaml.load(
+            (ROOT / ".github/workflows/forever-marketplace-recovery.yml").read_text(),
+            Loader=yaml.BaseLoader,
+        )
+
+    def test_recovery_is_manual_master_only_and_defaults_to_no_upload(self):
+        workflow = self.recovery_workflow()
+        self.assertEqual(set(workflow["on"]), {"workflow_dispatch"})
+        inputs = workflow["on"]["workflow_dispatch"]["inputs"]
+        self.assertEqual(inputs["tag"]["type"], "string")
+        self.assertEqual(inputs["tag"]["required"], "true")
+        self.assertEqual(inputs["provider"]["type"], "choice")
+        self.assertEqual(inputs["provider"]["default"], "all")
+        self.assertEqual(inputs["provider"]["options"], ["all", "curseforge", "wago"])
+        self.assertEqual(inputs["provider"]["required"], "true")
+        self.assertEqual(inputs["publish"]["type"], "boolean")
+        self.assertEqual(inputs["publish"]["required"], "true")
+        self.assertEqual(inputs["publish"]["default"], "false")
+        self.assertEqual(workflow["permissions"], {"contents": "read"})
+        self.assertEqual(set(workflow["jobs"]), {"recover"})
+        recover = workflow["jobs"]["recover"]
+        self.assertEqual(recover["if"], "github.ref == 'refs/heads/master'")
+        self.assertNotIn("permissions", recover)
+        self.assertEqual(workflow["concurrency"]["group"], "forever-refs/tags/${{ inputs.tag }}")
+        self.assertEqual(workflow["concurrency"]["cancel-in-progress"], "false")
+        checkout = next(step for step in recover["steps"] if "actions/checkout@" in step.get("uses", ""))
+        self.assertEqual(checkout["with"]["persist-credentials"], "false")
+
+    def test_recovery_executes_alpha_and_already_published_prerelease_guards(self):
+        steps = self.recovery_workflow()["jobs"]["recover"]["steps"]
+        validate = next(step for step in steps if "Validate alpha tag" in step.get("name", ""))
+        download = next(step for step in steps if "gh release download" in step.get("run", ""))
+
+        def embedded_python(step):
+            scripts = re.findall(r"python3 - <<'PY'\n(.*?)\nPY", step["run"], flags=re.S)
+            self.assertEqual(len(scripts), 1)
+            return scripts[0]
+
+        tag_guard, state_guard = embedded_python(validate), embedded_python(download)
+        for tag, accepted in [
+            ("forever-v0.1.0-alpha.1", True), ("forever-v12.3.4-alpha.25", True),
+            ("v3.5.0", False), ("forever-v0.1.0", False),
+            ("forever-v0.1.0-beta.1", False), ("forever-v0.1.0-test.2", False),
+            ("forever-v0.1.0-alpha.1\nextra", False),
+            ("forever-v$(echo unsafe)", False),
+        ]:
+            with self.subTest(tag=tag):
+                result = subprocess.run(
+                    [sys.executable, "-B", "-c", tag_guard],
+                    env={"TAG": tag}, capture_output=True, text=True,
+                )
+                self.assertEqual(result.returncode == 0, accepted, result.stderr)
+        with tempfile.TemporaryDirectory() as directory:
+            for draft, prerelease, accepted in [(False, True, True), (True, True, False),
+                                                 (False, False, False), (True, False, False)]:
+                with self.subTest(draft=draft, prerelease=prerelease):
+                    Path(directory, "release-state.json").write_text(json.dumps({
+                        "isDraft": draft, "isPrerelease": prerelease,
+                    }))
+                    result = subprocess.run(
+                        [sys.executable, "-B", "-c", state_guard], cwd=directory,
+                        capture_output=True, text=True,
+                    )
+                    self.assertEqual(result.returncode == 0, accepted, result.stderr)
+
+    def test_recovery_downloads_existing_assets_without_release_mutation_or_rebuild(self):
+        workflow = self.recovery_workflow()
+        steps = workflow["jobs"]["recover"]["steps"]
+        command = next(step["run"] for step in steps if "gh release download" in step.get("run", ""))
+        self.assertLess(command.index("gh release view"), command.index("gh release download"))
+        self.assertLess(command.index('state["isDraft"]'), command.index("gh release download"))
+        self.assertIn('--json isDraft,isPrerelease', command)
+        self.assertIn('gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --dir dist', command)
+        for asset in ["'KwikTip_Forever-*.zip'", "release.json", "SHA256SUMS",
+                      "source-evidence.json", "coverage.json", "release-notes.md"]:
+            self.assertIn("--pattern " + asset, command)
+        all_commands = "\n".join(step.get("run", "") for step in steps)
+        self.assertNotRegex(all_commands, r"\bgh\s+release\s+(create|edit|delete|upload)\b")
+        self.assertNotRegex(all_commands, r"\bgit\s+(tag|push|commit|reset)\b")
+        for builder in ["tools/forever_release.py", "tools/package_forever.py", "--clobber", "--force"]:
+            self.assertNotIn(builder, all_commands)
+        self.assertNotIn("${{ inputs.tag }}", all_commands)
+        self.assertNotIn("${{ inputs.provider }}", all_commands)
+
+    def test_recovery_preflight_precedes_opt_in_upload_with_scoped_provider_secrets(self):
+        workflow = self.recovery_workflow()
+        recover = workflow["jobs"]["recover"]
+        self.assertNotIn("env", workflow)
+        self.assertNotIn("env", recover)
+        steps = recover["steps"]
+        preflight = next(step for step in steps if "--preflight" in step.get("run", ""))
+        upload = next(step for step in steps if "--publish" in step.get("run", ""))
+        download = next(step for step in steps if "gh release download" in step.get("run", ""))
+        validate = next(step for step in steps if "Validate alpha tag" in step.get("name", ""))
+        self.assertLess(steps.index(validate), steps.index(download))
+        self.assertLess(steps.index(download), steps.index(preflight))
+        self.assertLess(steps.index(preflight), steps.index(upload))
+        self.assertNotIn("if", preflight)
+        self.assertEqual(upload["if"], "inputs.publish")
+        self.assertNotIn("--publish", preflight["run"])
+        self.assertNotIn("--preflight", upload["run"])
+        marketplace_steps = [step for step in steps if "CF_API_KEY" in step.get("env", {})]
+        self.assertEqual(marketplace_steps, [preflight, upload])
+        for step in marketplace_steps:
+            self.assertEqual(set(step["env"]), {"CF_API_KEY", "WAGO_API_TOKEN", "TAG", "PROVIDER"})
+            self.assertEqual(step["env"]["CF_API_KEY"], "${{ secrets.CF_API_KEY }}")
+            self.assertEqual(step["env"]["WAGO_API_TOKEN"], "${{ secrets.WAGO_API_TOKEN }}")
+            self.assertEqual(step["env"]["TAG"], "${{ inputs.tag }}")
+            self.assertEqual(step["env"]["PROVIDER"], "${{ inputs.provider }}")
+            self.assertIn('tools/forever_marketplaces.py dist --tag "$TAG" --provider "$PROVIDER"', step["run"])
+            self.assertNotIn("GH_TOKEN", step["env"])
+        gh_steps = [step for step in steps if "GH_TOKEN" in step.get("env", {})]
+        self.assertEqual(gh_steps, [download])
+        self.assertEqual(download["env"]["GH_TOKEN"], "${{ secrets.GITHUB_TOKEN }}")
+        self.assertNotIn("WOWI_API_TOKEN", str(workflow))
+
     def test_tag_validation_is_disjoint_alpha_only_and_matches_toc(self):
         forever_release.validate_tag("forever-v0.1.0-alpha.1", "0.1.0-alpha.1")
         for tag in ["v3.5.0", "forever-v0.1.0", "forever-v0.1.0-beta.1",

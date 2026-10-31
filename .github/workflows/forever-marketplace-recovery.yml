@@ -1,0 +1,76 @@
+name: Forever marketplace recovery
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing Forever alpha prerelease tag (never moved or rebuilt)
+        required: true
+        type: string
+      provider:
+        description: Select only destinations that have not accepted this file
+        required: true
+        type: choice
+        default: all
+        options: [all, curseforge, wago]
+      publish:
+        description: Upload after GET-only preflight (leave false for diagnosis)
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: forever-refs/tags/${{ inputs.tag }}
+  cancel-in-progress: false
+
+jobs:
+  recover:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - name: Validate alpha tag format
+        env:
+          TAG: ${{ inputs.tag }}
+        run: |
+          python3 - <<'PY'
+          import os, re
+          if not re.fullmatch(r"forever-v\d+\.\d+\.\d+-alpha\.\d+", os.environ["TAG"]):
+              raise SystemExit("Only an existing Forever alpha tag is allowed")
+          PY
+      - name: Download existing prerelease assets without rebuilding
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json isDraft,isPrerelease > release-state.json
+          python3 - <<'PY'
+          import json
+          state = json.load(open("release-state.json"))
+          if state["isDraft"] or not state["isPrerelease"]:
+              raise SystemExit("Recovery requires an already published prerelease")
+          PY
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --dir dist \
+            --pattern 'KwikTip_Forever-*.zip' --pattern release.json --pattern SHA256SUMS \
+            --pattern source-evidence.json --pattern coverage.json --pattern release-notes.md
+      - name: GET-only provider metadata preflight
+        env:
+          CF_API_KEY: ${{ secrets.CF_API_KEY }}
+          WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
+          TAG: ${{ inputs.tag }}
+          PROVIDER: ${{ inputs.provider }}
+        run: python3 -B tools/forever_marketplaces.py dist --tag "$TAG" --provider "$PROVIDER" --preflight
+      - name: Upload exact existing bytes to selected destinations
+        if: inputs.publish
+        env:
+          CF_API_KEY: ${{ secrets.CF_API_KEY }}
+          WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
+          TAG: ${{ inputs.tag }}
+          PROVIDER: ${{ inputs.provider }}
+        run: python3 -B tools/forever_marketplaces.py dist --tag "$TAG" --provider "$PROVIDER" --publish

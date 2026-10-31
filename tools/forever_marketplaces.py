@@ -11,6 +11,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 from urllib.error import HTTPError
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 import uuid
@@ -21,6 +22,7 @@ CF_PROJECT = "1478824"
 WAGO_PROJECT = "QN53W7KB"
 PATCH = "1.60.1"
 CF_FOREVER_TYPE = 88568
+USER_AGENT = "KwikTip-Forever-Publisher/0.1 (+https://github.com/postblink/KwikTip)"
 
 
 class NoRedirect(HTTPRedirectHandler):
@@ -30,24 +32,30 @@ class NoRedirect(HTTPRedirectHandler):
 
 def open_request(request):
     # Upload credentials stay on the explicitly named provider endpoint.
+    # Wago rejects urllib's generic default; identify this application honestly.
+    request.add_header("User-Agent", USER_AGENT)
     return build_opener(NoRedirect()).open(request, timeout=60)
 
 
-def payloads(cf_versions: list, wago_game: dict, version: str, notes: str) -> tuple[dict, dict]:
+def curseforge_payload(cf_versions: list, version: str, notes: str) -> dict:
     matches = [row["id"] for row in cf_versions
                if row.get("gameVersionTypeID") == CF_FOREVER_TYPE and row.get("name") == PATCH]
     if len(matches) != 1 or not isinstance(matches[0], int) or isinstance(matches[0], bool) or matches[0] <= 0:
         raise ValueError("Need one exact CurseForge Forever patch ID; no fallback is allowed")
+    return {"displayName": f"KwikTip Forever {version}", "gameVersions": matches, "releaseType": "alpha",
+            "changelog": notes, "changelogType": "markdown"}
+
+
+def wago_payload(wago_game: dict, version: str, notes: str) -> dict:
     patches = wago_game.get("patches", {}).get("forever", [])
     if not isinstance(patches, list) or PATCH not in patches:
         raise ValueError("Wago must explicitly support the exact Forever patch")
-    label = f"KwikTip Forever {version}"
-    return (
-        {"displayName": label, "gameVersions": matches, "releaseType": "alpha",
-         "changelog": notes, "changelogType": "markdown"},
-        {"label": label, "supported_forever_patches": [PATCH],
-         "stability": "alpha", "changelog": notes},
-    )
+    return {"label": f"KwikTip Forever {version}", "supported_forever_patches": [PATCH],
+            "stability": "alpha", "changelog": notes}
+
+
+def payloads(cf_versions: list, wago_game: dict, version: str, notes: str) -> tuple[dict, dict]:
+    return curseforge_payload(cf_versions, version, notes), wago_payload(wago_game, version, notes)
 
 
 def verified_inputs(directory: Path, tag: str) -> tuple[str, Path, str]:
@@ -79,7 +87,7 @@ def fetch_json(url: str, headers: dict) -> dict | list:
         return json.load(response)
 
 
-def upload(url: str, headers: dict, metadata: dict, archive: Path) -> None:
+def upload(url: str, headers: dict, metadata: dict, archive: Path) -> str | None:
     boundary = "kwiktip-" + uuid.uuid4().hex
     body = (
         f"--{boundary}\r\nContent-Disposition: form-data; name=\"metadata\"\r\n"
@@ -92,24 +100,51 @@ def upload(url: str, headers: dict, metadata: dict, archive: Path) -> None:
     with open_request(request) as response:
         if response.status not in (200, 201):
             raise ValueError(f"Upload returned HTTP {response.status}")
+        # Receipt IDs help reconcile a later provider failure. Do not dump the
+        # response body, and never turn a successful POST into a retry on JSON.
+        try:
+            result = json.load(response)
+        except (ValueError, UnicodeError, OSError):
+            result = {}
+        file_id = result.get("id") if isinstance(result, dict) else None
+        if isinstance(file_id, (str, int)) and not isinstance(file_id, bool):
+            if re.fullmatch(r"[A-Za-z0-9_-]{1,128}", str(file_id)):
+                return str(file_id)
+        return None
 
 
-def publish(directory: Path, tag: str) -> None:
+def publish(directory: Path, tag: str, provider: str = "all", preflight_only: bool = False) -> None:
+    if provider not in ("all", "curseforge", "wago"):
+        raise ValueError("Unknown marketplace")
     version, archive, notes = verified_inputs(directory, tag)
     cf_token, wago_token = os.environ.get("CF_API_KEY"), os.environ.get("WAGO_API_TOKEN")
-    if not cf_token or not wago_token:
-        raise ValueError("CF_API_KEY and WAGO_API_TOKEN must both be available; nothing uploaded")
+    use_cf, use_wago = provider != "wago", provider != "curseforge"
+    if (use_cf and not cf_token) or (use_wago and not wago_token):
+        raise ValueError("Selected marketplace token must be available; nothing uploaded")
     cf_headers = {"x-api-token": cf_token}
     wago_headers = {"authorization": f"Bearer {wago_token}", "accept": "application/json"}
-    cf_versions = fetch_json("https://wow.curseforge.com/api/game/wow/versions", cf_headers)
-    wago_game = fetch_json("https://addons.wago.io/api/data/game", {})
-    cf_payload, wago_payload = payloads(cf_versions, wago_game, version, notes)
+    selected_cf_payload, selected_wago_payload = None, None
+    if use_cf:
+        print("CurseForge: GET exact Forever patch metadata (no upload yet)", flush=True)
+        cf_versions = fetch_json("https://wow.curseforge.com/api/game/wow/versions", cf_headers)
+        selected_cf_payload = curseforge_payload(cf_versions, version, notes)
+    if use_wago:
+        print("Wago: GET exact Forever patch metadata (no upload yet)", flush=True)
+        wago_game = fetch_json("https://addons.wago.io/api/data/game", {})
+        selected_wago_payload = wago_payload(wago_game, version, notes)
+    print("Selected marketplace metadata verified; no files uploaded yet", flush=True)
+    if preflight_only:
+        return
     # Complete all validation before the first POST. A later failure can still
     # leave a partial publication; do not automatically retry either upload.
-    upload(f"https://wow.curseforge.com/api/projects/{CF_PROJECT}/upload-file", cf_headers, cf_payload, archive)
-    print(f"CurseForge project {CF_PROJECT}: Forever alpha upload succeeded", flush=True)
-    upload(f"https://addons.wago.io/api/projects/{WAGO_PROJECT}/version", wago_headers, wago_payload, archive)
-    print(f"Wago project {WAGO_PROJECT}: Forever alpha upload succeeded", flush=True)
+    if use_cf:
+        print(f"CurseForge project {CF_PROJECT}: POST verified Forever alpha", flush=True)
+        file_id = upload(f"https://wow.curseforge.com/api/projects/{CF_PROJECT}/upload-file", cf_headers, selected_cf_payload, archive)
+        print(f"CurseForge project {CF_PROJECT}: Forever alpha upload succeeded; file ID {file_id or 'not supplied'}", flush=True)
+    if use_wago:
+        print(f"Wago project {WAGO_PROJECT}: POST verified Forever alpha", flush=True)
+        file_id = upload(f"https://addons.wago.io/api/projects/{WAGO_PROJECT}/version", wago_headers, selected_wago_payload, archive)
+        print(f"Wago project {WAGO_PROJECT}: Forever alpha upload succeeded; file ID {file_id or 'not supplied'}", flush=True)
 
 
 def main() -> None:
@@ -117,10 +152,14 @@ def main() -> None:
     parser.add_argument("directory", type=Path)
     parser.add_argument("--tag", required=True)
     parser.add_argument("--publish", action="store_true", help="perform actual uploads; omit for verified no-network plan")
+    parser.add_argument("--provider", choices=("all", "curseforge", "wago"), default="all")
+    parser.add_argument("--preflight", action="store_true", help="check live provider metadata using GET only; never upload")
     args = parser.parse_args()
     try:
-        if args.publish:
-            publish(args.directory, args.tag)
+        if args.publish and args.preflight:
+            parser.error("--publish and --preflight are mutually exclusive")
+        if args.publish or args.preflight:
+            publish(args.directory, args.tag, args.provider, preflight_only=args.preflight)
         else:
             version, _, _ = verified_inputs(args.directory, args.tag)
             print(json.dumps({"version": version, "flavor": "forever", "curseforge": CF_PROJECT,
