@@ -1,0 +1,20 @@
+KwikTip Forever @VERSION@
+
+Early alpha scope: Hall of Thanes boss encounters and an optional dungeon-wide
+trash/preparation overview through Persistent Tip Window. The default stays quiet
+between encounters. This does not detect individual packs, NPCs, rooms or subzones.
+
+Client validation: pending. The owner cannot perform live testing before
+November 4. Offline Lua/frame tests do not establish game compatibility.
+Static IDs target build 1.60.1.70707, interface 16001. Check the current build.
+The Infurnus/Magmatus guide association is visibly provisional. Conflicting
+Durgen/add kill priorities are omitted. Report exact build, locale, encounter
+ID/name and Lua errors; preserve account data and unrelated SavedVariables.
+
+The full roadmap remains all Classic dungeon units/wings plus the nine new
+Forever dungeons; this alpha does not promise that coverage. No dungeon currently
+meets the full client-tested coverage definition. See the packaged README for
+manual acceptance and installation details. Disable the addon if it errors.
+
+Install only the KwikTip_Forever folder from the ZIP under the Forever client's
+Interface/AddOns directory. Keep Retail KwikTip disabled in that client.

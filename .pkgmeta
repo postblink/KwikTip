@@ -5,6 +5,13 @@ wowi-id: 27074
 
 ignore:
   - CLAUDE.md
+  # Forever is packaged independently; keep its new files out of Retail ZIPs.
+  - Forever
+  - docs/FOREVER*
+  - tools/package_forever.py
+  - tools/forever_release.py
+  - tools/forever_marketplaces.py
+  - tests/test_forever*
 
 localizations:
   - localization-id: 1478824

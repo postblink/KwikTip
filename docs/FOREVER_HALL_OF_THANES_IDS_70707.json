@@ -1,0 +1,144 @@
+{
+  "fetched_at_utc": "2026-10-31T20:26:48.044959+00:00",
+  "notes": [
+    "Wago-hosted raw DB2 export for explicit exact build; not direct extraction from installed local client and not in-game evidence.",
+    "No Hall UiMap name or assignment returned; no dungeon uiMap fallback inferred.",
+    "Encounter display Magmatus appears in guides, while raw client record is Infurnus.",
+    "Spell text names Magmatus, but these tables contain no direct DungeonEncounter3495 or NPC link. Infurnus/Magmatus alias remains unverified."
+  ],
+  "sources": [
+    {
+      "table": "Map",
+      "build": "1.60.1.70707",
+      "requested_url": "https://wago.tools/db2/Map/csv?build=1.60.1.70707",
+      "final_url": "https://wago.tools/db2/Map/csv?build=1.60.1.70707",
+      "status": 200,
+      "content_type": "text/csv; charset=UTF-8",
+      "sha256": "63e3681e1d37c2860ed4744511201121dd1391b8351ecb97d41ece33dc7b4f24",
+      "bytes": 11744,
+      "rows": 73,
+      "hall_rows": [
+        {
+          "ID": "3065",
+          "MapName_lang": "The Hall of Thanes",
+          "InstanceType": "1"
+        }
+      ]
+    },
+    {
+      "table": "DungeonEncounter",
+      "build": "1.60.1.70707",
+      "requested_url": "https://wago.tools/db2/DungeonEncounter/csv?build=1.60.1.70707",
+      "final_url": "https://wago.tools/db2/DungeonEncounter/csv?build=1.60.1.70707",
+      "status": 200,
+      "content_type": "text/csv; charset=UTF-8",
+      "sha256": "626223c1a6c021f81ed36ed374d796522730be777eb9233ec848788e916758ff",
+      "bytes": 17624,
+      "rows": 342,
+      "hall_rows": [
+        {
+          "Name_lang": "Faldrim Anvilmar",
+          "ID": "3493",
+          "MapID": "3065",
+          "OrderIndex": "0"
+        },
+        {
+          "Name_lang": "Infurnus",
+          "ID": "3495",
+          "MapID": "3065",
+          "OrderIndex": "2000"
+        },
+        {
+          "Name_lang": "Plunder",
+          "ID": "3494",
+          "MapID": "3065",
+          "OrderIndex": "2500"
+        },
+        {
+          "Name_lang": "Durgen Dirgehammer",
+          "ID": "3496",
+          "MapID": "3065",
+          "OrderIndex": "3000"
+        }
+      ]
+    },
+    {
+      "table": "UiMap",
+      "build": "1.60.1.70707",
+      "requested_url": "https://wago.tools/db2/UiMap/csv?build=1.60.1.70707",
+      "final_url": "https://wago.tools/db2/UiMap/csv?build=1.60.1.70707",
+      "status": 200,
+      "content_type": "text/csv; charset=UTF-8",
+      "sha256": "1f4aac70eaac015b1d2d0ea0faf6e3d7fb2cf7afdf45e5bb6772d9b80a72346b",
+      "bytes": 3097,
+      "rows": 60,
+      "hall_rows": []
+    },
+    {
+      "table": "UiMapAssignment",
+      "build": "1.60.1.70707",
+      "requested_url": "https://wago.tools/db2/UiMapAssignment/csv?build=1.60.1.70707",
+      "final_url": "https://wago.tools/db2/UiMapAssignment/csv?build=1.60.1.70707",
+      "status": 200,
+      "content_type": "text/csv; charset=UTF-8",
+      "sha256": "79267e8be8034e47daab14350411b3acc0b1f64e86efc9d821a217497254ca0a",
+      "bytes": 6778,
+      "rows": 61,
+      "hall_rows": []
+    },
+    {
+      "table": "AreaTable",
+      "build": "1.60.1.70707",
+      "requested_url": "https://wago.tools/db2/AreaTable/csv?build=1.60.1.70707",
+      "final_url": "https://wago.tools/db2/AreaTable/csv?build=1.60.1.70707",
+      "status": 200,
+      "content_type": "text/csv; charset=UTF-8",
+      "sha256": "e7ccbde2cd084329ff0cccaa5af7f33facc42079d410bb1d2569dc9bce10a379",
+      "bytes": 149095,
+      "rows": 1375,
+      "hall_rows": [
+        {
+          "ID": "16919",
+          "AreaName_lang": "The Hall of Thanes",
+          "ContinentID": "3065"
+        }
+      ]
+    },
+    {
+      "table": "Spell",
+      "build": "1.60.1.70707",
+      "requested_url": "https://wago.tools/db2/Spell/csv?build=1.60.1.70707",
+      "final_url": "https://wago.tools/db2/Spell/csv?build=1.60.1.70707",
+      "http_status": 200,
+      "content_type": "text/csv; charset=UTF-8",
+      "sha256": "b3a1c2a2e7129a78063f6f81dba6c209526aa6ffd78e2f585877eaf05bac9da0",
+      "bytes": 2215052,
+      "rows": 32030,
+      "selected_rows": [
+        {
+          "ID": "1293228",
+          "NameSubtext_lang": "",
+          "Description_lang": "Magmatus ignites the target, inflicting $s1 Fire damage and additional Fire damage every $t2 sec for $d.",
+          "AuraDescription_lang": "$s2 Fire damage inflicted every $t2 sec."
+        }
+      ]
+    },
+    {
+      "table": "SpellName",
+      "build": "1.60.1.70707",
+      "requested_url": "https://wago.tools/db2/SpellName/csv?build=1.60.1.70707",
+      "final_url": "https://wago.tools/db2/SpellName/csv?build=1.60.1.70707",
+      "http_status": 200,
+      "content_type": "text/csv; charset=UTF-8",
+      "sha256": "f716ca649c3716d33a814decbaa9ce9a1f78e5dd39463760c8731b34eaf48a14",
+      "bytes": 839852,
+      "rows": 32030,
+      "selected_rows": [
+        {
+          "ID": "1293228",
+          "Name_lang": "Combust"
+        }
+      ]
+    }
+  ]
+}

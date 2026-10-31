@@ -1,0 +1,93 @@
+name: Forever alpha
+
+on:
+  pull_request:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'forever-v*'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: forever-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    outputs:
+      version: ${{ steps.package.outputs.version }}
+      archive_name: ${{ steps.package.outputs.archive_name }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - name: Install offline test dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends lua5.1 python3-yaml
+      - name: Validate standalone package, runtime and distribution gates
+        run: /usr/bin/python3 -B -m unittest discover -s tests -p 'test_forever*.py' -v
+      - name: Check preserved Retail localization behavior
+        run: lua5.1 tests/test_localization.lua
+      - name: Prepare explicit Forever assets
+        id: package
+        env:
+          RELEASE_EVENT: ${{ github.event_name }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          if [[ "$RELEASE_EVENT" == push ]]; then
+            /usr/bin/python3 -B tools/forever_release.py dist --tag "$RELEASE_TAG" --github-output "$GITHUB_OUTPUT"
+          else
+            /usr/bin/python3 -B tools/forever_release.py dist --github-output "$GITHUB_OUTPUT"
+          fi
+      - name: Retain reviewable build assets
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: forever-alpha-assets
+          if-no-files-found: error
+          retention-days: 14
+          path: |
+            dist/*.zip
+            dist/release.json
+            dist/release-notes.md
+            dist/source-evidence.json
+            dist/SHA256SUMS
+
+  publish:
+    needs: build
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/forever-v')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: forever-alpha-assets
+          path: dist
+      - name: Verify exact build outputs
+        working-directory: dist
+        run: sha256sum --check SHA256SUMS
+      - name: Upload Forever files to existing CurseForge and Wago pages
+        env:
+          CF_API_KEY: ${{ secrets.CF_API_KEY }}
+          WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
+          TAG: ${{ github.ref_name }}
+        run: /usr/bin/python3 -B tools/forever_marketplaces.py dist --tag "$TAG" --publish
+      - name: Publish distinct Forever prerelease
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.ref_name }}
+          VERSION: ${{ needs.build.outputs.version }}
+          ARCHIVE_NAME: ${{ needs.build.outputs.archive_name }}
+        run: |
+          gh release create "$TAG" "dist/$ARCHIVE_NAME" dist/release.json dist/SHA256SUMS dist/source-evidence.json dist/release-notes.md \
+            --repo "$GITHUB_REPOSITORY" --verify-tag --prerelease --latest=false \
+            --title "KwikTip Forever $VERSION" --notes-file dist/release-notes.md

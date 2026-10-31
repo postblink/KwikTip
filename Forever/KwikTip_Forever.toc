@@ -1,0 +1,24 @@
+## Interface: 16001
+## Title: KwikTip: Forever (Local Test)
+## Notes: Hall encounters and optional dungeon overview; in-game validation pending. Not a full-coverage release.
+## Author: Lucas Boyles
+## Version: 0.1.0-test.2
+## DefaultState: enabled
+## OptionalDeps: LibSharedMedia-3.0
+
+## SavedVariables: KwikTipDB
+
+Locale\enUS.lua
+Locale\Locales.lua
+Locale\deDE.lua
+
+Init.lua
+DungeonData.lua
+RuntimeIndexes.lua
+
+Locale\tips.lua
+
+Core.lua
+Flavor.lua
+Frames.lua
+UI_Config.lua
