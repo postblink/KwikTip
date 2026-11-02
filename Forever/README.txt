@@ -1,20 +1,38 @@
-KwikTip Forever 0.1.0-alpha.1 -- early alpha candidate
+KwikTip Forever 0.1.0-alpha.1 -- WoW Forever alpha
+
+KwikTip now supports WoW Forever alongside Retail (Midnight). This standalone
+Forever package brings encounter tips and the familiar HUD/settings to Forever.
+
+Downloads:
+GitHub alpha: https://github.com/postblink/KwikTip/releases/tag/forever-v0.1.0-alpha.1
+CurseForge alpha: https://www.curseforge.com/wow/addons/kwiktip/files/9389199
+Wago alphas: https://addons.wago.io/addons/kwiktip/versions?stability=alpha
+
+CurseForge and Wago use the existing KwikTip pages; select the Forever game
+flavor and alpha versions. WoWInterface currently distributes Retail only.
+Retail uses the separate KwikTip folder; this package uses KwikTip_Forever.
 
 Included: Hall of Thanes (four encounters), Ragefire Chasm (four), and Stormwind
 Stockade (five regular encounters), plus optional dungeon-wide preparation
 overviews. Normal difficulty 1 only. Rare Bruegal automatic tips are excluded.
-This is not full dungeon coverage. The roadmap remains all Classic dungeon
-units/wings plus nine new Forever dungeons. No target-client test has passed.
+Full dungeon coverage remains in progress. The roadmap includes all Classic
+dungeon units/wings plus nine new Forever dungeons. No target-client test has
+passed; the first live checks are planned for November 4, 2026.
 
 Target: Forever product wowf, build 1.60.1.70707, interface 16001.
 The current install is World of Warcraft/_forever_/Wow.exe; the older
 _classic_beta_/WowB.exe path in historical notes is no longer the target.
 
-No automatic installation is performed by the builder. For a controlled manual
-test, close the game, copy only the KwikTip_Forever folder into the Forever
-client's Interface/AddOns directory, and enable it. Do not enable the Retail
-KwikTip addon in the same client. Removing this folder reverses the install;
-it does not erase SavedVariables. Disable the addon if you encounter Lua errors.
+Installation:
+1. Download the packaged Forever alpha ZIP from one of the links above.
+2. Close the game and extract its KwikTip_Forever folder into:
+   World of Warcraft/_forever_/Interface/AddOns/KwikTip_Forever
+3. Enable KwikTip: Forever (Alpha) in that client. Keep Retail KwikTip disabled
+   there, and retain a backup of the previous addon folder when updating.
+
+The repository's Forever directory is source material; install the packaged ZIP
+so the required shared runtime and assets are included. Disabling/removing this
+addon does not erase SavedVariables. Disable it if you encounter Lua errors.
 
 Expected behavior:
 - /kwik opens settings; the minimap icon and settings logo should appear.
