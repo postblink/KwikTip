@@ -3,20 +3,43 @@
 </p>
 
 <p align="center">
-  World of Warcraft: Midnight — Patch 12.1 (Season 2)
+  World of Warcraft: Retail (Midnight) + WoW Forever
 </p>
 
-A World of Warcraft: Midnight addon that displays contextual tips for dungeons, raids, delves, and Timewalking. As your group moves through an instance, KwikTip surfaces relevant boss and trash tips in a small, unobtrusive HUD — no interaction required mid-pull. **Built for Midnight Season 2; coverage and remaining content gaps are documented below.**
+KwikTip now supports **WoW Forever** alongside **Retail (Midnight)**, with a separate package for each client. It puts practical encounter tips in a small, unobtrusive HUD, so useful advice is close at hand during a run.
+
+The Retail package covers Midnight dungeons, raids, delves, and Timewalking. The **Forever alpha** starts with Hall of Thanes, Ragefire Chasm, and Stormwind Stockade; see its coverage below.
 
 Inspired by **QE Dungeon Tips** by QEdev (no longer maintained).
 
-**[Download on CurseForge](https://www.curseforge.com/wow/addons/kwiktip)** &nbsp;|&nbsp; **[Download on Wago](https://addons.wago.io/addons/kwiktip)** &nbsp;|&nbsp; **[Download on WoWInterface](https://www.wowinterface.com/downloads/info27074-KwikTip.html)**
+| Client | Package | Downloads |
+|---|---|---|
+| Retail (Midnight) | `KwikTip` | [CurseForge](https://www.curseforge.com/wow/addons/kwiktip) · [Wago](https://addons.wago.io/addons/kwiktip) · [WoWInterface](https://www.wowinterface.com/downloads/info27074-KwikTip.html) |
+| WoW Forever — alpha `0.1.0-alpha.1` | `KwikTip_Forever` | [GitHub alpha](https://github.com/postblink/KwikTip/releases/tag/forever-v0.1.0-alpha.1) · [CurseForge alpha](https://www.curseforge.com/wow/addons/kwiktip/files/9389199) · [Wago alphas](https://addons.wago.io/addons/kwiktip/versions?stability=alpha) |
+
+CurseForge and Wago host both versions on the existing KwikTip pages; choose a Forever file marked Alpha for the Forever client. WoWInterface currently distributes the Retail package only.
 
 ![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)
 
 ---
 
-## Screenshots
+## WoW Forever Support
+
+**Forever `0.1.0-alpha.1` is available now**, with tips triggered by 13 Normal-mode encounters and optional dungeon-wide preparation overviews through **Persistent Tip Window**.
+
+| Dungeon | Encounter tips |
+|---|---:|
+| Hall of Thanes | 4 |
+| Ragefire Chasm | 4 |
+| Stormwind Stockade | 5 |
+
+This is an early alpha: full dungeon coverage is still in progress, and no dungeon has completed in-game validation. The first live checks are planned for November 4, 2026. Other dungeons, room/pull routing, and NPC targeting are not included yet. Hall's Infurnus/Magmatus guide association remains provisional, and rare Bruegal Ironknuckle is excluded from automatic tips.
+
+The full roadmap remains all Classic dungeon units/wings plus the nine new Forever dungeons. See the [Forever README](https://github.com/postblink/KwikTip/blob/master/Forever/README.txt) for setup and testing details, or the [published coverage ledger](https://github.com/postblink/KwikTip/releases/download/forever-v0.1.0-alpha.1/coverage.json) for the exact included encounters.
+
+---
+
+## Screenshots (Retail)
 
 <p align="center">
   <img src="assets/example.png" alt="KwikTip in action" />
@@ -30,7 +53,7 @@ Inspired by **QE Dungeon Tips** by QEdev (no longer maintained).
 
 ---
 
-## Features
+## Retail Features
 
 - **Boss tips** — concise, actionable guidance for every boss across dungeons, raids, delves, and Timewalking
 - **Trash tips** — notable trash mobs in M+ dungeons get their own contextual tips with interrupt priorities and positioning notes
@@ -49,7 +72,7 @@ Inspired by **QE Dungeon Tips** by QEdev (no longer maintained).
 
 ---
 
-## Dungeon Coverage
+## Retail Coverage
 
 ### Season 2 Mythic+ Rotation (Current — Patch 12.1, Aug 2026)
 
@@ -100,7 +123,7 @@ Full boss + trash tips. All instance IDs confirmed in-game.
 
 ---
 
-## Known Limitations
+## Retail Limitations
 
 This is a **semi-ready** Season 2 release. Everything below works and ships in v3.0.1, but some content is still being completed for the Aug 18 S2 launch:
 
@@ -116,12 +139,27 @@ The addon uses a daily cron monitor that watches method.gg and Icy Veins dungeon
 
 ## Installation
 
-1. Download or clone this repository
-2. Copy the `KwikTip` folder into your addons directory:
+### Retail (Midnight)
+
+1. Download the Retail package from CurseForge, Wago, or WoWInterface.
+2. Extract the `KwikTip` folder into:
    ```
    World of Warcraft/_retail_/Interface/AddOns/KwikTip
    ```
-3. Enable the addon in the WoW character select screen
+3. Enable the addon on the character selection screen.
+
+### WoW Forever
+
+1. Download [the Forever alpha ZIP](https://github.com/postblink/KwikTip/releases/download/forever-v0.1.0-alpha.1/KwikTip_Forever-0.1.0-alpha.1.zip), or choose the Forever alpha on CurseForge or Wago.
+2. Close the game and extract the `KwikTip_Forever` folder into:
+
+   ```
+   World of Warcraft/_forever_/Interface/AddOns/KwikTip_Forever
+   ```
+
+3. Enable **KwikTip: Forever (Alpha)** in that client. Keep Retail `KwikTip` disabled there, and retain a backup of the previous addon folder when updating.
+
+Use the packaged ZIP for Forever. The repository's `Forever/` directory is source material; it does not contain the shared runtime and assets needed for installation. The published alpha targets interface `16001`; client compatibility still needs the live checks described above.
 
 ---
 
@@ -144,9 +182,9 @@ The HUD is hidden outside of instances. Use `/kwik move` to show and reposition 
 
 Open the settings window (minimap button or `/kwik`) to configure:
 
-- **Persistent Tip Window** — keep the HUD visible between subzone changes during a run
-- **Enable Custom Notes** — show the per-subzone note button so you can save personal notes
-- **Enable in Delves** — opt in to tips inside Delve (scenario) instances
+- **Persistent Tip Window** — keep the HUD visible during a run; Forever shows a dungeon-wide overview between encounters
+- **Enable Custom Notes** — show the note button so you can save personal notes
+- **Enable in Delves (Retail only)** — opt in to tips inside Delve (scenario) instances
 - **Hide HUD** — quickly hide the addon without disabling it; toggle again to show
 - **Auto-expand Height** — let the HUD grow for long tips instead of clipping
 - **Send to Chat** — choose None / Say / Instance / Party / Raid to print the current tip
@@ -167,7 +205,7 @@ To contribute a translation for your language:
 2. Go to the [KwikTip localization page](https://legacy.curseforge.com/wow/addons/kwiktip/localization)
 3. Select your language and fill in the strings
 
-Translations are pulled automatically into each release via the CurseForge packager.
+Retail releases pull translations through the CurseForge packager. The Forever alpha includes the bundled UI locales; its authored tips remain in English.
 
 ---
 
