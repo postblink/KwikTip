@@ -1,9 +1,10 @@
 KwikTip Forever @VERSION@
 
-Expanded Forever alpha with source-backed encounter advice. See coverage.json
+Unpublished next Forever alpha candidate with source-backed encounter advice. See coverage.json
 for the exact dungeon/encounter list. New slices include Ruins of Lordaeron,
-Excavation Site: Wetlands, City of Dalaran, Deadmines and Wailing Caverns.
-45 encounter records across eight entries; see exact exclusions below.
+Excavation Site: Wetlands, City of Dalaran, Deadmines and Wailing Caverns. Next batch adds Shadowfang Keep, Blackfathom
+Deeps, Gnomeregan, Razorfen Kraul and Uldaman.
+78 encounter records across thirteen entries; see exact exclusions below.
 
 This is partial dungeon coverage, not a complete Forever guide. Normal difficulty
 1 only. No NPC, room or subzone detection is added; new slices do not guess the

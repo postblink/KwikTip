@@ -1,4 +1,4 @@
-KwikTip Forever 0.1.0-alpha.2 -- expanded encounter alpha
+KwikTip Forever 0.1.0-alpha.3 -- unpublished next candidate; expanded encounter alpha
 
 KwikTip now supports WoW Forever alongside Retail (Midnight). This standalone
 Forever package brings encounter tips and the familiar HUD/settings to Forever.
@@ -117,3 +117,9 @@ Deadmines and Wailing Caverns use preserved70790 IDs; their current-build checks
 and in-game acceptance are pending too. Sneed has one matched event; shredder
 phase timing is unverified. Mutanus advice is not an escort-stage detector.
 Deviate Faerie Dragon has no automatic tip. See source-evidence.json.
+
+NEXT CANDIDATE alpha.3 adds Shadowfang8, Blackfathom6, Gnomeregan5,
+Razorfen Kraul6 and Uldaman8.
+Download links still identify published alpha.2; this work is not uploaded.
+Total78 encounters/13 entries. Geilhast/Gelihast alias and rare records excluded.
+Current-build IDs and client acceptance still unverified.

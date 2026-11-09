@@ -25,6 +25,10 @@ CurseForge and Wago host both versions on the existing KwikTip pages; choose a F
 
 ## WoW Forever Support
 
+Next unpublished alpha.3 candidate:78 encounter records/thirteen entries.
+The download links below remain published alpha.2 until a reviewed release.
+See [next refresh](docs/FOREVER_NEXT_20261109.md).
+
 **Expanded Forever alpha:** `0.1.0-alpha.2` adds five Ruins of
 Lordaeron tips and four Excavation Site: Wetlands tips plus seven City of Dalaran tips plus eight each for Deadmines and Wailing Caverns (45 total), with Baron/Butcher and rare Captain excluded.
 Current-build verification and in-game acceptance remain pending. See
