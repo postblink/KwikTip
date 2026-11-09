@@ -199,7 +199,7 @@ for _, name in ipairs({ "DUNGEON_BY_INSTANCEID", "DUNGEON_BY_UIMAPID", "BOSS_BY_
     check(type(addon[name]) == "table", "package initializes " .. name)
 end
 check(type(addon.DUNGEONS) == "table", "Forever data table exists")
-check(#addon.DUNGEONS == 8, "alpha manifest contains exactly eight dungeon records")
+check(#addon.DUNGEONS == 13, "alpha manifest contains exactly thirteen dungeon records")
 local hall = addon.DUNGEON_BY_INSTANCEID[3065]
 local ragefire = addon.DUNGEON_BY_INSTANCEID[389]
 local stockade = addon.DUNGEON_BY_INSTANCEID[34]
@@ -250,10 +250,13 @@ for i, id in ipairs({3311,3310,3298,3299,3300,3302,3303}) do
 end
 check(addon.BOSS_BY_ENCOUNTERID[3301] == nil and addon.BOSS_BY_ENCOUNTERID[3312] == nil, "no invented Dalaran aliases")
 check(addon.DUNGEON_BY_INSTANCEID[2980] == nil, "non-dungeon Dalaran map excluded")
+for _, id in ipairs({2694,2697,2699,2704,2710,2761,2762,2763,2764,2765,2766,2767,2825,2891,2899,2925,2927,2928,2935,2940}) do
+    check(addon.BOSS_BY_ENCOUNTERID[id] == nil, "alternate-mode identity never used for Normal")
+end
 local encounterCount = 0
 for _ in pairs(addon.BOSS_BY_ENCOUNTERID) do encounterCount = encounterCount + 1 end
-check(encounterCount == 45, "alpha manifest indexes exactly forty-five encounter records")
-for _, dungeon in ipairs({ hall, ragefire, stockade, ruins, excavation, dalaran, deadmines, caverns }) do
+check(encounterCount == 78, "alpha manifest indexes exactly seventy-eight encounter records")
+for _, dungeon in ipairs(addon.DUNGEONS) do
     check(type(dungeon.difficultyIDs) == "table" and #dungeon.difficultyIDs == 1
         and dungeon.difficultyIDs[1] == 1,
         "shipped dungeon explicitly restricts sourced advice to Normal difficulty")
@@ -659,6 +662,21 @@ state.instanceID, state.difficultyID = 43,1
 emit("PLAYER_ENTERING_WORLD")
 emit("ENCOUNTER_START", 999876, "Deviate Faerie Dragon", 1, 5)
 check(not addon.bossActive and not addon.HUD:IsShown(), "unmatched rare name cannot activate tip")
+
+for _, id in ipairs({33,48,90,47,70}) do
+    checkUnorderedClassicDungeon(addon.DUNGEON_BY_INSTANCEID[id], "Batch2_" .. id, "BATCH2_NOTE_" .. id)
+    state.inInstance, state.instanceType, state.instanceID = true, "party", id
+    for _, mode in ipairs({198,201,207}) do
+        state.difficultyID = mode
+        emit("PLAYER_ENTERING_WORLD")
+        emit("ENCOUNTER_START", addon.DUNGEON_BY_INSTANCEID[id].bosses[1].encounterID, "Known boss", mode, 5)
+        check(not addon.bossActive and not addon.HUD:IsShown(), "Batch2 alternate modes excluded")
+    end
+end
+state.instanceID, state.difficultyID = 48,1
+emit("PLAYER_ENTERING_WORLD")
+emit("ENCOUNTER_START", 2914, "Gelihast", 1, 5)
+check(not addon.bossActive and not addon.HUD:IsShown(), "unresolved Geilhast alias excluded")
 
 -- Real excluded Ruins IDs must never borrow a similar guide/name entry.
 state.inInstance, state.instanceType, state.instanceID = true, "party", 2999

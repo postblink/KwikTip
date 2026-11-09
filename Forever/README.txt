@@ -1,10 +1,10 @@
-KwikTip Forever 0.1.0-alpha.2 -- expanded encounter alpha
+KwikTip Forever 0.1.0-alpha.3 -- expanded encounter alpha
 
 KwikTip now supports WoW Forever alongside Retail (Midnight). This standalone
 Forever package brings encounter tips and the familiar HUD/settings to Forever.
 
 Downloads:
-GitHub alpha: https://github.com/postblink/KwikTip/releases/tag/forever-v0.1.0-alpha.2
+GitHub alpha: https://github.com/postblink/KwikTip/releases/tag/forever-v0.1.0-alpha.3
 CurseForge alphas: https://www.curseforge.com/wow/addons/kwiktip/files
 Wago alphas: https://addons.wago.io/addons/kwiktip/versions?stability=alpha
 
@@ -13,11 +13,12 @@ flavor and alpha versions. WoWInterface currently distributes Retail only.
 Retail uses the separate KwikTip folder; this package uses KwikTip_Forever.
 
 Candidate included: Hall (four), Ragefire (four), Stockade (five), and
-partial Ruins of Lordaeron (five), Excavation Site: Wetlands (four), partial City of Dalaran (seven), Deadmines (eight), Wailing Caverns (eight), plus optional dungeon-wide overviews.
-Select the 0.1.0-alpha.2 Forever file, not the Retail release. Normal difficulty 1 only. Rare Bruegal automatic tips are excluded.
+partial Ruins of Lordaeron (five), Excavation Site: Wetlands (four), partial City of Dalaran (seven), Deadmines (eight), Wailing Caverns (eight), Shadowfang Keep (eight), Blackfathom Deeps (six), Gnomeregan (five),
+Razorfen Kraul (six), and Uldaman (eight), plus optional dungeon-wide overviews.
+Select the 0.1.0-alpha.3 Forever file, not the Retail release. Normal difficulty 1 only. Rare Bruegal automatic tips are excluded.
 Full dungeon coverage remains in progress. The roadmap includes all Classic
 dungeon units/wings plus nine new Forever dungeons. This candidate has not been tested in-game; published-alpha reports do not
-qualify the new Ruins/Excavation/Dalaran data. Do not describe this as full or latest-build coverage.
+qualify the all added entries. Do not describe this as full or latest-build coverage.
 
 Target: Forever product wowf, interface 16001. Hall/Ragefire/Stockade use 70707; all added entries
 use preserved 70790 exports. Installed client observed at 70862; drift check pending.
@@ -25,7 +26,7 @@ The current install is World of Warcraft/_forever_/Wow.exe; the older
 _classic_beta_/WowB.exe path in historical notes is no longer the target.
 
 Installation:
-1. Download KwikTip_Forever-0.1.0-alpha.2.zip from the release or select the
+1. Download KwikTip_Forever-0.1.0-alpha.3.zip from the release or select the
    same Forever alpha version on the marketplace pages above.
 2. Close the game and extract its KwikTip_Forever folder into:
    World of Warcraft/_forever_/Interface/AddOns/KwikTip_Forever
@@ -74,7 +75,8 @@ Durgen add-versus-boss kill order is omitted because current guides disagree.
 In-game acceptance:
 1. Record /run print(GetBuildInfo()) and confirm clean login with no Lua errors.
 2. Check settings, icon/logo, move mode, preview, mouse passthrough when locked.
-3. In Hall (3065), Ragefire (389), Stockade (34), Ruins (2999), Excavation (2998), Dalaran (2959), Deadmines (36), and Wailing Caverns (43), use /kwik debug and observe all 45
+3. In Hall (3065), Ragefire (389), Stockade (34), Ruins (2999), Excavation (2998), Dalaran (2959), Deadmines (36), Wailing Caverns (43), Shadowfang (33), Blackfathom (48), Gnomeregan (90),
+   Razorfen Kraul (47), and Uldaman (70), use /kwik debug and observe all 78
    events, displayed names and tips, success/wipe handling, and zone exits.
    Check the provisional second-boss association before relying on that tip.
    Check Ragefire/Stockade with skipped/reordered bosses; no guessed next-boss tip is expected.
@@ -113,7 +115,14 @@ Dalaran strategy checked Nov9: Method Oct15 / Icy Veins Oct20.
 https://www.method.gg/wow-forever/dungeons/city-of-dalaran
 https://www.icy-veins.com/wow-forever/city-of-dalaran-guide
 
-Deadmines and Wailing Caverns use preserved70790 IDs; their current-build checks
+Deadmines and Wailing Caverns use preserved 70790 IDs; their current-build checks
 and in-game acceptance are pending too. Sneed has one matched event; shredder
 phase timing is unverified. Mutanus advice is not an escort-stage detector.
 Deviate Faerie Dragon has no automatic tip. See source-evidence.json.
+
+Alpha.3 adds Shadowfang (8), Blackfathom (6), Gnomeregan (5), Razorfen Kraul (6) and Uldaman (8).
+Total 78 encounters/13 entries. See coverage.json for exact IDs and exclusions.
+Known Geilhast 2914 versus guide Gelihast remains an unresolved alias and is excluded.
+Alternate difficulty 198/201 records must not substitute for Normal events.
+Rare/quest/escort timing remains unverified; no name-based fallback is provided.
+Current-build IDs and client acceptance still unverified.

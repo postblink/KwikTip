@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-alpha.2",
+  "version": "0.1.0-alpha.3",
   "data_build": "mixed: 1.60.1.70707 (Hall/Ragefire/Stockade), 1.60.1.70790 (remaining entries)",
   "interface": 16001,
   "client_tested": false,
@@ -182,6 +182,149 @@
         {
           "name": "Deviate Faerie Dragon",
           "reason": "No exact DungeonEncounter entry in preserved43 roster; no name/NPC fallback"
+        }
+      ]
+    },
+    {
+      "instanceID": 33,
+      "name": "Shadowfang Keep",
+      "encounterIDs": [
+        2748,
+        2749,
+        2750,
+        2751,
+        2752,
+        2753,
+        2754,
+        2755
+      ],
+      "difficultyIDs": [
+        1
+      ],
+      "data_build": "1.60.1.70790",
+      "status": "8 source-backed normal-compatible records; partial coverage, not current-build qualified",
+      "evidence": "docs/FOREVER_SHADOWFANG_KEEP_IDS_70790.json",
+      "excluded_encounters": [
+        {
+          "name": "Deathsworn Captain",
+          "reason": "No exact name-matched normal-compatible record and reconciled strategy in bounded slice; no fallback"
+        },
+        {
+          "name": "Fel Steed",
+          "reason": "No exact name-matched normal-compatible record and reconciled strategy in bounded slice; no fallback"
+        },
+        {
+          "name": "Shadow Charger",
+          "reason": "No exact name-matched normal-compatible record and reconciled strategy in bounded slice; no fallback"
+        }
+      ]
+    },
+    {
+      "instanceID": 48,
+      "name": "Blackfathom Deeps",
+      "encounterIDs": [
+        2916,
+        2915,
+        2913,
+        2912,
+        2911,
+        2910
+      ],
+      "difficultyIDs": [
+        1
+      ],
+      "data_build": "1.60.1.70790",
+      "status": "6 source-backed normal-compatible records; partial coverage, not current-build qualified",
+      "evidence": "docs/FOREVER_BLACKFATHOM_DEEPS_IDS_70790.json",
+      "excluded_encounters": [
+        {
+          "name": "Gelihast / Geilhast",
+          "reason": "Known normal ID2914 says Geilhast; guide Gelihast spelling/strategy association unresolved, no inferred alias"
+        },
+        {
+          "name": "Baron Aquanis",
+          "reason": "No exact name-matched normal-compatible record and reconciled strategy in bounded slice; no fallback"
+        }
+      ]
+    },
+    {
+      "instanceID": 90,
+      "name": "Gnomeregan",
+      "encounterIDs": [
+        2768,
+        2769,
+        2770,
+        2771,
+        2772
+      ],
+      "difficultyIDs": [
+        1
+      ],
+      "data_build": "1.60.1.70790",
+      "status": "5 source-backed normal-compatible records; partial coverage, not current-build qualified",
+      "evidence": "docs/FOREVER_GNOMEREGAN_IDS_70790.json",
+      "excluded_encounters": [
+        {
+          "name": "Dark Iron Ambassador",
+          "reason": "No exact name-matched normal-compatible record and reconciled strategy in bounded slice; no fallback"
+        },
+        {
+          "name": "Mechanical Menagerie",
+          "reason": "No exact name-matched normal-compatible record and reconciled strategy in bounded slice; no fallback"
+        }
+      ]
+    },
+    {
+      "instanceID": 47,
+      "name": "Razorfen Kraul",
+      "encounterIDs": [
+        2773,
+        2774,
+        2775,
+        2776,
+        2777,
+        2778
+      ],
+      "difficultyIDs": [
+        1
+      ],
+      "data_build": "1.60.1.70790",
+      "status": "six source-backed normal-mode records; current build and client acceptance pending",
+      "evidence": "docs/FOREVER_RAZORFEN_KRAUL_IDS_70790.json",
+      "excluded_encounters": [
+        {
+          "name": "Earthcaller Halmgar",
+          "reason": "No matched DungeonEncounter record in preserved map47 export; no name/NPC fallback"
+        },
+        {
+          "name": "Blind Hunter",
+          "reason": "No matched DungeonEncounter record in preserved map47 export; no name/NPC fallback"
+        }
+      ]
+    },
+    {
+      "instanceID": 70,
+      "name": "Uldaman",
+      "encounterIDs": [
+        547,
+        548,
+        549,
+        1887,
+        551,
+        552,
+        553,
+        554
+      ],
+      "difficultyIDs": [
+        1
+      ],
+      "data_build": "1.60.1.70790",
+      "status": "eight source-backed normal-mode encounter records; current-build and client acceptance pending",
+      "evidence": "docs/FOREVER_ULDAMAN_IDS_70790.json",
+      "excluded_encounters": [
+        {
+          "name": "Digmaster Shovelphlange",
+          "reason": "Pre-instance rare; no matched map70 DungeonEncounter row; no name/NPC fallback"
         }
       ]
     }

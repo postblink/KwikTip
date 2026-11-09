@@ -1,8 +1,8 @@
 ## Interface: 16001
 ## Title: KwikTip: Forever (Alpha)
-## Notes: Eight-entry encounter alpha; partial coverage and in-game validation pending. See coverage ledger.
+## Notes: Thirteen-entry encounter alpha; partial coverage and in-game validation pending. See coverage ledger.
 ## Author: Lucas Boyles
-## Version: 0.1.0-alpha.2
+## Version: 0.1.0-alpha.3
 ## DefaultState: enabled
 ## OptionalDeps: LibSharedMedia-3.0
 
