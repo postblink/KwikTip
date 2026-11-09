@@ -25,28 +25,17 @@ CurseForge and Wago host both versions on the existing KwikTip pages; choose a F
 
 ## WoW Forever Support
 
-**Forever `0.1.0-alpha.3`** contains 78 encounter records across thirteen entries,
-adding 33 records across Shadowfang Keep, Blackfathom Deeps, Gnomeregan,
-Razorfen Kraul and Uldaman. Current-build verification and in-game acceptance
-remain pending. See [the expanded refresh](docs/FOREVER_NEXT_20261109.md).
+**Published Forever `0.1.0-alpha.3`** has78 encounter records across13 entries.
+The **unpublished alpha.4 candidate** expands to178 records across22 runtime
+entries. Current-build verification and in-game acceptance remain pending.
+See [the candidate evidence](docs/FOREVER_BATCH4_20261109.md).
 
 Optional dungeon-wide preparation overviews use **Persistent Tip Window**.
 
-| Dungeon | Encounter tips |
-|---|---:|
-| Hall of Thanes | 4 |
-| Ragefire Chasm | 4 |
-| Stormwind Stockade | 5 |
-| Ruins of Lordaeron (partial) | 5 |
-| Excavation Site: Wetlands | 4 |
-| City of Dalaran (partial) | 7 |
-| Deadmines | 8 |
-| Wailing Caverns | 8 |
-| Shadowfang Keep | 8 |
-| Blackfathom Deeps (partial) | 6 |
-| Gnomeregan | 5 |
-| Razorfen Kraul | 6 |
-| Uldaman | 8 |
+The candidate adds BRD17, Scholomance11, ZulFarrak8, Maraudon8, Scarlet7,
+DireMaul19, Stratholme16, Temple8 and RazorfenDowns6 to the published78.
+Cathedral and Razorfen Downs tips are explicitly provisional. Shared-map wings
+are not inferred. BRS compatibility and five new dungeon slices remain pending.
 
 This is an early alpha: full dungeon coverage is still in progress, and no dungeon has completed in-game validation. Offline checks are not in-game acceptance. Other dungeons, room/pull routing, and NPC targeting are not included yet. Hall's Infurnus/Magmatus guide association remains provisional, and rare Bruegal Ironknuckle is excluded from automatic tips.
 

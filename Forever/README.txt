@@ -1,4 +1,4 @@
-KwikTip Forever 0.1.0-alpha.3 -- expanded encounter alpha
+KwikTip Forever 0.1.0-alpha.4 -- unpublished next candidate; expanded encounter alpha
 
 KwikTip now supports WoW Forever alongside Retail (Midnight). This standalone
 Forever package brings encounter tips and the familiar HUD/settings to Forever.
@@ -12,13 +12,20 @@ CurseForge and Wago use the existing KwikTip pages; select the Forever game
 flavor and alpha versions. WoWInterface currently distributes Retail only.
 Retail uses the separate KwikTip folder; this package uses KwikTip_Forever.
 
-Candidate included: Hall (four), Ragefire (four), Stockade (five), and
-partial Ruins of Lordaeron (five), Excavation Site: Wetlands (four), partial City of Dalaran (seven), Deadmines (eight), Wailing Caverns (eight), Shadowfang Keep (eight), Blackfathom Deeps (six), Gnomeregan (five),
-Razorfen Kraul (six), and Uldaman (eight), plus optional dungeon-wide overviews.
-Select the 0.1.0-alpha.3 Forever file, not the Retail release. Normal difficulty 1 only. Rare Bruegal automatic tips are excluded.
-Full dungeon coverage remains in progress. The roadmap includes all Classic
-dungeon units/wings plus nine new Forever dungeons. This candidate has not been tested in-game; published-alpha reports do not
-qualify the all added entries. Do not describe this as full or latest-build coverage.
+Candidate scope: 178 encounter tips in 22 runtime instance entries. Included:
+Hall, Ragefire, Stockade, Ruins, Excavation, Dalaran, Deadmines, Wailing Caverns,
+Shadowfang Keep, Blackfathom Deeps, Gnomeregan, Razorfen Kraul, Uldaman,
+Blackrock Depths, Scholomance, ZulFarrak, Maraudon, Scarlet Monastery,
+Dire Maul, Stratholme, Sunken Temple and Razorfen Downs. Individual encounter exclusions remain.
+Shared Scarlet, Dire Maul and Stratholme entries do not infer wings or routes.
+Cathedral and Razorfen Downs tips are explicitly provisional. Normal difficulty 1 only.
+
+The links below/above refer to published alpha.3, not this unpublished candidate.
+Full dungeon coverage remains in progress: 24 Classic units/wings and four new
+dungeons have some advice, not complete coverage. Both Blackrock Spire wings plus five new dungeons remain outside this candidate.
+The roadmap includes all Classic dungeon units/wings plus nine new dungeons.
+This candidate has not been tested in-game. Do not describe it as complete,
+current-build verified, or automatically installed.
 
 Target: Forever product wowf, interface 16001. Hall/Ragefire/Stockade use 70707; all added entries
 use preserved 70790 exports. Installed client observed at 70862; drift check pending.
@@ -126,3 +133,7 @@ Known Geilhast 2914 versus guide Gelihast remains an unresolved alias and is exc
 Alternate difficulty 198/201 records must not substitute for Normal events.
 Rare/quest/escort timing remains unverified; no name-based fallback is provided.
 Current-build IDs and client acceptance still unverified.
+
+UNPUBLISHED alpha.4 currently178 events/22 runtime entries; download links refer
+to publishedalpha.3. New BRD17, Scholomance11, ZulFarrak8, Maraudon8 and Scarlet7.
+Scarlet shares one runtime map across wings; Cathedral2 tips explicitly provisional.

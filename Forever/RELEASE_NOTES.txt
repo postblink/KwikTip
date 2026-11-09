@@ -1,9 +1,16 @@
 KwikTip Forever @VERSION@
 
-Expanded Forever alpha: adds 33 encounter records across Shadowfang Keep,
-Blackfathom Deeps, Gnomeregan, Razorfen Kraul and Uldaman to alpha.2.
-Total 78 encounter records across thirteen entries. Exact scope and provenance
-are included in coverage.json and source-evidence.json.
+Expanded Forever alpha: adds 100 encounter records to alpha.3 across Blackrock
+Depths, Scholomance, ZulFarrak, Maraudon, Scarlet Monastery, Dire Maul,
+Stratholme, Sunken Temple and Razorfen Downs. Total178 records across22 runtime
+instance entries. Shared instance entries do not infer wings or routes.
+Exact scope and dated provenance ship in coverage.json and source-evidence.json.
+
+Cathedral and Razorfen Downs tips are visibly provisional: conservative strategy
+is corroborated by independent Forever guides, but one source explicitly falls
+back to Classic. No in-game verification is implied. Temple uses normal events,
+not the old alternate or raid records. Blackrock Spire remains excluded pending
+party/raid classification; five new dungeons still lack qualified runtime slices.
 
 This is partial dungeon coverage, not a complete Forever guide. Normal difficulty
 1 only. No NPC, room or subzone detection is added; new slices do not guess the

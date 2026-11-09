@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-alpha.3",
+  "version": "0.1.0-alpha.4",
   "data_build": "mixed: 1.60.1.70707 (Hall/Ragefire/Stockade), 1.60.1.70790 (remaining entries)",
   "interface": 16001,
   "client_tested": false,
@@ -325,6 +325,331 @@
         {
           "name": "Digmaster Shovelphlange",
           "reason": "Pre-instance rare; no matched map70 DungeonEncounter row; no name/NPC fallback"
+        }
+      ]
+    },
+    {
+      "instanceID": 230,
+      "name": "Blackrock Depths",
+      "encounterIDs": [
+        227,
+        228,
+        229,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        241,
+        242,
+        244,
+        2789,
+        2790
+      ],
+      "difficultyIDs": [
+        1
+      ],
+      "data_build": "1.60.1.70790",
+      "status": "partial source-backed encounter records; current-build/client acceptance pending",
+      "evidence": "docs/FOREVER_BRD_IDS_70790.json",
+      "excluded_encounters": [
+        {
+          "encounterID": 230,
+          "name": "Ring of Law",
+          "reason": "Aggregate/alias or insufficient strategy mapping; excluded rather than guessed"
+        },
+        {
+          "encounterID": 240,
+          "name": "Ribbly Screwspigot",
+          "reason": "Aggregate/alias or insufficient strategy mapping; excluded rather than guessed"
+        },
+        {
+          "encounterID": 243,
+          "name": "The Seven",
+          "reason": "Aggregate/alias or insufficient strategy mapping; excluded rather than guessed"
+        },
+        {
+          "encounterID": 2791,
+          "name": "The Vault",
+          "reason": "Aggregate/alias or insufficient strategy mapping; excluded rather than guessed"
+        }
+      ]
+    },
+    {
+      "instanceID": 289,
+      "name": "Scholomance",
+      "encounterIDs": [
+        2801,
+        2802,
+        2803,
+        2804,
+        2806,
+        2807,
+        2808,
+        2809,
+        2811,
+        2812,
+        2813
+      ],
+      "difficultyIDs": [
+        1
+      ],
+      "data_build": "1.60.1.70790",
+      "status": "partial source-backed encounter records; current-build/client acceptance pending",
+      "evidence": "docs/FOREVER_SCHOLOMANCE_IDS_70790.json",
+      "excluded_encounters": [
+        {
+          "encounterID": 2805,
+          "name": "Kirtonos",
+          "reason": "Aggregate/alias or insufficient strategy mapping; excluded rather than guessed"
+        },
+        {
+          "encounterID": 2810,
+          "name": "Ras Frostwhisperer",
+          "reason": "Aggregate/alias or insufficient strategy mapping; excluded rather than guessed"
+        },
+        {
+          "encounterID": 3055,
+          "name": "Kormok",
+          "reason": "Aggregate/alias or insufficient strategy mapping; excluded rather than guessed"
+        }
+      ]
+    },
+    {
+      "instanceID": 209,
+      "name": "Zul'Farrak",
+      "encounterIDs": [
+        593,
+        594,
+        595,
+        596,
+        597,
+        598,
+        599,
+        600
+      ],
+      "difficultyIDs": [
+        1
+      ],
+      "data_build": "1.60.1.70790",
+      "status": "eight source-backed normal-mode records; current-build and client acceptance pending",
+      "evidence": "docs/FOREVER_ZULFARRAK_IDS_70790.json",
+      "excluded_encounters": [
+        {
+          "name": "Sergeant Bly",
+          "reason": "No matching preserved map DungeonEncounter row; no name or NPC fallback"
+        },
+        {
+          "name": "Zerillis",
+          "reason": "No matching preserved map DungeonEncounter row; no name or NPC fallback"
+        }
+      ]
+    },
+    {
+      "instanceID": 349,
+      "name": "Maraudon",
+      "encounterIDs": [
+        422,
+        423,
+        424,
+        425,
+        426,
+        427,
+        428,
+        429
+      ],
+      "difficultyIDs": [
+        1
+      ],
+      "data_build": "1.60.1.70790",
+      "status": "eight source-backed normal-mode records; current-build and client acceptance pending",
+      "evidence": "docs/FOREVER_MARAUDON_IDS_70790.json",
+      "excluded_encounters": [
+        {
+          "name": "Meshlok the Harvester",
+          "reason": "No matching preserved map DungeonEncounter row; no name or NPC fallback"
+        }
+      ]
+    },
+    {
+      "instanceID": 189,
+      "name": "Scarlet Monastery",
+      "encounterIDs": [
+        444,
+        2779,
+        446,
+        447,
+        448,
+        449,
+        450
+      ],
+      "difficultyIDs": [
+        1
+      ],
+      "data_build": "1.60.1.70790",
+      "status": "seven exact-ID events across shared-map wings; Cathedral strategy provisional; no wing or route detection; not client tested",
+      "evidence": "docs/FOREVER_SCARLET_MONASTERY_IDS_70790.json",
+      "excluded_encounters": [
+        {
+          "name": "Azshir the Sleepless",
+          "reason": "No standalone matching event in preserved map189; no NPC/name fallback"
+        },
+        {
+          "name": "Fallen Champion",
+          "reason": "No standalone matching event in preserved map189; no NPC/name fallback"
+        },
+        {
+          "name": "Ironspine",
+          "reason": "No standalone matching event in preserved map189; no NPC/name fallback"
+        },
+        {
+          "name": "Scarlet Commander Mograine",
+          "reason": "No standalone matching event in preserved map189; no NPC/name fallback"
+        }
+      ]
+    },
+    {
+      "instanceID": 429,
+      "name": "Dire Maul",
+      "encounterIDs": [
+        343,
+        344,
+        345,
+        346,
+        2792,
+        350,
+        348,
+        2794,
+        347,
+        349,
+        361,
+        2793,
+        362,
+        363,
+        364,
+        365,
+        366,
+        367,
+        368
+      ],
+      "difficultyIDs": [
+        1
+      ],
+      "data_build": "1.60.1.70790",
+      "status": "nineteen source-backed normal-mode records; current-build and client acceptance pending",
+      "evidence": "docs/FOREVER_DIREMAUL_IDS_70790.json",
+      "excluded_encounters": [
+        {
+          "name": "Isalien",
+          "reason": "No matching preserved map DungeonEncounter row; no name or NPC fallback"
+        }
+      ]
+    },
+    {
+      "instanceID": 329,
+      "name": "Stratholme",
+      "encounterIDs": [
+        472,
+        473,
+        474,
+        475,
+        476,
+        477,
+        478,
+        479,
+        480,
+        481,
+        482,
+        483,
+        484,
+        2798,
+        2799,
+        2800
+      ],
+      "difficultyIDs": [
+        1
+      ],
+      "data_build": "1.60.1.70790",
+      "status": "16 exact normal-compatible events; partial coverage, not current-build or client verified",
+      "evidence": "docs/FOREVER_STRATHOLME_IDS_70790.json",
+      "excluded_encounters": [
+        {
+          "name": "Black Guard Swordsmith",
+          "reason": "No matched usable strategy or standalone normal record in bounded slice; no name fallback"
+        },
+        {
+          "name": "Crimson Hammersmith",
+          "reason": "No matched usable strategy or standalone normal record in bounded slice; no name fallback"
+        },
+        {
+          "name": "Ezra Grimm",
+          "reason": "No matched usable strategy or standalone normal record in bounded slice; no name fallback"
+        },
+        {
+          "name": "Jarien",
+          "reason": "No matched usable strategy or standalone normal record in bounded slice; no name fallback"
+        },
+        {
+          "name": "Sothos",
+          "reason": "No matched usable strategy or standalone normal record in bounded slice; no name fallback"
+        }
+      ]
+    },
+    {
+      "instanceID": 109,
+      "name": "Sunken Temple",
+      "encounterIDs": [
+        3582,
+        3589,
+        3588,
+        3587,
+        3586,
+        3585,
+        3584,
+        3583
+      ],
+      "difficultyIDs": [
+        1
+      ],
+      "data_build": "1.60.1.70790",
+      "status": "8 exact normal-compatible events; partial coverage, not current-build or client verified",
+      "evidence": "docs/FOREVER_SUNKEN_TEMPLE_IDS_70790.json",
+      "excluded_encounters": [
+        {
+          "name": "Ogom the Wretched",
+          "reason": "No matched usable strategy or standalone normal record in bounded slice; no name fallback"
+        },
+        {
+          "name": "Atalai Defenders / balcony minibosses",
+          "reason": "No matched usable strategy or standalone normal record in bounded slice; no name fallback"
+        }
+      ]
+    },
+    {
+      "instanceID": 129,
+      "name": "Razorfen Downs",
+      "encounterIDs": [
+        2780,
+        2781,
+        2782,
+        2783,
+        2784,
+        2785
+      ],
+      "difficultyIDs": [
+        1
+      ],
+      "data_build": "1.60.1.70790",
+      "status": "six exact-ID events; all strategy visibly provisional; no gong/escort-stage or route detection; not client tested",
+      "evidence": "docs/FOREVER_RAZORFEN_DOWNS_IDS_70790.json",
+      "excluded_encounters": [
+        {
+          "name": "Lady Falther'ess",
+          "reason": "No matching standalone encounter in preserved map129 rows; no guessed alias or NPC/name fallback"
         }
       ]
     }
