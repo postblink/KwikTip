@@ -1,5 +1,16 @@
 # KwikTip Forever — full dungeon coverage matrix
 
+## Current refresh — 2026-11-09
+
+The previous snapshot below is historical. Candidate alpha.2 now contains eight
+entries and 45 encounter records, including partial Ruins, Excavation and Dalaran coverage. Current
+client 70862 IDs remain unverified; no full coverage or in-game pass is claimed.
+See [current refresh](FOREVER_REFRESH_20261109.md) and
+[current alpha scope](FOREVER_ALPHA_COVERAGE.md). Later source availability
+below is superseded where the refresh identifies current guides.
+
+## Historical snapshot (2026-10-31)
+
 Status (2026-10-31): **Alpha candidate `0.1.0-alpha.1` includes Hall, Ragefire and Stockade: 13 registered encounter records and opt-in dungeon overviews, normal difficulty 1 only. Zero dungeons meet complete coverage below.** Rare Bruegal automatic tips are excluded. Static IDs are verified from exact-build exports; runtime, area/NPC triggers and Hall's name association remain pending. Installed `0.1.0-test` stays unchanged. No release approval. See `FOREVER_ALPHA_COVERAGE.md` and `Forever/Coverage.json`; full scope is preserved.
 
 ## Release scope

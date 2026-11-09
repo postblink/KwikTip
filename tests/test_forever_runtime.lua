@@ -199,10 +199,15 @@ for _, name in ipairs({ "DUNGEON_BY_INSTANCEID", "DUNGEON_BY_UIMAPID", "BOSS_BY_
     check(type(addon[name]) == "table", "package initializes " .. name)
 end
 check(type(addon.DUNGEONS) == "table", "Forever data table exists")
-check(#addon.DUNGEONS == 3, "alpha manifest contains exactly three dungeon records")
+check(#addon.DUNGEONS == 8, "alpha manifest contains exactly eight dungeon records")
 local hall = addon.DUNGEON_BY_INSTANCEID[3065]
 local ragefire = addon.DUNGEON_BY_INSTANCEID[389]
 local stockade = addon.DUNGEON_BY_INSTANCEID[34]
+local deadmines = addon.DUNGEON_BY_INSTANCEID[36]
+local caverns = addon.DUNGEON_BY_INSTANCEID[43]
+local dalaran = addon.DUNGEON_BY_INSTANCEID[2959]
+local excavation = addon.DUNGEON_BY_INSTANCEID[2998]
+local ruins = addon.DUNGEON_BY_INSTANCEID[2999]
 check(hall ~= nil and ragefire ~= nil and stockade ~= nil,
     "alpha manifest indexes Hall, Ragefire, and Stockade by verified instance identity")
 local expectedIDs = { 3493, 3495, 3494, 3496 } -- Wago build 70707 OrderIndex
@@ -224,10 +229,31 @@ for i, encounterID in ipairs(expectedStockadeIDs) do
     check(stockade.bosses[i].encounterID == encounterID, "Stockade encounter identity matches raw DB2")
     check(stockade.bosses[i].name == expectedStockadeNames[i], "Stockade encounter name matches verified source record")
 end
+check(ruins ~= nil, "Ruins is indexed by exact instance ID")
+local ruinsIDs = { 3353, 3357, 3411, 3412, 3354 }
+check(#ruins.bosses == #ruinsIDs, "Ruins has exactly five admitted encounters")
+for i, id in ipairs(ruinsIDs) do
+    check(ruins.bosses[i].encounterID == id, "Ruins ID matches preserved DB2")
+end
+check(addon.BOSS_BY_ENCOUNTERID[3355] == nil and addon.BOSS_BY_ENCOUNTERID[3408] == nil,
+    "unreconciled Baron and rare Captain never become automatic tips")
+check(ruins.uiMapID == nil and ruins.areas == nil, "no guessed Ruins map/area routing")
+check(excavation ~= nil and #excavation.bosses == 4, "Excavation has four admitted event records")
+for i, id in ipairs({3480, 3481, 3644, 3482}) do
+    check(excavation.bosses[i].encounterID == id, "Excavation matches preserved DB2 IDs")
+end
+check(excavation.uiMapID == nil and excavation.areas == nil, "no guessed Excavation routing")
+check(not contains(excavation.bosses[2].tip, "%"), "no disputed enrage threshold shipped")
+check(dalaran ~= nil and #dalaran.bosses == 7, "Dalaran has seven exact matches")
+for i, id in ipairs({3311,3310,3298,3299,3300,3302,3303}) do
+    check(dalaran.bosses[i].encounterID == id, "Dalaran exact DB2 identity")
+end
+check(addon.BOSS_BY_ENCOUNTERID[3301] == nil and addon.BOSS_BY_ENCOUNTERID[3312] == nil, "no invented Dalaran aliases")
+check(addon.DUNGEON_BY_INSTANCEID[2980] == nil, "non-dungeon Dalaran map excluded")
 local encounterCount = 0
 for _ in pairs(addon.BOSS_BY_ENCOUNTERID) do encounterCount = encounterCount + 1 end
-check(encounterCount == 13, "alpha manifest indexes exactly thirteen encounter records")
-for _, dungeon in ipairs({ hall, ragefire, stockade }) do
+check(encounterCount == 45, "alpha manifest indexes exactly forty-five encounter records")
+for _, dungeon in ipairs({ hall, ragefire, stockade, ruins, excavation, dalaran, deadmines, caverns }) do
     check(type(dungeon.difficultyIDs) == "table" and #dungeon.difficultyIDs == 1
         and dungeon.difficultyIDs[1] == 1,
         "shipped dungeon explicitly restricts sourced advice to Normal difficulty")
@@ -533,6 +559,7 @@ state.inInstance, state.instanceType, state.instanceID, state.mapID = false, "no
 emit("PLAYER_ENTERING_WORLD")
 
 local function checkUnorderedClassicDungeon(dungeon, label, noteText)
+    state.difficultyID = 1 -- helper is independent of previous negative-mode fixture
     local noteKey = tostring(dungeon.instanceID)
     -- A Classic encounter roster is not an asserted player route. After a kill, the
     -- alpha returns to the user's overview choice instead of predicting a boss.
@@ -591,6 +618,75 @@ local function checkUnorderedClassicDungeon(dungeon, label, noteText)
 end
 checkUnorderedClassicDungeon(ragefire, "Ragefire", "RAGEFIRE_ALPHA_PERSONAL_NOTE")
 checkUnorderedClassicDungeon(stockade, "Stockade", "STOCKADE_ALPHA_PERSONAL_NOTE")
+checkUnorderedClassicDungeon(ruins, "Ruins", "RUINS_ALPHA_PERSONAL_NOTE")
+
+checkUnorderedClassicDungeon(excavation, "Excavation", "EXCAVATION_ALPHA_PERSONAL_NOTE")
+state.inInstance, state.instanceType, state.instanceID = true, "party", 2998
+state.difficultyID = 201
+emit("PLAYER_ENTERING_WORLD")
+emit("ENCOUNTER_START", 3480, "Saltspine", 201, 5)
+check(not addon.bossActive and not addon.HUD:IsShown(), "Excavation alternate mode is unsupported")
+
+checkUnorderedClassicDungeon(dalaran, "Dalaran", "DALARAN_ALPHA_PERSONAL_NOTE")
+state.inInstance, state.instanceType, state.instanceID = true, "party", 2959
+state.difficultyID = 1
+emit("PLAYER_ENTERING_WORLD")
+for _, id in ipairs({3301,3312}) do
+    emit("ENCOUNTER_START", id, "Arcanic Enigma", 1, 5)
+    check(not addon.bossActive and not addon.HUD:IsShown(), "unmatched Dalaran ID stays quiet")
+end
+state.difficultyID = 201
+emit("PLAYER_ENTERING_WORLD")
+emit("ENCOUNTER_START", 3298, "Arcane Anomaly", 201, 5)
+check(not addon.bossActive and not addon.HUD:IsShown(), "Dalaran alternate mode excluded")
+state.instanceID, state.difficultyID = 2980, 1
+emit("PLAYER_ENTERING_WORLD")
+emit("ENCOUNTER_START", 3298, "Arcane Anomaly", 1, 5)
+check(not addon.bossActive and not addon.HUD:IsShown(), "city map cannot activate dungeon advice")
+
+checkUnorderedClassicDungeon(deadmines, "Deadmines", "DEADMINES_NOTE")
+checkUnorderedClassicDungeon(caverns, "Caverns", "CAVERNS_NOTE")
+for _, dungeon in ipairs({deadmines,caverns}) do
+    state.inInstance, state.instanceType, state.instanceID = true, "party", dungeon.instanceID
+    for _, mode in ipairs({201,213}) do
+        state.difficultyID = mode
+        emit("PLAYER_ENTERING_WORLD")
+        emit("ENCOUNTER_START", dungeon.bosses[1].encounterID, "Known boss", mode, 5)
+        check(not addon.bossActive and not addon.HUD:IsShown(), "Classic alternate mode excluded")
+    end
+end
+state.instanceID, state.difficultyID = 43,1
+emit("PLAYER_ENTERING_WORLD")
+emit("ENCOUNTER_START", 999876, "Deviate Faerie Dragon", 1, 5)
+check(not addon.bossActive and not addon.HUD:IsShown(), "unmatched rare name cannot activate tip")
+
+-- Real excluded Ruins IDs must never borrow a similar guide/name entry.
+state.inInstance, state.instanceType, state.instanceID = true, "party", 2999
+state.difficultyID, state.mapID, state.subzone = 1, nil, ""
+for _, showOverview in ipairs({ false, true }) do
+    KwikTipDB.showInDungeon = showOverview
+    emit("PLAYER_ENTERING_WORLD")
+    for _, excludedID in ipairs({ 3355, 3408 }) do
+        emit("ENCOUNTER_START", excludedID, "The Baron", 1, 5)
+        check(not addon.bossActive and addon._activeBossEntry == nil,
+            "excluded Ruins IDs cannot activate guide-name fallback")
+        if showOverview then
+            check(contains(addon._lastContent, ruins.overview), "excluded Ruins fight leaves overview only")
+        else
+            check(addon._lastContent == "" and not addon.HUD:IsShown(), "excluded Ruins fight stays quiet")
+        end
+    end
+end
+KwikTipDB.showInDungeon = false
+state.difficultyID = 201
+emit("PLAYER_ENTERING_WORLD")
+emit("ENCOUNTER_START", 3353, "Witherfang", 201, 5)
+check(not addon.bossActive and not addon.HUD:IsShown(), "Ruins alternate mode is unsupported")
+state.difficultyID = 1
+emit("PLAYER_ENTERING_WORLD")
+emit("ENCOUNTER_START", 3353, "Witherfang", 1, 5)
+emit("ENCOUNTER_END", 3353, "Witherfang", 1, 5, 0)
+check(not addon.bossActive and not addon.HUD:IsShown(), "Ruins wipe clears active tip without route guess")
 
 -- This high encounter ID is a synthetic negative fixture, not a guessed rare
 -- ID. A familiar rare name cannot create automatic coverage absent raw IDs.

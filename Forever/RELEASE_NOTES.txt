@@ -1,25 +1,25 @@
 KwikTip Forever @VERSION@
 
-Early alpha scope: Hall of Thanes (four encounters), Ragefire Chasm (four), and
-Stormwind Stockade (five regular encounters), with optional overviews through Persistent Tip
-Window. Normal difficulty 1 only. The default stays quiet between encounters.
-This does not detect individual packs, NPCs, rooms or subzones. Ragefire/Stockade
-do not assume a next-boss route after kills; reordered fights remain event-driven.
-Rare Bruegal Ironknuckle has no verified encounter mapping and no automatic tip.
+Expanded Forever alpha with source-backed encounter advice. See coverage.json
+for the exact dungeon/encounter list. New slices include Ruins of Lordaeron,
+Excavation Site: Wetlands, City of Dalaran, Deadmines and Wailing Caverns.
+45 encounter records across eight entries; see exact exclusions below.
 
-Client validation: pending. The owner cannot perform live testing before
-November 4. Offline Lua/frame tests do not establish game compatibility.
-Static IDs target build 1.60.1.70707, interface 16001. Check the current build.
-The Infurnus/Magmatus guide association is visibly provisional. Conflicting
-Durgen/add kill priorities are omitted. Report exact build, locale, encounter
-ID/name and Lua errors; preserve account data and unrelated SavedVariables.
+This is partial dungeon coverage, not a complete Forever guide. Normal difficulty
+1 only. No NPC, room or subzone detection is added; new slices do not guess the
+next boss after a kill. Optional encounters activate only on matching events.
 
-Static MapDifficulty data also contains alternate modes 201/214, which are excluded
-from this candidate. The full roadmap remains all Classic dungeon units/wings plus the nine new
-Forever dungeons; this alpha does not promise that coverage. No dungeon currently
-meets the full client-tested coverage definition. See the packaged README for
-manual acceptance and installation details. Disable the addon if it errors.
-coverage.json and source-evidence.json list the exact included scope and provenance.
+Important exclusions: Ruins Baron/Butcher identity is unresolved; rare Captain
+is excluded. Dalaran Arcanic Enigma has no verified name-to-ID match; Mana
+Elemental and Mana Wraith are excluded rather than assigned guessed tips.
+Rare Bruegal and Deviate Faerie Dragon are excluded. Sneed phase timing and
+Hall Infurnus/Magmatus association need client verification. Bjork advice remains conservative. Disputed exact thresholds are omitted.
 
-Install only the KwikTip_Forever folder from the ZIP under the Forever client's
-Interface/AddOns directory. Keep Retail KwikTip disabled in that client.
+Client validation: pending. Static IDs mix preserved 70707 and rehash-verified
+70790 exports. Installed client observed at 70862; raw latest-build ID drift
+has not been reverified. Interface 16001. Offline tests do not establish an
+in-game acceptance pass. Complete, client-accepted dungeons: zero.
+
+Separate Forever alpha package; Retail remains unchanged. coverage.json and
+source-evidence.json ship the exact scope, source dates and exclusions. Please
+report build, locale, encounter IDs and Lua errors without sharing private files.

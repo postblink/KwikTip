@@ -1,6 +1,6 @@
 {
-  "version": "0.1.0-alpha.1",
-  "data_build": "1.60.1.70707",
+  "version": "0.1.0-alpha.2",
+  "data_build": "mixed: 1.60.1.70707 (Hall/Ragefire/Stockade), 1.60.1.70790 (remaining entries)",
   "interface": 16001,
   "client_tested": false,
   "complete_dungeons": 0,
@@ -58,6 +58,132 @@
           "reason": "rare spawn has no verified DungeonEncounter mapping; no automatic tip or name/NPC fallback"
         }
       ]
+    },
+    {
+      "instanceID": 2999,
+      "name": "Ruins of Lordaeron",
+      "encounterIDs": [
+        3353,
+        3357,
+        3411,
+        3412,
+        3354
+      ],
+      "status": "five source-backed normal-mode encounter records; partial dungeon coverage; not current-build qualified",
+      "evidence": "docs/FOREVER_RUINS_IDS_70790.json",
+      "difficultyIDs": [
+        1
+      ],
+      "data_build": "1.60.1.70790",
+      "excluded_encounters": [
+        {
+          "name": "The Baron / The Butcher",
+          "encounterID": 3355,
+          "reason": "Static export says The Butcher; current guides/Blizzard say The Baron. Identity/ability mapping not established."
+        },
+        {
+          "name": "Lordaeron Captain",
+          "encounterID": 3408,
+          "reason": "Rare faction-sensitive encounter omitted from this bounded slice; no inferred name/NPC fallback"
+        }
+      ]
+    },
+    {
+      "instanceID": 2998,
+      "name": "Excavation Site: Wetlands",
+      "encounterIDs": [
+        3480,
+        3481,
+        3644,
+        3482
+      ],
+      "difficultyIDs": [
+        1
+      ],
+      "status": "four source-backed normal-mode events including optional quest boss; not current-build qualified",
+      "evidence": "docs/FOREVER_EXCAVATION_IDS_70790.json",
+      "data_build": "1.60.1.70790"
+    },
+    {
+      "instanceID": 2959,
+      "name": "City of Dalaran",
+      "encounterIDs": [
+        3311,
+        3310,
+        3298,
+        3299,
+        3300,
+        3302,
+        3303
+      ],
+      "difficultyIDs": [
+        1
+      ],
+      "status": "seven exact source-name normal-mode records, partial coverage; not current-build qualified",
+      "evidence": "docs/FOREVER_DALARAN_IDS_70790.json",
+      "data_build": "1.60.1.70790",
+      "excluded_encounters": [
+        {
+          "name": "Mana Elemental",
+          "encounterID": 3301,
+          "reason": "No proven mapping to guide Arcanic Enigma"
+        },
+        {
+          "name": "Mana Wraith",
+          "encounterID": 3312,
+          "reason": "No reconciled strategy"
+        },
+        {
+          "name": "Arcanic Enigma",
+          "reason": "No exact name-matched encounter ID in preserved export; no inferred alias"
+        }
+      ]
+    },
+    {
+      "instanceID": 36,
+      "name": "Deadmines",
+      "encounterIDs": [
+        2741,
+        2742,
+        3676,
+        2743,
+        2745,
+        2744,
+        2747,
+        2746
+      ],
+      "difficultyIDs": [
+        1
+      ],
+      "data_build": "1.60.1.70790",
+      "status": "eight source-backed event records; not current-build qualified or client tested",
+      "evidence": "docs/FOREVER_DEADMINES_IDS_70790.json"
+    },
+    {
+      "instanceID": 43,
+      "name": "Wailing Caverns",
+      "encounterIDs": [
+        585,
+        586,
+        587,
+        588,
+        589,
+        590,
+        591,
+        592
+      ],
+      "difficultyIDs": [
+        1
+      ],
+      "data_build": "1.60.1.70790",
+      "status": "eight source-backed event records; not current-build qualified or client tested",
+      "evidence": "docs/FOREVER_WAILING_CAVERNS_IDS_70790.json",
+      "excluded_encounters": [
+        {
+          "name": "Deviate Faerie Dragon",
+          "reason": "No exact DungeonEncounter entry in preserved43 roster; no name/NPC fallback"
+        }
+      ]
     }
   ],
   "not_included": [
@@ -66,5 +192,7 @@
     "Per-room or per-pull routing",
     "NPC target detection"
   ],
-  "live_acceptance": "Pending November 4: actual load, event IDs/names, HUD, success/wipe/exit behavior and settings persistence"
+  "live_acceptance": "Current candidate untested in-game; current 70862 ID drift and per-encounter runtime acceptance pending",
+  "current_client_build_observed": "1.60.1.70862",
+  "current_build_ids_reverified": false
 }
