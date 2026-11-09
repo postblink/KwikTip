@@ -1,7 +1,7 @@
-# Forever alpha.4 candidate scope
+# Forever alpha.4 release scope
 
-Unpublished candidate:178 encounters in22 runtime entries; Normal1 only.
-Complete client-accepted dungeons:zero. Published alpha.3 remains78/13.
+Release:178 encounters in22 runtime entries; Normal1 only.
+Complete client-accepted dungeons:zero. Previous alpha.3 contained78/13.
 
 | Dungeon | Instance | Events |
 |---|---:|---|

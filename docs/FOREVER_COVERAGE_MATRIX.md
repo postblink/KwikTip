@@ -2,11 +2,11 @@
 
 ## Current refresh — 2026-11-09
 
-The snapshot below is historical. Unpublished alpha.4 candidate has178 encounter
+The snapshot below is historical. Alpha.4 release has178 encounter
 records in22 runtime entries, representing partial coverage of24 Classic roster
 units/wings and four new dungeons. Neither entries nor roster units are complete
 client-accepted dungeons. Current70862 IDs remain unverified. See the authoritative
-[current candidate scope](FOREVER_ALPHA_COVERAGE.md) and
+[current release scope](FOREVER_ALPHA_COVERAGE.md) and
 [batch evidence](FOREVER_BATCH4_20261109.md). BRS classification and five new
 slices remain open. Do not use the historical missing-row statuses as current.
 

@@ -1,10 +1,10 @@
-KwikTip Forever 0.1.0-alpha.4 -- unpublished next candidate; expanded encounter alpha
+KwikTip Forever 0.1.0-alpha.4 -- expanded release; expanded encounter alpha
 
 KwikTip now supports WoW Forever alongside Retail (Midnight). This standalone
 Forever package brings encounter tips and the familiar HUD/settings to Forever.
 
 Downloads:
-GitHub alpha: https://github.com/postblink/KwikTip/releases/tag/forever-v0.1.0-alpha.3
+GitHub alpha: https://github.com/postblink/KwikTip/releases/tag/forever-v0.1.0-alpha.4
 CurseForge alphas: https://www.curseforge.com/wow/addons/kwiktip/files
 Wago alphas: https://addons.wago.io/addons/kwiktip/versions?stability=alpha
 
@@ -12,7 +12,7 @@ CurseForge and Wago use the existing KwikTip pages; select the Forever game
 flavor and alpha versions. WoWInterface currently distributes Retail only.
 Retail uses the separate KwikTip folder; this package uses KwikTip_Forever.
 
-Candidate scope: 178 encounter tips in 22 runtime instance entries. Included:
+Release scope: 178 encounter tips in 22 runtime instance entries. Included:
 Hall, Ragefire, Stockade, Ruins, Excavation, Dalaran, Deadmines, Wailing Caverns,
 Shadowfang Keep, Blackfathom Deeps, Gnomeregan, Razorfen Kraul, Uldaman,
 Blackrock Depths, Scholomance, ZulFarrak, Maraudon, Scarlet Monastery,
@@ -20,7 +20,6 @@ Dire Maul, Stratholme, Sunken Temple and Razorfen Downs. Individual encounter ex
 Shared Scarlet, Dire Maul and Stratholme entries do not infer wings or routes.
 Cathedral and Razorfen Downs tips are explicitly provisional. Normal difficulty 1 only.
 
-The links below/above refer to published alpha.3, not this unpublished candidate.
 Full dungeon coverage remains in progress: 24 Classic units/wings and four new
 dungeons have some advice, not complete coverage. Both Blackrock Spire wings plus five new dungeons remain outside this candidate.
 The roadmap includes all Classic dungeon units/wings plus nine new dungeons.
@@ -33,7 +32,7 @@ The current install is World of Warcraft/_forever_/Wow.exe; the older
 _classic_beta_/WowB.exe path in historical notes is no longer the target.
 
 Installation:
-1. Download KwikTip_Forever-0.1.0-alpha.3.zip from the release or select the
+1. Download KwikTip_Forever-0.1.0-alpha.4.zip from the release or select the
    same Forever alpha version on the marketplace pages above.
 2. Close the game and extract its KwikTip_Forever folder into:
    World of Warcraft/_forever_/Interface/AddOns/KwikTip_Forever
