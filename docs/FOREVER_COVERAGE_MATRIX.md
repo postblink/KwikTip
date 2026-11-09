@@ -2,12 +2,13 @@
 
 ## Current refresh — 2026-11-09
 
-The previous snapshot below is historical. Candidate alpha.2 now contains eight
-entries and 45 encounter records, including partial Ruins, Excavation and Dalaran coverage. Current
-client 70862 IDs remain unverified; no full coverage or in-game pass is claimed.
-See [current refresh](FOREVER_REFRESH_20261109.md) and
-[current alpha scope](FOREVER_ALPHA_COVERAGE.md). Later source availability
-below is superseded where the refresh identifies current guides.
+The snapshot below is historical. Alpha.4 release has178 encounter
+records in22 runtime entries, representing partial coverage of24 Classic roster
+units/wings and four new dungeons. Neither entries nor roster units are complete
+client-accepted dungeons. Current70862 IDs remain unverified. See the authoritative
+[current release scope](FOREVER_ALPHA_COVERAGE.md) and
+[batch evidence](FOREVER_BATCH4_20261109.md). BRS classification and five new
+slices remain open. Do not use the historical missing-row statuses as current.
 
 ## Historical snapshot (2026-10-31)
 

@@ -1,0 +1,179 @@
+{
+  "reviewed_at_utc": "2026-11-09",
+  "data_build": "1.60.1.70790",
+  "current_client_build": "1.60.1.70862",
+  "scope": "Exact normal-compatible IDs. Strategy provisional; current70862 and in-game validation pending. No gong/escort-stage or route detection.",
+  "sources": [
+    {
+      "table": "Map",
+      "build": "1.60.1.70790",
+      "requested_url": "https://wago.tools/db2/Map/csv?build=1.60.1.70790",
+      "retrieved_utc": "2026-11-04T21:57:27.624262+00:00",
+      "sha256": "392e2f6e2cb338570c9e5e6368d59e65525c18d99c3b4e89c27fdcd123923099",
+      "bytes": 11744,
+      "rows": 73,
+      "selected_rows": [
+        {
+          "ID": "129",
+          "Directory": "RazorfenDowns",
+          "MapName_lang": "Razorfen Downs",
+          "MapDescription0_lang": "",
+          "MapDescription1_lang": "",
+          "PvpShortDescription_lang": "",
+          "PvpLongDescription_lang": "",
+          "Corpse_0": "-4662.8828125",
+          "Corpse_1": "-2535.8715820312",
+          "MapType": "1",
+          "InstanceType": "1",
+          "ExpansionID": "0",
+          "AreaTableID": "0",
+          "LoadingScreenID": "145",
+          "TimeOfDayOverride": "-1",
+          "ParentMapID": "-1",
+          "CosmeticParentMapID": "-1",
+          "TimeOffset": "0",
+          "MinimapIconScale": "1",
+          "CorpseMapID": "1",
+          "MaxPlayers": "10",
+          "WindSettingsID": "0",
+          "ZmpFileDataID": "0",
+          "WdtFileDataID": "790517",
+          "OceanLiquidTypeID": "2",
+          "NavigationMaxDistance": "0",
+          "PreloadFileDataID": "0",
+          "Flags_0": "81425",
+          "Flags_1": "262144",
+          "Flags_2": "130"
+        }
+      ]
+    },
+    {
+      "table": "DungeonEncounter",
+      "build": "1.60.1.70790",
+      "requested_url": "https://wago.tools/db2/DungeonEncounter/csv?build=1.60.1.70790",
+      "retrieved_utc": "2026-11-04T21:57:27.624262+00:00",
+      "sha256": "a710019c412ebf4f6a267f092c5b54a2ef70d3832835467e0478681d60ed9370",
+      "bytes": 17624,
+      "rows": 342,
+      "selected_rows": [
+        {
+          "Name_lang": "Tuten'kash",
+          "ID": "2780",
+          "MapID": "129",
+          "DifficultyID": "0",
+          "OrderIndex": "0",
+          "CompleteWorldStateID": "24519",
+          "Bit": "0",
+          "Flags": "1024",
+          "SpellIconFileID": "0",
+          "Faction": "-1",
+          "ItemSequenceLevel": "0"
+        },
+        {
+          "Name_lang": "Plaguemaw the Rotting",
+          "ID": "2781",
+          "MapID": "129",
+          "DifficultyID": "0",
+          "OrderIndex": "1000",
+          "CompleteWorldStateID": "24520",
+          "Bit": "1",
+          "Flags": "1024",
+          "SpellIconFileID": "0",
+          "Faction": "-1",
+          "ItemSequenceLevel": "0"
+        },
+        {
+          "Name_lang": "Mordresh Fire Eye",
+          "ID": "2782",
+          "MapID": "129",
+          "DifficultyID": "0",
+          "OrderIndex": "2000",
+          "CompleteWorldStateID": "24521",
+          "Bit": "2",
+          "Flags": "1024",
+          "SpellIconFileID": "0",
+          "Faction": "-1",
+          "ItemSequenceLevel": "0"
+        },
+        {
+          "Name_lang": "Ragglesnout",
+          "ID": "2783",
+          "MapID": "129",
+          "DifficultyID": "0",
+          "OrderIndex": "3000",
+          "CompleteWorldStateID": "24522",
+          "Bit": "3",
+          "Flags": "1024",
+          "SpellIconFileID": "0",
+          "Faction": "-1",
+          "ItemSequenceLevel": "0"
+        },
+        {
+          "Name_lang": "Glutton",
+          "ID": "2784",
+          "MapID": "129",
+          "DifficultyID": "0",
+          "OrderIndex": "4000",
+          "CompleteWorldStateID": "24523",
+          "Bit": "4",
+          "Flags": "1024",
+          "SpellIconFileID": "0",
+          "Faction": "-1",
+          "ItemSequenceLevel": "0"
+        },
+        {
+          "Name_lang": "Amnennar the Coldbringer",
+          "ID": "2785",
+          "MapID": "129",
+          "DifficultyID": "0",
+          "OrderIndex": "5000",
+          "CompleteWorldStateID": "24524",
+          "Bit": "5",
+          "Flags": "1024",
+          "SpellIconFileID": "0",
+          "Faction": "-1",
+          "ItemSequenceLevel": "0"
+        }
+      ]
+    },
+    {
+      "table": "MapDifficulty",
+      "build": "1.60.1.70790",
+      "requested_url": "https://wago.tools/db2/MapDifficulty/csv?build=1.60.1.70790",
+      "retrieved_utc": "2026-11-04T21:57:27.624262+00:00",
+      "sha256": "18efa9c5823859f0bc91a6650f987f97635f64b864d1c88b95364cbb3471a2cb",
+      "bytes": 5242,
+      "rows": 142,
+      "selected_rows": [
+        {
+          "Message_lang": "You must be at least level 35 to enter.",
+          "ID": "20",
+          "DifficultyID": "1",
+          "LockID": "0",
+          "ResetInterval": "0",
+          "MaxPlayers": "5",
+          "ItemContext": "0",
+          "ItemContextPickerID": "0",
+          "Flags": "0",
+          "ContentTuningID": "5245",
+          "WorldStateExpressionID": "0",
+          "MapID": "129"
+        },
+        {
+          "Message_lang": "",
+          "ID": "5246",
+          "DifficultyID": "201",
+          "LockID": "12",
+          "ResetInterval": "1",
+          "MaxPlayers": "10",
+          "ItemContext": "0",
+          "ItemContextPickerID": "0",
+          "Flags": "0",
+          "ContentTuningID": "0",
+          "WorldStateExpressionID": "0",
+          "MapID": "129"
+        }
+      ]
+    }
+  ]
+}
