@@ -1,34 +1,23 @@
-# Forever 0.1.0-alpha.1 candidate coverage
+# Forever 0.1.0-alpha.2 release scope
 
-Prepared for review and build-only CI. No publishing tag or release is approved
-by this document. Installed `0.1.0-test` is unchanged; this candidate is separate.
+Expanded alpha.2 scope; publishing does not install the addon on the workstation.
 
-| Included alpha entry | Static identity | Tips/overview | Mode | Actual client test |
-|---|---|---|---|---|
-| Hall of Thanes | 3065; 3493/3495/3494/3496 | Four boss records and opt-in dungeon overview; Infurnus/Magmatus association provisional | Normal 1 only | Pending November 4 |
-| Ragefire Chasm | 389; 2732/2733/2734/2735 | Four boss records and opt-in dungeon overview; no assumed next-boss route | Normal 1 only | Pending November 4 |
-| Stormwind Stockade | 34; 2756/2757/2758/2759/2760 | Five regular boss records and opt-in overview; rare Bruegal automatic tips excluded; no wing-order assumption | Normal 1 only | Pending November 4 |
+| Entry | Instance | Encounter tips | Mode | Candidate client test |
+|---|---:|---|---|---|
+| Hall | 3065 | 3493/3495/3494/3496 | Normal1 | Pending; Infurnus alias provisional |
+| Ragefire | 389 | 2732/2733/2734/2735 | Normal1 | Pending |
+| Stockade | 34 | 2756/2757/2758/2759/2760 | Normal1 | Pending; Bruegal excluded |
+| Ruins | 2999 | 3353/3357/3411/3412/3354 | Normal1 | Pending; 3355/3408 excluded |
+| Excavation | 2998 | 3480/3481/3644/3482 | Normal1 | Pending; optional quest encounter included |
+| Dalaran | 2959 | 3311/3310/3298/3299/3300/3302/3303 | Normal1 | Pending; 3301/3312 and Enigma unmapped |
+| Deadmines | 36 | 2741/2742/3676/2743/2745/2744/2747/2746 | Normal1 | Pending; Sneed phase timing unverified |
+| Wailing Caverns | 43 | 585/586/587/588/589/590/591/592 | Normal1 | Pending; rare Faerie Dragon excluded |
 
-This means **three implemented alpha entries, 13 encounter records, zero
-complete/client-tested dungeons**. No NPC/subzone/current-pull routing or raid
-coverage is included. Tips are English; UI locale fallback is exercised offline.
-The release's `coverage.json` and bundled `source-evidence.json` state the same
-scope and provenance. Exported IDs and mocked events do not establish an in-game pass.
+Eight entries, 45 encounter records, zero newly completed client-tested dungeons.
+No NPC, subzone, room, pull or loot database is added. English prose with tested
+UI locale fallback. Ruins, Excavation, Dalaran, Ragefire and Stockade never infer next-boss order.
 
-The full target remains all Classic dungeon units/wings plus nine new Forever
-dungeons. In the provisional 26+9 matrix, 24 other Classic candidates and eight
-other new dungeons remain unimplemented; UBRS classification may reduce the final
-inventory by one. The first alpha must not be described as full support.
-
-Before a publishing decision, inspect this candidate's PR/checks and artifact,
-confirm build/version/coverage notes, and choose whether a clearly untested
-launch alpha is acceptable or to wait for the first November 4 client smoke.
-Merge and publishing-tag decisions are separate; no tag is created automatically.
-
-First live loop: record GetBuildInfo and actual difficulty, clean login/HUD/settings,
-one fight in either included dungeon, success/wipe/exit cleanup, and persistence.
-Then exercise the remaining encounter records and explicitly confirm the Hall
-alias; Bruegal remains excluded unless his identity is verified. Disable the
-addon on an error; preserve the old ZIP and SavedVariables.
-For hotfixes, capture exact build/instance/event/error, reproduce offline where
-possible, rerun the gates, and issue a distinct reviewed alpha version.
+Existing static data is from 70707; all newly added entries from 70790. Current installed build 70862
+has not been reverified. Details, source dates, uncertainty and next research are
+in `FOREVER_REFRESH_20261109.md`; machine scope is `Forever/Coverage.json`.
+The prior alpha.1 remains separately versioned. Release links must identify alpha.2.

@@ -1,5 +1,16 @@
 # World of Warcraft: Forever support — readiness and implementation gates
 
+## Current refresh — 2026-11-09
+
+The previous snapshot below is historical. Candidate alpha.2 now contains eight
+entries and 45 encounter records, including partial Ruins, Excavation and Dalaran coverage. Current
+client 70862 IDs remain unverified; no full coverage or in-game pass is claimed.
+See [current refresh](FOREVER_REFRESH_20261109.md) and
+[current alpha scope](FOREVER_ALPHA_COVERAGE.md). Later source availability
+below is superseded where the refresh identifies current guides.
+
+## Historical snapshot (2026-10-31)
+
 Status (2026-10-31): alpha candidate **`0.1.0-alpha.1`** contains Hall, Ragefire and Stockade: 13 registered encounters, optional instance-wide preparation and normal difficulty 1 only. Stockade rare Bruegal automatic tips are excluded. Installed `0.1.0-test` is unchanged. Static IDs are from exact-build Wago exports. **No in-game pass or release approval.** Area/NPC triggers and Hall's guide-name association remain unverified. Full Classic-plus-nine scope is unchanged; see `FOREVER_ALPHA_COVERAGE.md` and per-dungeon readiness/provenance docs.
 
 The active install manifest identifies `wowf` version `1.60.1.70707`; the executable is `_forever_/Wow.exe`. The latest inspected graphics log recorded 1.60.1.70634 on October 27. The older `_classic_beta_` install no longer has an executable. Interface `16001` is the intended package target and is corroborated by installed Forever addon TOCs, not a new `GetBuildInfo()` observation. The test instructions are packaged in `Forever/README.txt`.

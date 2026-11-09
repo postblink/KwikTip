@@ -8,14 +8,14 @@
 
 KwikTip now supports **WoW Forever** alongside **Retail (Midnight)**, with a separate package for each client. It puts practical encounter tips in a small, unobtrusive HUD, so useful advice is close at hand during a run.
 
-The Retail package covers Midnight dungeons, raids, delves, and Timewalking. The **Forever alpha** starts with Hall of Thanes, Ragefire Chasm, and Stormwind Stockade; see its coverage below.
+The Retail package covers Midnight dungeons, raids, delves, and Timewalking. The **Forever alpha** provides a growing, explicitly partial encounter dataset; see its coverage below.
 
 Inspired by **QE Dungeon Tips** by QEdev (no longer maintained).
 
 | Client | Package | Downloads |
 |---|---|---|
 | Retail (Midnight) | `KwikTip` | [CurseForge](https://www.curseforge.com/wow/addons/kwiktip) · [Wago](https://addons.wago.io/addons/kwiktip) · [WoWInterface](https://www.wowinterface.com/downloads/info27074-KwikTip.html) |
-| WoW Forever — alpha `0.1.0-alpha.1` | `KwikTip_Forever` | [GitHub alpha](https://github.com/postblink/KwikTip/releases/tag/forever-v0.1.0-alpha.1) · [CurseForge alpha](https://www.curseforge.com/wow/addons/kwiktip/files/9389199) · [Wago alphas](https://addons.wago.io/addons/kwiktip/versions?stability=alpha) |
+| WoW Forever — alpha `0.1.0-alpha.2` | `KwikTip_Forever` | [GitHub alpha](https://github.com/postblink/KwikTip/releases/tag/forever-v0.1.0-alpha.2) · [CurseForge alpha](https://www.curseforge.com/wow/addons/kwiktip/files) · [Wago alphas](https://addons.wago.io/addons/kwiktip/versions?stability=alpha) |
 
 CurseForge and Wago host both versions on the existing KwikTip pages; choose a Forever file marked Alpha for the Forever client. WoWInterface currently distributes the Retail package only.
 
@@ -25,17 +25,27 @@ CurseForge and Wago host both versions on the existing KwikTip pages; choose a F
 
 ## WoW Forever Support
 
-**Forever `0.1.0-alpha.1` is available now**, with tips triggered by 13 Normal-mode encounters and optional dungeon-wide preparation overviews through **Persistent Tip Window**.
+**Expanded Forever alpha:** `0.1.0-alpha.2` adds five Ruins of
+Lordaeron tips and four Excavation Site: Wetlands tips plus seven City of Dalaran tips plus eight each for Deadmines and Wailing Caverns (45 total), with Baron/Butcher and rare Captain excluded.
+Current-build verification and in-game acceptance remain pending. See
+[the November 9 refresh](docs/FOREVER_REFRESH_20261109.md).
+
+Optional dungeon-wide preparation overviews use **Persistent Tip Window**.
 
 | Dungeon | Encounter tips |
 |---|---:|
 | Hall of Thanes | 4 |
 | Ragefire Chasm | 4 |
 | Stormwind Stockade | 5 |
+| Ruins of Lordaeron (partial) | 5 |
+| Excavation Site: Wetlands | 4 |
+| City of Dalaran (partial) | 7 |
+| Deadmines | 8 |
+| Wailing Caverns | 8 |
 
-This is an early alpha: full dungeon coverage is still in progress, and no dungeon has completed in-game validation. The first live checks are planned for November 4, 2026. Other dungeons, room/pull routing, and NPC targeting are not included yet. Hall's Infurnus/Magmatus guide association remains provisional, and rare Bruegal Ironknuckle is excluded from automatic tips.
+This is an early alpha: full dungeon coverage is still in progress, and no dungeon has completed in-game validation. Offline checks are not in-game acceptance. Other dungeons, room/pull routing, and NPC targeting are not included yet. Hall's Infurnus/Magmatus guide association remains provisional, and rare Bruegal Ironknuckle is excluded from automatic tips.
 
-The full roadmap remains all Classic dungeon units/wings plus the nine new Forever dungeons. See the [Forever README](https://github.com/postblink/KwikTip/blob/master/Forever/README.txt) for setup and testing details, or the [published coverage ledger](https://github.com/postblink/KwikTip/releases/download/forever-v0.1.0-alpha.1/coverage.json) for the exact included encounters.
+The full roadmap remains all Classic dungeon units/wings plus the nine new Forever dungeons. See the [Forever README](https://github.com/postblink/KwikTip/blob/master/Forever/README.txt) for setup and testing details, or the [published coverage ledger](https://github.com/postblink/KwikTip/releases/download/forever-v0.1.0-alpha.2/coverage.json) for the exact included encounters.
 
 ---
 
@@ -150,7 +160,7 @@ The addon uses a daily cron monitor that watches method.gg and Icy Veins dungeon
 
 ### WoW Forever
 
-1. Download [the Forever alpha ZIP](https://github.com/postblink/KwikTip/releases/download/forever-v0.1.0-alpha.1/KwikTip_Forever-0.1.0-alpha.1.zip), or choose the Forever alpha on CurseForge or Wago.
+1. Download [the Forever alpha ZIP](https://github.com/postblink/KwikTip/releases/download/forever-v0.1.0-alpha.2/KwikTip_Forever-0.1.0-alpha.2.zip), or choose the Forever alpha on CurseForge or Wago.
 2. Close the game and extract the `KwikTip_Forever` folder into:
 
    ```

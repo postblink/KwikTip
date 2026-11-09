@@ -1,30 +1,32 @@
-KwikTip Forever 0.1.0-alpha.1 -- WoW Forever alpha
+KwikTip Forever 0.1.0-alpha.2 -- expanded encounter alpha
 
 KwikTip now supports WoW Forever alongside Retail (Midnight). This standalone
 Forever package brings encounter tips and the familiar HUD/settings to Forever.
 
 Downloads:
-GitHub alpha: https://github.com/postblink/KwikTip/releases/tag/forever-v0.1.0-alpha.1
-CurseForge alpha: https://www.curseforge.com/wow/addons/kwiktip/files/9389199
+GitHub alpha: https://github.com/postblink/KwikTip/releases/tag/forever-v0.1.0-alpha.2
+CurseForge alphas: https://www.curseforge.com/wow/addons/kwiktip/files
 Wago alphas: https://addons.wago.io/addons/kwiktip/versions?stability=alpha
 
 CurseForge and Wago use the existing KwikTip pages; select the Forever game
 flavor and alpha versions. WoWInterface currently distributes Retail only.
 Retail uses the separate KwikTip folder; this package uses KwikTip_Forever.
 
-Included: Hall of Thanes (four encounters), Ragefire Chasm (four), and Stormwind
-Stockade (five regular encounters), plus optional dungeon-wide preparation
-overviews. Normal difficulty 1 only. Rare Bruegal automatic tips are excluded.
+Candidate included: Hall (four), Ragefire (four), Stockade (five), and
+partial Ruins of Lordaeron (five), Excavation Site: Wetlands (four), partial City of Dalaran (seven), Deadmines (eight), Wailing Caverns (eight), plus optional dungeon-wide overviews.
+Select the 0.1.0-alpha.2 Forever file, not the Retail release. Normal difficulty 1 only. Rare Bruegal automatic tips are excluded.
 Full dungeon coverage remains in progress. The roadmap includes all Classic
-dungeon units/wings plus nine new Forever dungeons. No target-client test has
-passed; the first live checks are planned for November 4, 2026.
+dungeon units/wings plus nine new Forever dungeons. This candidate has not been tested in-game; published-alpha reports do not
+qualify the new Ruins/Excavation/Dalaran data. Do not describe this as full or latest-build coverage.
 
-Target: Forever product wowf, build 1.60.1.70707, interface 16001.
+Target: Forever product wowf, interface 16001. Hall/Ragefire/Stockade use 70707; all added entries
+use preserved 70790 exports. Installed client observed at 70862; drift check pending.
 The current install is World of Warcraft/_forever_/Wow.exe; the older
 _classic_beta_/WowB.exe path in historical notes is no longer the target.
 
 Installation:
-1. Download the packaged Forever alpha ZIP from one of the links above.
+1. Download KwikTip_Forever-0.1.0-alpha.2.zip from the release or select the
+   same Forever alpha version on the marketplace pages above.
 2. Close the game and extract its KwikTip_Forever folder into:
    World of Warcraft/_forever_/Interface/AddOns/KwikTip_Forever
 3. Enable KwikTip: Forever (Alpha) in that client. Keep Retail KwikTip disabled
@@ -50,6 +52,15 @@ Expected behavior:
 - Stockade uses instance 34 and encounters 2756/2757/2758/2759/2760. Its wing
   order is not assumed. Bruegal Ironknuckle is present in current guides, but
   has no verified encounter mapping and does not get an automatic/name-based tip.
+- Ruins uses instance 2999 and events 3353/3357/3411/3412/3354.
+  Baron/Butcher 3355 and rare Captain 3408 are deliberately excluded.
+  No next-boss route is assumed; Bjork ability advice remains conservative.
+- Excavation uses instance 2998 and events 3480/3481/3644/3482. Highland Horror
+  is optional; encounter order is not inferred. Disputed exact enrage thresholds
+  and Dust Storm effect descriptions are omitted.
+- City of Dalaran uses dungeon instance 2959, never city map 2980. Seven exact
+  matches are included. Arcanic Enigma, Mana Elemental and Mana Wraith remain
+  excluded for unresolved identity/strategy; no name-based substitution. Optional Lyn triggers only on its event.
 - Alternate difficulties 201/214 and other unsupported modes do not activate these tips.
 - Area/trash triggers, NPC targeting, and pre-pull room routing are not implemented.
   There is no guessed city-map fallback. A quiet HUD before a boss is expected.
@@ -63,7 +74,7 @@ Durgen add-versus-boss kill order is omitted because current guides disagree.
 In-game acceptance:
 1. Record /run print(GetBuildInfo()) and confirm clean login with no Lua errors.
 2. Check settings, icon/logo, move mode, preview, mouse passthrough when locked.
-3. In Hall (3065), Ragefire (389) and Stockade (34), use /kwik debug and observe all 13
+3. In Hall (3065), Ragefire (389), Stockade (34), Ruins (2999), Excavation (2998), Dalaran (2959), Deadmines (36), and Wailing Caverns (43), use /kwik debug and observe all 45
    events, displayed names and tips, success/wipe handling, and zone exits.
    Check the provisional second-boss association before relying on that tip.
    Check Ragefire/Stockade with skipped/reordered bosses; no guessed next-boss tip is expected.
@@ -90,3 +101,19 @@ https://www.icy-veins.com/wow-forever/the-stockade-guide
 
 The release assets include coverage.json and source-evidence.json for the exact
 candidate scope and static-data provenance. These are not client test results.
+
+Refresh checked 2026-11-09: Method Ruins (Nov6), Icy Veins Ruins (Oct19);
+see source-evidence.json. Local installation is a separate user action.
+
+Excavation strategy checked Nov9: Method (Oct15), Icy Veins (Oct18 header/Oct19 changelog).
+https://www.method.gg/wow-forever/dungeons/excavation-site-wetlands
+https://www.icy-veins.com/wow-forever/excavation-site-wetlands-guide
+
+Dalaran strategy checked Nov9: Method Oct15 / Icy Veins Oct20.
+https://www.method.gg/wow-forever/dungeons/city-of-dalaran
+https://www.icy-veins.com/wow-forever/city-of-dalaran-guide
+
+Deadmines and Wailing Caverns use preserved70790 IDs; their current-build checks
+and in-game acceptance are pending too. Sneed has one matched event; shredder
+phase timing is unverified. Mutanus advice is not an escort-stage detector.
+Deviate Faerie Dragon has no automatic tip. See source-evidence.json.

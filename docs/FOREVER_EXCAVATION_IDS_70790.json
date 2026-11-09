@@ -1,0 +1,153 @@
+{
+  "reviewed_at_utc": "2026-11-09",
+  "data_build": "1.60.1.70790",
+  "current_client_build": "1.60.1.70862",
+  "scope": "Preserved raw exports, not fresh current-build verification; Normal 1 only; no route inference",
+  "sources": [
+    {
+      "table": "Map",
+      "build": "1.60.1.70790",
+      "requested_url": "https://wago.tools/db2/Map/csv?build=1.60.1.70790",
+      "retrieved_utc": "2026-11-04T21:57:27.624262+00:00",
+      "sha256": "392e2f6e2cb338570c9e5e6368d59e65525c18d99c3b4e89c27fdcd123923099",
+      "bytes": 11744,
+      "rows": 73,
+      "selected_rows": [
+        {
+          "ID": "2998",
+          "Directory": "2998",
+          "MapName_lang": "Excavation Site: Wetlands",
+          "MapDescription0_lang": "",
+          "MapDescription1_lang": "",
+          "PvpShortDescription_lang": "",
+          "PvpLongDescription_lang": "",
+          "Corpse_0": "0",
+          "Corpse_1": "0",
+          "MapType": "1",
+          "InstanceType": "1",
+          "ExpansionID": "0",
+          "AreaTableID": "0",
+          "LoadingScreenID": "691",
+          "TimeOfDayOverride": "-1",
+          "ParentMapID": "-1",
+          "CosmeticParentMapID": "-1",
+          "TimeOffset": "0",
+          "MinimapIconScale": "1",
+          "CorpseMapID": "-1",
+          "MaxPlayers": "0",
+          "WindSettingsID": "136",
+          "ZmpFileDataID": "0",
+          "WdtFileDataID": "7252920",
+          "OceanLiquidTypeID": "2",
+          "NavigationMaxDistance": "0",
+          "PreloadFileDataID": "0",
+          "Flags_0": "8396381",
+          "Flags_1": "1040",
+          "Flags_2": "2347232"
+        }
+      ]
+    },
+    {
+      "table": "DungeonEncounter",
+      "build": "1.60.1.70790",
+      "requested_url": "https://wago.tools/db2/DungeonEncounter/csv?build=1.60.1.70790",
+      "retrieved_utc": "2026-11-04T21:57:27.624262+00:00",
+      "sha256": "a710019c412ebf4f6a267f092c5b54a2ef70d3832835467e0478681d60ed9370",
+      "bytes": 17624,
+      "rows": 342,
+      "selected_rows": [
+        {
+          "Name_lang": "Saltspine",
+          "ID": "3480",
+          "MapID": "2998",
+          "DifficultyID": "0",
+          "OrderIndex": "0",
+          "CompleteWorldStateID": "30737",
+          "Bit": "0",
+          "Flags": "1024",
+          "SpellIconFileID": "0",
+          "Faction": "-1",
+          "ItemSequenceLevel": "0"
+        },
+        {
+          "Name_lang": "Shadetooth",
+          "ID": "3481",
+          "MapID": "2998",
+          "DifficultyID": "0",
+          "OrderIndex": "1000",
+          "CompleteWorldStateID": "30739",
+          "Bit": "1",
+          "Flags": "1024",
+          "SpellIconFileID": "0",
+          "Faction": "-1",
+          "ItemSequenceLevel": "0"
+        },
+        {
+          "Name_lang": "Relic Guardian",
+          "ID": "3482",
+          "MapID": "2998",
+          "DifficultyID": "0",
+          "OrderIndex": "2000",
+          "CompleteWorldStateID": "30741",
+          "Bit": "2",
+          "Flags": "1024",
+          "SpellIconFileID": "0",
+          "Faction": "-1",
+          "ItemSequenceLevel": "0"
+        },
+        {
+          "Name_lang": "Highland Horror",
+          "ID": "3644",
+          "MapID": "2998",
+          "DifficultyID": "0",
+          "OrderIndex": "1500",
+          "CompleteWorldStateID": "32642",
+          "Bit": "3",
+          "Flags": "4",
+          "SpellIconFileID": "0",
+          "Faction": "-1",
+          "ItemSequenceLevel": "0"
+        }
+      ]
+    },
+    {
+      "table": "MapDifficulty",
+      "build": "1.60.1.70790",
+      "requested_url": "https://wago.tools/db2/MapDifficulty/csv?build=1.60.1.70790",
+      "retrieved_utc": "2026-11-04T21:57:27.624262+00:00",
+      "sha256": "18efa9c5823859f0bc91a6650f987f97635f64b864d1c88b95364cbb3471a2cb",
+      "bytes": 5242,
+      "rows": 142,
+      "selected_rows": [
+        {
+          "Message_lang": "",
+          "ID": "6012",
+          "DifficultyID": "1",
+          "LockID": "0",
+          "ResetInterval": "0",
+          "MaxPlayers": "5",
+          "ItemContext": "0",
+          "ItemContextPickerID": "0",
+          "Flags": "0",
+          "ContentTuningID": "0",
+          "WorldStateExpressionID": "0",
+          "MapID": "2998"
+        },
+        {
+          "Message_lang": "",
+          "ID": "6341",
+          "DifficultyID": "201",
+          "LockID": "42",
+          "ResetInterval": "1",
+          "MaxPlayers": "5",
+          "ItemContext": "0",
+          "ItemContextPickerID": "0",
+          "Flags": "0",
+          "ContentTuningID": "0",
+          "WorldStateExpressionID": "0",
+          "MapID": "2998"
+        }
+      ]
+    }
+  ]
+}
