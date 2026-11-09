@@ -1,10 +1,9 @@
 KwikTip Forever @VERSION@
 
-Unpublished next Forever alpha candidate with source-backed encounter advice. See coverage.json
-for the exact dungeon/encounter list. New slices include Ruins of Lordaeron,
-Excavation Site: Wetlands, City of Dalaran, Deadmines and Wailing Caverns. Next batch adds Shadowfang Keep, Blackfathom
-Deeps, Gnomeregan, Razorfen Kraul and Uldaman.
-78 encounter records across thirteen entries; see exact exclusions below.
+Expanded Forever alpha: adds 33 encounter records across Shadowfang Keep,
+Blackfathom Deeps, Gnomeregan, Razorfen Kraul and Uldaman to alpha.2.
+Total 78 encounter records across thirteen entries. Exact scope and provenance
+are included in coverage.json and source-evidence.json.
 
 This is partial dungeon coverage, not a complete Forever guide. Normal difficulty
 1 only. No NPC, room or subzone detection is added; new slices do not guess the
@@ -13,7 +12,9 @@ next boss after a kill. Optional encounters activate only on matching events.
 Important exclusions: Ruins Baron/Butcher identity is unresolved; rare Captain
 is excluded. Dalaran Arcanic Enigma has no verified name-to-ID match; Mana
 Elemental and Mana Wraith are excluded rather than assigned guessed tips.
-Rare Bruegal and Deviate Faerie Dragon are excluded. Sneed phase timing and
+Rare Bruegal and Deviate Faerie Dragon are excluded. Known Geilhast 2914 versus
+guide Gelihast is unresolved and omitted; alternate-mode IDs are not reused.
+Other rare/pre-instance exclusions are listed in coverage.json. Sneed phase timing and
 Hall Infurnus/Magmatus association need client verification. Bjork advice remains conservative. Disputed exact thresholds are omitted.
 
 Client validation: pending. Static IDs mix preserved 70707 and rehash-verified

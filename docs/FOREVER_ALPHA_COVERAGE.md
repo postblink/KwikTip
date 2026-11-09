@@ -1,6 +1,6 @@
-# Forever alpha.3 next candidate scope (unpublished)
+# Forever alpha.3 release scope
 
-Published alpha.2 remains separate:45 encounters/eight entries. This candidate
+Published alpha.2 remains separate:45 encounters/eight entries. This alpha
 contains78 records/thirteen entries, all Normal1, client acceptance pending.
 
 | Dungeon | Instance | Events |

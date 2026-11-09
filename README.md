@@ -15,7 +15,7 @@ Inspired by **QE Dungeon Tips** by QEdev (no longer maintained).
 | Client | Package | Downloads |
 |---|---|---|
 | Retail (Midnight) | `KwikTip` | [CurseForge](https://www.curseforge.com/wow/addons/kwiktip) · [Wago](https://addons.wago.io/addons/kwiktip) · [WoWInterface](https://www.wowinterface.com/downloads/info27074-KwikTip.html) |
-| WoW Forever — alpha `0.1.0-alpha.2` | `KwikTip_Forever` | [GitHub alpha](https://github.com/postblink/KwikTip/releases/tag/forever-v0.1.0-alpha.2) · [CurseForge alpha](https://www.curseforge.com/wow/addons/kwiktip/files) · [Wago alphas](https://addons.wago.io/addons/kwiktip/versions?stability=alpha) |
+| WoW Forever — alpha `0.1.0-alpha.3` | `KwikTip_Forever` | [GitHub alpha](https://github.com/postblink/KwikTip/releases/tag/forever-v0.1.0-alpha.3) · [CurseForge alpha](https://www.curseforge.com/wow/addons/kwiktip/files) · [Wago alphas](https://addons.wago.io/addons/kwiktip/versions?stability=alpha) |
 
 CurseForge and Wago host both versions on the existing KwikTip pages; choose a Forever file marked Alpha for the Forever client. WoWInterface currently distributes the Retail package only.
 
@@ -25,14 +25,10 @@ CurseForge and Wago host both versions on the existing KwikTip pages; choose a F
 
 ## WoW Forever Support
 
-Next unpublished alpha.3 candidate:78 encounter records/thirteen entries.
-The download links below remain published alpha.2 until a reviewed release.
-See [next refresh](docs/FOREVER_NEXT_20261109.md).
-
-**Expanded Forever alpha:** `0.1.0-alpha.2` adds five Ruins of
-Lordaeron tips and four Excavation Site: Wetlands tips plus seven City of Dalaran tips plus eight each for Deadmines and Wailing Caverns (45 total), with Baron/Butcher and rare Captain excluded.
-Current-build verification and in-game acceptance remain pending. See
-[the November 9 refresh](docs/FOREVER_REFRESH_20261109.md).
+**Forever `0.1.0-alpha.3`** contains 78 encounter records across thirteen entries,
+adding 33 records across Shadowfang Keep, Blackfathom Deeps, Gnomeregan,
+Razorfen Kraul and Uldaman. Current-build verification and in-game acceptance
+remain pending. See [the expanded refresh](docs/FOREVER_NEXT_20261109.md).
 
 Optional dungeon-wide preparation overviews use **Persistent Tip Window**.
 
@@ -46,10 +42,15 @@ Optional dungeon-wide preparation overviews use **Persistent Tip Window**.
 | City of Dalaran (partial) | 7 |
 | Deadmines | 8 |
 | Wailing Caverns | 8 |
+| Shadowfang Keep | 8 |
+| Blackfathom Deeps (partial) | 6 |
+| Gnomeregan | 5 |
+| Razorfen Kraul | 6 |
+| Uldaman | 8 |
 
 This is an early alpha: full dungeon coverage is still in progress, and no dungeon has completed in-game validation. Offline checks are not in-game acceptance. Other dungeons, room/pull routing, and NPC targeting are not included yet. Hall's Infurnus/Magmatus guide association remains provisional, and rare Bruegal Ironknuckle is excluded from automatic tips.
 
-The full roadmap remains all Classic dungeon units/wings plus the nine new Forever dungeons. See the [Forever README](https://github.com/postblink/KwikTip/blob/master/Forever/README.txt) for setup and testing details, or the [published coverage ledger](https://github.com/postblink/KwikTip/releases/download/forever-v0.1.0-alpha.2/coverage.json) for the exact included encounters.
+The full roadmap remains all Classic dungeon units/wings plus the nine new Forever dungeons. See the [Forever README](https://github.com/postblink/KwikTip/blob/master/Forever/README.txt) for setup and testing details, or the [published coverage ledger](https://github.com/postblink/KwikTip/releases/download/forever-v0.1.0-alpha.3/coverage.json) for the exact included encounters.
 
 ---
 
@@ -164,7 +165,7 @@ The addon uses a daily cron monitor that watches method.gg and Icy Veins dungeon
 
 ### WoW Forever
 
-1. Download [the Forever alpha ZIP](https://github.com/postblink/KwikTip/releases/download/forever-v0.1.0-alpha.2/KwikTip_Forever-0.1.0-alpha.2.zip), or choose the Forever alpha on CurseForge or Wago.
+1. Download [the Forever alpha ZIP](https://github.com/postblink/KwikTip/releases/download/forever-v0.1.0-alpha.3/KwikTip_Forever-0.1.0-alpha.3.zip), or choose the Forever alpha on CurseForge or Wago.
 2. Close the game and extract the `KwikTip_Forever` folder into:
 
    ```

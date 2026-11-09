@@ -1,4 +1,4 @@
-# Next substantial Forever refresh (unpublished)
+# Forever alpha.3 release record
 
 Branch forever-next-20261109 builds on published alpha.2. Added Shadowfang Keep8,
 Blackfathom Deeps6, Gnomeregan5. Razorfen Kraul adds6. Uldaman adds8. Current candidate78 events/13 dungeon entries.
@@ -34,3 +34,9 @@ count remains zero. Broader pages found are leads, not proof of verified behavio
 
 Independent review found no functional/identity blockers; older Uldaman source
 assessment labeled superseded. Candidate not uploaded; alpha.2 remains live.
+
+## Alpha.3 release preparation
+
+Parent requested publication of this substantial reviewed batch to existing
+destinations. Earlier unpublished statements describe preparation checkpoints.
+Final docs now target alpha.3 while preserving all evidence limitations.
