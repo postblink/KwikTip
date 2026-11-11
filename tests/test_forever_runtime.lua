@@ -199,7 +199,7 @@ for _, name in ipairs({ "DUNGEON_BY_INSTANCEID", "DUNGEON_BY_UIMAPID", "BOSS_BY_
     check(type(addon[name]) == "table", "package initializes " .. name)
 end
 check(type(addon.DUNGEONS) == "table", "Forever data table exists")
-check(#addon.DUNGEONS == 22, "alpha manifest contains exactly twenty-two dungeon records")
+check(#addon.DUNGEONS == 23, "alpha manifest contains exactly twenty-three dungeon records")
 local hall = addon.DUNGEON_BY_INSTANCEID[3065]
 local ragefire = addon.DUNGEON_BY_INSTANCEID[389]
 local stockade = addon.DUNGEON_BY_INSTANCEID[34]
@@ -264,7 +264,7 @@ for _ in pairs(addon.BOSS_BY_ENCOUNTERID) do encounterCount = encounterCount + 1
 for _, boss in ipairs(addon.DUNGEON_BY_INSTANCEID[129].bosses) do
     check(contains(boss.tip, "Provisional advice:"), "RFD provisional status remains visible")
 end
-check(encounterCount == 178, "alpha manifest indexes exactly one hundred seventy-eight encounter records")
+check(encounterCount == 183, "alpha manifest indexes exactly one hundred eighty-three encounter records")
 for _, dungeon in ipairs(addon.DUNGEONS) do
     check(type(dungeon.difficultyIDs) == "table" and #dungeon.difficultyIDs == 1
         and dungeon.difficultyIDs[1] == 1,
@@ -748,6 +748,47 @@ for _, showOverview in ipairs({ false, true }) do
 end
 KwikTipDB.showInDungeon = false
 state.inInstance, state.instanceType, state.instanceID, state.mapID = false, "none", 0, nil
+emit("PLAYER_ENTERING_WORLD")
+
+-- Drowned City is admitted from exact-build readable DB2 sections only.
+local drowned = addon.DUNGEON_BY_INSTANCEID[2970]
+check(drowned ~= nil and #drowned.bosses == 5, "Drowned City includes five exact-ID strategy matches")
+for i, id in ipairs({3474,3475,3476,3511,3479}) do
+    check(drowned.bosses[i].encounterID == id, "Drowned City encounter matches verified 70888 row")
+end
+check(drowned.uiMapID == nil and drowned.areas == nil, "Drowned City has no guessed map or area routing")
+check(addon.BOSS_BY_ENCOUNTERID[3478] == nil, "Deathless Guardians does not borrow Marrow advice")
+checkUnorderedClassicDungeon(drowned, "Drowned City", "DROWNED_CITY_NOTE")
+state.inInstance, state.instanceType, state.instanceID = true, "party", 2970
+state.difficultyID, state.mapID, state.subzone = 1, nil, ""
+for _, showOverview in ipairs({ false, true }) do
+    KwikTipDB.showInDungeon = showOverview
+    emit("PLAYER_ENTERING_WORLD")
+    for _, excluded in ipairs({{3478,"Deathless Marrow"},{994101,"Umbra"},{994102,"Gill"},{994103,"Zin'aka"}}) do
+        emit("ENCOUNTER_START", excluded[1], excluded[2], 1, 5)
+        check(not addon.bossActive and addon._activeBossEntry == nil, "Drowned City exclusions cannot create name-based tips")
+        check(showOverview and contains(addon._lastContent, drowned.overview)
+            or not showOverview and addon._lastContent == "" and not addon.HUD:IsShown(),
+            "excluded Drowned City events preserve only the opted-in overview")
+    end
+end
+KwikTipDB.showInDungeon = false
+for _, boss in ipairs(drowned.bosses) do
+    state.instanceID, state.difficultyID = 2970, 201
+    emit("PLAYER_ENTERING_WORLD")
+    emit("ENCOUNTER_START", boss.encounterID, boss.name, 201, 5)
+    check(not addon.bossActive and not addon.HUD:IsShown(), "Drowned City alternate difficulty stays disabled")
+    state.instanceID, state.difficultyID = 3065, 1
+    emit("PLAYER_ENTERING_WORLD")
+    emit("ENCOUNTER_START", boss.encounterID, boss.name, 1, 5)
+    check(not addon.bossActive and not addon.HUD:IsShown(), "Drowned City events cannot leak into another dungeon")
+    state.instanceID = 2970
+    emit("PLAYER_ENTERING_WORLD")
+    emit("ENCOUNTER_START", boss.encounterID, boss.name, 1, 5)
+    emit("ENCOUNTER_END", boss.encounterID, boss.name, 1, 5, 0)
+    check(not addon.bossActive and not addon.HUD:IsShown(), "Drowned City wipe clears the active tip")
+end
+state.inInstance, state.instanceType, state.instanceID = false, "none", 0
 emit("PLAYER_ENTERING_WORLD")
 
 -- Empty/unsupported routes must work before tests add any fixture data.

@@ -10,6 +10,12 @@ client-accepted dungeons. Current70862 IDs remain unverified. See the authoritat
 [batch evidence](FOREVER_BATCH4_20261109.md). BRS classification and five new
 slices remain open. Do not use the historical missing-row statuses as current.
 
+## Research update, 2026-11-11
+
+The alpha.5 package adds five Drowned City tips, including Primeval
+Elemental, after exact 70888 Map/MapDifficulty/encounter verification. It has 183
+events in 23 entries. Only Normal 1 is enabled; client acceptance remains pending. See the [refresh and promotion gate](FOREVER_DROWNED_CITY_REFRESH_20261111.md).
+
 ## Historical snapshot (2026-10-31)
 
 Status (2026-10-31): **Alpha candidate `0.1.0-alpha.1` includes Hall, Ragefire and Stockade: 13 registered encounter records and opt-in dungeon overviews, normal difficulty 1 only. Zero dungeons meet complete coverage below.** Rare Bruegal automatic tips are excluded. Static IDs are verified from exact-build exports; runtime, area/NPC triggers and Hall's name association remain pending. Installed `0.1.0-test` stays unchanged. No release approval. See `FOREVER_ALPHA_COVERAGE.md` and `Forever/Coverage.json`; full scope is preserved.

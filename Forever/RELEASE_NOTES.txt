@@ -1,34 +1,28 @@
 KwikTip Forever @VERSION@
 
-Expanded Forever alpha: adds 100 encounter records to alpha.3 across Blackrock
-Depths, Scholomance, ZulFarrak, Maraudon, Scarlet Monastery, Dire Maul,
-Stratholme, Sunken Temple and Razorfen Downs. Total178 records across22 runtime
-instance entries. Shared instance entries do not infer wings or routes.
-Exact scope and dated provenance ship in coverage.json and source-evidence.json.
+Adds five Drowned City encounter tips and an opt-in
+dungeon overview. Total: 183 encounter records across 23 runtime instance entries.
+Drowned City uses exact installed build 1.60.1.70888 Map, MapDifficulty and
+DungeonEncounter rows, decoded from readable client-data sections. Strategy
+comes from Wowhead's guide updated November 10.
 
-Cathedral and Razorfen Downs tips are visibly provisional: conservative strategy
-is corroborated by independent Forever guides, but one source explicitly falls
-back to Classic. No in-game verification is implied. Temple uses normal events,
-not the old alternate or raid records. Blackrock Spire remains excluded pending
-party/raid classification; five new dungeons still lack qualified runtime slices.
+Included: Zul'Alai, Var'Taka, Captain Dreadrise, Primeval Elemental and Min'loth
+the Serpent. Deathless Guardians is not assumed to be the guide's Deathless
+Marrow. Umbra, Gill and Zin'aka remain excluded without reconciled mappings.
+Normal difficulty 1 only; alternate difficulty 201 is deliberately disabled.
+No next-boss route, room, subzone or NPC detection is added.
 
-This is partial dungeon coverage, not a complete Forever guide. Normal difficulty
-1 only. No NPC, room or subzone detection is added; new slices do not guess the
-next boss after a kill. Optional encounters activate only on matching events.
+Coverage remains partial: 24 Classic roster units/wings and five new dungeons
+have some advice. Blackrock Spire and four new dungeons still lack runtime
+slices. Shared maps do not imply wing detection. Cathedral and Razorfen Downs
+advice remains provisional. Existing encounter exclusions remain in coverage.json.
 
-Important exclusions: Ruins Baron/Butcher identity is unresolved; rare Captain
-is excluded. Dalaran Arcanic Enigma has no verified name-to-ID match; Mana
-Elemental and Mana Wraith are excluded rather than assigned guessed tips.
-Rare Bruegal and Deviate Faerie Dragon are excluded. Known Geilhast 2914 versus
-guide Gelihast is unresolved and omitted; alternate-mode IDs are not reused.
-Other rare/pre-instance exclusions are listed in coverage.json. Sneed phase timing and
-Hall Infurnus/Magmatus association need client verification. Bjork advice remains conservative. Disputed exact thresholds are omitted.
-
-Client validation: pending. Static IDs mix preserved 70707 and rehash-verified
-70790 exports. Installed client observed at 70862; raw latest-build ID drift
-has not been reverified. Interface 16001. Offline tests do not establish an
-in-game acceptance pass. Complete, client-accepted dungeons: zero.
+Client validation: pending. Only Drowned City's static identities were newly
+qualified at 70888; the other entries retain 70707/70790 evidence and need a
+latest-build drift check. Whole raw tables contain unrelated unreadable sections;
+no exhaustive roster or absent-encounter claim is made. Complete client-accepted
+dungeons: zero. Offline tests do not establish an in-game pass.
 
 Separate Forever alpha package; Retail remains unchanged. coverage.json and
-source-evidence.json ship the exact scope, source dates and exclusions. Please
-report build, locale, encounter IDs and Lua errors without sharing private files.
+source-evidence.json identify exact scope, source dates and exclusions. Installation is
+a separate step; this release does not establish an in-game acceptance pass.

@@ -1,7 +1,7 @@
-# Forever alpha.4 release scope
+# Forever alpha.5 scope
 
-Release:178 encounters in22 runtime entries; Normal1 only.
-Complete client-accepted dungeons:zero. Previous alpha.3 contained78/13.
+Alpha package: 183 encounters in 23 runtime entries; Normal 1 only.
+Complete client-accepted dungeons: zero. Published alpha.4 contained 178/22.
 
 | Dungeon | Instance | Events |
 |---|---:|---|
@@ -27,9 +27,15 @@ Complete client-accepted dungeons:zero. Previous alpha.3 contained78/13.
 | Stratholme | 329 | 472,473,474,475,476,477,478,479,480,481,482,483,484,2798,2799,2800 |
 | Sunken Temple | 109 | 3582,3589,3588,3587,3586,3585,3584,3583 |
 | Razorfen Downs | 129 | 2780,2781,2782,2783,2784,2785 |
+| The Drowned City | 2970 | 3474,3475,3476,3511,3479 |
 
 See Coverage.json and source-evidence.json for exact dated provenance/exclusions.
 Cathedral and Razorfen Downs tips are explicitly provisional. Shared maps do not
-infer wings/routes. Current70862 IDs and live acceptance remain unverified.
-24 Classic roster units/wings and four new dungeons have some advice, not complete
-coverage. BRS mode classification and five new dungeons remain outside this slice.
+infer wings/routes. Drowned City static rows are verified at 70888; other entries
+still use 70707/70790 and need current-build checks. All live acceptance is pending.
+24 Classic roster units/wings and five new dungeons have some advice, not complete
+coverage. BRS mode classification and four new dungeons remain outside this slice.
+
+Drowned City excludes the unresolved Marrow/Guardians association and unmatched
+Umbra/Gill/Zin'aka. Its raw table inspection is partial, but every admitted row
+comes from a fully readable section. See FOREVER_DROWNED_CITY_IDS_70888.json.

@@ -1,10 +1,10 @@
-KwikTip Forever 0.1.0-alpha.4 -- expanded release; expanded encounter alpha
+KwikTip Forever 0.1.0-alpha.5 -- partial encounter alpha
 
 KwikTip now supports WoW Forever alongside Retail (Midnight). This standalone
 Forever package brings encounter tips and the familiar HUD/settings to Forever.
 
 Downloads:
-GitHub alpha: https://github.com/postblink/KwikTip/releases/tag/forever-v0.1.0-alpha.4
+GitHub alpha: https://github.com/postblink/KwikTip/releases/tag/forever-v0.1.0-alpha.5
 CurseForge alphas: https://www.curseforge.com/wow/addons/kwiktip/files
 Wago alphas: https://addons.wago.io/addons/kwiktip/versions?stability=alpha
 
@@ -12,27 +12,28 @@ CurseForge and Wago use the existing KwikTip pages; select the Forever game
 flavor and alpha versions. WoWInterface currently distributes Retail only.
 Retail uses the separate KwikTip folder; this package uses KwikTip_Forever.
 
-Release scope: 178 encounter tips in 22 runtime instance entries. Included:
+Candidate scope: 183 encounter tips in 23 runtime instance entries. Included:
 Hall, Ragefire, Stockade, Ruins, Excavation, Dalaran, Deadmines, Wailing Caverns,
 Shadowfang Keep, Blackfathom Deeps, Gnomeregan, Razorfen Kraul, Uldaman,
 Blackrock Depths, Scholomance, ZulFarrak, Maraudon, Scarlet Monastery,
-Dire Maul, Stratholme, Sunken Temple and Razorfen Downs. Individual encounter exclusions remain.
+Dire Maul, Stratholme, Sunken Temple, Razorfen Downs and The Drowned City. Individual encounter exclusions remain.
 Shared Scarlet, Dire Maul and Stratholme entries do not infer wings or routes.
 Cathedral and Razorfen Downs tips are explicitly provisional. Normal difficulty 1 only.
 
-Full dungeon coverage remains in progress: 24 Classic units/wings and four new
-dungeons have some advice, not complete coverage. Both Blackrock Spire wings plus five new dungeons remain outside this candidate.
+Full dungeon coverage remains in progress: 24 Classic units/wings and five new
+dungeons have some advice, not complete coverage. Both Blackrock Spire wings plus four new dungeons remain outside this candidate.
 The roadmap includes all Classic dungeon units/wings plus nine new dungeons.
 This candidate has not been tested in-game. Do not describe it as complete,
-current-build verified, or automatically installed.
+fully current-build verified, or automatically installed.
 
 Target: Forever product wowf, interface 16001. Hall/Ragefire/Stockade use 70707; all added entries
-use preserved 70790 exports. Installed client observed at 70862; drift check pending.
+except Drowned City use preserved 70790 exports. Drowned City uses exact 70888
+Map, MapDifficulty and encounter rows. Other latest-build drift checks remain pending.
 The current install is World of Warcraft/_forever_/Wow.exe; the older
 _classic_beta_/WowB.exe path in historical notes is no longer the target.
 
 Installation:
-1. Download KwikTip_Forever-0.1.0-alpha.4.zip from the release or select the
+1. Download KwikTip_Forever-0.1.0-alpha.5.zip from the release or select the
    same Forever alpha version on the marketplace pages above.
 2. Close the game and extract its KwikTip_Forever folder into:
    World of Warcraft/_forever_/Interface/AddOns/KwikTip_Forever
@@ -68,6 +69,9 @@ Expected behavior:
 - City of Dalaran uses dungeon instance 2959, never city map 2980. Seven exact
   matches are included. Arcanic Enigma, Mana Elemental and Mana Wraith remain
   excluded for unresolved identity/strategy; no name-based substitution. Optional Lyn triggers only on its event.
+- Drowned City uses instance 2970 and events 3474/3475/3476/3511/3479. The five
+  exact source-name matches trigger only on their encounter events. Deathless
+  Marrow/Guardians, Umbra, Gill and Zin'aka remain excluded; no inferred aliases.
 - Alternate difficulties 201/214 and other unsupported modes do not activate these tips.
 - Area/trash triggers, NPC targeting, and pre-pull room routing are not implemented.
   There is no guessed city-map fallback. A quiet HUD before a boss is expected.
@@ -81,12 +85,11 @@ Durgen add-versus-boss kill order is omitted because current guides disagree.
 In-game acceptance:
 1. Record /run print(GetBuildInfo()) and confirm clean login with no Lua errors.
 2. Check settings, icon/logo, move mode, preview, mouse passthrough when locked.
-3. In Hall (3065), Ragefire (389), Stockade (34), Ruins (2999), Excavation (2998), Dalaran (2959), Deadmines (36), Wailing Caverns (43), Shadowfang (33), Blackfathom (48), Gnomeregan (90),
-   Razorfen Kraul (47), and Uldaman (70), use /kwik debug and observe all 78
-   events, displayed names and tips, success/wipe handling, and zone exits.
-   Check the provisional second-boss association before relying on that tip.
-   Check Ragefire/Stockade with skipped/reordered bosses; no guessed next-boss tip is expected.
-   If rare Bruegal appears, record whether an encounter event fires; do not assume coverage.
+3. For every included entry in coverage.json, use /kwik debug and observe each
+   event, displayed name and tip, success/wipe handling, and zone exits. The
+   candidate has 183 events across 23 entries, including five in Drowned City 2970.
+   Check provisional strategy associations and skipped/reordered bosses; only
+   Hall permits its existing next-boss preview. Do not assume rare coverage.
 4. Confirm no tip leaks into another dungeon or after leaving the instance.
    Check the opt-in overview and its personal note; disable Persistent Tip Window
    and confirm ordinary entry is quiet again. Record actual difficulty IDs;
@@ -133,6 +136,9 @@ Alternate difficulty 198/201 records must not substitute for Normal events.
 Rare/quest/escort timing remains unverified; no name-based fallback is provided.
 Current-build IDs and client acceptance still unverified.
 
-UNPUBLISHED alpha.4 currently178 events/22 runtime entries; download links refer
-to publishedalpha.3. New BRD17, Scholomance11, ZulFarrak8, Maraudon8 and Scarlet7.
-Scarlet shares one runtime map across wings; Cathedral2 tips explicitly provisional.
+Historical alpha.4 added 100 events for a total 178/22. The alpha.5
+package adds five Drowned City events for 183/23. Source strategy checked Nov 11:
+https://www.wowhead.com/forever/guide/the-drowned-city-dungeon-overview-location-rewards
+Drowned City's current-build row evidence is in source-evidence.json. Full tables
+have unrelated unreadable sections; no missing-row or complete-roster claim.
+New tips use English fallback where a translated authored tip is not available.

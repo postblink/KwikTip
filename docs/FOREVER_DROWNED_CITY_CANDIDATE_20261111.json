@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "reviewed_at_utc": "2026-11-11",
+  "name": "The Drowned City",
+  "status": "alpha.5 implementation; exact-build identities verified; client acceptance pending",
+  "runtime_enabled": true,
+  "raw_identity_verified": true,
+  "client_tested": false,
+  "instanceID": 2970,
+  "difficultyIDs": [
+    1
+  ],
+  "reported_identity": {
+    "source": "community-roster",
+    "claimed_build": "1.60.1.70862",
+    "map_id": 2970,
+    "encounters": [
+      {
+        "name": "Zul'Alai",
+        "encounter_id": 3474
+      },
+      {
+        "name": "Var'Taka",
+        "encounter_id": 3475
+      },
+      {
+        "name": "Captain Dreadrise",
+        "encounter_id": 3476
+      },
+      {
+        "name": "Deathless Guardians",
+        "encounter_id": 3478
+      },
+      {
+        "name": "Primeval Elemental",
+        "encounter_id": 3511
+      },
+      {
+        "name": "Min'loth the Serpent",
+        "encounter_id": 3479
+      }
+    ],
+    "limitation": "Historical community lead only. Admitted identities are now independently verified against readable sections of installed build 1.60.1.70888, with exact schema and layout matching.",
+    "corroborating_source": "att-addon"
+  },
+  "sources": [
+    {
+      "id": "wowhead-guide",
+      "url": "https://www.wowhead.com/forever/guide/the-drowned-city-dungeon-overview-location-rewards",
+      "page_updated": "2026-11-10",
+      "role": "Authored strategy; reviewed boss sections."
+    },
+    {
+      "id": "community-roster",
+      "url": "https://wow-forever.gg/dungeons/the-drowned-city/",
+      "role": "Reported map and encounter values; requires raw verification."
+    },
+    {
+      "id": "blizzard-hotfixes",
+      "url": "https://news.blizzard.com/en-us/article/24315281/wow-forever-hotfixes-november-9-2026",
+      "section_date": "2026-11-09",
+      "role": "Official tuning context. Indexed section was readable; direct page extraction returned no body."
+    },
+    {
+      "id": "att-addon",
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/9bb7f2a929550016947d31b5948b464e48592147/.contrib/.db/forever/dungeons%20%26%20raids/the%20drowned%20city.lua",
+      "revision_date": "2026-11-10",
+      "origin_build": "1.60.1.70840",
+      "role": "Independent established-addon corroboration of map 2970 and all six reported encounter IDs. No Normal/party runtime verification."
+    }
+  ],
+  "overview_candidate": "Use small pulls, avoid knockbacks into nearby packs, and interrupt caster Fear. Watch your breath during underwater sections.",
+  "overview_source": "wowhead-guide",
+  "bosses": [
+    {
+      "name": "Zul'Alai",
+      "encounterID": 3474,
+      "tip": "Move away during Monstrous Slam. Prioritize removing Rotted Strike from the tank and prepare extra healing for the late enrage.",
+      "source": "wowhead-guide"
+    },
+    {
+      "name": "Var'Taka",
+      "encounterID": 3475,
+      "tip": "Control or kill the priestesses before their heals prolong the fight. Face the boss away from allies and clear nearby packs before pulling.",
+      "source": "wowhead-guide"
+    },
+    {
+      "name": "Captain Dreadrise",
+      "encounterID": 3476,
+      "tip": "Break Abyssal Bubbles to free trapped players, including the tank. Interrupt Waterbolt Volley and clear patrols before the pull.",
+      "source": "wowhead-guide"
+    },
+    {
+      "name": "Primeval Elemental",
+      "encounterID": 3511,
+      "tip": "Defeat the Undying Offerings to activate this optional boss. Watch your breath and surface when needed; prepare healing for Freeze Water.",
+      "source": "wowhead-guide"
+    },
+    {
+      "name": "Min'loth the Serpent",
+      "encounterID": 3479,
+      "tip": "Save resources for the serpent phase after the troll form falls. Cleanse poison promptly and prepare for Fear.",
+      "source": "wowhead-guide"
+    }
+  ],
+  "excluded": [
+    {
+      "names": [
+        "Deathless Marrow",
+        "Deathless Guardians"
+      ],
+      "reason": "Guide and community roster use different encounter names. The official hotfix confirms the Marrow fight, but does not establish its event ID. Do not infer an alias."
+    },
+    {
+      "names": [
+        "Umbra",
+        "Gill"
+      ],
+      "reason": "Guide strategy exists, but no verified DungeonEncounter mapping is available. No name or NPC fallback."
+    },
+    {
+      "names": [
+        "Zin'aka"
+      ],
+      "reason": "No reconciled strategy and raw event mapping were established in this refresh."
+    }
+  ],
+  "hotfix_review": {
+    "source": "blizzard-hotfixes",
+    "summary": "The November 9 section corrects excessive dungeon creature damage and reduces health, damage and Shield Slam frequency in the Deathless Marrow encounter.",
+    "strategy_effect": "These tuning changes do not establish event identity. Candidate tips avoid damage numbers and assume no new route or alias."
+  },
+  "promotion_requirements": [
+    "Complete the target-client load and encounter acceptance checks before claiming in-game validation.",
+    "Reconcile omitted encounter strategy/identity before extending coverage; alternate difficulty 201 remains disabled."
+  ],
+  "installed_client_build_observed": "1.60.1.70888",
+  "local_identity_evidence": "docs/FOREVER_DROWNED_CITY_LOCAL_ID_CHECK_70888.json",
+  "raw_identity_evidence": "docs/FOREVER_DROWNED_CITY_IDS_70888.json"
+}

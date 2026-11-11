@@ -2,7 +2,8 @@
 local ADDON_NAME, KwikTip = ...
 
 -- IDs: Wago Map/DungeonEncounter CSVs: existing entries use 70707;
--- All newly added entries use preserved 70790 exports. Current 70862 drift remains unverified.
+-- Other existing entries use preserved 70790 exports; latest-build drift remains pending.
+-- Drowned City uses exact installed 70888 rows; see FOREVER_DROWNED_CITY_IDS_70888.json.
 -- Strategy: current Forever Method/Icy Veins guides. See the per-dungeon
 -- readiness/provenance documents listed in Forever/Coverage.json.
 -- These static IDs do not establish an in-game pass. UiMap/NPC/subzone
@@ -639,6 +640,26 @@ KwikTip.DUNGEONS = {
               tip = "Provisional advice: ranged stay away from Disease Cloud. Healers prepare for heavy damage on the tank." },
             { encounterID = 2785, name = "Amnennar the Coldbringer",
               tip = "Provisional advice: tank collects summoned adds. Agree whether to focus adds or boss; avoid splitting damage without a plan." },
+        },
+    },
+    {
+        -- Exact 70888 Map/MapDifficulty/DungeonEncounter rows; not client tested.
+        instanceID = 2970, name = "The Drowned City",
+        season = "forever", type = "dungeon",
+        difficultyIDs = { 1 }, previewNextBoss = false,
+        -- No Deathless Marrow/Guardians alias, rare-name fallback or route inference.
+        overview = "Use small pulls, avoid knockbacks into nearby packs, and interrupt caster Fear. Watch your breath during underwater sections.",
+        bosses = {
+            { encounterID = 3474, name = "Zul'Alai",
+              tip = "Move away during Monstrous Slam. Prioritize removing Rotted Strike from the tank and prepare extra healing for the late enrage." },
+            { encounterID = 3475, name = "Var'Taka",
+              tip = "Control or kill the priestesses before their heals prolong the fight. Face the boss away from allies and clear nearby packs before pulling." },
+            { encounterID = 3476, name = "Captain Dreadrise",
+              tip = "Break Abyssal Bubbles to free trapped players, including the tank. Interrupt Waterbolt Volley and clear patrols before the pull." },
+            { encounterID = 3511, name = "Primeval Elemental",
+              tip = "Defeat the Undying Offerings to activate this optional boss. Watch your breath and surface when needed; prepare healing for Freeze Water." },
+            { encounterID = 3479, name = "Min'loth the Serpent",
+              tip = "Save resources for the serpent phase after the troll form falls. Cleanse poison promptly and prepare for Fear." },
         },
     },
 }

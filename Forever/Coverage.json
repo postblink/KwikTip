@@ -1,6 +1,6 @@
 {
-  "version": "0.1.0-alpha.4",
-  "data_build": "mixed: 1.60.1.70707 (Hall/Ragefire/Stockade), 1.60.1.70790 (remaining entries)",
+  "version": "0.1.0-alpha.5",
+  "data_build": "mixed: 1.60.1.70707 (Hall/Ragefire/Stockade), 1.60.1.70790 (other existing entries), 1.60.1.70888 (Drowned City)",
   "interface": 16001,
   "client_tested": false,
   "complete_dungeons": 0,
@@ -652,6 +652,34 @@
           "reason": "No matching standalone encounter in preserved map129 rows; no guessed alias or NPC/name fallback"
         }
       ]
+    },
+    {
+      "instanceID": 2970,
+      "name": "The Drowned City",
+      "encounterIDs": [
+        3474,
+        3475,
+        3476,
+        3511,
+        3479
+      ],
+      "difficultyIDs": [
+        1
+      ],
+      "data_build": "1.60.1.70888",
+      "status": "five exact-build source-name matches; partial Normal-only coverage; not client tested",
+      "evidence": "docs/FOREVER_DROWNED_CITY_IDS_70888.json",
+      "excluded_encounters": [
+        {
+          "name": "Deathless Marrow / Deathless Guardians",
+          "encounterID": 3478,
+          "reason": "Raw event names Deathless Guardians; guide names Deathless Marrow. No proven strategy-to-event alias."
+        },
+        {
+          "name": "Umbra / Gill / Zin'aka",
+          "reason": "No reconciled strategy and positive raw event mapping; no absence claim or name/NPC fallback"
+        }
+      ]
     }
   ],
   "not_included": [
@@ -660,7 +688,7 @@
     "Per-room or per-pull routing",
     "NPC target detection"
   ],
-  "live_acceptance": "Current candidate untested in-game; current 70862 ID drift and per-encounter runtime acceptance pending",
-  "current_client_build_observed": "1.60.1.70862",
+  "live_acceptance": "Candidate untested in-game; Drowned City static IDs verified at 70888, other entries still need latest-build drift checks and all entries need client acceptance",
+  "current_client_build_observed": "1.60.1.70888",
   "current_build_ids_reverified": false
 }
