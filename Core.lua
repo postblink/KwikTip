@@ -329,6 +329,9 @@ local function FormatBossContent(dungeon, boss, difficultyID)
     return body and (header .. "\n" .. body) or header
 end
 
+-- Exposed on the private addon table so Forever flavor can render existing boss tips verbatim.
+KwikTip._FormatBossContent = FormatBossContent
+
 
 -- Match a player's current subzone string against an area entry.
 -- Checks the canonical English subzone and any localized aliases stored
@@ -425,6 +428,7 @@ local function AppendUserNote(content)
     if not note or note == "" then return content end
     return content .. "\n|cffffdd88" .. note .. "|r"
 end
+KwikTip._AppendUserNote = AppendUserNote
 
 -- ============================================================
 -- Boss encounter state

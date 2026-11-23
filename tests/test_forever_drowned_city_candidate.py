@@ -91,13 +91,13 @@ class DrownedCityCandidateTests(unittest.TestCase):
     def test_release_coverage_includes_only_the_admitted_subset(self) -> None:
         coverage = json.loads((ROOT / "Forever/Coverage.json").read_text())
         entry = next(item for item in coverage["included_dungeons"] if item["instanceID"] == 2970)
-        self.assertEqual(entry["encounterIDs"], [3474, 3475, 3476, 3511, 3479])
+        self.assertEqual(entry["encounterIDs"], [3474, 3475, 3476, 3511, 3478, 3479])
         self.assertEqual(entry["difficultyIDs"], [1])
         self.assertEqual(entry["data_build"], "1.60.1.70888")
         self.assertEqual(entry["evidence"], self.candidate["raw_identity_evidence"])
-        self.assertIn(3478, {item.get("encounterID") for item in entry["excluded_encounters"]})
+        self.assertNotIn(3478, {item.get("encounterID") for item in entry["excluded_encounters"]})
         self.assertFalse(coverage["client_tested"])
-        self.assertFalse(coverage["current_build_ids_reverified"])
+        self.assertTrue(coverage["current_build_ids_reverified"])
         self.assertEqual(coverage["complete_dungeons"], 0)
 
     def test_package_contains_advice_but_not_research_or_decoder(self) -> None:
@@ -109,7 +109,7 @@ class DrownedCityCandidateTests(unittest.TestCase):
             data = (package / "DungeonData.lua").read_text()
             for boss in self.candidate["bosses"]:
                 self.assertIn(boss["tip"], data)
-            self.assertIn(self.candidate["overview_candidate"], data)
+            self.assertIn("Saltseer Coroner Healing Wave", data)
 
 
 if __name__ == "__main__":

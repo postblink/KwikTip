@@ -1,0 +1,742 @@
+{
+  "build": "1.60.1.71037",
+  "schema_revision": "3a7954cfb8ee4f1132c83cd1859753294ee8964b",
+  "complete_tables": false,
+  "client_tested": false,
+  "tables": {
+    "Map": {
+      "raw_sha256": "bd3f4070b140fa21a87e4231a2fbf88ef636ebec0dbdcf5c671cde7c9f519c89",
+      "readable_rows_sha256": "b1dbf1c8e71a863b10b16879562f8120d38317d0f0935c08a6a8336e819808a1",
+      "decoded_rows": 78,
+      "layout_hash": "D43AFAC3",
+      "unreadable_declared_records": 3
+    },
+    "MapDifficulty": {
+      "raw_sha256": "bcfd494a40d6109a0addf6620a469ce21d1409a01b87f60fa6c4515fae5925c6",
+      "readable_rows_sha256": "11b6cc9c2175959b552e0f73f27f8106ce6cdb2c8644671de74595be8f1b44ca",
+      "decoded_rows": 142,
+      "layout_hash": "24A16AD3",
+      "unreadable_declared_records": 4
+    },
+    "DungeonEncounter": {
+      "raw_sha256": "0f1bece58f3dc640a531039e0ab591c8d7a4493065980e27971cdac4e7a7f459",
+      "readable_rows_sha256": "a070bb9e1b9deae1ddb2c3e96395aea77d47c3c85d7f1eb2c10c078586b826c4",
+      "decoded_rows": 376,
+      "layout_hash": "35863DC4",
+      "unreadable_declared_records": 23
+    }
+  },
+  "local_hotfixes": {
+    "records_scanned": 120558,
+    "table_records": {
+      "Map": 5,
+      "DungeonEncounter": 6,
+      "MapDifficulty": 2
+    },
+    "row_changes": 0
+  },
+  "maps": [
+    {
+      "instanceID": 33,
+      "name": "Shadowfang Keep",
+      "type": 1,
+      "difficultyID": 1,
+      "mapDifficultyRecordID": 7,
+      "encounters": [
+        {"encounterID": 2748, "name": "Rethilgore", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2749, "name": "Razorclaw the Butcher", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2750, "name": "Baron Silverlaine", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2751, "name": "Commander Springvale", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2752, "name": "Odo the Blindwatcher", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2753, "name": "Fenrus the Devourer", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2754, "name": "Wolf Master Nandos", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2755, "name": "Archmage Arugal", "tableDifficultyID": 0, "sourceSection": 0}
+      ]
+    },
+    {
+      "instanceID": 34,
+      "name": "Stormwind Stockade",
+      "type": 1,
+      "difficultyID": 1,
+      "mapDifficultyRecordID": 8,
+      "encounters": [
+        {"encounterID": 2756, "name": "Targorr the Dread", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2757, "name": "Kam Deepfury", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2758, "name": "Hamhock", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2759, "name": "Dextren Ward", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2760, "name": "Bazil Thredd", "tableDifficultyID": 0, "sourceSection": 0}
+      ]
+    },
+    {
+      "instanceID": 36,
+      "name": "Deadmines",
+      "type": 1,
+      "difficultyID": 1,
+      "mapDifficultyRecordID": 10,
+      "encounters": [
+        {"encounterID": 2741, "name": "Rhahk'Zor", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2742, "name": "Sneed", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2743, "name": "Gilnid", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2744, "name": "Captain Greenskin", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2745, "name": "Mr. Smite", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2746, "name": "Cookie", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2747, "name": "Edwin VanCleef", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3676, "name": "Miner Johnson", "tableDifficultyID": 0, "sourceSection": 0}
+      ]
+    },
+    {
+      "instanceID": 43,
+      "name": "Wailing Caverns",
+      "type": 1,
+      "difficultyID": 1,
+      "mapDifficultyRecordID": 13,
+      "encounters": [
+        {"encounterID": 585, "name": "Lady Anacondra", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 586, "name": "Lord Cobrahn", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 587, "name": "Kresh", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 588, "name": "Lord Pythas", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 589, "name": "Skum", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 590, "name": "Lord Serpentis", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 591, "name": "Verdan the Everliving", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 592, "name": "Mutanus the Devourer", "tableDifficultyID": 0, "sourceSection": 0}
+      ]
+    },
+    {
+      "instanceID": 47,
+      "name": "Razorfen Kraul",
+      "type": 1,
+      "difficultyID": 1,
+      "mapDifficultyRecordID": 15,
+      "encounters": [
+        {"encounterID": 2773, "name": "Roogug", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2774, "name": "Aggem Thorncurse", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2775, "name": "Death Speaker Jargba", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2776, "name": "Overlord Ramtusk", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2777, "name": "Agathelos the Raging", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2778, "name": "Charlga Razorflank", "tableDifficultyID": 0, "sourceSection": 0}
+      ]
+    },
+    {
+      "instanceID": 48,
+      "name": "Blackfathom Deeps",
+      "type": 1,
+      "difficultyID": 1,
+      "mapDifficultyRecordID": 16,
+      "encounters": [
+        {"encounterID": 2910, "name": "Aku'mai", "tableDifficultyID": 1, "sourceSection": 0},
+        {"encounterID": 2911, "name": "Twilight Lord Kelris", "tableDifficultyID": 1, "sourceSection": 0},
+        {"encounterID": 2912, "name": "Old Serra'kis", "tableDifficultyID": 1, "sourceSection": 0},
+        {"encounterID": 2913, "name": "Lorgus Jett", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2914, "name": "Geilhast", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2915, "name": "Lady Sarevess", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2916, "name": "Ghamoo-ra", "tableDifficultyID": 0, "sourceSection": 0}
+      ]
+    },
+    {
+      "instanceID": 70,
+      "name": "Uldaman",
+      "type": 1,
+      "difficultyID": 1,
+      "mapDifficultyRecordID": 17,
+      "encounters": [
+        {"encounterID": 547, "name": "Revelosh", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 548, "name": "The Lost Dwarves", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 549, "name": "Ironaya", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 551, "name": "Ancient Stone Keeper", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 552, "name": "Galgann Firehammer", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 553, "name": "Grimlok", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 554, "name": "Archaedas", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 1887, "name": "Obsidian Sentinel", "tableDifficultyID": 0, "sourceSection": 0}
+      ]
+    },
+    {
+      "instanceID": 90,
+      "name": "Gnomeregan",
+      "type": 1,
+      "difficultyID": 1,
+      "mapDifficultyRecordID": 18,
+      "encounters": [
+        {"encounterID": 2768, "name": "Grubbis", "tableDifficultyID": 1, "sourceSection": 0},
+        {"encounterID": 2769, "name": "Viscous Fallout", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2770, "name": "Electrocutioner 6000", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2771, "name": "Crowd Pummeler 9-60", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2772, "name": "Mekgineer Thermaplugg", "tableDifficultyID": 0, "sourceSection": 0}
+      ]
+    },
+    {
+      "instanceID": 109,
+      "name": "Sunken Temple",
+      "type": 1,
+      "difficultyID": 1,
+      "mapDifficultyRecordID": 19,
+      "encounters": [
+        {"encounterID": 3582, "name": "Atal'alarion", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3583, "name": "Avatar of Hakkar", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3584, "name": "Shade of Eranikus", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3585, "name": "Hazzas", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3586, "name": "Morphaz", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3587, "name": "Weaver", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3588, "name": "Dreamscythe", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3589, "name": "Jammal'an the Prophet", "tableDifficultyID": 0, "sourceSection": 0}
+      ]
+    },
+    {
+      "instanceID": 129,
+      "name": "Razorfen Downs",
+      "type": 1,
+      "difficultyID": 1,
+      "mapDifficultyRecordID": 20,
+      "encounters": [
+        {"encounterID": 2780, "name": "Tuten'kash", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2781, "name": "Plaguemaw the Rotting", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2782, "name": "Mordresh Fire Eye", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2783, "name": "Ragglesnout", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2784, "name": "Glutton", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2785, "name": "Amnennar the Coldbringer", "tableDifficultyID": 0, "sourceSection": 0}
+      ]
+    },
+    {
+      "instanceID": 189,
+      "name": "Scarlet Monastery",
+      "type": 1,
+      "difficultyID": 1,
+      "mapDifficultyRecordID": 22,
+      "encounters": [
+        {"encounterID": 444, "name": "Interrogator Vishas", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 446, "name": "Houndmaster Loksey", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 447, "name": "Arcanist Doan", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 448, "name": "Herod", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 449, "name": "High Inquisitor Fairbanks", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 450, "name": "High Inquisitor Whitemane", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2779, "name": "Bloodmage Thalnos", "tableDifficultyID": 0, "sourceSection": 0}
+      ]
+    },
+    {
+      "instanceID": 209,
+      "name": "Zul'Farrak",
+      "type": 1,
+      "difficultyID": 1,
+      "mapDifficultyRecordID": 23,
+      "encounters": [
+        {"encounterID": 593, "name": "Hydromancer Velratha", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 594, "name": "Gahz'rilla", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 595, "name": "Antu'sul", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 596, "name": "Theka the Martyr", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 597, "name": "Witch Doctor Zum'rah", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 598, "name": "Nekrum Gutchewer", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 599, "name": "Shadowpriest Sezz'ziz", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 600, "name": "Chief Ukorz Sandscalp", "tableDifficultyID": 0, "sourceSection": 0}
+      ]
+    },
+    {
+      "instanceID": 229,
+      "name": "Blackrock Spire",
+      "type": 1,
+      "difficultyID": 1,
+      "mapDifficultyRecordID": 24,
+      "encounters": [
+        {"encounterID": 267, "name": "Highlord Omokk", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 268, "name": "Shadow Hunter Vosh'gajin", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 269, "name": "War Master Voone", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 270, "name": "Mother Smolderweb", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 271, "name": "Urok Doomhowl", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 272, "name": "Quartermaster Zigris", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 273, "name": "Gizrul the Slavener", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 274, "name": "Halycon", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 275, "name": "Overlord Wyrmthalak", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3062, "name": "Pyroguard Emberseer", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3063, "name": "Warchief Rend Blackhand", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3068, "name": "The Beast", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3069, "name": "General Drakkisath", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3070, "name": "Lord Valthalak", "tableDifficultyID": 0, "sourceSection": 0}
+      ]
+    },
+    {
+      "instanceID": 230,
+      "name": "Blackrock Depths",
+      "type": 1,
+      "difficultyID": 1,
+      "mapDifficultyRecordID": 25,
+      "encounters": [
+        {"encounterID": 227, "name": "High Interrogator Gerstahn", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 228, "name": "Lord Roccor", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 229, "name": "Houndmaster Grebmar", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 230, "name": "Ring of Law", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 231, "name": "Pyromancer Loregrain", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 232, "name": "Lord Incendius", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 233, "name": "Warder Stilgiss", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 234, "name": "Fineous Darkvire", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 235, "name": "Bael'Gar", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 236, "name": "General Angerforge", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 237, "name": "Golem Lord Argelmach", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 238, "name": "Hurley Blackbreath", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 239, "name": "Phalanx", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 240, "name": "Ribbly Screwspigot", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 241, "name": "Plugger Spazzring", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 242, "name": "Ambassador Flamelash", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 243, "name": "The Seven", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 244, "name": "Magmus", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2789, "name": "Princess Moira Bronzebeard", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2790, "name": "Emperor Dagran Thaurissan", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2791, "name": "The Vault", "tableDifficultyID": 0, "sourceSection": 0}
+      ]
+    },
+    {
+      "instanceID": 289,
+      "name": "Scholomance",
+      "type": 1,
+      "difficultyID": 1,
+      "mapDifficultyRecordID": 28,
+      "encounters": [
+        {"encounterID": 2801, "name": "Darkmaster Gandling", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2802, "name": "Doctor Theolen Krastinov", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2803, "name": "Instructor Malicia", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2804, "name": "Jandice Barov", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2805, "name": "Kirtonos", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2806, "name": "Lady Illucia Barov", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2807, "name": "Lord Alexei Barov", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2808, "name": "Lorekeeper Polkelt", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2809, "name": "Marduk Blackpool", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2810, "name": "Ras Frostwhisperer", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2811, "name": "Rattlegore", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2812, "name": "The Ravenian", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2813, "name": "Vectus", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3055, "name": "Kormok", "tableDifficultyID": 0, "sourceSection": 0}
+      ]
+    },
+    {
+      "instanceID": 329,
+      "name": "Stratholme",
+      "type": 1,
+      "difficultyID": 1,
+      "mapDifficultyRecordID": 30,
+      "encounters": [
+        {"encounterID": 472, "name": "The Unforgiven", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 473, "name": "Hearthsinger Forresten", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 474, "name": "Timmy the Cruel", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 475, "name": "Cannon Master Willey", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 476, "name": "Malor the Zealous", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 477, "name": "Archivist Galford", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 478, "name": "Balnazzar", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 479, "name": "Baroness Anastari", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 480, "name": "Nerub'enkan", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 481, "name": "Maleki the Pallid", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 482, "name": "Magistrate Barthilas", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 483, "name": "Ramstein the Gorger", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 484, "name": "Baron Rivendare", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2795, "name": "Black Guard Swordsmith", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2796, "name": "Crimson Hammersmith", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2797, "name": "Ezra Grimm", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2798, "name": "Postmaster Malown", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2799, "name": "Skul", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2800, "name": "Stonespine", "tableDifficultyID": 0, "sourceSection": 0}
+      ]
+    },
+    {
+      "instanceID": 349,
+      "name": "Maraudon",
+      "type": 1,
+      "difficultyID": 1,
+      "mapDifficultyRecordID": 31,
+      "encounters": [
+        {"encounterID": 422, "name": "Noxxion", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 423, "name": "Razorlash", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 424, "name": "Lord Vyletongue", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 425, "name": "Celebras the Cursed", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 426, "name": "Landslide", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 427, "name": "Tinkerer Gizlock", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 428, "name": "Rotgrip", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 429, "name": "Princess Theradras", "tableDifficultyID": 0, "sourceSection": 0}
+      ]
+    },
+    {
+      "instanceID": 389,
+      "name": "Ragefire Chasm",
+      "type": 1,
+      "difficultyID": 1,
+      "mapDifficultyRecordID": 33,
+      "encounters": [
+        {"encounterID": 2732, "name": "Oggleflint", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2733, "name": "Taragaman the Hungerer", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2734, "name": "Jergosh the Invoker", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2735, "name": "Bazzalan", "tableDifficultyID": 0, "sourceSection": 0}
+      ]
+    },
+    {
+      "instanceID": 429,
+      "name": "Dire Maul",
+      "type": 1,
+      "difficultyID": 1,
+      "mapDifficultyRecordID": 35,
+      "encounters": [
+        {"encounterID": 343, "name": "Zevrim Thornhoof", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 344, "name": "Hydrospawn", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 345, "name": "Lethtendris", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 346, "name": "Alzzin the Wildshaper", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 347, "name": "Illyanna Ravenoak", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 348, "name": "Magister Kalendris", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 349, "name": "Immol'thar", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 350, "name": "Tendris Warpwood", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 361, "name": "Prince Tortheldrin", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 362, "name": "Guard Mol'dar", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 363, "name": "Stomper Kreeg", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 364, "name": "Guard Fengus", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 365, "name": "Guard Slip'kik", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 366, "name": "Captain Kromcrush", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 367, "name": "Cho'Rush the Observer", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 368, "name": "King Gordok", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2792, "name": "Pusillin", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2793, "name": "Lord Hel'nurath", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 2794, "name": "Tsu'zee", "tableDifficultyID": 0, "sourceSection": 0}
+      ]
+    },
+    {
+      "instanceID": 2959,
+      "name": "City of Dalaran",
+      "type": 1,
+      "difficultyID": 1,
+      "mapDifficultyRecordID": 5923,
+      "encounters": [
+        {"encounterID": 3298, "name": "Arcane Anomaly", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3299, "name": "Fel Ancient", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3300, "name": "Mana Devourer", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3301, "name": "Mana Elemental", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3302, "name": "Unstable Sentinel", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3303, "name": "Shade of the Archmage", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3310, "name": "Lyn the Ignored", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3311, "name": "Atrexis the Grave Knight", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3312, "name": "Mana Wraith", "tableDifficultyID": 0, "sourceSection": 0}
+      ]
+    },
+    {
+      "instanceID": 2970,
+      "name": "The Drowned City",
+      "type": 1,
+      "difficultyID": 1,
+      "mapDifficultyRecordID": 5935,
+      "encounters": [
+        {"encounterID": 3474, "name": "Zul'Alai", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3475, "name": "Var'Taka", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3476, "name": "Captain Dreadrise", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3478, "name": "Deathless Guardians", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3479, "name": "Min'loth the Serpent", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3511, "name": "Primeval Elemental", "tableDifficultyID": 0, "sourceSection": 2}
+      ]
+    },
+    {
+      "instanceID": 2974,
+      "name": "Blackmaw Hold",
+      "type": 1,
+      "difficultyID": 1,
+      "mapDifficultyRecordID": 5941,
+      "encounters": [
+        {"encounterID": 3315, "name": "Withermaw", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3316, "name": "Impaan the Imprisoner", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3322, "name": "Bonesnout the Unbroken", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3323, "name": "Blackmaw Behemoth", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3327, "name": "Elder Shaman Bloodmane", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3334, "name": "Varrox Bleakhoof", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3336, "name": "Unbound Spirit", "tableDifficultyID": 0, "sourceSection": 2}
+      ]
+    },
+    {
+      "instanceID": 2994,
+      "name": "Alcaz Prison",
+      "type": 1,
+      "difficultyID": 1,
+      "mapDifficultyRecordID": 6008,
+      "encounters": [
+        {"encounterID": 3403, "name": "Overseer Wrex", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3409, "name": "Blazeroar", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3410, "name": "Tidemistress Ca'zass", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3415, "name": "The Questioner", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3418, "name": "Katerina the Cleaner", "tableDifficultyID": 0, "sourceSection": 2}
+      ]
+    },
+    {
+      "instanceID": 2998,
+      "name": "Excavation Site: Wetlands",
+      "type": 1,
+      "difficultyID": 1,
+      "mapDifficultyRecordID": 6012,
+      "encounters": [
+        {"encounterID": 3480, "name": "Saltspine", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3481, "name": "Shadetooth", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3482, "name": "Relic Guardian", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3644, "name": "Highland Horror", "tableDifficultyID": 0, "sourceSection": 0}
+      ]
+    },
+    {
+      "instanceID": 2999,
+      "name": "Ruins of Lordaeron",
+      "type": 1,
+      "difficultyID": 1,
+      "mapDifficultyRecordID": 6013,
+      "encounters": [
+        {"encounterID": 3353, "name": "Witherfang", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3354, "name": "Rath'mael", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3355, "name": "The Butcher", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3357, "name": "The Abandoned", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3408, "name": "Lordaeron Captain", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3411, "name": "Viktor the Vile", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3412, "name": "Bjork", "tableDifficultyID": 0, "sourceSection": 0}
+      ]
+    },
+    {
+      "instanceID": 3001,
+      "name": "The Shaper's Terrace",
+      "type": 1,
+      "difficultyID": 1,
+      "mapDifficultyRecordID": 6015,
+      "encounters": [
+        {"encounterID": 3498, "name": "Titanosaur", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3499, "name": "Ravasaur Hunters", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3500, "name": "Thunderhoof", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3501, "name": "Venomridge", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3502, "name": "Nanaya", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3503, "name": "Cinder", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3504, "name": "King Op", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3505, "name": "Bolt", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3507, "name": "Direhorn Matriarch", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3597, "name": "Snowtalon", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3600, "name": "Vitrix", "tableDifficultyID": 0, "sourceSection": 2}
+      ]
+    },
+    {
+      "instanceID": 3039,
+      "name": "Krol'dok Stronghold",
+      "type": 1,
+      "difficultyID": 1,
+      "mapDifficultyRecordID": 6144,
+      "encounters": [
+        {"encounterID": 3449, "name": "Nar'gurk", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3450, "name": "Slavecrusher Grox", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3451, "name": "Overseer Mugg", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3452, "name": "Twilight Commander Zarmok", "tableDifficultyID": 0, "sourceSection": 2},
+        {"encounterID": 3453, "name": "Handler Ashka", "tableDifficultyID": 0, "sourceSection": 2}
+      ]
+    },
+    {
+      "instanceID": 3065,
+      "name": "The Hall of Thanes",
+      "type": 1,
+      "difficultyID": 1,
+      "mapDifficultyRecordID": 6226,
+      "encounters": [
+        {"encounterID": 3493, "name": "Faldrim Anvilmar", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3494, "name": "Plunder", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3495, "name": "Infurnus", "tableDifficultyID": 0, "sourceSection": 0},
+        {"encounterID": 3496, "name": "Durgen Dirgehammer", "tableDifficultyID": 0, "sourceSection": 0}
+      ]
+    }
+  ],
+  "units": [
+    {
+      "instanceID": 3065,
+      "name": "The Hall of Thanes",
+      "sharedMap": false
+    },
+    {
+      "instanceID": 389,
+      "name": "Ragefire Chasm",
+      "sharedMap": false
+    },
+    {
+      "instanceID": 34,
+      "name": "Stormwind Stockade",
+      "sharedMap": false
+    },
+    {
+      "instanceID": 2999,
+      "name": "Ruins of Lordaeron",
+      "sharedMap": false
+    },
+    {
+      "instanceID": 2998,
+      "name": "Excavation Site: Wetlands",
+      "sharedMap": false
+    },
+    {
+      "instanceID": 2959,
+      "name": "City of Dalaran",
+      "sharedMap": false
+    },
+    {
+      "instanceID": 36,
+      "name": "Deadmines",
+      "sharedMap": false
+    },
+    {
+      "instanceID": 43,
+      "name": "Wailing Caverns",
+      "sharedMap": false
+    },
+    {
+      "instanceID": 33,
+      "name": "Shadowfang Keep",
+      "sharedMap": false
+    },
+    {
+      "instanceID": 48,
+      "name": "Blackfathom Deeps",
+      "sharedMap": false
+    },
+    {
+      "instanceID": 90,
+      "name": "Gnomeregan",
+      "sharedMap": false
+    },
+    {
+      "instanceID": 47,
+      "name": "Razorfen Kraul",
+      "sharedMap": false
+    },
+    {
+      "instanceID": 70,
+      "name": "Uldaman",
+      "sharedMap": false
+    },
+    {
+      "instanceID": 230,
+      "name": "Blackrock Depths",
+      "sharedMap": false
+    },
+    {
+      "instanceID": 289,
+      "name": "Scholomance",
+      "sharedMap": false
+    },
+    {
+      "instanceID": 209,
+      "name": "Zul'Farrak",
+      "sharedMap": false
+    },
+    {
+      "instanceID": 349,
+      "name": "Maraudon",
+      "sharedMap": false
+    },
+    {
+      "instanceID": 189,
+      "name": "Scarlet Monastery — Graveyard",
+      "sharedMap": true
+    },
+    {
+      "instanceID": 189,
+      "name": "Scarlet Monastery — Library",
+      "sharedMap": true
+    },
+    {
+      "instanceID": 189,
+      "name": "Scarlet Monastery — Armory",
+      "sharedMap": true
+    },
+    {
+      "instanceID": 189,
+      "name": "Scarlet Monastery — Cathedral",
+      "sharedMap": true
+    },
+    {
+      "instanceID": 429,
+      "name": "Dire Maul — East",
+      "sharedMap": true
+    },
+    {
+      "instanceID": 429,
+      "name": "Dire Maul — West",
+      "sharedMap": true
+    },
+    {
+      "instanceID": 429,
+      "name": "Dire Maul — North",
+      "sharedMap": true
+    },
+    {
+      "instanceID": 329,
+      "name": "Stratholme — Living / Main Gate",
+      "sharedMap": true
+    },
+    {
+      "instanceID": 329,
+      "name": "Stratholme — Undead / Service Gate",
+      "sharedMap": true
+    },
+    {
+      "instanceID": 109,
+      "name": "Sunken Temple",
+      "sharedMap": false
+    },
+    {
+      "instanceID": 129,
+      "name": "Razorfen Downs",
+      "sharedMap": false
+    },
+    {
+      "instanceID": 2970,
+      "name": "The Drowned City",
+      "sharedMap": false
+    },
+    {
+      "instanceID": 229,
+      "name": "Blackrock Spire — Lower",
+      "sharedMap": true
+    },
+    {
+      "instanceID": 229,
+      "name": "Blackrock Spire — Upper",
+      "sharedMap": true
+    },
+    {
+      "instanceID": 2994,
+      "name": "Alcaz Prison",
+      "sharedMap": false
+    },
+    {
+      "instanceID": 2974,
+      "name": "Blackmaw Hold",
+      "sharedMap": false
+    },
+    {
+      "instanceID": 3001,
+      "name": "The Shaper's Terrace",
+      "sharedMap": false
+    },
+    {
+      "instanceID": 3039,
+      "name": "Krol'dok Stronghold",
+      "sharedMap": false
+    }
+  ],
+  "unconfirmed_availability": [
+    {
+      "instanceID": 2784,
+      "name": "Demon Fall Canyon",
+      "encounters": [
+        {"encounterID": 3023, "name": "Grimroot"},
+        {"encounterID": 3024, "name": "Diathorus the Seeker"},
+        {"encounterID": 3028, "name": "Destructor's Wraith"},
+        {"encounterID": 3029, "name": "Zilbagob"},
+        {"encounterID": 3030, "name": "Pyranis"},
+        {"encounterID": 3031, "name": "Hellscream's Phantom"},
+        {"encounterID": 3080, "name": "Azgaloth"}
+      ]
+    },
+    {
+      "instanceID": 2875,
+      "name": "Karazhan Crypts",
+      "encounters": [
+        {"encounterID": 3141, "name": "Harbinger of Sin"},
+        {"encounterID": 3143, "name": "Kharon"},
+        {"encounterID": 3144, "name": "Three Little Wolves"},
+        {"encounterID": 3145, "name": "Dark Rider"},
+        {"encounterID": 3146, "name": "Creeping Malison"},
+        {"encounterID": 3152, "name": "Unk'omon"},
+        {"encounterID": 3168, "name": "Hans and Greta"},
+        {"encounterID": 3169, "name": "The Ugly Goblin"},
+        {"encounterID": 3170, "name": "Kaigy Maryla"},
+        {"encounterID": 3171, "name": "Sairuh Maryla"},
+        {"encounterID": 3172, "name": "Barian Maryla"}
+      ]
+    }
+  ]
+}

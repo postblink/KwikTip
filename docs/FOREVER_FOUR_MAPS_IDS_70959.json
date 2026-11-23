@@ -1,0 +1,1066 @@
+{
+  "build": "1.60.1.70959",
+  "complete_tables": false,
+  "client_tested": false,
+  "build_info_sha256": "ae5838b798ff3d56ebf2def77fc6d3a48aea09410878c05c8dbbbe55f2105216",
+  "cache_sha256": "e9faeb92918109f7b9ece9fa0d23759eda2ea9e41a1523afc571e5a31faa04b4",
+  "cache_records_scanned": 98835,
+  "scope": "Selected readable row IDs in one local cache snapshot; no server completeness or runtime proof. Any matching cache record requires separate matching-schema decode before admission.",
+  "tables": {
+    "Map": {
+      "readable_rows_sha256": "b1dbf1c8e71a863b10b16879562f8120d38317d0f0935c08a6a8336e819808a1",
+      "sections": [
+        {
+          "end": 9652,
+          "offset": 2840,
+          "public_key_lookup": "0000000000000000",
+          "readable": true,
+          "records": 73,
+          "section": 0
+        },
+        {
+          "end": 9788,
+          "offset": 9652,
+          "public_key_lookup": "0DA4670DB36FB2A9",
+          "readable": false,
+          "records": 2,
+          "section": 1
+        },
+        {
+          "end": 10138,
+          "offset": 9788,
+          "public_key_lookup": "D2C028CB7AC14D0B",
+          "readable": true,
+          "records": 5,
+          "section": 2
+        },
+        {
+          "end": 10209,
+          "offset": 10138,
+          "public_key_lookup": "DA0E7785727A0A65",
+          "readable": false,
+          "records": 1,
+          "section": 3
+        }
+      ],
+      "target_rows": [
+        {
+          "fields": {
+            "AreaTableID": 1583,
+            "Corpse": [
+              -7522.527,
+              -1233.0415
+            ],
+            "CorpseMapID": 0,
+            "CosmeticParentMapID": -1,
+            "Directory": "BlackRockSpire",
+            "ExpansionID": 0,
+            "Flags": [
+              67073,
+              0,
+              130
+            ],
+            "ID": 229,
+            "InstanceType": 1,
+            "LoadingScreenID": 189,
+            "MapDescription0_lang": "",
+            "MapDescription1_lang": "",
+            "MapName_lang": "Blackrock Spire",
+            "MapType": 2,
+            "MaxPlayers": 10,
+            "MinimapIconScale": 1,
+            "NavigationMaxDistance": 0,
+            "OceanLiquidTypeID": 2,
+            "ParentMapID": -1,
+            "PreloadFileDataID": 0,
+            "PvpLongDescription_lang": "",
+            "PvpShortDescription_lang": "",
+            "TimeOfDayOverride": -1,
+            "TimeOffset": 0,
+            "WdtFileDataID": 780175,
+            "WindSettingsID": 0,
+            "ZmpFileDataID": 0
+          },
+          "record_id": 229,
+          "source_section": 0
+        },
+        {
+          "fields": {
+            "AreaTableID": 16554,
+            "Corpse": [
+              0,
+              0
+            ],
+            "CorpseMapID": -1,
+            "CosmeticParentMapID": -1,
+            "Directory": "2974",
+            "ExpansionID": 0,
+            "Flags": [
+              8396381,
+              1040,
+              2347232
+            ],
+            "ID": 2974,
+            "InstanceType": 1,
+            "LoadingScreenID": 692,
+            "MapDescription0_lang": "",
+            "MapDescription1_lang": "",
+            "MapName_lang": "Blackmaw Hold",
+            "MapType": 1,
+            "MaxPlayers": 0,
+            "MinimapIconScale": 1,
+            "NavigationMaxDistance": 0,
+            "OceanLiquidTypeID": 1250,
+            "ParentMapID": -1,
+            "PreloadFileDataID": 0,
+            "PvpLongDescription_lang": "",
+            "PvpShortDescription_lang": "",
+            "TimeOfDayOverride": -1,
+            "TimeOffset": 0,
+            "WdtFileDataID": 7011642,
+            "WindSettingsID": 136,
+            "ZmpFileDataID": 0
+          },
+          "record_id": 2974,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "AreaTableID": 0,
+            "Corpse": [
+              0,
+              0
+            ],
+            "CorpseMapID": -1,
+            "CosmeticParentMapID": -1,
+            "Directory": "2994",
+            "ExpansionID": 0,
+            "Flags": [
+              8396381,
+              1040,
+              119008
+            ],
+            "ID": 2994,
+            "InstanceType": 1,
+            "LoadingScreenID": 690,
+            "MapDescription0_lang": "",
+            "MapDescription1_lang": "",
+            "MapName_lang": "Alcaz Prison",
+            "MapType": 1,
+            "MaxPlayers": 0,
+            "MinimapIconScale": 1,
+            "NavigationMaxDistance": 0,
+            "OceanLiquidTypeID": 2,
+            "ParentMapID": -1,
+            "PreloadFileDataID": 0,
+            "PvpLongDescription_lang": "",
+            "PvpShortDescription_lang": "",
+            "TimeOfDayOverride": -1,
+            "TimeOffset": 0,
+            "WdtFileDataID": 7244526,
+            "WindSettingsID": 136,
+            "ZmpFileDataID": 0
+          },
+          "record_id": 2994,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "AreaTableID": 0,
+            "Corpse": [
+              0,
+              0
+            ],
+            "CorpseMapID": -1,
+            "CosmeticParentMapID": 1,
+            "Directory": "3001",
+            "ExpansionID": 0,
+            "Flags": [
+              8396381,
+              1040,
+              250080
+            ],
+            "ID": 3001,
+            "InstanceType": 1,
+            "LoadingScreenID": 696,
+            "MapDescription0_lang": "",
+            "MapDescription1_lang": "",
+            "MapName_lang": "The Shaper's Terrace",
+            "MapType": 1,
+            "MaxPlayers": 0,
+            "MinimapIconScale": 1,
+            "NavigationMaxDistance": 0,
+            "OceanLiquidTypeID": 2,
+            "ParentMapID": -1,
+            "PreloadFileDataID": 0,
+            "PvpLongDescription_lang": "",
+            "PvpShortDescription_lang": "",
+            "TimeOfDayOverride": -1,
+            "TimeOffset": 0,
+            "WdtFileDataID": 7278158,
+            "WindSettingsID": 136,
+            "ZmpFileDataID": 0
+          },
+          "record_id": 3001,
+          "source_section": 2
+        }
+      ],
+      "target_cache_records": []
+    },
+    "MapDifficulty": {
+      "readable_rows_sha256": "11b6cc9c2175959b552e0f73f27f8106ce6cdb2c8644671de74595be8f1b44ca",
+      "sections": [
+        {
+          "end": 4674,
+          "offset": 1140,
+          "public_key_lookup": "0000000000000000",
+          "readable": true,
+          "records": 142,
+          "section": 0
+        },
+        {
+          "end": 4766,
+          "offset": 4674,
+          "public_key_lookup": "0DA4670DB36FB2A9",
+          "readable": false,
+          "records": 4,
+          "section": 1
+        }
+      ],
+      "target_rows": [
+        {
+          "fields": {
+            "ContentTuningID": 5239,
+            "DifficultyID": 1,
+            "Flags": 0,
+            "ID": 24,
+            "ItemContext": 0,
+            "ItemContextPickerID": 0,
+            "LockID": 0,
+            "MapID": 229,
+            "MaxPlayers": 10,
+            "Message_lang": "You must be at least level 48 to enter.",
+            "ResetInterval": 0,
+            "WorldStateExpressionID": 0
+          },
+          "record_id": 24,
+          "source_section": 0
+        },
+        {
+          "fields": {
+            "ContentTuningID": 0,
+            "DifficultyID": 207,
+            "Flags": 0,
+            "ID": 5575,
+            "ItemContext": 0,
+            "ItemContextPickerID": 0,
+            "LockID": 0,
+            "MapID": 229,
+            "MaxPlayers": 1,
+            "Message_lang": "",
+            "ResetInterval": 0,
+            "WorldStateExpressionID": 0
+          },
+          "record_id": 5575,
+          "source_section": 0
+        },
+        {
+          "fields": {
+            "ContentTuningID": 4550,
+            "DifficultyID": 1,
+            "Flags": 0,
+            "ID": 5941,
+            "ItemContext": 0,
+            "ItemContextPickerID": 0,
+            "LockID": 0,
+            "MapID": 2974,
+            "MaxPlayers": 5,
+            "Message_lang": "",
+            "ResetInterval": 0,
+            "WorldStateExpressionID": 0
+          },
+          "record_id": 5941,
+          "source_section": 0
+        },
+        {
+          "fields": {
+            "ContentTuningID": 6061,
+            "DifficultyID": 1,
+            "Flags": 0,
+            "ID": 6008,
+            "ItemContext": 0,
+            "ItemContextPickerID": 0,
+            "LockID": 0,
+            "MapID": 2994,
+            "MaxPlayers": 5,
+            "Message_lang": "",
+            "ResetInterval": 0,
+            "WorldStateExpressionID": 0
+          },
+          "record_id": 6008,
+          "source_section": 0
+        },
+        {
+          "fields": {
+            "ContentTuningID": 7033,
+            "DifficultyID": 1,
+            "Flags": 0,
+            "ID": 6015,
+            "ItemContext": 0,
+            "ItemContextPickerID": 0,
+            "LockID": 0,
+            "MapID": 3001,
+            "MaxPlayers": 5,
+            "Message_lang": "",
+            "ResetInterval": 0,
+            "WorldStateExpressionID": 0
+          },
+          "record_id": 6015,
+          "source_section": 0
+        },
+        {
+          "fields": {
+            "ContentTuningID": 0,
+            "DifficultyID": 201,
+            "Flags": 0,
+            "ID": 6334,
+            "ItemContext": 0,
+            "ItemContextPickerID": 0,
+            "LockID": 35,
+            "MapID": 229,
+            "MaxPlayers": 10,
+            "Message_lang": "",
+            "ResetInterval": 1,
+            "WorldStateExpressionID": 0
+          },
+          "record_id": 6334,
+          "source_section": 0
+        },
+        {
+          "fields": {
+            "ContentTuningID": 0,
+            "DifficultyID": 201,
+            "Flags": 0,
+            "ID": 6343,
+            "ItemContext": 0,
+            "ItemContextPickerID": 0,
+            "LockID": 45,
+            "MapID": 2994,
+            "MaxPlayers": 5,
+            "Message_lang": "",
+            "ResetInterval": 1,
+            "WorldStateExpressionID": 0
+          },
+          "record_id": 6343,
+          "source_section": 0
+        },
+        {
+          "fields": {
+            "ContentTuningID": 4550,
+            "DifficultyID": 201,
+            "Flags": 0,
+            "ID": 6344,
+            "ItemContext": 0,
+            "ItemContextPickerID": 0,
+            "LockID": 46,
+            "MapID": 2974,
+            "MaxPlayers": 5,
+            "Message_lang": "",
+            "ResetInterval": 1,
+            "WorldStateExpressionID": 0
+          },
+          "record_id": 6344,
+          "source_section": 0
+        },
+        {
+          "fields": {
+            "ContentTuningID": 0,
+            "DifficultyID": 201,
+            "Flags": 0,
+            "ID": 6345,
+            "ItemContext": 0,
+            "ItemContextPickerID": 0,
+            "LockID": 47,
+            "MapID": 3001,
+            "MaxPlayers": 5,
+            "Message_lang": "",
+            "ResetInterval": 1,
+            "WorldStateExpressionID": 0
+          },
+          "record_id": 6345,
+          "source_section": 0
+        }
+      ],
+      "target_cache_records": []
+    },
+    "DungeonEncounter": {
+      "readable_rows_sha256": "a070bb9e1b9deae1ddb2c3e96395aea77d47c3c85d7f1eb2c10c078586b826c4",
+      "sections": [
+        {
+          "end": 13916,
+          "offset": 1016,
+          "public_key_lookup": "0000000000000000",
+          "readable": true,
+          "records": 342,
+          "section": 0
+        },
+        {
+          "end": 14844,
+          "offset": 13916,
+          "public_key_lookup": "0DA4670DB36FB2A9",
+          "readable": false,
+          "records": 22,
+          "section": 1
+        },
+        {
+          "end": 16172,
+          "offset": 14844,
+          "public_key_lookup": "D2C028CB7AC14D0B",
+          "readable": true,
+          "records": 34,
+          "section": 2
+        },
+        {
+          "end": 16226,
+          "offset": 16172,
+          "public_key_lookup": "DA0E7785727A0A65",
+          "readable": false,
+          "records": 1,
+          "section": 3
+        }
+      ],
+      "target_rows": [
+        {
+          "fields": {
+            "Bit": 0,
+            "CompleteWorldStateID": 4646,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 267,
+            "ItemSequenceLevel": 0,
+            "MapID": 229,
+            "Name_lang": "Highlord Omokk",
+            "OrderIndex": 0,
+            "SpellIconFileID": 0
+          },
+          "record_id": 267,
+          "source_section": 0
+        },
+        {
+          "fields": {
+            "Bit": 1,
+            "CompleteWorldStateID": 4647,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 268,
+            "ItemSequenceLevel": 0,
+            "MapID": 229,
+            "Name_lang": "Shadow Hunter Vosh'gajin",
+            "OrderIndex": 1000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 268,
+          "source_section": 0
+        },
+        {
+          "fields": {
+            "Bit": 2,
+            "CompleteWorldStateID": 4648,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 269,
+            "ItemSequenceLevel": 0,
+            "MapID": 229,
+            "Name_lang": "War Master Voone",
+            "OrderIndex": 2000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 269,
+          "source_section": 0
+        },
+        {
+          "fields": {
+            "Bit": 3,
+            "CompleteWorldStateID": 4649,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 270,
+            "ItemSequenceLevel": 0,
+            "MapID": 229,
+            "Name_lang": "Mother Smolderweb",
+            "OrderIndex": 3000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 270,
+          "source_section": 0
+        },
+        {
+          "fields": {
+            "Bit": 4,
+            "CompleteWorldStateID": 4650,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 271,
+            "ItemSequenceLevel": 0,
+            "MapID": 229,
+            "Name_lang": "Urok Doomhowl",
+            "OrderIndex": 4000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 271,
+          "source_section": 0
+        },
+        {
+          "fields": {
+            "Bit": 5,
+            "CompleteWorldStateID": 4651,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 272,
+            "ItemSequenceLevel": 0,
+            "MapID": 229,
+            "Name_lang": "Quartermaster Zigris",
+            "OrderIndex": 5000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 272,
+          "source_section": 0
+        },
+        {
+          "fields": {
+            "Bit": 6,
+            "CompleteWorldStateID": 4652,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 273,
+            "ItemSequenceLevel": 0,
+            "MapID": 229,
+            "Name_lang": "Gizrul the Slavener",
+            "OrderIndex": 6000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 273,
+          "source_section": 0
+        },
+        {
+          "fields": {
+            "Bit": 7,
+            "CompleteWorldStateID": 4653,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 274,
+            "ItemSequenceLevel": 0,
+            "MapID": 229,
+            "Name_lang": "Halycon",
+            "OrderIndex": 5500,
+            "SpellIconFileID": 0
+          },
+          "record_id": 274,
+          "source_section": 0
+        },
+        {
+          "fields": {
+            "Bit": 8,
+            "CompleteWorldStateID": 4654,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 275,
+            "ItemSequenceLevel": 0,
+            "MapID": 229,
+            "Name_lang": "Overlord Wyrmthalak",
+            "OrderIndex": 8000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 275,
+          "source_section": 0
+        },
+        {
+          "fields": {
+            "Bit": 9,
+            "CompleteWorldStateID": 21478,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 3062,
+            "ItemSequenceLevel": 0,
+            "MapID": 229,
+            "Name_lang": "Pyroguard Emberseer",
+            "OrderIndex": 9000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3062,
+          "source_section": 0
+        },
+        {
+          "fields": {
+            "Bit": 10,
+            "CompleteWorldStateID": 27109,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 3063,
+            "ItemSequenceLevel": 0,
+            "MapID": 229,
+            "Name_lang": "Warchief Rend Blackhand",
+            "OrderIndex": 10000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3063,
+          "source_section": 0
+        },
+        {
+          "fields": {
+            "Bit": 11,
+            "CompleteWorldStateID": 24571,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 3068,
+            "ItemSequenceLevel": 0,
+            "MapID": 229,
+            "Name_lang": "The Beast",
+            "OrderIndex": 11000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3068,
+          "source_section": 0
+        },
+        {
+          "fields": {
+            "Bit": 12,
+            "CompleteWorldStateID": 24572,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 3069,
+            "ItemSequenceLevel": 0,
+            "MapID": 229,
+            "Name_lang": "General Drakkisath",
+            "OrderIndex": 12000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3069,
+          "source_section": 0
+        },
+        {
+          "fields": {
+            "Bit": 13,
+            "CompleteWorldStateID": 27118,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 3070,
+            "ItemSequenceLevel": 0,
+            "MapID": 229,
+            "Name_lang": "Lord Valthalak",
+            "OrderIndex": 13000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3070,
+          "source_section": 0
+        },
+        {
+          "fields": {
+            "Bit": 0,
+            "CompleteWorldStateID": 29125,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 3315,
+            "ItemSequenceLevel": 0,
+            "MapID": 2974,
+            "Name_lang": "Withermaw",
+            "OrderIndex": 0,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3315,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 0,
+            "CompleteWorldStateID": 29135,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 3316,
+            "ItemSequenceLevel": 0,
+            "MapID": 2974,
+            "Name_lang": "Impaan the Imprisoner",
+            "OrderIndex": 1000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3316,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 1,
+            "CompleteWorldStateID": 29193,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 3322,
+            "ItemSequenceLevel": 0,
+            "MapID": 2974,
+            "Name_lang": "Bonesnout the Unbroken",
+            "OrderIndex": 3000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3322,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 2,
+            "CompleteWorldStateID": 29197,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1028,
+            "ID": 3323,
+            "ItemSequenceLevel": 0,
+            "MapID": 2974,
+            "Name_lang": "Blackmaw Behemoth",
+            "OrderIndex": 5000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3323,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 1,
+            "CompleteWorldStateID": 29229,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 3327,
+            "ItemSequenceLevel": 0,
+            "MapID": 2974,
+            "Name_lang": "Elder Shaman Bloodmane",
+            "OrderIndex": 2000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3327,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 2,
+            "CompleteWorldStateID": 29282,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1028,
+            "ID": 3334,
+            "ItemSequenceLevel": 0,
+            "MapID": 2974,
+            "Name_lang": "Varrox Bleakhoof",
+            "OrderIndex": 4000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3334,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 3,
+            "CompleteWorldStateID": 29395,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1152,
+            "ID": 3336,
+            "ItemSequenceLevel": 0,
+            "MapID": 2974,
+            "Name_lang": "Unbound Spirit",
+            "OrderIndex": 6000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3336,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 0,
+            "CompleteWorldStateID": 30153,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1028,
+            "ID": 3403,
+            "ItemSequenceLevel": 0,
+            "MapID": 2994,
+            "Name_lang": "Overseer Wrex",
+            "OrderIndex": 0,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3403,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 1,
+            "CompleteWorldStateID": 30371,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1028,
+            "ID": 3409,
+            "ItemSequenceLevel": 0,
+            "MapID": 2994,
+            "Name_lang": "Blazeroar",
+            "OrderIndex": 1000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3409,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 2,
+            "CompleteWorldStateID": 30368,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1028,
+            "ID": 3410,
+            "ItemSequenceLevel": 0,
+            "MapID": 2994,
+            "Name_lang": "Tidemistress Ca'zass",
+            "OrderIndex": 500,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3410,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 3,
+            "CompleteWorldStateID": 30370,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1028,
+            "ID": 3415,
+            "ItemSequenceLevel": 0,
+            "MapID": 2994,
+            "Name_lang": "The Questioner",
+            "OrderIndex": 750,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3415,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 4,
+            "CompleteWorldStateID": 30369,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1028,
+            "ID": 3418,
+            "ItemSequenceLevel": 0,
+            "MapID": 2994,
+            "Name_lang": "Katerina the Cleaner",
+            "OrderIndex": 625,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3418,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 0,
+            "CompleteWorldStateID": 31044,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 3498,
+            "ItemSequenceLevel": 0,
+            "MapID": 3001,
+            "Name_lang": "Titanosaur",
+            "OrderIndex": 0,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3498,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 1,
+            "CompleteWorldStateID": 31046,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 3499,
+            "ItemSequenceLevel": 0,
+            "MapID": 3001,
+            "Name_lang": "Ravasaur Hunters",
+            "OrderIndex": 1000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3499,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 2,
+            "CompleteWorldStateID": 31048,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 3500,
+            "ItemSequenceLevel": 0,
+            "MapID": 3001,
+            "Name_lang": "Thunderhoof",
+            "OrderIndex": 2000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3500,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 3,
+            "CompleteWorldStateID": 31050,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 3501,
+            "ItemSequenceLevel": 0,
+            "MapID": 3001,
+            "Name_lang": "Venomridge",
+            "OrderIndex": 3000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3501,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 4,
+            "CompleteWorldStateID": 31052,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 3502,
+            "ItemSequenceLevel": 0,
+            "MapID": 3001,
+            "Name_lang": "Nanaya",
+            "OrderIndex": 8000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3502,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 5,
+            "CompleteWorldStateID": 31089,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 3503,
+            "ItemSequenceLevel": 0,
+            "MapID": 3001,
+            "Name_lang": "Cinder",
+            "OrderIndex": 5000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3503,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 6,
+            "CompleteWorldStateID": 31092,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 3504,
+            "ItemSequenceLevel": 0,
+            "MapID": 3001,
+            "Name_lang": "King Op",
+            "OrderIndex": 6000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3504,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 7,
+            "CompleteWorldStateID": 31119,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 3505,
+            "ItemSequenceLevel": 0,
+            "MapID": 3001,
+            "Name_lang": "Bolt",
+            "OrderIndex": 7000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3505,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 8,
+            "CompleteWorldStateID": 31135,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 3507,
+            "ItemSequenceLevel": 0,
+            "MapID": 3001,
+            "Name_lang": "Direhorn Matriarch",
+            "OrderIndex": 3500,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3507,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 9,
+            "CompleteWorldStateID": 32351,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 3597,
+            "ItemSequenceLevel": 0,
+            "MapID": 3001,
+            "Name_lang": "Snowtalon",
+            "OrderIndex": 6500,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3597,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 10,
+            "CompleteWorldStateID": 32368,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 3600,
+            "ItemSequenceLevel": 0,
+            "MapID": 3001,
+            "Name_lang": "Vitrix",
+            "OrderIndex": 7500,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3600,
+          "source_section": 2
+        }
+      ],
+      "target_cache_records": []
+    }
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "status": "unreleased alpha.6 validation candidate; live test and publication pending",
+  "base_commit": "516707a0932d0a500978bfa37f2fd0d068b3fd8c",
+  "runtime_enabled": true,
+  "raw_identity_verified": true,
+  "client_tested": false,
+  "strategy_provisional": true,
+  "instanceID": 229,
+  "name": "Blackrock Spire (Lower encounters only)",
+  "difficultyIDs": [
+    1
+  ],
+  "raw_identity_evidence": "docs/FOREVER_LBRS_IDS_70888.json",
+  "overview": "Lower Blackrock Spire only; provisional Classic advice. Pull one pack at a time and control casters. Upper Spire encounters and rare spawns are not covered.",
+  "sources": [
+    {
+      "id": "icy-veins-classic",
+      "url": "https://www.icy-veins.com/wow-classic/lower-blackrock-spire-guide",
+      "page_updated": "2024-11-18",
+      "reviewed_at_utc": "2026-11-12",
+      "scope": "Classic baseline only; not proof of unchanged Forever mechanics"
+    },
+    {
+      "id": "wowhead-forever-roster",
+      "url": "https://www.wowhead.com/forever/guide/dungeons-overview-locations-details",
+      "page_updated": "2026-11-11",
+      "reviewed_at_utc": "2026-11-12",
+      "scope": "Lower and Upper are separate roster units sharing Blackrock Spire; not a combat strategy guide"
+    },
+    {
+      "id": "icy-veins-forever-index",
+      "url": "https://www.icy-veins.com/wow-forever/dungeons-overview/",
+      "reviewed_at_utc": "2026-11-12",
+      "scope": "Forever-specific Lower guide remains Coming Soon; Classic advice stays provisional"
+    }
+  ],
+  "bosses": [
+    {
+      "encounterID": 267,
+      "name": "Highlord Omokk",
+      "tip": "Provisional Classic advice: Control the two ogre guards. Face Omokk away from allies and leave safe space for knockback.",
+      "source": "icy-veins-classic"
+    },
+    {
+      "encounterID": 268,
+      "name": "Shadow Hunter Vosh'gajin",
+      "tip": "Provisional Classic advice: Kill or control the two shadow priests. Remove Curse of Blood when possible; Hex can disable a party member.",
+      "source": "icy-veins-classic"
+    },
+    {
+      "encounterID": 269,
+      "name": "War Master Voone",
+      "tip": "Provisional Classic advice: Let the tank establish threat. Keep allies out of Voone's cleave and watch heavy tank damage.",
+      "source": "icy-veins-classic"
+    },
+    {
+      "encounterID": 270,
+      "name": "Mother Smolderweb",
+      "tip": "Provisional Classic advice: Face Smolderweb away from allies to avoid her frontal stun. Watch for Mother's Milk poison.",
+      "source": "icy-veins-classic"
+    },
+    {
+      "encounterID": 271,
+      "name": "Urok Doomhowl",
+      "tip": "Provisional Classic advice: Control the summoned ogre waves. Keep ranged players and the healer away from Urok's fear.",
+      "source": "icy-veins-classic"
+    },
+    {
+      "encounterID": 272,
+      "name": "Quartermaster Zigris",
+      "tip": "Provisional Classic advice: Clear nearby orc packs before engaging Zigris; avoid pulling the hall together.",
+      "source": "icy-veins-classic"
+    },
+    {
+      "encounterID": 274,
+      "name": "Halycon",
+      "tip": "Provisional Classic advice: Hold Halycon while the group kills her small worg adds, then focus her.",
+      "source": "icy-veins-classic"
+    },
+    {
+      "encounterID": 273,
+      "name": "Gizrul the Slavener",
+      "tip": "Provisional Classic advice: Expect heavy tank damage. Use available damage cooldowns to shorten the fight.",
+      "source": "icy-veins-classic"
+    },
+    {
+      "encounterID": 275,
+      "name": "Overlord Wyrmthalak",
+      "tip": "Provisional Classic advice: Tank with your back toward a safe wall and face Wyrmthalak away. Control the elite adds when they appear.",
+      "source": "icy-veins-classic"
+    }
+  ],
+  "excluded_encounterIDs": [
+    3062,
+    3063,
+    3068,
+    3069,
+    3070
+  ],
+  "excluded_names": [
+    "All Upper Blackrock Spire encounters",
+    "All rare spawns"
+  ],
+  "exclusion_reason": "Upper events are positive raw rows but outside this slice. Rare spawns have no admitted strategy/event mapping; no absent-row claim or name/NPC fallback.",
+  "promotion_requirements": [
+    "Review the combined alpha.6 patch and record the live validation results before publication.",
+    "Run the full gates against the final integrated commit before any publication.",
+    "Verify live Normal-mode event activation, localized names, tips, success/wipe, settings persistence and exits.",
+    "Confirm the Classic strategy baseline in the Forever client; remove provisional labels only after evidence."
+  ],
+  "version": "0.1.0-alpha.6"
+}

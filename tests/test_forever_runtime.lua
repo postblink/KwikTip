@@ -199,7 +199,7 @@ for _, name in ipairs({ "DUNGEON_BY_INSTANCEID", "DUNGEON_BY_UIMAPID", "BOSS_BY_
     check(type(addon[name]) == "table", "package initializes " .. name)
 end
 check(type(addon.DUNGEONS) == "table", "Forever data table exists")
-check(#addon.DUNGEONS == 23, "alpha manifest contains exactly twenty-three dungeon records")
+check(#addon.DUNGEONS == 28, "candidate contains exactly twenty-eight dungeon records")
 local hall = addon.DUNGEON_BY_INSTANCEID[3065]
 local ragefire = addon.DUNGEON_BY_INSTANCEID[389]
 local stockade = addon.DUNGEON_BY_INSTANCEID[34]
@@ -230,13 +230,13 @@ for i, encounterID in ipairs(expectedStockadeIDs) do
     check(stockade.bosses[i].name == expectedStockadeNames[i], "Stockade encounter name matches verified source record")
 end
 check(ruins ~= nil, "Ruins is indexed by exact instance ID")
-local ruinsIDs = { 3353, 3357, 3411, 3412, 3354 }
-check(#ruins.bosses == #ruinsIDs, "Ruins has exactly five admitted encounters")
+local ruinsIDs = { 3353, 3357, 3411, 3412, 3354, 3355 }
+check(#ruins.bosses == #ruinsIDs, "Ruins includes the observed Butcher event")
 for i, id in ipairs(ruinsIDs) do
     check(ruins.bosses[i].encounterID == id, "Ruins ID matches preserved DB2")
 end
-check(addon.BOSS_BY_ENCOUNTERID[3355] == nil and addon.BOSS_BY_ENCOUNTERID[3408] == nil,
-    "unreconciled Baron and rare Captain never become automatic tips")
+check(addon.BOSS_BY_ENCOUNTERID[3355] ~= nil and addon.BOSS_BY_ENCOUNTERID[3408] == nil,
+    "The Butcher is bound, but the rare Captain remains excluded")
 check(ruins.uiMapID == nil and ruins.areas == nil, "no guessed Ruins map/area routing")
 check(excavation ~= nil and #excavation.bosses == 4, "Excavation has four admitted event records")
 for i, id in ipairs({3480, 3481, 3644, 3482}) do
@@ -244,27 +244,43 @@ for i, id in ipairs({3480, 3481, 3644, 3482}) do
 end
 check(excavation.uiMapID == nil and excavation.areas == nil, "no guessed Excavation routing")
 check(not contains(excavation.bosses[2].tip, "%"), "no disputed enrage threshold shipped")
-check(dalaran ~= nil and #dalaran.bosses == 7, "Dalaran has seven exact matches")
-for i, id in ipairs({3311,3310,3298,3299,3300,3302,3303}) do
+check(dalaran ~= nil and #dalaran.bosses == 8, "Dalaran includes the observed Mana Elemental")
+for i, id in ipairs({3311,3310,3298,3299,3300,3301,3302,3303}) do
     check(dalaran.bosses[i].encounterID == id, "Dalaran exact DB2 identity")
 end
-check(addon.BOSS_BY_ENCOUNTERID[3301] == nil and addon.BOSS_BY_ENCOUNTERID[3312] == nil, "no invented Dalaran aliases")
+check(addon.BOSS_BY_ENCOUNTERID[3301] ~= nil and addon.BOSS_BY_ENCOUNTERID[3312] == nil, "no invented Dalaran aliases")
 check(addon.DUNGEON_BY_INSTANCEID[2980] == nil, "non-dungeon Dalaran map excluded")
 for _, id in ipairs({2694,2697,2699,2704,2710,2761,2762,2763,2764,2765,2766,2767,2825,2891,2899,2925,2927,2928,2935,2940}) do
     check(addon.BOSS_BY_ENCOUNTERID[id] == nil, "alternate-mode identity never used for Normal")
 end
-for _, id in ipairs({230,240,243,2791,2805,2810,3055,2795,2796,2797}) do
+for _, id in ipairs({240,2805,2810,3055,2795,2796,2797}) do
     check(addon.BOSS_BY_ENCOUNTERID[id] == nil, "unresolved aggregate/alias/strategy remains excluded")
 end
 for _, id in ipairs({449,450}) do
-    check(contains(addon.BOSS_BY_ENCOUNTERID[id].boss.tip, "Provisional"), "Cathedral uncertainty stays visible")
+    check(contains(addon.BOSS_BY_ENCOUNTERID[id].boss.tip, id == 449 and "Curse of Blood" or "Mograine"), "Cathedral tips contain encounter-specific counterplay")
 end
 local encounterCount = 0
 for _ in pairs(addon.BOSS_BY_ENCOUNTERID) do encounterCount = encounterCount + 1 end
-for _, boss in ipairs(addon.DUNGEON_BY_INSTANCEID[129].bosses) do
-    check(contains(boss.tip, "Provisional advice:"), "RFD provisional status remains visible")
+check(contains(addon.BOSS_BY_ENCOUNTERID[2780].boss.tip, "Web Spray"), "RFD gives specific counterplay for Tuten'kash")
+check(encounterCount == 229, "candidate indexes 229 encounter records")
+for id, marker in pairs({[2914] = "Net", [3301] = "Manamorph", [3355] = "Knockout", [3478] = "Shield Slam", [230] = "arena", [243] = "mana", [2791] = "vault", [3409] = "dragon", [3323] = "Clawbert"}) do
+    local entry = addon.BOSS_BY_ENCOUNTERID[id]
+    check(entry and contains(entry.boss.tip, marker), "current-build encounter has situation-specific advice: " .. id)
 end
-check(encounterCount == 183, "alpha manifest indexes exactly one hundred eighty-three encounter records")
+check(contains(addon.DUNGEON_BY_INSTANCEID[36].overview, "Flamestrike"), "Deadmines overview includes Evoker counterplay")
+check(contains(addon.DUNGEON_BY_INSTANCEID[43].overview, "Slumber"), "Wailing Caverns overview includes druid counterplay")
+check(contains(addon.DUNGEON_BY_INSTANCEID[47].overview, "Groundshakers"), "Kraul overview includes Groundshaker priority")
+check(contains(addon.DUNGEON_BY_INSTANCEID[33].overview, "Lupine Horrors"), "Shadowfang overview includes summoner priority")
+check(contains(addon.DUNGEON_BY_INSTANCEID[48].overview, "Mana Burn"), "Blackfathom overview includes mana-burn counterplay")
+check(contains(addon.DUNGEON_BY_INSTANCEID[90].overview, "Reflection Field"), "Gnomeregan overview includes reflect counterplay")
+check(contains(addon.DUNGEON_BY_INSTANCEID[129].overview, "Belnistrasz"), "Razorfen Downs overview explains escort protection")
+check(contains(addon.DUNGEON_BY_INSTANCEID[209].overview, "Mallet"), "Zul'Farrak overview mentions Classic summon preparation")
+check(contains(addon.DUNGEON_BY_INSTANCEID[70].overview, "Healing Wave"), "Uldaman prepares players for Oracle healing")
+check(contains(addon.DUNGEON_BY_INSTANCEID[189].overview, "Library:"), "Scarlet preparation distinguishes named wings without inferring position")
+check(addon.BOSS_BY_ENCOUNTERID[598].boss.tip == addon.BOSS_BY_ENCOUNTERID[599].boss.tip
+    and contains(addon.BOSS_BY_ENCOUNTERID[598].boss.tip, "fear"), "either Zul'Farrak paired start shows complete counterplay")
+check(contains(addon.DUNGEON_BY_INSTANCEID[209].overview, "Shadowhunter"), "Zul'Farrak overview provides specific trash counterplay")
+check(contains(addon.DUNGEON_BY_INSTANCEID[3039].overview, "Shaman"), "Krol'dok overview provides specific trash counterplay")
 for _, dungeon in ipairs(addon.DUNGEONS) do
     check(type(dungeon.difficultyIDs) == "table" and #dungeon.difficultyIDs == 1
         and dungeon.difficultyIDs[1] == 1,
@@ -502,9 +518,15 @@ check(contains(addon._lastContent, hallFirstBoss.tip)
     and not contains(addon._lastContent, hall.overview),
     "overview updates preserve the active Hall fight tip")
 emit("ENCOUNTER_END", hallFirstBoss.encounterID, "Known Hall boss priority test", 1, 5, 1)
-check(not addon.bossActive and contains(addon._lastContent, hallSecondBoss.tip)
-    and not contains(addon._lastContent, hall.overview),
-    "successful Hall boss completion shows the next-boss preview before the overview")
+check(not addon.bossActive and contains(addon._lastContent, hall.overview)
+    and not contains(addon._lastContent, hallSecondBoss.tip),
+    "successful Hall boss completion restores overview without guessing the next boss")
+KwikTipDB.showInDungeon = false
+emit("ENCOUNTER_START", hallFirstBoss.encounterID, "Hall quiet success", 1, 5)
+emit("ENCOUNTER_END", hallFirstBoss.encounterID, "Hall quiet success", 1, 5, 1)
+check(not addon.bossActive and addon._lastContent == "" and not addon.HUD:IsShown(),
+    "successful Hall boss completion is quiet with overview disabled")
+KwikTipDB.showInDungeon = true
 
 emit("ENCOUNTER_START", hallFirstBoss.encounterID, "Hall before mode transition", 1, 5)
 state.difficultyID = 201
@@ -643,7 +665,7 @@ checkUnorderedClassicDungeon(dalaran, "Dalaran", "DALARAN_ALPHA_PERSONAL_NOTE")
 state.inInstance, state.instanceType, state.instanceID = true, "party", 2959
 state.difficultyID = 1
 emit("PLAYER_ENTERING_WORLD")
-for _, id in ipairs({3301,3312}) do
+for _, id in ipairs({3312}) do
     emit("ENCOUNTER_START", id, "Arcanic Enigma", 1, 5)
     check(not addon.bossActive and not addon.HUD:IsShown(), "unmatched Dalaran ID stays quiet")
 end
@@ -697,7 +719,8 @@ end
 state.instanceID, state.difficultyID = 48,1
 emit("PLAYER_ENTERING_WORLD")
 emit("ENCOUNTER_START", 2914, "Gelihast", 1, 5)
-check(not addon.bossActive and not addon.HUD:IsShown(), "unresolved Geilhast alias excluded")
+check(addon.bossActive and contains(addon._lastContent, "Net"), "Geilhast event displays the sourced Net tip")
+emit("ENCOUNTER_END", 2914, "Geilhast", 1, 5, 1)
 
 -- Real excluded Ruins IDs must never borrow a similar guide/name entry.
 state.inInstance, state.instanceType, state.instanceID = true, "party", 2999
@@ -705,7 +728,7 @@ state.difficultyID, state.mapID, state.subzone = 1, nil, ""
 for _, showOverview in ipairs({ false, true }) do
     KwikTipDB.showInDungeon = showOverview
     emit("PLAYER_ENTERING_WORLD")
-    for _, excludedID in ipairs({ 3355, 3408 }) do
+    for _, excludedID in ipairs({ 3408 }) do
         emit("ENCOUNTER_START", excludedID, "The Baron", 1, 5)
         check(not addon.bossActive and addon._activeBossEntry == nil,
             "excluded Ruins IDs cannot activate guide-name fallback")
@@ -750,21 +773,174 @@ KwikTipDB.showInDungeon = false
 state.inInstance, state.instanceType, state.instanceID, state.mapID = false, "none", 0, nil
 emit("PLAYER_ENTERING_WORLD")
 
+-- Lower Blackrock Spire shares map 229 with Upper; never infer a current wing.
+local lower = addon.DUNGEON_BY_INSTANCEID[229]
+check(lower ~= nil and #lower.bosses == 14, "Blackrock Spire includes fourteen positive event identities")
+for i, id in ipairs({267,268,269,270,271,272,274,273,275}) do
+    check(lower.bosses[i].encounterID == id, "Lower encounter matches positive 70888 row")
+    check(#lower.bosses[i].tip > 20, "Lower Spire provides an actionable tip")
+end
+check(lower.bosses[7].name == "Halycon", "preserve exact client spelling rather than guessing an alias")
+check(lower.uiMapID == nil and lower.areas == nil, "Lower has no guessed wing or NPC routing")
+checkUnorderedClassicDungeon(lower, "Lower Blackrock Spire", "LOWER_SPIRE_NOTE")
+state.inInstance, state.instanceType, state.instanceID = true, "party", 229
+state.difficultyID, state.mapID, state.subzone = 1, nil, ""
+for _, showOverview in ipairs({ false, true }) do
+    KwikTipDB.showInDungeon = showOverview
+    emit("PLAYER_ENTERING_WORLD")
+    for _, excluded in ipairs({994201}) do
+        check(addon.BOSS_BY_ENCOUNTERID[excluded] == nil, "Synthetic rare ID is not admitted")
+        emit("ENCOUNTER_START", 267, "Omokk before unsupported fight", 1, 10)
+        emit("ENCOUNTER_START", excluded, "Highlord Omokk", 1, 10)
+        check(not addon.bossActive and addon._activeBossEntry == nil, "Upper/rare event clears stale Lower tip despite familiar name")
+        check(showOverview and contains(addon._lastContent, lower.overview)
+            or not showOverview and addon._lastContent == "" and not addon.HUD:IsShown(),
+            "unsupported shared-map event preserves only the shared overview")
+    end
+end
+KwikTipDB.showInDungeon = false
+for _, boss in ipairs(lower.bosses) do
+    for _, mode in ipairs({201,207}) do
+        state.instanceID, state.difficultyID = 229, mode
+        emit("PLAYER_ENTERING_WORLD")
+        emit("ENCOUNTER_START", boss.encounterID, boss.name, mode, 10)
+        check(not addon.bossActive and not addon.HUD:IsShown(), "Lower alternate modes stay disabled")
+    end
+    state.instanceID, state.difficultyID = 230, 1
+    emit("PLAYER_ENTERING_WORLD")
+    emit("ENCOUNTER_START", boss.encounterID, boss.name, 1, 10)
+    check(not addon.bossActive and not addon.HUD:IsShown(), "Lower events cannot leak into Blackrock Depths")
+    state.instanceID = 229
+    emit("PLAYER_ENTERING_WORLD")
+    emit("ENCOUNTER_START", boss.encounterID, "Localized Lower encounter", 1, 10)
+    check(addon.bossActive and contains(addon._lastContent, boss.tip), "normal ten-player event keeps provisional tip")
+    check(contains(addon._lastContent, "Localized Lower encounter"), "Lower header uses localized event name")
+    emit("ENCOUNTER_END", boss.encounterID, boss.name, 1, 10, 0)
+    check(not addon.bossActive and not addon.HUD:IsShown(), "Lower wipe clears tip without predicting route")
+end
+state.inInstance, state.instanceType, state.instanceID = false, "none", 0
+emit("PLAYER_ENTERING_WORLD")
+
+-- Synthetic packaged-path events do not establish target-client event semantics.
+for _, slice in ipairs({
+    {229, {3062,3063,3068,3069,3070}, {{994210,"Solakar Flamewreath"},{994211,"Goraluk Anvilcrack"},{994212,"Jed Runewatcher"}}},
+    {2994, {3410,3403,3418,3409,3415}, {}},
+    {2974, {3315,3322,3316,3323,3336,3327,3334}, {{994213,"Moontouched Wanderer"}}},
+    {3001, {3503,3498,3597,3507,3500,3501,3505,3502}, {{3499,"Tor'Rel and Izha'Rel"},{3504,"King Op"},{3600,"Vitrix"}}},
+}) do
+    local map, ids, excluded = slice[1], slice[2], slice[3]
+    local dungeon = addon.DUNGEON_BY_INSTANCEID[map]
+    check(dungeon ~= nil and dungeon.previewNextBoss == false, "candidate map suppresses guessed boss order")
+    for _, showOverview in ipairs({false, true}) do
+        KwikTipDB.showInDungeon = showOverview
+        state.inInstance, state.instanceType, state.instanceID, state.difficultyID = true, "party", map, 1
+        emit("PLAYER_ENTERING_WORLD")
+        check(showOverview and contains(addon._lastContent, dungeon.overview)
+            or not showOverview and addon._lastContent == "" and not addon.HUD:IsShown(),
+            "candidate entry shows only opt-in overview")
+        for _, id in ipairs(ids) do
+            local boss = addon.BOSS_BY_ENCOUNTERID[id].boss
+            for _, size in ipairs({5,10}) do
+                emit("ENCOUNTER_START", id, "Localized event", 1, size)
+                check(addon.bossActive and contains(addon._lastContent, boss.tip), "admitted event shows its tip")
+                emit("ENCOUNTER_END", id, boss.name, 1, size, 0)
+                check(not addon.bossActive, "wipe clears event")
+            end
+            emit("ENCOUNTER_START", id, boss.name, 1, 5)
+            emit("ENCOUNTER_END", id, boss.name, 1, 5, 1)
+            check(not addon.bossActive, "success clears event without guessed next boss")
+            check(showOverview and contains(addon._lastContent, dungeon.overview)
+                or not showOverview and addon._lastContent == "" and not addon.HUD:IsShown(),
+                "success returns to overview or quiet state")
+        end
+        for _, unknown in ipairs(excluded) do
+            emit("ENCOUNTER_START", ids[1], "prior fight", 1, 5)
+            emit("ENCOUNTER_START", unknown[1], unknown[2], 1, 5)
+            check(not addon.bossActive and addon._activeBossEntry == nil, "excluded name cannot inherit prior tip")
+            check(showOverview and contains(addon._lastContent, dungeon.overview)
+                or not showOverview and addon._lastContent == "" and not addon.HUD:IsShown(),
+                "excluded event returns to overview or quiet state")
+        end
+        emit("ENCOUNTER_START", ids[1], "prior fight", 1, 5)
+        emit("ENCOUNTER_START", 999999, "Unknown encounter", 1, 5)
+        check(not addon.bossActive and addon._activeBossEntry == nil, "unknown event clears prior fight")
+        for _, mode in ipairs({201,207}) do
+            state.difficultyID = mode
+            emit("PLAYER_ENTERING_WORLD")
+            emit("ENCOUNTER_START", ids[1], "unsupported mode", mode, 5)
+            check(not addon.bossActive and not addon.HUD:IsShown(), "unsupported difficulty stays quiet")
+        end
+        state.difficultyID, state.instanceID = 1, 230
+        emit("PLAYER_ENTERING_WORLD")
+        emit("ENCOUNTER_START", ids[1], "foreign event", 1, 5)
+        check(not addon.bossActive, "foreign instance cannot display tip")
+        state.instanceID = map
+        emit("PLAYER_ENTERING_WORLD")
+        emit("ENCOUNTER_START", ids[1], "prior fight", 1, 5)
+        state.inInstance, state.instanceType, state.instanceID = false, "none", 0
+        emit("PLAYER_ENTERING_WORLD")
+        check(not addon.bossActive and not addon.HUD:IsShown(), "zone exit clears event")
+    end
+end
+KwikTipDB.showInDungeon = false
+
+-- Krol'dok incorporates live-observed event identities and reconciled guide names.
+local kroldok = addon.DUNGEON_BY_INSTANCEID[3039]
+check(kroldok ~= nil, "Krol'dok candidate is indexed by its 70959 instance ID")
+if kroldok then
+    check(#kroldok.bosses == 5, "Krol'dok includes five observed encounter identities")
+    local ids = { 3450, 3452, 3453, 3449, 3451 }
+    for i, id in ipairs(ids) do
+        check(kroldok.bosses[i].encounterID == id, "Krol'dok uses a positively identified encounter")
+    end
+    check(kroldok.uiMapID == nil and kroldok.areas == nil, "Krol'dok does not guess area routing")
+    checkUnorderedClassicDungeon(kroldok, "Krol'dok", "KROLDOK_NOTE")
+    state.inInstance, state.instanceType, state.instanceID = true, "party", 3039
+    state.difficultyID, state.mapID, state.subzone = 1, nil, ""
+    for _, showOverview in ipairs({ false, true }) do
+        KwikTipDB.showInDungeon = showOverview
+        emit("PLAYER_ENTERING_WORLD")
+        for _, excluded in ipairs({{994301, "Bossman Toof"}}) do
+            emit("ENCOUNTER_START", 3450, "Grox", 1, 5)
+            emit("ENCOUNTER_START", excluded[1], excluded[2], 1, 5)
+            check(not addon.bossActive and addon._activeBossEntry == nil, "unreconciled or unknown Krol'dok boss clears previous tip")
+            check(showOverview and contains(addon._lastContent, kroldok.overview)
+                or not showOverview and addon._lastContent == "" and not addon.HUD:IsShown(),
+                "excluded Krol'dok encounter preserves only the optional overview")
+        end
+    end
+    KwikTipDB.showInDungeon = false
+    state.difficultyID = 1
+    emit("PLAYER_ENTERING_WORLD")
+    for _, boss in ipairs(kroldok.bosses) do
+        emit("ENCOUNTER_START", boss.encounterID, "Localized encounter", 1, 5)
+        check(addon.bossActive and contains(addon._lastContent, boss.tip), "Krol'dok simulated five-player event displays the tip")
+        emit("ENCOUNTER_END", boss.encounterID, "Localized encounter", 1, 5, 0)
+        check(not addon.bossActive and not addon.HUD:IsShown(), "Krol'dok five-player wipe returns to quiet")
+    end
+    state.difficultyID = 201
+    emit("PLAYER_ENTERING_WORLD")
+    emit("ENCOUNTER_START", 3450, "Slavecrusher Grox", 201, 5)
+    check(not addon.bossActive and not addon.HUD:IsShown(), "Krol'dok alternate difficulty stays unsupported")
+    state.inInstance, state.instanceType, state.instanceID = false, "none", 0
+    emit("PLAYER_ENTERING_WORLD")
+end
+
 -- Drowned City is admitted from exact-build readable DB2 sections only.
 local drowned = addon.DUNGEON_BY_INSTANCEID[2970]
-check(drowned ~= nil and #drowned.bosses == 5, "Drowned City includes five exact-ID strategy matches")
-for i, id in ipairs({3474,3475,3476,3511,3479}) do
+check(drowned ~= nil and #drowned.bosses == 6, "Drowned City includes Guardian-only counterplay")
+for i, id in ipairs({3474,3475,3476,3511,3478,3479}) do
     check(drowned.bosses[i].encounterID == id, "Drowned City encounter matches verified 70888 row")
 end
 check(drowned.uiMapID == nil and drowned.areas == nil, "Drowned City has no guessed map or area routing")
-check(addon.BOSS_BY_ENCOUNTERID[3478] == nil, "Deathless Guardians does not borrow Marrow advice")
+check(not contains(addon.BOSS_BY_ENCOUNTERID[3478].boss.tip, "Marrow") and not contains(addon.BOSS_BY_ENCOUNTERID[3478].boss.tip, "Bloodbolt"), "Deathless Guardians does not borrow Marrow advice")
 checkUnorderedClassicDungeon(drowned, "Drowned City", "DROWNED_CITY_NOTE")
 state.inInstance, state.instanceType, state.instanceID = true, "party", 2970
 state.difficultyID, state.mapID, state.subzone = 1, nil, ""
 for _, showOverview in ipairs({ false, true }) do
     KwikTipDB.showInDungeon = showOverview
     emit("PLAYER_ENTERING_WORLD")
-    for _, excluded in ipairs({{3478,"Deathless Marrow"},{994101,"Umbra"},{994102,"Gill"},{994103,"Zin'aka"}}) do
+    for _, excluded in ipairs({{994101,"Umbra"},{994102,"Gill"},{994103,"Zin'aka"}}) do
         emit("ENCOUNTER_START", excluded[1], excluded[2], 1, 5)
         check(not addon.bossActive and addon._activeBossEntry == nil, "Drowned City exclusions cannot create name-based tips")
         check(showOverview and contains(addon._lastContent, drowned.overview)
@@ -791,6 +967,312 @@ end
 state.inInstance, state.instanceType, state.instanceID = false, "none", 0
 emit("PLAYER_ENTERING_WORLD")
 
+-- ============================================================
+-- Forever-only manual boss tip preview (pre-pull, out of combat)
+-- ============================================================
+local chatLines = {}
+local origPrint = print
+local function captureSlash(cmd)
+    chatLines = {}
+    print = function(...)
+        local parts = {}
+        for i = 1, select("#", ...) do parts[i] = tostring(select(i, ...)) end
+        chatLines[#chatLines + 1] = table.concat(parts, "\t")
+    end
+    local okCall, errCall = pcall(SlashCmdList.KWIKTIP, cmd)
+    print = origPrint
+    assert(okCall, errCall)
+    return table.concat(chatLines, "\n")
+end
+
+-- 1. Unsupported instances/modes keep picker unavailable with clear message.
+check(addon.IS_FOREVER == true, "Forever runtime sets IS_FOREVER flavor flag")
+KwikTipDB.showInDungeon = false
+KwikTipDB.persistentHide = false
+state.inInstance, state.instanceType, state.instanceID, state.difficultyID = false, "none", 0, 1
+emit("PLAYER_ENTERING_WORLD")
+local dUnsupported, reasonUnsupported = addon:GetBossPreviewDungeon()
+check(dUnsupported == nil and contains(reasonUnsupported, "Unavailable:"),
+    "boss preview is unavailable outside an instance with clear reason")
+local okOutside = addon:PreviewBoss(1)
+check(not okOutside and addon._manualBossPreview == nil and not addon.HUD:IsShown(),
+    "PreviewBoss fails closed outside an instance")
+check(contains(captureSlash("boss"), "Unavailable:"), "/kwik boss reports unavailable outside instance")
+check(contains(captureSlash("boss 1"), "Unavailable:") and not addon.HUD:IsShown(),
+    "/kwik boss 1 fails closed outside instance")
+
+addon:ToggleConfig()
+check(addon.Config:IsShown() and addon._bossPreviewUI ~= nil, "config initializes Forever boss preview picker")
+check(addon._bossPreviewUI.dropBtn:GetText() == "Unavailable"
+    and contains(addon._bossPreviewUI.hintText:GetText(), "Unavailable:"),
+    "config picker shows unavailable state outside an instance")
+addon._bossPreviewUI.dropBtn:GetScript("OnClick")(addon._bossPreviewUI.dropBtn)
+check(not addon._bossPreviewUI.dropList:IsShown(), "unavailable picker does not open dropdown")
+addon:ToggleConfig()
+
+for _, unsupportedCase in ipairs({
+    { inInst = true, instType = "raid", instID = 389, diff = 1, label = "raid mode" },
+    { inInst = true, instType = "party", instID = 990001, diff = 1, label = "unknown party instance" },
+    { inInst = true, instType = "party", instID = 389, diff = 201, label = "unsupported difficulty 201" },
+    { inInst = true, instType = "party", instID = 389, diff = 0, label = "zero difficulty" },
+    { inInst = true, instType = "party", instID = 389, diff = nil, label = "nil difficulty" },
+}) do
+    state.inInstance, state.instanceType = unsupportedCase.inInst, unsupportedCase.instType
+    state.instanceID, state.difficultyID = unsupportedCase.instID, unsupportedCase.diff
+    emit("PLAYER_ENTERING_WORLD")
+    local dCase, rCase = addon:GetBossPreviewDungeon()
+    check(dCase == nil and contains(rCase, "Unavailable:"),
+        "boss preview unavailable in " .. unsupportedCase.label)
+    check(not addon:PreviewBoss(1) and not addon.HUD:IsShown(),
+        "PreviewBoss refuses " .. unsupportedCase.label)
+end
+
+-- An absent difficulty allowlist must not admit an unverified mode.
+state.inInstance, state.instanceType, state.instanceID, state.difficultyID = true, "party", 389, 201
+local savedDifficultyIDs = ragefire.difficultyIDs
+ragefire.difficultyIDs = nil
+check(not addon:PreviewBoss(1), "missing difficulty allowlist fails closed")
+ragefire.difficultyIDs = savedDifficultyIDs
+
+-- 2. Supported instance with Persistent Tip Window (showInDungeon) OFF.
+state.inInstance, state.instanceType, state.instanceID, state.difficultyID = true, "party", 389, 1
+state.instanceName, state.subzone = "Localized Ragefire Chasm", ""
+KwikTipDB.showInDungeon = false
+KwikTipDB.persistentHide = false
+emit("PLAYER_ENTERING_WORLD")
+check(addon._lastContent == "" and not addon.HUD:IsShown(),
+    "Ragefire starts hidden with Persistent Tip Window OFF")
+
+addon:ToggleConfig()
+local ui = addon._bossPreviewUI
+check(contains(ui.hintText:GetText(), "list, not pull order"),
+    "config picker explicitly labels bosses as a list, not pull order")
+check(contains(ui.listHeader:GetText(), "list, not pull order"),
+    "dropdown header explicitly labels bosses as a list, not pull order")
+ui.dropBtn:GetScript("OnClick")(ui.dropBtn)
+check(ui.dropList:IsShown(), "clicking picker opens boss dropdown in supported instance")
+for i, boss in ipairs(ragefire.bosses) do
+    check(ui.rows[i]:IsShown() and ui.rows[i]._boss == boss and ui.rows[i]._lbl:GetText() == boss.name,
+        "picker lists Ragefire boss " .. i .. " in exact data order")
+end
+-- A prior unknown encounter must not supply the preview's displayed boss name.
+emit("ENCOUNTER_START", 994999, "Unrelated Unknown Encounter", 1, 5)
+check(not addon.bossActive, "unknown encounter does not start a supported fight")
+-- Pick Taragaman the Hungerer (index 2) from the UI list.
+ui.rows[2]:GetScript("OnClick")(ui.rows[2])
+check(not ui.dropList:IsShown(), "selecting a boss closes the dropdown")
+check(addon._manualBossPreview and addon._manualBossPreview.boss == ragefire.bosses[2],
+    "selecting a boss sets manual boss preview state")
+check(addon.HUD:IsShown() and contains(addon._lastContent, ragefire.bosses[2].name)
+    and contains(addon._lastContent, ragefire.bosses[2].tip),
+    "manual boss preview displays existing boss tip even with Persistent Tip Window OFF")
+-- Closing Config keeps the manual boss preview up so the player can read it before pulling.
+addon:ToggleConfig()
+check(not addon.Config:IsShown() and addon.HUD:IsShown()
+    and contains(addon._lastContent, ragefire.bosses[2].tip),
+    "closing config preserves manual boss preview until pull/combat/zone exit/clear")
+
+-- Walking between subzones inside the same dungeon keeps the preview visible.
+state.subzone = "The Burning Vaults"
+emit("ZONE_CHANGED")
+check(addon.HUD:IsShown() and contains(addon._lastContent, ragefire.bosses[2].tip),
+    "subzone change inside the same supported dungeon preserves manual boss preview")
+
+-- Clear button dismisses preview and hides HUD when Persistent Tip Window is OFF.
+addon:ToggleConfig()
+ui.clearBtn:GetScript("OnClick")(ui.clearBtn)
+check(addon._manualBossPreview == nil and addon._lastContent == "" and not addon.HUD:IsShown(),
+    "Clear button removes manual boss preview and hides HUD when Persistent Tip Window is OFF")
+addon:ToggleConfig()
+
+-- 3. /kwik boss slash command (list, index, partial name, ambiguity, clear, help).
+local listOutput = captureSlash("boss")
+check(contains(listOutput, "list, not pull order") and contains(listOutput, "[1] Oggleflint")
+    and contains(listOutput, "[4] Bazzalan"),
+    "/kwik boss prints current dungeon bosses as a list, not pull order")
+local pickIdxOut = captureSlash("boss 3")
+check(contains(pickIdxOut, "Jergosh the Invoker") and addon.HUD:IsShown()
+    and contains(addon._lastContent, ragefire.bosses[3].tip),
+    "/kwik boss 3 previews third boss tip with Persistent Tip Window OFF")
+local pickNameOut = captureSlash("boss bazz")
+check(contains(pickNameOut, "Bazzalan") and addon.HUD:IsShown()
+    and contains(addon._lastContent, ragefire.bosses[4].tip),
+    "/kwik boss <partial name> previews matching boss tip")
+local clearOut = captureSlash("boss clear")
+check(contains(clearOut, "cleared") and addon._manualBossPreview == nil
+    and addon._lastContent == "" and not addon.HUD:IsShown(),
+    "/kwik boss clear dismisses preview and hides HUD")
+check(contains(captureSlash("help"), "/kwik boss"), "/kwik help documents /kwik boss")
+
+-- Ambiguous match in Lower Blackrock Spire ("lord" matches Highlord Omokk and Overlord Wyrmthalak).
+state.instanceID = 229
+emit("PLAYER_ENTERING_WORLD")
+local ambigOut = captureSlash("boss lord")
+check(contains(ambigOut, "Multiple bosses match") and addon._manualBossPreview == nil
+    and not addon.HUD:IsShown(),
+    "/kwik boss refuses to guess on ambiguous boss names")
+
+-- 4. Persistent Tip Window ON restores overview + personal note when cleared.
+state.instanceID, state.subzone = 389, ""
+KwikTipDB.showInDungeon = true
+KwikTipDB.notes["389"] = "RAGEFIRE_PREVIEW_NOTE"
+emit("PLAYER_ENTERING_WORLD")
+check(contains(addon._lastContent, ragefire.overview), "overview renders with Persistent Tip Window ON")
+captureSlash("boss 1")
+check(contains(addon._lastContent, ragefire.bosses[1].tip)
+    and not contains(addon._lastContent, ragefire.overview),
+    "manual boss preview replaces overview while active")
+check(contains(addon._lastContent, "RAGEFIRE_PREVIEW_NOTE"),
+    "manual boss preview includes the existing personal note")
+do
+    local edit, save
+    for _, frame in ipairs(frames) do
+        if frame.kind == "EditBox" and frame.parent and frame.parent.parent == KwikTipNotePopup then
+            edit = frame
+        elseif frame.kind == "Button" and frame.parent == KwikTipNotePopup
+            and frame:GetText() == addon.L.BTN_NOTE_SAVE then
+            save = frame
+        end
+    end
+    check(edit ~= nil and save ~= nil, "note editor and save button exist")
+    addon.NoteBtn:GetScript("OnClick")(addon.NoteBtn)
+    edit:SetText("EDITED_PREVIEW_NOTE")
+    save:GetScript("OnClick")(save)
+    check(KwikTipDB.notes["389"] == "EDITED_PREVIEW_NOTE"
+        and contains(addon._lastContent, "EDITED_PREVIEW_NOTE")
+        and not contains(addon._lastContent, "RAGEFIRE_PREVIEW_NOTE"),
+        "saving a note through the UI refreshes the active boss preview")
+end
+captureSlash("boss clear")
+check(contains(addon._lastContent, ragefire.overview)
+    and contains(addon._lastContent, "EDITED_PREVIEW_NOTE"),
+    "clearing manual preview restores overview and saved personal note")
+KwikTipDB.notes["389"] = nil
+KwikTipDB.showInDungeon = false
+emit("PLAYER_ENTERING_WORLD")
+
+-- 5. Disable Tips (persistentHide) hides HUD even when preview is selected.
+KwikTipDB.persistentHide = true
+captureSlash("boss 1")
+check(addon._manualBossPreview ~= nil and not addon.HUD:IsShown(),
+    "Disable Tips keeps HUD hidden while manual preview is selected")
+KwikTipDB.persistentHide = false
+addon:UpdateVisibility()
+check(addon.HUD:IsShown() and contains(addon._lastContent, ragefire.bosses[1].tip),
+    "unchecking Disable Tips reveals the active manual boss preview")
+addon:ClearBossPreview()
+
+-- 6. Combat lockdown / combat state blocks picking; leaving combat clears preview.
+local prevInCombatLockdown = InCombatLockdown
+InCombatLockdown = function() return true end
+local okCombat, errCombat = addon:PreviewBoss(1)
+check(not okCombat and contains(errCombat, "combat") and addon._manualBossPreview == nil
+    and not addon.HUD:IsShown(),
+    "InCombatLockdown blocks PreviewBoss")
+check(contains(captureSlash("boss 1"), "combat") and addon._manualBossPreview == nil,
+    "InCombatLockdown blocks /kwik boss pick")
+addon:ToggleConfig()
+check(ui.dropBtn:GetText() == "In combat" and contains(ui.statusText:GetText(), "combat"),
+    "config picker reflects combat lockdown state")
+ui.dropBtn:GetScript("OnClick")(ui.dropBtn)
+check(not ui.dropList:IsShown(), "dropdown cannot open during combat lockdown")
+addon:ToggleConfig()
+InCombatLockdown = prevInCombatLockdown
+
+-- Start preview out of combat, open dropdown, then enter and leave combat without encounter.
+addon:ToggleConfig()
+ui.dropBtn:GetScript("OnClick")(ui.dropBtn)
+check(ui.dropList:IsShown(), "dropdown opens out of combat")
+emit("PLAYER_REGEN_DISABLED")
+check(not ui.dropList:IsShown() and ui.dropBtn:GetText() == "In combat",
+    "entering combat closes boss dropdown and disables picking")
+addon:ToggleConfig()
+check(not addon:PreviewBoss(2), "PLAYER_REGEN_DISABLED blocks picking even if InCombatLockdown stub is false")
+emit("PLAYER_REGEN_ENABLED")
+check(addon:PreviewBoss(2) and addon.HUD:IsShown(), "out-of-combat picking succeeds after PLAYER_REGEN_ENABLED")
+emit("PLAYER_REGEN_DISABLED")
+check(addon._manualBossPreview == nil and addon._lastContent == "" and not addon.HUD:IsShown(),
+    "entering combat clears manual preview immediately without a stale tip")
+emit("PLAYER_REGEN_ENABLED")
+check(addon._manualBossPreview == nil and addon._lastContent == "" and not addon.HUD:IsShown(),
+    "leaving combat clears manual boss preview and leaves no stale tip")
+
+-- 7. Real ENCOUNTER_START overrides manual preview; ENCOUNTER_END clears without stale tip.
+for _, showOverview in ipairs({ false, true }) do
+    KwikTipDB.showInDungeon = showOverview
+    emit("PLAYER_ENTERING_WORLD")
+    addon:PreviewBoss(2) -- Taragaman
+    check(contains(addon._lastContent, ragefire.bosses[2].tip), "pre-pull preview active before pull")
+    emit("PLAYER_REGEN_DISABLED")
+    check(addon._manualBossPreview == nil and not contains(addon._lastContent, ragefire.bosses[2].tip),
+        "combat start clears the pre-pull tip before encounter start")
+    emit("ENCOUNTER_START", ragefire.bosses[1].encounterID, "Oggleflint Live", 1, 5)
+    check(addon._manualBossPreview == nil and addon.bossActive
+        and contains(addon._lastContent, ragefire.bosses[1].tip)
+        and not contains(addon._lastContent, ragefire.bosses[2].tip),
+        "real ENCOUNTER_START overrides and clears manual boss preview")
+    emit("ENCOUNTER_END", ragefire.bosses[1].encounterID, "Oggleflint Live", 1, 5, 1)
+    emit("PLAYER_REGEN_ENABLED")
+    check(addon._manualBossPreview == nil and not addon.bossActive
+        and not contains(addon._lastContent, ragefire.bosses[2].tip),
+        "ENCOUNTER_END does not fall back to stale manual preview")
+    if showOverview then
+        check(contains(addon._lastContent, ragefire.overview), "ENCOUNTER_END returns to overview when enabled")
+    else
+        check(addon._lastContent == "" and not addon.HUD:IsShown(), "ENCOUNTER_END hides HUD when overview is off")
+    end
+end
+
+-- Also cover ENCOUNTER_START arriving before the combat event.
+KwikTipDB.showInDungeon = false
+emit("PLAYER_ENTERING_WORLD")
+check(addon:PreviewBoss(2), "preview can be selected before direct encounter start")
+emit("ENCOUNTER_START", ragefire.bosses[1].encounterID, "Oggleflint Live", 1, 5)
+check(addon._manualBossPreview == nil and addon.bossActive
+    and contains(addon._lastContent, ragefire.bosses[1].tip)
+    and not contains(addon._lastContent, ragefire.bosses[2].tip),
+    "direct encounter start overrides a still-active manual preview")
+emit("ENCOUNTER_END", ragefire.bosses[1].encounterID, "Oggleflint Live", 1, 5, 1)
+
+-- Unrecognized ENCOUNTER_START also clears an active manual preview instead of leaving stale tip.
+KwikTipDB.showInDungeon = false
+emit("PLAYER_ENTERING_WORLD")
+addon:PreviewBoss(2)
+emit("ENCOUNTER_START", 994999, "Unknown Rare", 1, 5)
+check(addon._manualBossPreview == nil and not addon.bossActive
+    and addon._lastContent == "" and not addon.HUD:IsShown(),
+    "unrecognized ENCOUNTER_START clears manual preview instead of leaving stale tip")
+emit("ENCOUNTER_END", 994999, "Unknown Rare", 1, 5, 0)
+check(addon._manualBossPreview == nil and addon._lastContent == "" and not addon.HUD:IsShown(),
+    "ENCOUNTER_END after unrecognized encounter leaves no stale tip")
+
+-- 8. Leaving instance/zone clears manual preview (PLAYER_ENTERING_WORLD, ZONE_CHANGED_NEW_AREA, ZONE_CHANGED).
+addon:PreviewBoss(2)
+state.inInstance, state.instanceType, state.instanceID = false, "none", 0
+emit("PLAYER_ENTERING_WORLD")
+check(addon._manualBossPreview == nil and addon._lastContent == "" and not addon.HUD:IsShown(),
+    "leaving instance via PLAYER_ENTERING_WORLD clears manual preview")
+
+state.inInstance, state.instanceType, state.instanceID = true, "party", 389
+emit("PLAYER_ENTERING_WORLD")
+addon:PreviewBoss(2)
+state.inInstance, state.instanceType, state.instanceID = false, "none", 0
+emit("ZONE_CHANGED_NEW_AREA")
+check(addon._manualBossPreview == nil and addon._lastContent == "" and not addon.HUD:IsShown(),
+    "leaving instance via ZONE_CHANGED_NEW_AREA clears manual preview")
+
+state.inInstance, state.instanceType, state.instanceID = true, "party", 389
+emit("PLAYER_ENTERING_WORLD")
+addon:PreviewBoss(2)
+state.instanceID = 34 -- changed instance without loading screen
+emit("ZONE_CHANGED")
+check(addon._manualBossPreview == nil and addon._lastContent == "" and not addon.HUD:IsShown(),
+    "instance change via ZONE_CHANGED clears manual preview without stale tip")
+
+KwikTipDB.showInDungeon = false
+state.inInstance, state.instanceType, state.instanceID, state.difficultyID = false, "none", 0, 1
+emit("PLAYER_ENTERING_WORLD")
+
 -- Empty/unsupported routes must work before tests add any fixture data.
 state.inInstance, state.instanceType, state.instanceID = true, "party", 990001
 state.instanceName, state.subzone, state.mapID = "Unknown fixture instance", "Unknown area", 990002
@@ -806,6 +1288,7 @@ local boss1 = { encounterID = 991003, name = "Synthetic first boss", tip = "SYNT
 local boss2 = { encounterID = 991004, name = "Synthetic second boss", tip = "SYNTHETIC_SECOND_TIP" }
 local dungeon = {
     instanceID = 991001, uiMapID = 991002, name = "Synthetic dungeon", mythicPlus = false,
+    difficultyIDs = { 1 },
     bosses = { boss1, boss2 },
     areas = {
         { id = "991001:1", subzone = "Synthetic corridor", tip = "SYNTHETIC_CORRIDOR_TIP" },

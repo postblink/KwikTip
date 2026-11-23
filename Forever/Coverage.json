@@ -1,6 +1,6 @@
 {
-  "version": "0.1.0-alpha.5",
-  "data_build": "mixed: 1.60.1.70707 (Hall/Ragefire/Stockade), 1.60.1.70790 (other existing entries), 1.60.1.70888 (Drowned City)",
+  "version": "0.1.0-test.20261122",
+  "data_build": "1.60.1.71037 readable IDs and local-hotfix reconciliation; earlier per-entry files preserved for provenance",
   "interface": 16001,
   "client_tested": false,
   "complete_dungeons": 0,
@@ -67,20 +67,16 @@
         3357,
         3411,
         3412,
-        3354
+        3354,
+        3355
       ],
-      "status": "five source-backed normal-mode encounter records; partial dungeon coverage; not current-build qualified",
+      "status": "six source-backed normal-mode encounter records; partial dungeon coverage; in-client acceptance pending",
       "evidence": "docs/FOREVER_RUINS_IDS_70790.json",
       "difficultyIDs": [
         1
       ],
       "data_build": "1.60.1.70790",
       "excluded_encounters": [
-        {
-          "name": "The Baron / The Butcher",
-          "encounterID": 3355,
-          "reason": "Static export says The Butcher; current guides/Blizzard say The Baron. Identity/ability mapping not established."
-        },
         {
           "name": "Lordaeron Captain",
           "encounterID": 3408,
@@ -100,7 +96,7 @@
       "difficultyIDs": [
         1
       ],
-      "status": "four source-backed normal-mode events including optional quest boss; not current-build qualified",
+      "status": "four source-backed normal-mode events including optional quest boss; in-client acceptance pending",
       "evidence": "docs/FOREVER_EXCAVATION_IDS_70790.json",
       "data_build": "1.60.1.70790"
     },
@@ -113,21 +109,17 @@
         3298,
         3299,
         3300,
+        3301,
         3302,
         3303
       ],
       "difficultyIDs": [
         1
       ],
-      "status": "seven exact source-name normal-mode records, partial coverage; not current-build qualified",
+      "status": "eight source-backed Normal-mode records, partial coverage; in-client acceptance pending",
       "evidence": "docs/FOREVER_DALARAN_IDS_70790.json",
       "data_build": "1.60.1.70790",
       "excluded_encounters": [
-        {
-          "name": "Mana Elemental",
-          "encounterID": 3301,
-          "reason": "No proven mapping to guide Arcanic Enigma"
-        },
         {
           "name": "Mana Wraith",
           "encounterID": 3312,
@@ -156,7 +148,7 @@
         1
       ],
       "data_build": "1.60.1.70790",
-      "status": "eight source-backed event records; not current-build qualified or client tested",
+      "status": "eight source-backed event records; in-client acceptance pending",
       "evidence": "docs/FOREVER_DEADMINES_IDS_70790.json"
     },
     {
@@ -176,7 +168,7 @@
         1
       ],
       "data_build": "1.60.1.70790",
-      "status": "eight source-backed event records; not current-build qualified or client tested",
+      "status": "eight source-backed event records; in-client acceptance pending",
       "evidence": "docs/FOREVER_WAILING_CAVERNS_IDS_70790.json",
       "excluded_encounters": [
         {
@@ -202,7 +194,7 @@
         1
       ],
       "data_build": "1.60.1.70790",
-      "status": "8 source-backed normal-compatible records; partial coverage, not current-build qualified",
+      "status": "8 source-backed normal-compatible records; partial coverage, in-client acceptance pending",
       "evidence": "docs/FOREVER_SHADOWFANG_KEEP_IDS_70790.json",
       "excluded_encounters": [
         {
@@ -226,6 +218,7 @@
         2916,
         2915,
         2913,
+        2914,
         2912,
         2911,
         2910
@@ -234,13 +227,9 @@
         1
       ],
       "data_build": "1.60.1.70790",
-      "status": "6 source-backed normal-compatible records; partial coverage, not current-build qualified",
+      "status": "7 source-backed normal-compatible records; partial coverage, in-client acceptance pending",
       "evidence": "docs/FOREVER_BLACKFATHOM_DEEPS_IDS_70790.json",
       "excluded_encounters": [
-        {
-          "name": "Gelihast / Geilhast",
-          "reason": "Known normal ID2914 says Geilhast; guide Gelihast spelling/strategy association unresolved, no inferred alias"
-        },
         {
           "name": "Baron Aquanis",
           "reason": "No exact name-matched normal-compatible record and reconciled strategy in bounded slice; no fallback"
@@ -261,7 +250,7 @@
         1
       ],
       "data_build": "1.60.1.70790",
-      "status": "5 source-backed normal-compatible records; partial coverage, not current-build qualified",
+      "status": "5 source-backed normal-compatible records; partial coverage, in-client acceptance pending",
       "evidence": "docs/FOREVER_GNOMEREGAN_IDS_70790.json",
       "excluded_encounters": [
         {
@@ -289,7 +278,7 @@
         1
       ],
       "data_build": "1.60.1.70790",
-      "status": "six source-backed normal-mode records; current build and client acceptance pending",
+      "status": "six source-backed normal-mode records; in-client acceptance pending",
       "evidence": "docs/FOREVER_RAZORFEN_KRAUL_IDS_70790.json",
       "excluded_encounters": [
         {
@@ -319,7 +308,7 @@
         1
       ],
       "data_build": "1.60.1.70790",
-      "status": "eight source-backed normal-mode encounter records; current-build and client acceptance pending",
+      "status": "eight source-backed normal-mode encounter records; in-client acceptance pending",
       "evidence": "docs/FOREVER_ULDAMAN_IDS_70790.json",
       "excluded_encounters": [
         {
@@ -335,6 +324,7 @@
         227,
         228,
         229,
+        230,
         231,
         232,
         233,
@@ -346,7 +336,9 @@
         239,
         241,
         242,
+        243,
         244,
+        2791,
         2789,
         2790
       ],
@@ -354,27 +346,12 @@
         1
       ],
       "data_build": "1.60.1.70790",
-      "status": "partial source-backed encounter records; current-build/client acceptance pending",
+      "status": "partial source-backed encounter records; in-client acceptance pending",
       "evidence": "docs/FOREVER_BRD_IDS_70790.json",
       "excluded_encounters": [
         {
-          "encounterID": 230,
-          "name": "Ring of Law",
-          "reason": "Aggregate/alias or insufficient strategy mapping; excluded rather than guessed"
-        },
-        {
           "encounterID": 240,
           "name": "Ribbly Screwspigot",
-          "reason": "Aggregate/alias or insufficient strategy mapping; excluded rather than guessed"
-        },
-        {
-          "encounterID": 243,
-          "name": "The Seven",
-          "reason": "Aggregate/alias or insufficient strategy mapping; excluded rather than guessed"
-        },
-        {
-          "encounterID": 2791,
-          "name": "The Vault",
           "reason": "Aggregate/alias or insufficient strategy mapping; excluded rather than guessed"
         }
       ]
@@ -399,7 +376,7 @@
         1
       ],
       "data_build": "1.60.1.70790",
-      "status": "partial source-backed encounter records; current-build/client acceptance pending",
+      "status": "partial source-backed encounter records; in-client acceptance pending",
       "evidence": "docs/FOREVER_SCHOLOMANCE_IDS_70790.json",
       "excluded_encounters": [
         {
@@ -436,7 +413,7 @@
         1
       ],
       "data_build": "1.60.1.70790",
-      "status": "eight source-backed normal-mode records; current-build and client acceptance pending",
+      "status": "eight source-backed normal-mode records; in-client acceptance pending",
       "evidence": "docs/FOREVER_ZULFARRAK_IDS_70790.json",
       "excluded_encounters": [
         {
@@ -466,7 +443,7 @@
         1
       ],
       "data_build": "1.60.1.70790",
-      "status": "eight source-backed normal-mode records; current-build and client acceptance pending",
+      "status": "eight source-backed normal-mode records; in-client acceptance pending",
       "evidence": "docs/FOREVER_MARAUDON_IDS_70790.json",
       "excluded_encounters": [
         {
@@ -491,7 +468,7 @@
         1
       ],
       "data_build": "1.60.1.70790",
-      "status": "seven exact-ID events across shared-map wings; Cathedral strategy provisional; no wing or route detection; not client tested",
+      "status": "seven exact-ID events across shared-map wings; no wing or route detection; not client tested",
       "evidence": "docs/FOREVER_SCARLET_MONASTERY_IDS_70790.json",
       "excluded_encounters": [
         {
@@ -540,7 +517,7 @@
         1
       ],
       "data_build": "1.60.1.70790",
-      "status": "nineteen source-backed normal-mode records; current-build and client acceptance pending",
+      "status": "nineteen source-backed normal-mode records; in-client acceptance pending",
       "evidence": "docs/FOREVER_DIREMAUL_IDS_70790.json",
       "excluded_encounters": [
         {
@@ -574,20 +551,23 @@
         1
       ],
       "data_build": "1.60.1.70790",
-      "status": "16 exact normal-compatible events; partial coverage, not current-build or client verified",
+      "status": "16 exact normal-compatible events; partial coverage, not client tested",
       "evidence": "docs/FOREVER_STRATHOLME_IDS_70790.json",
       "excluded_encounters": [
         {
+          "encounterID": 2795,
           "name": "Black Guard Swordsmith",
-          "reason": "No matched usable strategy or standalone normal record in bounded slice; no name fallback"
+          "reason": "Current Normal-compatible row; encounter-specific strategy and trigger still unverified"
         },
         {
+          "encounterID": 2796,
           "name": "Crimson Hammersmith",
-          "reason": "No matched usable strategy or standalone normal record in bounded slice; no name fallback"
+          "reason": "Current Normal-compatible row; encounter-specific strategy and trigger still unverified"
         },
         {
+          "encounterID": 2797,
           "name": "Ezra Grimm",
-          "reason": "No matched usable strategy or standalone normal record in bounded slice; no name fallback"
+          "reason": "Current Normal-compatible row; encounter-specific strategy and trigger still unverified"
         },
         {
           "name": "Jarien",
@@ -616,7 +596,7 @@
         1
       ],
       "data_build": "1.60.1.70790",
-      "status": "8 exact normal-compatible events; partial coverage, not current-build or client verified",
+      "status": "8 exact normal-compatible events; partial coverage, not client tested",
       "evidence": "docs/FOREVER_SUNKEN_TEMPLE_IDS_70790.json",
       "excluded_encounters": [
         {
@@ -644,7 +624,7 @@
         1
       ],
       "data_build": "1.60.1.70790",
-      "status": "six exact-ID events; all strategy visibly provisional; no gong/escort-stage or route detection; not client tested",
+      "status": "six exact-ID events; no gong/escort-stage or route detection; not client tested",
       "evidence": "docs/FOREVER_RAZORFEN_DOWNS_IDS_70790.json",
       "excluded_encounters": [
         {
@@ -661,24 +641,83 @@
         3475,
         3476,
         3511,
+        3478,
         3479
       ],
       "difficultyIDs": [
         1
       ],
       "data_build": "1.60.1.70888",
-      "status": "five exact-build source-name matches; partial Normal-only coverage; not client tested",
+      "status": "five boss tips and one Guardian add-event tip; partial Normal-only coverage; not client tested",
       "evidence": "docs/FOREVER_DROWNED_CITY_IDS_70888.json",
       "excluded_encounters": [
-        {
-          "name": "Deathless Marrow / Deathless Guardians",
-          "encounterID": 3478,
-          "reason": "Raw event names Deathless Guardians; guide names Deathless Marrow. No proven strategy-to-event alias."
-        },
         {
           "name": "Umbra / Gill / Zin'aka",
           "reason": "No reconciled strategy and positive raw event mapping; no absence claim or name/NPC fallback"
         }
+      ]
+    },
+    {
+      "instanceID": 229,
+      "name": "Blackrock Spire (partial Lower and Upper)",
+      "encounterIDs": [
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        274,
+        273,
+        275, 3062, 3063, 3068, 3069, 3070
+      ],
+      "difficultyIDs": [
+        1
+      ],
+      "data_build": "1.60.1.70959",
+      "status": "nine Lower and five Upper positive current-build rows; Classic advice provisional; shared map does not detect wing; not client tested",
+      "evidence": "docs/FOREVER_LBRS_IDS_70888.json",
+      "current_evidence": "docs/FOREVER_FOUR_MAPS_IDS_70959.json",
+      "strategy_evidence": "docs/FOREVER_LBRS_CANDIDATE_20261112.json",
+      "excluded_encounters": [
+        {"name": "Solakar Flamewreath", "reason": "No reconciled event mapping"},
+        {"name": "Goraluk Anvilcrack", "reason": "No reconciled event mapping"},
+        {"name": "Jed Runewatcher", "reason": "Rare; no reconciled event mapping"},
+        {
+          "name": "All rare spawns",
+          "reason": "No admitted positive event/strategy mapping; no name/NPC fallback"
+        }
+      ]
+    },
+    {
+      "instanceID": 2994, "name": "Alcaz Prison", "encounterIDs": [3410, 3403, 3418, 3409, 3415], "difficultyIDs": [1],
+      "data_build": "1.60.1.70959", "evidence": "docs/FOREVER_FOUR_MAPS_IDS_70959.json",
+      "status": "partial, guide-sourced, not client tested",
+      "excluded_encounters": []
+    },
+    {
+      "instanceID": 2974, "name": "Blackmaw Hold", "encounterIDs": [3315, 3322, 3316, 3323, 3336, 3327, 3334], "difficultyIDs": [1],
+      "data_build": "1.60.1.70959", "evidence": "docs/FOREVER_FOUR_MAPS_IDS_70959.json",
+      "status": "partial, guide-sourced, not client tested",
+      "excluded_encounters": [{"name": "Moontouched Wanderer / Gortek the Apprentice / Tunnelweb Matriarch", "reason": "Rare encounters have no reconciled mapping"}]
+    },
+    {
+      "instanceID": 3001, "name": "The Shaper's Terrace", "encounterIDs": [3503, 3498, 3597, 3507, 3500, 3501, 3505, 3502], "difficultyIDs": [1],
+      "data_build": "1.60.1.70959", "evidence": "docs/FOREVER_FOUR_MAPS_IDS_70959.json",
+      "status": "partial, guide-sourced, not client tested",
+      "excluded_encounters": [{"encounterID": 3499, "name": "Ravasaur Hunters", "reason": "Guide names Tor'Rel and Izha'Rel; association unconfirmed"}, {"encounterID": 3504, "name": "King Op", "reason": "No reconciled guide strategy"}, {"encounterID": 3600, "name": "Vitrix", "reason": "Guide's early-launch one-shot warning and strategy require current validation"}]
+    },
+    {
+      "instanceID": 3039,
+      "name": "Krol'dok Stronghold",
+      "encounterIDs": [3450, 3452, 3453, 3449, 3451],
+      "difficultyIDs": [1],
+      "data_build": "1.60.1.70959",
+      "status": "five IDs observed in prior player encounter log; guide aliases reconciled, new candidate not client tested",
+      "evidence": "docs/FOREVER_KROLDOK_IDS_70959.json",
+      "content_evidence": "docs/FOREVER_CONTENT_20261122.md",
+      "excluded_encounters": [
+        {"name": "Bossman Toof", "reason": "No reconciled event mapping; unreadable sections prevent absence claims"}
       ]
     }
   ],
@@ -688,7 +727,9 @@
     "Per-room or per-pull routing",
     "NPC target detection"
   ],
-  "live_acceptance": "Candidate untested in-game; Drowned City static IDs verified at 70888, other entries still need latest-build drift checks and all entries need client acceptance",
-  "current_client_build_observed": "1.60.1.70888",
-  "current_build_ids_reverified": false
+  "live_acceptance": "Current readable IDs checked; new package HUD, encounters and room routing not yet tested in the client",
+  "current_client_build_observed": "1.60.1.71037",
+  "current_build_ids_reverified": true,
+  "current_build_evidence": "docs/FOREVER_CURRENT_IDS_71037.json",
+  "candidate_status": "Unreleased dungeon refresh; in-client acceptance pending"
 }

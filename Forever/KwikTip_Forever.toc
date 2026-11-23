@@ -1,9 +1,9 @@
 ## Interface: 16001
-## Title: KwikTip: Forever (Alpha)
-## Notes: Twenty-three-entry encounter alpha; partial coverage and in-game validation pending. See coverage ledger.
+## Title: KwikTip: Forever (Test Build)
+## Notes: Normal-mode dungeon preparation and boss tips; in-client validation pending.
 ## Author: Lucas Boyles
-## Version: 0.1.0-alpha.5
-## DefaultState: enabled
+## Version: 0.1.0-test.20261122
+## DefaultState: disabled
 ## OptionalDeps: LibSharedMedia-3.0
 
 ## SavedVariables: KwikTipDB
@@ -19,6 +19,6 @@ RuntimeIndexes.lua
 Locale\tips.lua
 
 Core.lua
-Flavor.lua
 Frames.lua
 UI_Config.lua
+Flavor.lua

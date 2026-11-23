@@ -1,10 +1,9 @@
--- Forever-only local test data. No Retail or Timewalking data is loaded.
+-- Forever-only dungeon data. No Retail or Timewalking data is loaded.
 local ADDON_NAME, KwikTip = ...
 
--- IDs: Wago Map/DungeonEncounter CSVs: existing entries use 70707;
--- Other existing entries use preserved 70790 exports; latest-build drift remains pending.
--- Drowned City uses exact installed 70888 rows; see FOREVER_DROWNED_CITY_IDS_70888.json.
--- Strategy: current Forever Method/Icy Veins guides. See the per-dungeon
+-- Current readable Map, MapDifficulty, and DungeonEncounter IDs checked at 1.60.1.71037.
+-- See Coverage.json for source and runtime limits.
+-- Strategy: Forever guides or explicitly provisional Classic baselines. See the per-dungeon
 -- readiness/provenance documents listed in Forever/Coverage.json.
 -- These static IDs do not establish an in-game pass. UiMap/NPC/subzone
 -- identifiers remain unverified and are deliberately omitted, not set to 0.
@@ -15,16 +14,15 @@ KwikTip.DUNGEONS = {
         season = "forever",
         type = "dungeon",
         difficultyIDs = { 1 }, -- source-backed normal-mode alpha only
+        previewNextBoss = false, -- encounter order is not verified in the target client
         -- Dungeon-wide preparation only. No claim to detect the current pack,
         -- room, subzone or NPC. Shown by the existing opt-in persistent setting.
-        overview = "Engineers: move away from the bomb's target spot.\n"
-            .. "Summoners: interrupt casts; use line of sight to bring them closer.\n"
-            .. "Looters and Golems hit hard: keep pulls small and control extra enemies.",
+        overview = "Move away from Engineers' bombs and interrupt Summoners. Use line of sight to group casters. Remove Bloodhound Runts' Infected Wounds when possible; it amplifies physical damage.",
         bosses = {
             {
                 encounterID = 3493,
                 name = "Faldrim Anvilmar",
-                tip = "Clear space along the patrol before pulling. Interrupt Mind Blast.",
+                tip = "Clear his patrol area and interrupt Mind Blast. Remove Anvilmar's Curse when able; it slows attacking and casting.",
             },
             {
                 encounterID = 3495,
@@ -54,8 +52,7 @@ KwikTip.DUNGEONS = {
         -- DB2 order is an encounter roster, not observed player progression.
         -- Surface actual encounter events; do not guess the next pull after a kill.
         previewNextBoss = false,
-        overview = "Shaman: interrupt Healing Wave; use line of sight to bring casters closer.\n"
-            .. "Avoid large Enforcer pulls that can chain-stun the tank. Keep fights away from lava edges.",
+        overview = "Interrupt Shaman Healing Wave; bring Warlocks around corners and watch their Voidwalkers. Avoid combining Enforcers that can chain-stun the tank, and fight away from lava edges.",
         bosses = {
             {
                 encounterID = 2732,
@@ -87,8 +84,7 @@ KwikTip.DUNGEONS = {
         difficultyIDs = { 1 },
         previewNextBoss = false, -- wing order is not assumed from DB2 OrderIndex
         -- Rare Bruegal has no verified DungeonEncounter mapping and is excluded.
-        overview = "Clear nearby cells before boss pulls and control accompanying prisoners.\n"
-            .. "Keep pulls small: prisoner stuns and bleeds can compound tank damage.",
+        overview = "Control prisoners in adjacent cells and focus Defias Insurgents to limit Battle Shout. Keep pulls small: stuns, bleeds and the Captives' physical-damage debuff can pile up on the tank.",
         bosses = {
             {
                 encounterID = 2756,
@@ -118,17 +114,14 @@ KwikTip.DUNGEONS = {
         },
     },
     {
-        -- Preserved Wago 70790 IDs; current 70862 recheck remains pending.
-        -- Do not infer a route or map The Baron onto The Butcher (3355).
+        -- The Butcher is the client event name for the Baron fight.
         instanceID = 2999,
         name = "Ruins of Lordaeron",
         season = "forever",
         type = "dungeon",
         difficultyIDs = { 1 },
         previewNextBoss = false,
-        overview = "Pull spider packs back from patrols. Avoid combining heavy-hitting golems or monstrosities with other packs.\n"
-            .. "Prioritize Ragged Ghouls; keep nearby groups out of the pull.\n"
-            .. "This candidate omits The Baron/Butcher and the rare Lordaeron Captain.",
+        overview = "Pull spiders back from patrols. Aim Flesh Golem knockbacks away from extra packs; pull Living Monstrosities separately. Control Ragged Ghouls and keep the tank clear of nearby packs.",
         bosses = {
             {
                 encounterID = 3353,
@@ -148,28 +141,28 @@ KwikTip.DUNGEONS = {
             {
                 encounterID = 3412,
                 name = "Bjork",
-                tip = "Clear nearby enemies before engaging and keep the fight away from other patrols. His detailed ability advice is pending source reconciliation.",
+                tip = "Clear ghouls away from Bjork's patrol. Hold key magic attacks while Anti-Magic Shield is active.",
             },
             {
                 encounterID = 3354,
                 name = "Rath'mael",
                 tip = "Clear surrounding enemies first. Move out of Flamestrike; use a stun to prevent the cast when available.",
             },
+            { encounterID = 3355, name = "The Butcher",
+              tip = "Keep the tank healthy for Knockout, a heavy hit with stun and knockback. Stun the boss when possible." },
         },
     },
     {
-        -- Preserved 70790 IDs, not current 70862 qualification.
         instanceID = 2998,
         name = "Excavation Site: Wetlands",
         season = "forever",
         type = "dungeon",
         difficultyIDs = { 1 },
         previewNextBoss = false,
-        overview = "Keep raptor pulls small and watch for hidden enemies near the grass.\n"
-            .. "Dodge Saboteur bombs. Clear room around bosses before pulling; Highland Horror is an optional quest encounter.",
+        overview = "Focus Young Riptooth one at a time. Remove Thicket Hunter Infected Wound and watch the tank when Warders reduce healing. Move away from Saboteur bombs.",
         bosses = {
             { encounterID = 3480, name = "Saltspine",
-              tip = "Pull away from other lake enemies. Keep ranged players outside melee range during Dust Storm; watch the tank's movement slow." },
+              tip = "Clear the lake edge before pulling. Watch threat during Dust Storm: a tank affected by it generates less threat." },
             { encounterID = 3481, name = "Shadetooth",
               tip = "Clear hidden raptors before pulling so fear cannot bring extra packs. Control the two accompanying Hunters and prepare healing and stops for heavy bleed damage and enrage." },
             { encounterID = 3644, name = "Highland Horror",
@@ -184,8 +177,7 @@ KwikTip.DUNGEONS = {
         name = "City of Dalaran",
         season = "forever", type = "dungeon", difficultyIDs = { 1 },
         previewNextBoss = false,
-        overview = "Keep pulls controlled and replenish mana between fights.\n"
-            .. "Partial coverage: Arcanic Enigma and unmatched static records have no automatic tip.",
+        overview = "Stop Mana Phantom Mana Burn. Stop casting into Phantasm Reflection Field; focus necromancers to limit skeletons. Bring a non-Arcane damage option for resistant targets.",
         bosses = {
             { encounterID = 3311, name = "Atrexis the Grave Knight",
               tip = "Clear nearby necromancers first. Control summoned skeletons and watch threat while the tank is disarmed." },
@@ -197,6 +189,8 @@ KwikTip.DUNGEONS = {
               tip = "Move out of green pools immediately. Save root-breaking abilities for Entangle overlapping a pool." },
             { encounterID = 3300, name = "Mana Devourer",
               tip = "Clear the room before engaging; remaining enemies join the fight. Start with mana ready and finish before repeated drains exhaust the healer." },
+            { encounterID = 3301, name = "Mana Elemental",
+              tip = "Interrupt or stun both Mana Phantoms as they open with Mana Burn, then kill them first. Dispel Manamorph." },
             { encounterID = 3302, name = "Unstable Sentinel",
               tip = "Clear nearby enemies first. Face the boss away from allies and move out for Malfunction; ranged and healers stay well back." },
             { encounterID = 3303, name = "Shade of the Archmage",
@@ -204,11 +198,10 @@ KwikTip.DUNGEONS = {
         },
     },
     {
-        -- Preserved70790 IDs; current70862 validation pending.
         instanceID = 36, name = "Deadmines",
         season = "forever", type = "dungeon",
         difficultyIDs = { 1 }, previewNextBoss = false,
-        overview = "Clear space before pulls and avoid adding patrols. This is encounter advice, not a route tracker.",
+        overview = "Interrupt Defias Evoker Flamestrike or move out. Watch Engineers for summoned golems. Face Goblin Woodcarvers away from the group and expect Axe Toss stuns.",
         bosses = {
             { encounterID = 2741, name = "Rhahk'Zor",
               tip = "Pull guards separately first. Healers watch the tank during stuns." },
@@ -229,11 +222,10 @@ KwikTip.DUNGEONS = {
         },
     },
     {
-        -- Preserved70790 IDs; current70862 validation pending.
         instanceID = 43, name = "Wailing Caverns",
         season = "forever", type = "dungeon",
         difficultyIDs = { 1 }, previewNextBoss = false,
-        overview = "Clear space before pulls and avoid adding patrols. This is encounter advice, not a route tracker.",
+        overview = "Stop Druids of the Fang's Slumber and Healing Touch, and interrupt Shambler Wild Regeneration. Remove viper poison and clear room before Dreadfang fear.",
         bosses = {
             { encounterID = 585, name = "Lady Anacondra",
               tip = "Avoid adding patrols. Interrupt Sleep and Healing Touch; control extra enemies." },
@@ -254,11 +246,10 @@ KwikTip.DUNGEONS = {
         },
     },
     {
-        -- Preserved70790 normal-compatible IDs; current70862 validation pending.
         instanceID = 33, name = "Shadowfang Keep",
         season = "forever", type = "dungeon",
         difficultyIDs = { 1 }, previewNextBoss = false,
-        overview = "Keep pulls controlled and clear space before bosses. Coverage is event-based, not a room or route tracker.",
+        overview = "Prioritize Lupine Horrors before their summons accumulate. Casters stay back from Wailing Guardsmen's melee-range silence.",
         bosses = {
             { encounterID = 2748, name = "Rethilgore",
               tip = "Clear nearby worgen before pulling. Interrupt Soul Drain." },
@@ -275,15 +266,14 @@ KwikTip.DUNGEONS = {
             { encounterID = 2754, name = "Wolf Master Nandos",
               tip = "Pull surrounding worgs separately first. Pick up and kill additional summoned wolves." },
             { encounterID = 2755, name = "Archmage Arugal",
-              tip = "Use corners to break Void Bolt line of sight. Watch threat when Arugal teleports." },
+              tip = "Break line of sight for Void Bolt. Control the ally affected by Arugal's Curse without killing them, and let the tank recover threat after teleports." },
         },
     },
     {
-        -- Preserved70790 normal-compatible IDs; current70862 validation pending.
         instanceID = 48, name = "Blackfathom Deeps",
         season = "forever", type = "dungeon",
         difficultyIDs = { 1 }, previewNextBoss = false,
-        overview = "Keep pulls controlled and clear space before bosses. Coverage is event-based, not a room or route tracker.",
+        overview = "Stop Fallenroot Hellcaller Mana Burn and Acolyte heals. Focus Twilight Shadowmages before Dominate Mind and watch for stealthed Shadowstalkers. After Kelris, light one brazier at a time.",
         bosses = {
             { encounterID = 2916, name = "Ghamoo-ra",
               tip = "Ranged stay back from Trample. Armor reduction helps physical attackers." },
@@ -291,6 +281,8 @@ KwikTip.DUNGEONS = {
               tip = "Clear nearby naga and control escorts. Spread for lightning; free the tank from Frost Nova if able." },
             { encounterID = 2913, name = "Lorgus Jett",
               tip = "Avoid extra patrols. Remove Lightning Shield with an offensive dispel or limit attacks into it." },
+            { encounterID = 2914, name = "Geilhast",
+              tip = "Clear nearby murlocs before pulling. Free the tank if Net prevents repositioning." },
             { encounterID = 2912, name = "Old Serra'kis",
               tip = "Manage breath before the underwater fight; water-breathing effects help." },
             { encounterID = 2911, name = "Twilight Lord Kelris",
@@ -300,35 +292,33 @@ KwikTip.DUNGEONS = {
         },
     },
     {
-        -- Preserved70790 normal-compatible IDs; current70862 validation pending.
         instanceID = 90, name = "Gnomeregan",
         season = "forever", type = "dungeon",
         difficultyIDs = { 1 }, previewNextBoss = false,
-        overview = "Keep pulls controlled and clear space before bosses. Coverage is event-based, not a room or route tracker.",
+        overview = "Stop Mobile Alert Systems before they summon help. Don't cast into Arcane Nullifier Reflection Field. Focus Irradiated Horrors to limit Chain Burn; move away from Dark Iron mines.",
         bosses = {
             { encounterID = 2768, name = "Grubbis",
-              tip = "Event encounter: control remaining trogg adds when Grubbis arrives." },
+              tip = "After the trogg waves, control Chomper and focus one enemy at a time." },
             { encounterID = 2769, name = "Viscous Fallout",
-              tip = "Clear a safe section of the patrol before engaging, avoiding extra trash." },
+              tip = "Clear Viscous Fallout's patrol path. Prepare steady tank healing for heavy nature melee damage." },
             { encounterID = 2770, name = "Electrocutioner 6000",
               tip = "Spread for Chain Bolt and avoid the frontal Megavolt cone. Watch tank damage from Shock." },
             { encounterID = 2771, name = "Crowd Pummeler 9-60",
-              tip = "Face the frontal smash away. Casters stay back from interrupts; heal nearby allies through area damage." },
+              tip = "Face the frontal smash away from allies. Fight away from ledges and recover position after knockbacks." },
             { encounterID = 2772, name = "Mekgineer Thermaplugg",
               tip = "Assign dispenser buttons or destroy Walking Bombs before they reach players. Watch threat after the tank is knocked back." },
         },
     },
     {
-        -- Preserved70790 identity; current70862/client acceptance pending.
         instanceID = 47, name = "Razorfen Kraul",
         season = "forever", type = "dungeon",
         difficultyIDs = { 1 }, previewNextBoss = false,
-        overview = "Clear safe space around boss pulls. Rare Earthcaller Halmgar and Blind Hunter have no automatic tips in this slice.",
+        overview = "Prioritize Razorfen Groundshakers. Interrupt Death's Head Priest heals; casters stay back from Kraul bats' silence.",
         bosses = {
             { encounterID = 2773, name = "Roogug",
               tip = "Clear surrounding enemies and control the accompanying Earth Elemental to reduce pressure on the tank." },
             { encounterID = 2774, name = "Aggem Thorncurse",
-              tip = "Switch to the summoned Boar Spirit and defeat it before returning damage to Aggem." },
+              tip = "Interrupt Chain Heal and have the tank pick up the summoned Boar Spirit." },
             { encounterID = 2775, name = "Death Speaker Jargba",
               tip = "Control or kill the two caster escorts first. Avoid damaging a party member affected by Dominate Mind." },
             { encounterID = 2776, name = "Overlord Ramtusk",
@@ -336,15 +326,14 @@ KwikTip.DUNGEONS = {
             { encounterID = 2777, name = "Agathelos the Raging",
               tip = "Watch the tank closely after Rushing Charge; prepare healing for the stronger follow-up melee hit." },
             { encounterID = 2778, name = "Charlga Razorflank",
-              tip = "Pull away from her platform and interrupt casts. Expect brief immunity and healing during the encounter." },
+              tip = "Use a corner to pull her off the platform. Spread for Chain Bolt; hold damage during Purity and heal through the casts." },
         },
     },
     {
-        -- Dated70790 exact IDs; current70862/client validation pending.
         instanceID = 70, name = "Uldaman",
         season = "forever", type = "dungeon",
         difficultyIDs = { 1 }, previewNextBoss = false,
-        overview = "Clear space and control extra enemies before boss pulls. No pre-instance or room routing is provided.",
+        overview = "Interrupt Stonevault Oracle Healing Wave and destroy totems. Stop casting into Jadespine Basilisk Reflection and remove Crystalline Slumber if able.",
         bosses = {
             { encounterID = 547, name = "Revelosh",
               tip = "Control accompanying Rockchewers and prioritize interrupts on Chain Lightning." },
@@ -359,7 +348,7 @@ KwikTip.DUNGEONS = {
             { encounterID = 552, name = "Galgann Firehammer",
               tip = "Control or kill both Geologists first. Separate Galgann from allies and remove fire-vulnerability effects when possible." },
             { encounterID = 553, name = "Grimlok",
-              tip = "Control an escort and focus Grimlok before Shrink. Deal with the Geomancer before the remaining escorts." },
+              tip = "Control the escorts and kill the Jadespine Basilisk before its long stun. Prepare tank defensives for Bloodlust." },
             { encounterID = 554, name = "Archaedas",
               tip = "Start with resources ready. Kill early summoned adds promptly; prepare cooldowns for the late elite wave and finish the boss." },
         },
@@ -368,7 +357,7 @@ KwikTip.DUNGEONS = {
         instanceID = 230, name = "Blackrock Depths",
         season = "forever", type = "dungeon", difficultyIDs = { 1 },
         previewNextBoss = false,
-        overview = "Partial event-based advice. Clear safe space and agree on optional encounters; no route detection.",
+        overview = "Prison: Loot Gerstahn's key if freeing prisoners. Grim Guzzler: Pick an exit plan and keep cleave off neutral patrons. Lyceum: Loot two Shadowforge Flame Keeper torches and light both braziers. Decide before the Emperor pull whether to spare Moira.",
         bosses = {
             { encounterID = 227, name = "High Interrogator Gerstahn",
               tip = "Clear nearby packs before fear; interrupt Mana Burn." },
@@ -376,6 +365,8 @@ KwikTip.DUNGEONS = {
               tip = "Healers prepare for Earth Shock interrupting casts." },
             { encounterID = 229, name = "Houndmaster Grebmar",
               tip = "Remove hound packs before engaging the patrolling boss." },
+            { encounterID = 230, name = "Ring of Law",
+              tip = "Clear the arena waves before the random opponent. Move out of Gorosh’s spin; against Ok’thor, spread and dispel Polymorph." },
             { encounterID = 231, name = "Pyromancer Loregrain",
               tip = "Destroy Scorching Totem promptly." },
             { encounterID = 232, name = "Lord Incendius",
@@ -389,31 +380,35 @@ KwikTip.DUNGEONS = {
             { encounterID = 236, name = "General Angerforge",
               tip = "Control and defeat reinforcements while maintaining damage on the boss." },
             { encounterID = 237, name = "Golem Lord Argelmach",
-              tip = "Spread out to limit Chain Lightning jumps." },
+              tip = "Kill both constructs first and spread for Chain Lightning." },
             { encounterID = 238, name = "Hurley Blackbreath",
-              tip = "Control escorts while focusing Hurley." },
+              tip = "Break the three kegs only when ready. Control the escorts and keep AoE inside the storeroom." },
             { encounterID = 239, name = "Phalanx",
               tip = "Prepare tank healing for Mighty Blow; avoid aggroing neutral patrons." },
             { encounterID = 241, name = "Plugger Spazzring",
-              tip = "Clear nearby patrons before engaging; watch Shadow Bolt damage." },
+              tip = "Nearby patrons can turn hostile. Isolate Plugger and remove Curse of Tongues if able." },
             { encounterID = 242, name = "Ambassador Flamelash",
               tip = "Kill approaching spirits before they reach and empower the boss." },
+            { encounterID = 243, name = "The Seven",
+              tip = "Start with mana ready. Interrupt casters and finish each spirit quickly before the next joins; keep adds off the healer." },
             { encounterID = 244, name = "Magmus",
               tip = "Position away from the chamber fire jets." },
+            { encounterID = 2791, name = "The Vault",
+              tip = "Recover before opening the final vault compartment. Pick up the activated guards and Watchman Doomgrip." },
             { encounterID = 2789, name = "Princess Moira Bronzebeard",
-              tip = "Agree whether to spare Moira; interrupt her casts without unintended damage." },
+              tip = "Rescue route: hold Moira and interrupt her heals while killing the Emperor. Avoid cleave on her. If you are not saving her, kill her first." },
             { encounterID = 2790, name = "Emperor Dagran Thaurissan",
-              tip = "If saving Moira, control her casting while defeating the emperor." },
+              tip = "Rescue route: hold Moira and interrupt her heals while killing the Emperor. Avoid cleave on her. If you are not saving her, kill her first." },
         },
     },
     {
         instanceID = 289, name = "Scholomance",
         season = "forever", type = "dungeon", difficultyIDs = { 1 },
         previewNextBoss = false,
-        overview = "Partial event-based advice. Clear safe space and agree on optional encounters; no route detection.",
+        overview = "Pick up Reanimated Corpses again when they rise. Use physical or Holy damage on Risen Aberrations; move away from poison clouds left by Plagued Ghouls.",
         bosses = {
             { encounterID = 2801, name = "Darkmaster Gandling",
-              tip = "Interrupt Arcane Missiles. Teleported players defeat their room enemies to return." },
+              tip = "Interrupt Arcane Missiles and remove the curse. Teleported players kill the room enemies; ease damage if the tank is missing and use self-defensives if the healer is gone." },
             { encounterID = 2802, name = "Doctor Theolen Krastinov",
               tip = "Tank against a wall; save defenses for faster attacks." },
             { encounterID = 2803, name = "Instructor Malicia",
@@ -421,15 +416,15 @@ KwikTip.DUNGEONS = {
             { encounterID = 2804, name = "Jandice Barov",
               tip = "Identify the real Jandice among illusions; remove Curse of Blood." },
             { encounterID = 2806, name = "Lady Illucia Barov",
-              tip = "Clear space before fear; control mind-controlled allies without killing them." },
+              tip = "Clear nearby rooms before fear. Control mind-controlled allies without killing them. Keep the healer at range for silence." },
             { encounterID = 2807, name = "Lord Alexei Barov",
-              tip = "Control skeletal escorts, avoid green liquid, and remove Veil of Shadow." },
+              tip = "Control skeletons and avoid the green liquid. Remove the healing-reduction curse; casters stay outside his aura." },
             { encounterID = 2808, name = "Lorekeeper Polkelt",
               tip = "Move away from allies with Volatile Infection; ranged keep their distance." },
             { encounterID = 2809, name = "Marduk Blackpool",
               tip = "Ranged stay outside the aura; avoid attacking into Shadow Shield." },
             { encounterID = 2811, name = "Rattlegore",
-              tip = "Clear nearby enemies; face away from allies and prepare heavy tank healing." },
+              tip = "Clear the platform, then tank facing away with a wall behind you. Casters stay outside stun range." },
             { encounterID = 2812, name = "The Ravenian",
               tip = "Tank against a wall facing away from the party." },
             { encounterID = 2813, name = "Vectus",
@@ -437,36 +432,35 @@ KwikTip.DUNGEONS = {
         },
     },
     {
-        -- Preserved70790 identities; current70862 and in-game acceptance pending.
         instanceID = 209, name = "Zul'Farrak",
         season = "forever", type = "dungeon",
         difficultyIDs = { 1 }, previewNextBoss = false,
-        overview = "Normal-mode encounter tips only; no route or automatic next-boss preview.",
+        overview = "Control or focus Sandfury Shadowhunters before Hex disables the healer. At the pyramid, hold the stairs and protect the healer during waves.\n"
+            .. "Optional Gahz'rilla: bring the Mallet of Zul'Farrak and clear the pool before using the gong. Guide-based; not a live route tracker.",
         bosses = {
             { encounterID = 593, name = "Hydromancer Velratha",
-              tip = "Separate her from nearby enemies and interrupt casts." },
+              tip = "Clear nearby pool enemies before pulling. Interrupt casts and destroy totems." },
             { encounterID = 594, name = "Gahz'rilla",
-              tip = "Clear the fighting area; tank with your back against a wall for knockback." },
+              tip = "Clear the pool first. Slam knocks nearby players upward: fight under the entrance arch to limit fall damage. Interrupt Icicle and heal the frozen player." },
             { encounterID = 595, name = "Antu'sul",
-              tip = "Prioritize summoned adds and totems; interrupt healing casts." },
+              tip = "Clear the cave approach. Focus summoned basilisks and Healing Wards; interrupt Healing Wave." },
             { encounterID = 596, name = "Theka the Martyr",
-              tip = "Expect temporary damage immunity and incoming scarabs; keep the extra enemies controlled." },
+              tip = "Remove Fevered Plague if able. During his transformation physical and Shadow damage are ineffective; use other spell schools." },
             { encounterID = 597, name = "Witch Doctor Zum'rah",
               tip = "Interrupt Shadow Bolt Volley; switch promptly to zombies and totems." },
             { encounterID = 598, name = "Nekrum Gutchewer",
-              tip = "Focus Nekrum while assigning an interrupt to Sezz'ziz's healing." },
+              tip = "Focus Nekrum first while interrupting Sezz'ziz's heals. Prepare for fear and switch to Sezz'ziz after Nekrum falls." },
             { encounterID = 599, name = "Shadowpriest Sezz'ziz",
-              tip = "Interrupt heals while the group finishes Nekrum; prepare for fear." },
+              tip = "Focus Nekrum first while interrupting Sezz'ziz's heals. Prepare for fear and switch to Sezz'ziz after Nekrum falls." },
             { encounterID = 600, name = "Chief Ukorz Sandscalp",
               tip = "Kill Ruuzlu first. Face both enemies away from allies; melee attack from behind." },
         },
     },
     {
-        -- Preserved70790 identities; current70862 and in-game acceptance pending.
         instanceID = 349, name = "Maraudon",
         season = "forever", type = "dungeon",
         difficultyIDs = { 1 }, previewNextBoss = false,
-        overview = "Normal-mode encounter tips only; no route or automatic next-boss preview.",
+        overview = "Orange side: kite slow Creeping Sludge and watch roaming Dryads. Purple side: watch for enemies below ledges before pulling. Classic guide advice; the HUD does not detect your wing.",
         bosses = {
             { encounterID = 422, name = "Noxxion",
               tip = "Kill every split add so Noxxion reforms; prepare healing for poison damage." },
@@ -491,7 +485,7 @@ KwikTip.DUNGEONS = {
         instanceID = 189, name = "Scarlet Monastery",
         season = "forever", type = "dungeon",
         difficultyIDs = { 1 }, previewNextBoss = false,
-        overview = "Shared-map encounter coverage only: this HUD does not identify your wing or route. Cathedral advice remains provisional.",
+        overview = "Graveyard: stop Scryer Sleep. Library: interrupt Adept Heal and pull Diviners around corners. Armory: stop Protector Holy Light. Cathedral: clear the church before Mograine or nearby packs join.",
         bosses = {
             { encounterID = 444, name = "Interrogator Vishas",
               tip = "Clear nearby enemies before engaging. Keep the tank healthy through Immolate." },
@@ -504,17 +498,16 @@ KwikTip.DUNGEONS = {
             { encounterID = 448, name = "Herod",
               tip = "Move away during Whirlwind; do not tank the spin. Be ready to collect and defeat trainees after Herod falls." },
             { encounterID = 449, name = "High Inquisitor Fairbanks",
-              tip = "Provisional Cathedral advice: interrupt healing, remove harmful effects when able, and keep nearby enemies out of the fight." },
+              tip = "Interrupt Heal, remove Curse of Blood when able, and prepare for Sleep." },
             { encounterID = 450, name = "High Inquisitor Whitemane",
-              tip = "Provisional Cathedral advice: interrupt heals. After sleep and resurrection, let the tank collect Mograine and focus Whitemane together." },
+              tip = "Interrupt heals. After Whitemane sleeps the party and revives Mograine, have the tank collect both; focus Whitemane first." },
         },
     },
     {
-        -- Preserved70790 identities; current70862 and in-game acceptance pending.
         instanceID = 429, name = "Dire Maul",
         season = "forever", type = "dungeon",
         difficultyIDs = { 1 }, previewNextBoss = false,
-        overview = "All three wings share this map. No route inference. Agree on Tribute goals before engaging North bosses.",
+        overview = "East: Watch for stealthed satyrs, interrupt heals, and talk to Ironbark after Zevrim.\nWest: Clear elementals at all five pylons to free Immol'thar.\nNorth: Decide Tribute before attacking guards. Bring Frost Oil and a Thorium Widget for the trap, arrange an Ogre Suit, and spare Cho'Rush.",
         bosses = {
             { encounterID = 343, name = "Zevrim Thornhoof",
               tip = "Heal the Sacrifice target urgently; ranged keep distance and remove Intense Pain when possible." },
@@ -523,25 +516,25 @@ KwikTip.DUNGEONS = {
             { encounterID = 345, name = "Lethtendris",
               tip = "Defeat Pimgib first; interrupt Void Bolt and remove curses." },
             { encounterID = 346, name = "Alzzin the Wildshaper",
-              tip = "Cleanse Enervate and Wither; prepare to handle the late arriving adds." },
+              tip = "Clear the plants around the ramp. Watch for self-healing, heal through tank bleeds, and switch to AoE when the imps arrive." },
             { encounterID = 2792, name = "Pusillin",
               tip = "Control the summoned imps, interrupt fire casts and watch for spell reflection." },
             { encounterID = 350, name = "Tendris Warpwood",
-              tip = "Ranged stay back from Trample; dispel roots when possible." },
+              tip = "Clear nearby treants before pulling or they join the fight." },
             { encounterID = 348, name = "Magister Kalendris",
-              tip = "Interrupt shadow spells and remove harmful magic when possible." },
+              tip = "Save an interrupt for Dominate Mind." },
             { encounterID = 2794, name = "Tsu'zee",
               tip = "Let the tank establish threat before attacking; prepare healing for heavy melee damage." },
             { encounterID = 347, name = "Illyanna Ravenoak",
               tip = "Stay close, avoid traps and focus Illyanna before Ferra." },
             { encounterID = 349, name = "Immol'thar",
-              tip = "Assign someone to destroy eyes; prepare extra tank healing during Enrage and recover positioning after teleports." },
+              tip = "Assign ranged DPS to kill Eyes before the slow stacks. Heal players after teleport drops." },
             { encounterID = 361, name = "Prince Tortheldrin",
               tip = "Tank in a corner; pause damage after Arcane Blast until the tank regains control." },
             { encounterID = 2793, name = "Lord Hel'nurath",
               tip = "During the summoned encounter, focus Hel'nurath before finishing the Dreadsteed." },
             { encounterID = 362, name = "Guard Mol'dar",
-              tip = "Let the tank establish threat; ranged keep back from melee knockbacks." },
+              tip = "If not doing Tribute, pull Mol'dar away from the dogs he calls for help." },
             { encounterID = 363, name = "Stomper Kreeg",
               tip = "Expect reduced accuracy from Booze Spit; prepare for enraged melee damage." },
             { encounterID = 364, name = "Guard Fengus",
@@ -549,11 +542,11 @@ KwikTip.DUNGEONS = {
             { encounterID = 365, name = "Guard Slip'kik",
               tip = "Let the tank establish threat; ranged keep back from melee knockbacks." },
             { encounterID = 366, name = "Captain Kromcrush",
-              tip = "Control summoned Reavers, prepare for fear and support the tank through heavy hits." },
+              tip = "If fighting him, clear room for fear. Stop melee swings during Retaliation and control or kill both Reavers." },
             { encounterID = 367, name = "Cho'Rush the Observer",
-              tip = "Interrupt his spellcasting. For Tribute, keep him alive while the group defeats Gordok." },
+              tip = "Tribute: hold Cho'Rush, interrupt his heals if he casts them, and kill only Gordok. For a full clear, kill Cho'Rush first." },
             { encounterID = 368, name = "King Gordok",
-              tip = "Tank Gordok securely while controlling his companion. Tribute requires leaving the companion alive." },
+              tip = "Tribute: hold Cho'Rush, interrupt his heals if he casts them, and kill only Gordok. For a full clear, kill Cho'Rush first." },
         },
     },
     {
@@ -561,7 +554,7 @@ KwikTip.DUNGEONS = {
         instanceID = 329, name = "Stratholme",
         season = "forever", type = "dungeon",
         difficultyIDs = { 1 }, previewNextBoss = false,
-        overview = "Encounter advice only: the HUD does not identify your side, route or pre-boss event stage. Clear space and prepare before pulling.",
+        overview = "Living: Bring the Scarlet Key. Control undead outside and humanoids in the Bastion; the third mailbox starts Malown.\nUndead: Bring the Key to the City for the service gate. Kill the acolytes inside all three ziggurats. Recover before the last abomination dies: Ramstein and more undead follow.",
         bosses = {
             { encounterID = 472, name = "The Unforgiven",
               tip = "Prepare health and mana for accompanying adds; avoid starting with another pack already engaged." },
@@ -574,23 +567,23 @@ KwikTip.DUNGEONS = {
             { encounterID = 476, name = "Malor the Zealous",
               tip = "Expect Lay on Hands to prolong the fight; keep tank healing steady." },
             { encounterID = 477, name = "Archivist Galford",
-              tip = "Prepare group healing for fire damage and watch the tank during Burning Winds." },
+              tip = "Spread and heal whoever gets Burning Winds; it can target someone other than the tank." },
             { encounterID = 478, name = "Balnazzar",
-              tip = "Control dominated allies, dispel sleep when possible, and keep casters back from fear." },
+              tip = "Dathrohan transforms into Balnazzar. Stay back from Psychic Scream and control dominated allies without killing them." },
             { encounterID = 479, name = "Baroness Anastari",
-              tip = "Reduce a possessed ally to half health to break possession, without killing them. Prepare for silence." },
+              tip = "Reduce a possessed ally to half health to break possession, without killing them. Prepare for silence. Kill the acolytes inside the ziggurat before moving on." },
             { encounterID = 480, name = "Nerub'enkan",
-              tip = "Kill spawned scarabs. Coordinate extra tank healing or defensives during armor reduction." },
+              tip = "Kill spawned scarabs. Coordinate extra tank healing or defensives during armor reduction. Kill the acolytes inside the ziggurat before moving on." },
             { encounterID = 481, name = "Maleki the Pallid",
-              tip = "Watch threat while Ice Tomb disables the tank; avoid pulling the boss onto the healer." },
+              tip = "Watch threat while Ice Tomb disables the tank; avoid pulling the boss onto the healer. Kill the acolytes inside the ziggurat before moving on." },
             { encounterID = 482, name = "Magistrate Barthilas",
               tip = "Tank with your back near a safe wall so knockback cannot add another group." },
             { encounterID = 483, name = "Ramstein the Gorger",
-              tip = "Expect target changes during Knockout; heal threatened allies and watch for nearby Trample damage." },
+              tip = "Recover before killing the last abomination. Let the tank reclaim Ramstein after Knockout; save AoE for the undead wave." },
             { encounterID = 484, name = "Baron Rivendare",
-              tip = "Kill summoned skeletons promptly. Ranged keep distance from the aura; melee avoid the frontal cleave." },
+              tip = "Kill skeletons without moving the boss. Keep ranged outside Unholy Aura and use tank defensives for Mortal Strike." },
             { encounterID = 2798, name = "Postmaster Malown",
-              tip = "Control or kill accompanying postmen promptly and remove their stacking curse when possible." },
+              tip = "The third mailbox starts the fight. Shackle or kill the postmen and leave room for fear." },
             { encounterID = 2799, name = "Skul",
               tip = "Interrupt spellcasts to reduce incoming damage." },
             { encounterID = 2800, name = "Stonespine",
@@ -602,44 +595,44 @@ KwikTip.DUNGEONS = {
         instanceID = 109, name = "Sunken Temple",
         season = "forever", type = "dungeon",
         difficultyIDs = { 1 }, previewNextBoss = false,
-        overview = "Encounter advice only: the HUD does not identify your side, route or pre-boss event stage. Clear space and prepare before pulling.",
+        overview = "Upper ring: Kill all six Atal'ai Defenders to open Jammal'an's room; destroy Mijan's Healing Ward. Statues: S, N, SW, SE, NW, NE. Lower temple: Clear the dragonkin before Eranikus. Optional Hakkar: Bring the summon quest or scroll; use Bloodkeepers' blood on four braziers.",
         bosses = {
             { encounterID = 3582, name = "Atal'alarion",
-              tip = "Tank near a wall and recover threat after knockups. Healers prepare for landing damage; ranged stay back." },
+              tip = "Before the pull, light statues S, N, SW, SE, NW, NE. During the fight, ranged and healer stay back from the stun." },
             { encounterID = 3589, name = "Jammal'an the Prophet",
-              tip = "Kill Ogom first. Spread and avoid the hostile transformed ally during Hex; interrupt healing when possible." },
+              tip = "Kill Ogom first. Interrupt Healing Wave, move out of Flamestrike, and kite the ally affected by Hex." },
             { encounterID = 3588, name = "Dreamscythe",
-              tip = "Face the drake away from allies. Tank near a wall to limit knockback." },
+              tip = "Pull separately from Weaver if they are apart. Face Acid Breath away and tank with your back to a wall for Wing Flap." },
             { encounterID = 3587, name = "Weaver",
-              tip = "Face the drake away from allies. Tank near a wall to limit knockback." },
+              tip = "Pull separately from Dreamscythe if they are apart. Face Acid Breath away and tank with your back to a wall for Wing Flap." },
             { encounterID = 3586, name = "Morphaz",
-              tip = "Avoid extra dragonkin pulls. Face the drake away and use a wall against knockback." },
+              tip = "Morphaz and Hazzas come together. Focus one down, face their breaths away, and prepare for Wing Flap and heavy tank damage." },
             { encounterID = 3585, name = "Hazzas",
-              tip = "Avoid extra dragonkin pulls. Face the drake away and use a wall against knockback." },
+              tip = "Morphaz and Hazzas come together. Focus one down, face their breaths away, and prepare for Wing Flap and heavy tank damage." },
             { encounterID = 3584, name = "Shade of Eranikus",
-              tip = "Clear remaining dragonkin before engaging. Ranged avoid melee stun; prepare for tank sleep and sustained healing." },
+              tip = "Clear nearby dragonkin. Face the breath away and keep ranged outside War Stomp. Have backup healing and tank defensives ready for Deep Slumber." },
             { encounterID = 3583, name = "Avatar of Hakkar",
-              tip = "Control allies affected by Cause Insanity until they return to normal." },
+              tip = "Kill Bloodkeepers and use their blood on all four braziers. Briefly control the ally hit by Cause Insanity without killing them." },
         },
     },
     {
         instanceID = 129, name = "Razorfen Downs",
         season = "forever", type = "dungeon",
         difficultyIDs = { 1 }, previewNextBoss = false,
-        overview = "Conservative provisional advice from published Forever guides; not client-tested. No gong, escort-stage or route detection.",
+        overview = "At the gong, finish each spider wave before ringing again. Remove diseases and spider poison when able, and focus Skeletal Summoners. For the optional escort, keep enemies off Belnistrasz.",
         bosses = {
             { encounterID = 2780, name = "Tuten'kash",
-              tip = "Provisional advice: let the tank establish threat before attacking newly arrived spiders. Remove poison when able." },
+              tip = "Face Web Spray away from allies. Remove poison and Curse of Tuten'kash when able." },
             { encounterID = 2781, name = "Plaguemaw the Rotting",
-              tip = "Provisional advice: keep the boss on the tank and maintain healing; no special positioning prescribed." },
+              tip = "Optional escort finale: keep waves off Belnistrasz and recover between them. Remove Putrid Stench when able." },
             { encounterID = 2782, name = "Mordresh Fire Eye",
-              tip = "Provisional advice: control the skeletons and give the tank time to collect them before heavy damage or healing." },
+              tip = "Collect and clear the skeletons first. Ranged stay back from Fire Nova." },
             { encounterID = 2783, name = "Ragglesnout",
-              tip = "Provisional advice: interrupt his healing. Be ready to cover a party member who becomes mind controlled." },
+              tip = "Interrupt Heal and control any mind-controlled ally without killing them." },
             { encounterID = 2784, name = "Glutton",
-              tip = "Provisional advice: ranged stay away from Disease Cloud. Healers prepare for heavy damage on the tank." },
+              tip = "Ranged stay back from Disease Cloud. Prepare extra tank healing when Glutton enrages." },
             { encounterID = 2785, name = "Amnennar the Coldbringer",
-              tip = "Provisional advice: tank collects summoned adds. Agree whether to focus adds or boss; avoid splitting damage without a plan." },
+              tip = "Pick up and kill Frost Spectres. Free the tank from Frost Nova if able; ranged stay outside it." },
         },
     },
     {
@@ -647,8 +640,8 @@ KwikTip.DUNGEONS = {
         instanceID = 2970, name = "The Drowned City",
         season = "forever", type = "dungeon",
         difficultyIDs = { 1 }, previewNextBoss = false,
-        -- No Deathless Marrow/Guardians alias, rare-name fallback or route inference.
-        overview = "Use small pulls, avoid knockbacks into nearby packs, and interrupt caster Fear. Watch your breath during underwater sections.",
+        -- Guardians guidance is add-only; do not treat it as Deathless Marrow.
+        overview = "Stop Profane Necromancer Conjure Spirit and Saltseer Coroner Healing Wave or Chain Lightning. Stay close against Risen Sentry charges. Watch your breath underwater.",
         bosses = {
             { encounterID = 3474, name = "Zul'Alai",
               tip = "Move away during Monstrous Slam. Prioritize removing Rotted Strike from the tank and prepare extra healing for the late enrage." },
@@ -658,8 +651,142 @@ KwikTip.DUNGEONS = {
               tip = "Break Abyssal Bubbles to free trapped players, including the tank. Interrupt Waterbolt Volley and clear patrols before the pull." },
             { encounterID = 3511, name = "Primeval Elemental",
               tip = "Defeat the Undying Offerings to activate this optional boss. Watch your breath and surface when needed; prepare healing for Freeze Water." },
+            { encounterID = 3478, name = "Deathless Guardians",
+              tip = "When Deathless Guardians spawn, focus them first; Shield Slam stuns." },
             { encounterID = 3479, name = "Min'loth the Serpent",
               tip = "Save resources for the serpent phase after the troll form falls. Cleanse poison promptly and prepare for Fear." },
         },
     },
+    {
+        instanceID = 229,
+        name = "Blackrock Spire",
+        season = "forever",
+        type = "dungeon",
+        difficultyIDs = { 1 },
+        previewNextBoss = false,
+        -- Shared Lower/Upper map: no wing detection.
+        -- Some tips still use explicitly provisional Classic strategy.
+        overview = "Lower: control ogre casters and stop runners; check the Mother's Milk quest before cleansing. Upper: clear dragonkin before the egg event, stop egg openers, and pick up the whelps.",
+        bosses = {
+            {
+                encounterID = 267,
+                name = "Highlord Omokk",
+                tip = "Provisional Classic advice: Control the two ogre guards. Face Omokk away from allies and leave safe space for knockback.",
+            },
+            {
+                encounterID = 268,
+                name = "Shadow Hunter Vosh'gajin",
+                tip = "Provisional Classic advice: Kill or control the two shadow priests. Remove Curse of Blood when possible; Hex can disable a party member.",
+            },
+            {
+                encounterID = 269,
+                name = "War Master Voone",
+                tip = "Provisional Classic advice: Let the tank establish threat. Keep allies out of Voone's cleave and watch heavy tank damage.",
+            },
+            {
+                encounterID = 270,
+                name = "Mother Smolderweb",
+                tip = "Face Smolderweb away from allies and spread against the nearby poison stun. Confirm whether anyone needs Mother's Milk before cleansing.",
+            },
+            {
+                encounterID = 271,
+                name = "Urok Doomhowl",
+                tip = "Provisional Classic advice: Control the summoned ogre waves. Keep ranged players and the healer away from Urok's fear.",
+            },
+            {
+                encounterID = 272,
+                name = "Quartermaster Zigris",
+                tip = "Provisional Classic advice: Clear nearby orc packs before engaging Zigris; avoid pulling the hall together.",
+            },
+            {
+                encounterID = 274,
+                name = "Halycon",
+                tip = "Hold Halycon while the group clears her pups. Stay together and conserve mana for Gizrul's arrival.",
+            },
+            {
+                encounterID = 273,
+                name = "Gizrul the Slavener",
+                tip = "Pick up Gizrul as he arrives after Halycon; expect hard tank hits and let threat settle before opening up.",
+            },
+            {
+                encounterID = 275,
+                name = "Overlord Wyrmthalak",
+                tip = "Provisional Classic advice: Tank with your back toward a safe wall and face Wyrmthalak away. Control the elite adds when they appear.",
+            },
+            { encounterID = 3062, name = "Pyroguard Emberseer",
+              tip = "Defeat the jailers first, then let the tank pick up Emberseer. Ranged stay clear of Fire Nova." },
+            { encounterID = 3063, name = "Warchief Rend Blackhand",
+              tip = "Survive the arena waves, face Gyth away for his breath, and pick up Rend on dismount. Finish Gyth first and move out of Rend's spin." },
+            { encounterID = 3068, name = "The Beast",
+              tip = "Provisional Classic advice: Clear the room first. Tank near a wall for knockback; ranged should stay back from Fear and Flamebreak." },
+            { encounterID = 3069, name = "General Drakkisath",
+              tip = "Agree on guard control and a kill order. Face Drakkisath's breaths away; use a cleared kite path if separating him from the guards." },
+            { encounterID = 3070, name = "Lord Valthalak",
+              tip = "Provisional Classic advice: Kill summoned adds quickly. Prepare group healing for Shadow Bolt Volley and save defenses for his final phase." },
+        },
+    },
+    {
+        -- Current-build positive rows; strategies are guide-sourced, not client-tested.
+        instanceID = 2994, name = "Alcaz Prison", season = "forever", type = "dungeon",
+        difficultyIDs = { 1 }, previewNextBoss = false,
+        overview = "Interrupt Strashaz Enchantress Polymorph and remove hound diseases. Before pulling Wrex, clear the central area and all three branching rooms while he patrols away.",
+        bosses = {
+            { encounterID = 3410, name = "Tidemistress Ca'zass", tip = "Interrupt Polymorph and Frostbolt Volley, defeat the two enchantresses first, and move out of Blizzard." },
+            { encounterID = 3403, name = "Overseer Wrex", tip = "Before pulling, clear the three branching rooms and the central area while Wrex patrols elsewhere; enemies left there can join him." },
+            { encounterID = 3418, name = "Katerina the Cleaner", tip = "Control or interrupt the Chaplains. Cleanse tank poison and heal a Garrote target above 90%." },
+            { encounterID = 3409, name = "Blazeroar",
+              tip = "Interrupt Fireball and move out of Flamestrike in human form. Save cooldowns for the dragon; face it away and prepare for fear and party fire damage." },
+            { encounterID = 3415, name = "The Questioner", tip = "If doing The Man in the Iron Chains quest chain, get its follow-up after Zarla before pulling. Clear adds and interrupt Drain Life." },
+        },
+    },
+    {
+        instanceID = 2974, name = "Blackmaw Hold", season = "forever", type = "dungeon",
+        difficultyIDs = { 1 }, previewNextBoss = false,
+        overview = "Control Plaguebringers before rat swarms; move away from low-health Bloated Grizzlies. Interrupt Legashi Summoner Fear and stagger kills on Swarming Imps to limit death explosions.",
+        bosses = {
+            { encounterID = 3315, name = "Withermaw", tip = "Pick up the summoned maggots. Prepare for Fear and remove diseases when possible." },
+            { encounterID = 3322, name = "Bonesnout the Unbroken", tip = "Defeat the four Legashi Ritualists to remove his damage resistance; ranged should avoid his stunning stomp." },
+            { encounterID = 3316, name = "Impaan the Imprisoner", tip = "Kill summoned imps immediately; they shield Impaan. Interrupt Shadowbolt when possible." },
+            { encounterID = 3323, name = "Blackmaw Behemoth",
+              tip = "Focus Clawbert while he is alive. Interrupt the Behemoth’s roar, step out of Whirlwind and be ready to interrupt Thunder Roar after Clawbert dies." },
+            { encounterID = 3336, name = "Unbound Spirit", tip = "Speak to Elder Bramblesnap to start. Defend the ritual and destroy each totem as it becomes vulnerable before attacking the spirit." },
+            { encounterID = 3327, name = "Elder Shaman Bloodmane", tip = "Clear the devotees before pulling. Interrupt Chain Lightning and pick up the Feral Spirits." },
+            { encounterID = 3334, name = "Varrox Bleakhoof", tip = "Tank near the edge. Everyone else move away from the Crimson Wrest target; that player moves out as soon as released. Interrupt Fear and Shadow Bolt Volley." },
+        },
+    },
+    {
+        instanceID = 3001, name = "The Shaper's Terrace", season = "forever", type = "dungeon",
+        difficultyIDs = { 1 }, previewNextBoss = false,
+        overview = "Agree on panel colors first: each archival panel needs 15 matching crystals. Clear nearby packs before feeding a panel; its boss can appear immediately.",
+        bosses = {
+            { encounterID = 3503, name = "Cinder", tip = "Clear surrounding fire elementals before activating the red panel. Fire resistance can help." },
+            { encounterID = 3498, name = "Titanosaur", tip = "Clear nearby enemies before pulling and prepare fear protection. Don't stand directly behind the boss where its tail can knock players back." },
+            { encounterID = 3597, name = "Snowtalon", tip = "Move out of the panel cave and face Snowtalon's Cone of Cold away from the group; watch for Frost Nova." },
+            { encounterID = 3507, name = "Direhorn Matriarch", tip = "Clear nearby packs, avoid standing directly behind her tail, and prepare to heal players charged during the fight." },
+            { encounterID = 3500, name = "Thunderhoof", tip = "Interrupt lightning casts when possible; nature resistance can help if interrupts are unavailable." },
+            { encounterID = 3501, name = "Venomridge", tip = "Remove poison from the party when possible; prepare group healing for poison damage." },
+            { encounterID = 3505, name = "Bolt", tip = "Ranged players and healers should spread out to limit Chain Lightning jumps; heal through its instant casts." },
+            { encounterID = 3502, name = "Nanaya", tip = "Watch which crystals empower Nanaya; move out of Blizzard and spread for Chain Lightning. Prepare for a nearby area stun." },
+        },
+    },
+    {
+        -- Five event IDs observed in saved encounter log; aliases reconciled in content evidence.
+        instanceID = 3039, name = "Krol'dok Stronghold",
+        season = "forever", type = "dungeon",
+        difficultyIDs = { 1 }, previewNextBoss = false,
+        overview = "Slow or stun Twilight Peon runners and watch mounted Outriders. Stop Grunt Bladestorm and control Shamans before they Bloodlust Centurions. At Toof's bridge, clear Brute waves and prioritize the two Shamans.",
+        bosses = {
+            { encounterID = 3450, name = "Slavecrusher Grox",
+              tip = "Clear nearby prisoners before pulling. Quickly deal with prisoners called into the fight and prepare healing when the tank is stunned." },
+            { encounterID = 3452, name = "Twilight Commander Zarmok",
+              tip = "Clear nearby grunts before pulling his patrol. Melee move out of Rending Whirl; heal through heavy tank damage and his enrage." },
+            { encounterID = 3453, name = "Handler Ashka",
+              tip = "Clear nearby packs. Stun and focus Snarlfang and Terrorhowl first; protect the player targeted by Command: Kill! Prepare for fear." },
+            { encounterID = 3449, name = "Nar'gurk",
+              tip = "Control or defeat nearby adds and heal through Shadow Bolt Volley. Stop uncontrolled AoE on Convert; carefully damage the controlled player to 50% health, then heal them." },
+            { encounterID = 3451, name = "Overseer Mugg",
+              tip = "Control or kill the two Centurions first. Spread for Crushing Slam's knockback; save tank mitigation and healing for his faster, harder-hitting weapon phases." },
+        },
+    },
+
 }

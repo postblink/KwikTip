@@ -15,7 +15,7 @@ Inspired by **QE Dungeon Tips** by QEdev (no longer maintained).
 | Client | Package | Downloads |
 |---|---|---|
 | Retail (Midnight) | `KwikTip` | [CurseForge](https://www.curseforge.com/wow/addons/kwiktip) · [Wago](https://addons.wago.io/addons/kwiktip) · [WoWInterface](https://www.wowinterface.com/downloads/info27074-KwikTip.html) |
-| WoW Forever — alpha `0.1.0-alpha.5` | `KwikTip_Forever` | [GitHub alpha](https://github.com/postblink/KwikTip/releases/tag/forever-v0.1.0-alpha.5) · [CurseForge alpha](https://www.curseforge.com/wow/addons/kwiktip/files) · [Wago alphas](https://addons.wago.io/addons/kwiktip/versions?stability=alpha) |
+| WoW Forever — released alpha `0.1.0-alpha.4` | `KwikTip_Forever` | [GitHub alpha](https://github.com/postblink/KwikTip/releases/tag/forever-v0.1.0-alpha.4) · [CurseForge alpha](https://www.curseforge.com/wow/addons/kwiktip/files) · [Wago alphas](https://addons.wago.io/addons/kwiktip/versions?stability=alpha) |
 
 CurseForge and Wago host both versions on the existing KwikTip pages; choose a Forever file marked Alpha for the Forever client. WoWInterface currently distributes the Retail package only.
 
@@ -25,21 +25,17 @@ CurseForge and Wago host both versions on the existing KwikTip pages; choose a F
 
 ## WoW Forever Support
 
-**Forever `0.1.0-alpha.5`** contains 183 records across 23 runtime entries. Drowned City static identities are verified at build 70888; other entries still need current-build checks. In-game acceptance remains pending.
-See [the Drowned City evidence and limits](docs/FOREVER_DROWNED_CITY_REFRESH_20261111.md).
+The **unreleased Forever test build** adds dungeon preparation and a manual
+pre-pull boss picker. Open `/kwik` for settings and the picker, or use `/kwik boss`
+from a supported Normal-mode dungeon. **Persistent Tip Window** shows optional
+trash and preparation advice between fights. A real boss event takes over the HUD.
 
-Optional dungeon-wide preparation overviews use **Persistent Tip Window**.
-
-This release adds five Drowned City encounters: Zul'Alai, Var'Taka, Captain
-Dreadrise, Primeval Elemental and Min'loth the Serpent. Only Normal difficulty 1
-is supported. Deathless Marrow/Guardians and unmatched rare encounters remain
-excluded; no route or name-based fallback is assumed. Cathedral and Razorfen
-Downs tips remain provisional. Blackrock Spire and four new dungeon slices are
-still outside this partial coverage.
-
-This is an early alpha: full dungeon coverage is still in progress, and no dungeon has completed in-game validation. Offline checks are not in-game acceptance. Other dungeons, room/pull routing, and NPC targeting are not included yet. Hall's Infurnus/Magmatus guide association remains provisional, and rare Bruegal Ironknuckle is excluded from automatic tips.
-
-The full roadmap remains all Classic dungeon units/wings plus the nine new Forever dungeons. See the [Forever README](https://github.com/postblink/KwikTip/blob/master/Forever/README.txt) for setup and testing details, or the [published coverage ledger](https://github.com/postblink/KwikTip/releases/download/forever-v0.1.0-alpha.5/coverage.json) for the exact included encounters.
+The refresh spans 28 runtime maps. The [coverage ledger](Forever/Coverage.json)
+lists included encounters and exclusions, and the [current-build evidence](docs/FOREVER_CURRENT_IDS_71037.json)
+records checks against readable Forever 1.60.1.71037 client data. Shared-map wings
+are labeled in the advice, not detected automatically. Some optional encounters
+remain unmapped. In-client verification of this build is pending; the download
+table above links the last published release, not this test build.
 
 ---
 

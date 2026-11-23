@@ -1,5 +1,16 @@
 # KwikTip Forever — full dungeon coverage matrix
 
+## Current test build
+
+See the [runtime coverage ledger](../Forever/Coverage.json) for all included encounters and exclusions, and the [71037 evidence](FOREVER_CURRENT_IDS_71037.json) for the 35 tracked units, their 28 shared or standalone maps, and readable Normal-compatible rows. Demon Fall Canyon and Karazhan Crypts have separate client rows; current playability is not established. The test build adds a manual pre-pull picker and does not infer your wing or room. In-client acceptance is pending.
+
+## Research candidate update — 2026-11-18
+
+The isolated four-map extension contains 218 records in 28 runtime entries.
+Upper Spire and three additional Forever dungeons are partial and untested.
+See [four-map identity evidence](FOREVER_FOUR_MAPS_IDS_70959.json) and
+[Krol'dok evidence](FOREVER_KROLDOK_CANDIDATE_20261117.md). Earlier summaries below are historical.
+
 ## Current refresh — 2026-11-09
 
 The snapshot below is historical. Alpha.4 release has178 encounter
@@ -15,6 +26,16 @@ slices remain open. Do not use the historical missing-row statuses as current.
 The alpha.5 package adds five Drowned City tips, including Primeval
 Elemental, after exact 70888 Map/MapDifficulty/encounter verification. It has 183
 events in 23 entries. Only Normal 1 is enabled; client acceptance remains pending. See the [refresh and promotion gate](FOREVER_DROWNED_CITY_REFRESH_20261111.md).
+
+## Review candidate update, 2026-11-12
+
+Nine Lower Blackrock Spire encounters are added in an isolated, unreleased candidate
+on top of Drowned City: 192 events in 24 runtime entries. All nine tips are visibly
+provisional Classic advice. Shared map 229 is a party instance, with Normal 1 and
+MaxPlayers 10 in preserved 70888 data. Upper Spire remains excluded; the map alone
+does not establish wing location. The combined validation package now uses alpha.6;
+publication and live-game acceptance remain pending.
+See [the Lower Spire evidence and gate](FOREVER_LBRS_REFRESH_20261112.md).
 
 ## Historical snapshot (2026-10-31)
 
