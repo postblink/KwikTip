@@ -722,6 +722,67 @@ emit("ENCOUNTER_START", 2914, "Gelihast", 1, 5)
 check(addon.bossActive and contains(addon._lastContent, "Net"), "Geilhast event displays the sourced Net tip")
 emit("ENCOUNTER_END", 2914, "Geilhast", 1, 5, 1)
 
+-- Paired Zul'Farrak events can overlap; either can end first.
+state.inInstance, state.instanceType, state.instanceID = true, "party", 209
+state.difficultyID, state.mapID, state.subzone = 1, nil, ""
+KwikTipDB.showInDungeon = false
+for _, ends in ipairs({ {598, 599}, {599, 598} }) do
+    emit("PLAYER_ENTERING_WORLD")
+    emit("ENCOUNTER_START", 598, "Pyramid pair A", 1, 5)
+    emit("ENCOUNTER_START", 599, "Pyramid pair B", 1, 5)
+    emit("ENCOUNTER_END", ends[1], "First pair end", 1, 5, 1)
+    check(addon.bossActive and addon.HUD:IsShown(),
+        "ending either overlapping paired encounter preserves the other tip")
+    emit("ENCOUNTER_END", ends[2], "Second pair end", 1, 5, 1)
+    check(not addon.bossActive and not addon.HUD:IsShown(),
+        "ending the final paired encounter clears the HUD")
+end
+
+-- Reverse start order, duplicate starts, mismatched ends and wipe cleanup.
+for _, starts in ipairs({ {598, 599}, {599, 598} }) do
+    emit("PLAYER_ENTERING_WORLD")
+    emit("ENCOUNTER_START", starts[1], "Pair first", 1, 5)
+    emit("ENCOUNTER_START", starts[2], "Pair second", 1, 5)
+    emit("ENCOUNTER_START", starts[2], "Pair duplicate", 1, 5)
+    emit("ENCOUNTER_END", 987654, "Unrelated end", 1, 5, 0)
+    check(addon.bossActive and addon.HUD:IsShown(), "unrelated end cannot clear pair")
+    emit("ENCOUNTER_END", starts[2], "Pair wipe first", 1, 5, 0)
+    check(addon.bossActive and addon._activeEncounterID == starts[1]
+        and contains(addon._lastContent, "fear"), "wipe of displayed pair member restores remaining member")
+    emit("ENCOUNTER_END", starts[2], "Duplicate end", 1, 5, 0)
+    check(addon.bossActive, "duplicate end cannot clear remaining pair member")
+    emit("ENCOUNTER_END", starts[1], "Pair wipe last", 1, 5, 0)
+    check(not addon.bossActive and not addon.HUD:IsShown(), "final pair wipe clears HUD")
+end
+
+emit("PLAYER_ENTERING_WORLD")
+emit("ENCOUNTER_START", 598, "Pair before unknown", 1, 5)
+emit("ENCOUNTER_START", 599, "Pair before unknown", 1, 5)
+emit("ENCOUNTER_START", 987655, "Unknown encounter", 1, 5)
+check(not addon.bossActive, "unknown start invalidates pair")
+emit("ENCOUNTER_END", 598, "Stale pair end", 1, 5, 1)
+check(not addon.bossActive, "stale pair end does not revive pair after unknown")
+emit("ENCOUNTER_END", 987655, "Unknown encounter", 1, 5, 0)
+
+emit("PLAYER_ENTERING_WORLD")
+emit("ENCOUNTER_START", 598, "Pair before mode change", 1, 5)
+emit("ENCOUNTER_START", 599, "Pair before mode change", 1, 5)
+state.difficultyID = 201
+emit("ENCOUNTER_END", 598, "End after mode changed", 1, 5, 0)
+check(not addon.bossActive and not addon.HUD:IsShown(), "end after mode change clears pair immediately")
+state.difficultyID = 1
+emit("PLAYER_ENTERING_WORLD")
+emit("ENCOUNTER_START", 598, "Pair before zone exit", 1, 5)
+emit("ENCOUNTER_START", 599, "Pair before zone exit", 1, 5)
+state.instanceID = 389
+emit("ZONE_CHANGED_NEW_AREA")
+check(not addon.bossActive, "zone exit clears pair")
+state.instanceID = 209
+emit("PLAYER_ENTERING_WORLD")
+emit("ENCOUNTER_START", 598, "New solo pull", 1, 5)
+emit("ENCOUNTER_END", 598, "Solo pull end", 1, 5, 1)
+check(not addon.bossActive, "zone exit removed old pair members before solo pull")
+
 -- Real excluded Ruins IDs must never borrow a similar guide/name entry.
 state.inInstance, state.instanceType, state.instanceID = true, "party", 2999
 state.difficultyID, state.mapID, state.subzone = 1, nil, ""

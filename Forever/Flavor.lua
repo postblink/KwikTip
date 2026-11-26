@@ -16,6 +16,7 @@ local function inDungeon(dungeon)
 end
 
 local function clearBoss(self)
+    self._pairedEncounters = nil
     self._activeBossEntry = nil
     self._activeEncounterID = nil
     self._activeEncounterName = nil
@@ -421,7 +422,18 @@ function KwikTip:OnEncounterStart(encounterID, encounterName, difficultyID, grou
         self:UpdateVisibility()
         return
     end
+    -- Only the observed Zul'Farrak pair shares an overlapping lifecycle.
+    -- Other starts replace it, including unknown starts, as before.
+    local isPair = entry and entry.dungeon.instanceID == 209
+        and (encounterID == 598 or encounterID == 599)
+    if not isPair then self._pairedEncounters = nil end
     OnEncounterStart(self, encounterID, encounterName, difficultyID, groupSize)
+    if isPair and self.bossActive then
+        self._pairedEncounters = self._pairedEncounters or {}
+        self._pairedEncounters[encounterID] = {
+            entry = entry, name = encounterName, difficulty = difficultyID,
+        }
+    end
     -- The shared handler logs an unknown encounter and clears its entry, but
     -- can leave bossActive from a previous fight. Fail closed instead of
     -- retaining that previous fight's tip indefinitely.
@@ -437,7 +449,31 @@ function KwikTip:OnEncounterStart(encounterID, encounterName, difficultyID, grou
 end
 
 local OnEncounterEnd = KwikTip.OnEncounterEnd
-function KwikTip:OnEncounterEnd(success)
+function KwikTip:OnEncounterEnd(success, encounterID)
+    if self._activeBossEntry and not inDungeon(self._activeBossEntry.dungeon) then
+        clearBoss(self)
+        self:UpdateContent()
+        self:UpdateVisibility()
+        return
+    end
+    -- Late or unrelated end events must not terminate the current fight.
+    if encounterID and self._activeEncounterID and encounterID ~= self._activeEncounterID
+        and not (self._pairedEncounters and self._pairedEncounters[encounterID]) then return end
+    if self._pairedEncounters then
+        if encounterID then self._pairedEncounters[encounterID] = nil end
+        local remainingID, remaining = next(self._pairedEncounters)
+        if remaining then
+            self._activeEncounterID = remainingID
+            self._activeEncounterName = remaining.name
+            self._activeDifficultyID = remaining.difficulty
+            self._activeBossEntry = remaining.entry
+            local content = self._FormatBossContent(remaining.entry.dungeon, remaining.entry.boss, remaining.difficulty)
+            self:SetContent(self._AppendUserNote(content))
+            self:UpdateVisibility()
+            return
+        end
+        self._pairedEncounters = nil
+    end
     local hadManualPreview = clearManualPreview(self)
     local entry = self._activeBossEntry
     OnEncounterEnd(self, success)

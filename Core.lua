@@ -41,8 +41,8 @@ frame:SetScript("OnEvent", function(self, event, ...)
         local encounterID, encounterName, difficultyID, groupSize = ...
         KwikTip:OnEncounterStart(encounterID, encounterName, difficultyID, groupSize)
     elseif event == "ENCOUNTER_END" then
-        local _, _, _, _, success = ...
-        KwikTip:OnEncounterEnd(success)
+        local encounterID, _, _, _, success = ...
+        KwikTip:OnEncounterEnd(success, encounterID)
     elseif event == "PLAYER_ROLES_ASSIGNED" then
         KwikTip:UpdateContent()
     elseif event == "CHALLENGE_MODE_START" then
