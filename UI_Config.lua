@@ -540,6 +540,10 @@ function KwikTip:CreateConfigWindow()
         end
     end)
 
+    if self.InitForeverBossPreviewUI then
+        self:InitForeverBossPreviewUI(cfg, tf1, chatDropBtn, MakeSectionHeader)
+    end
+
 
     -- ============================================================
     -- TAB 2: Layout
@@ -880,6 +884,9 @@ function KwikTip:CreateConfigWindow()
         borderEnabledCB:SetChecked(db.borderEnabled ~= false)
         borderSwatchBtn:SetBackdropColor(db.borderColorR or 0, db.borderColorG or 0, db.borderColorB or 0, 1)
         self:_UpdateConfigMoveBtn()
+        if self.RefreshForeverBossPreviewUI then
+            self:RefreshForeverBossPreviewUI()
+        end
     end
 
     -- Assigned last so a construction failure leaves self.Config nil and allows retry

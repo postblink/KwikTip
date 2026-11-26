@@ -1,0 +1,374 @@
+{
+  "DungeonEncounter": [
+    {
+      "base": {
+        "Bit": 6,
+        "CompleteWorldStateID": 4676,
+        "DifficultyID": 0,
+        "Faction": -1,
+        "Flags": 1152,
+        "ID": 349,
+        "ItemSequenceLevel": 0,
+        "MapID": 429,
+        "Name_lang": "Immol'thar",
+        "OrderIndex": 6000,
+        "SpellIconFileID": 0
+      },
+      "equal": true,
+      "id": 349,
+      "overlay": {
+        "Bit": 6,
+        "CompleteWorldStateID": 4676,
+        "DifficultyID": 0,
+        "Faction": -1,
+        "Flags": 1152,
+        "ID": 349,
+        "ItemSequenceLevel": 0,
+        "MapID": 429,
+        "Name_lang": "Immol'thar",
+        "OrderIndex": 6000,
+        "SpellIconFileID": 0
+      }
+    },
+    {
+      "base": {
+        "Bit": 5,
+        "CompleteWorldStateID": 28965,
+        "DifficultyID": 0,
+        "Faction": -1,
+        "Flags": 1024,
+        "ID": 3303,
+        "ItemSequenceLevel": 0,
+        "MapID": 2959,
+        "Name_lang": "Shade of the Archmage",
+        "OrderIndex": 9000,
+        "SpellIconFileID": 0
+      },
+      "equal": true,
+      "id": 3303,
+      "overlay": {
+        "Bit": 5,
+        "CompleteWorldStateID": 28965,
+        "DifficultyID": 0,
+        "Faction": -1,
+        "Flags": 1024,
+        "ID": 3303,
+        "ItemSequenceLevel": 0,
+        "MapID": 2959,
+        "Name_lang": "Shade of the Archmage",
+        "OrderIndex": 9000,
+        "SpellIconFileID": 0
+      }
+    },
+    {
+      "base": {
+        "Bit": 1,
+        "CompleteWorldStateID": 29625,
+        "DifficultyID": 0,
+        "Faction": -1,
+        "Flags": 1024,
+        "ID": 3354,
+        "ItemSequenceLevel": 0,
+        "MapID": 2999,
+        "Name_lang": "Rath'mael",
+        "OrderIndex": 5000,
+        "SpellIconFileID": 0
+      },
+      "equal": true,
+      "id": 3354,
+      "overlay": {
+        "Bit": 1,
+        "CompleteWorldStateID": 29625,
+        "DifficultyID": 0,
+        "Faction": -1,
+        "Flags": 1024,
+        "ID": 3354,
+        "ItemSequenceLevel": 0,
+        "MapID": 2999,
+        "Name_lang": "Rath'mael",
+        "OrderIndex": 5000,
+        "SpellIconFileID": 0
+      }
+    },
+    {
+      "base": {
+        "Bit": 4,
+        "CompleteWorldStateID": 30733,
+        "DifficultyID": 0,
+        "Faction": -1,
+        "Flags": 1028,
+        "ID": 3479,
+        "ItemSequenceLevel": 0,
+        "MapID": 2970,
+        "Name_lang": "Min'loth the Serpent",
+        "OrderIndex": 6000,
+        "SpellIconFileID": 0
+      },
+      "equal": true,
+      "id": 3479,
+      "overlay": {
+        "Bit": 4,
+        "CompleteWorldStateID": 30733,
+        "DifficultyID": 0,
+        "Faction": -1,
+        "Flags": 1028,
+        "ID": 3479,
+        "ItemSequenceLevel": 0,
+        "MapID": 2970,
+        "Name_lang": "Min'loth the Serpent",
+        "OrderIndex": 6000,
+        "SpellIconFileID": 0
+      }
+    },
+    {
+      "base": {
+        "Bit": 6,
+        "CompleteWorldStateID": 30202,
+        "DifficultyID": 0,
+        "Faction": -1,
+        "Flags": 1024,
+        "ID": 3411,
+        "ItemSequenceLevel": 0,
+        "MapID": 2999,
+        "Name_lang": "Viktor the Vile",
+        "OrderIndex": 3000,
+        "SpellIconFileID": 0
+      },
+      "equal": true,
+      "id": 3411,
+      "overlay": {
+        "Bit": 6,
+        "CompleteWorldStateID": 30202,
+        "DifficultyID": 0,
+        "Faction": -1,
+        "Flags": 1024,
+        "ID": 3411,
+        "ItemSequenceLevel": 0,
+        "MapID": 2999,
+        "Name_lang": "Viktor the Vile",
+        "OrderIndex": 3000,
+        "SpellIconFileID": 0
+      }
+    }
+  ],
+  "Map": [
+    {
+      "base": {
+        "AreaTableID": 0,
+        "Corpse": [
+          -4459.449,
+          -1660.2118
+        ],
+        "CorpseMapID": 1,
+        "CosmeticParentMapID": -1,
+        "Directory": "RazorfenKraulInstance",
+        "ExpansionID": 0,
+        "Flags": [
+          81425,
+          262144,
+          128
+        ],
+        "ID": 47,
+        "InstanceType": 1,
+        "LoadingScreenID": 188,
+        "MapDescription0_lang": "",
+        "MapDescription1_lang": "",
+        "MapName_lang": "Razorfen Kraul",
+        "MapType": 1,
+        "MaxPlayers": 10,
+        "MinimapIconScale": 1,
+        "NavigationMaxDistance": 0,
+        "OceanLiquidTypeID": 2,
+        "ParentMapID": -1,
+        "PreloadFileDataID": 0,
+        "PvpLongDescription_lang": "",
+        "PvpShortDescription_lang": "",
+        "TimeOfDayOverride": -1,
+        "TimeOffset": 0,
+        "WdtFileDataID": 790640,
+        "WindSettingsID": 0,
+        "ZmpFileDataID": 0
+      },
+      "equal": true,
+      "id": 47,
+      "overlay": {
+        "AreaTableID": 0,
+        "Corpse": [
+          -4459.449,
+          -1660.2118
+        ],
+        "CorpseMapID": 1,
+        "CosmeticParentMapID": -1,
+        "Directory": "RazorfenKraulInstance",
+        "ExpansionID": 0,
+        "Flags": [
+          81425,
+          262144,
+          128
+        ],
+        "ID": 47,
+        "InstanceType": 1,
+        "LoadingScreenID": 188,
+        "MapDescription0_lang": "",
+        "MapDescription1_lang": "",
+        "MapName_lang": "Razorfen Kraul",
+        "MapType": 1,
+        "MaxPlayers": 10,
+        "MinimapIconScale": 1,
+        "NavigationMaxDistance": 0,
+        "OceanLiquidTypeID": 2,
+        "ParentMapID": -1,
+        "PreloadFileDataID": 0,
+        "PvpLongDescription_lang": "",
+        "PvpShortDescription_lang": "",
+        "TimeOfDayOverride": -1,
+        "TimeOffset": 0,
+        "WdtFileDataID": 790640,
+        "WindSettingsID": 0,
+        "ZmpFileDataID": 0
+      }
+    },
+    {
+      "base": {
+        "AreaTableID": 717,
+        "Corpse": [
+          -8762.379,
+          848.0103
+        ],
+        "CorpseMapID": 0,
+        "CosmeticParentMapID": -1,
+        "Directory": "StormwindJail",
+        "ExpansionID": 0,
+        "Flags": [
+          67073,
+          0,
+          2277506
+        ],
+        "ID": 34,
+        "InstanceType": 1,
+        "LoadingScreenID": 194,
+        "MapDescription0_lang": "",
+        "MapDescription1_lang": "",
+        "MapName_lang": "Stormwind Stockade",
+        "MapType": 2,
+        "MaxPlayers": 10,
+        "MinimapIconScale": 1,
+        "NavigationMaxDistance": 0,
+        "OceanLiquidTypeID": 2,
+        "ParentMapID": -1,
+        "PreloadFileDataID": 0,
+        "PvpLongDescription_lang": "",
+        "PvpShortDescription_lang": "",
+        "TimeOfDayOverride": -1,
+        "TimeOffset": 0,
+        "WdtFileDataID": 791060,
+        "WindSettingsID": 0,
+        "ZmpFileDataID": 0
+      },
+      "equal": true,
+      "id": 34,
+      "overlay": {
+        "AreaTableID": 717,
+        "Corpse": [
+          -8762.379,
+          848.0103
+        ],
+        "CorpseMapID": 0,
+        "CosmeticParentMapID": -1,
+        "Directory": "StormwindJail",
+        "ExpansionID": 0,
+        "Flags": [
+          67073,
+          0,
+          2277506
+        ],
+        "ID": 34,
+        "InstanceType": 1,
+        "LoadingScreenID": 194,
+        "MapDescription0_lang": "",
+        "MapDescription1_lang": "",
+        "MapName_lang": "Stormwind Stockade",
+        "MapType": 2,
+        "MaxPlayers": 10,
+        "MinimapIconScale": 1,
+        "NavigationMaxDistance": 0,
+        "OceanLiquidTypeID": 2,
+        "ParentMapID": -1,
+        "PreloadFileDataID": 0,
+        "PvpLongDescription_lang": "",
+        "PvpShortDescription_lang": "",
+        "TimeOfDayOverride": -1,
+        "TimeOffset": 0,
+        "WdtFileDataID": 791060,
+        "WindSettingsID": 0,
+        "ZmpFileDataID": 0
+      }
+    }
+  ],
+  "MapDifficulty": [
+    {
+      "base": {
+        "ContentTuningID": 0,
+        "DifficultyID": 184,
+        "Flags": 0,
+        "ID": 4978,
+        "ItemContext": 0,
+        "ItemContextPickerID": 0,
+        "LockID": 0,
+        "MapID": 209,
+        "MaxPlayers": 10,
+        "Message_lang": "",
+        "ResetInterval": 0,
+        "WorldStateExpressionID": 0
+      },
+      "equal": true,
+      "id": 4978,
+      "overlay": {
+        "ContentTuningID": 0,
+        "DifficultyID": 184,
+        "Flags": 0,
+        "ID": 4978,
+        "ItemContext": 0,
+        "ItemContextPickerID": 0,
+        "LockID": 0,
+        "MapID": 209,
+        "MaxPlayers": 10,
+        "Message_lang": "",
+        "ResetInterval": 0,
+        "WorldStateExpressionID": 0
+      }
+    },
+    {
+      "base": {
+        "ContentTuningID": 5255,
+        "DifficultyID": 207,
+        "Flags": 0,
+        "ID": 5449,
+        "ItemContext": 0,
+        "ItemContextPickerID": 0,
+        "LockID": 0,
+        "MapID": 209,
+        "MaxPlayers": 1,
+        "Message_lang": "",
+        "ResetInterval": 0,
+        "WorldStateExpressionID": 0
+      },
+      "equal": true,
+      "id": 5449,
+      "overlay": {
+        "ContentTuningID": 5255,
+        "DifficultyID": 207,
+        "Flags": 0,
+        "ID": 5449,
+        "ItemContext": 0,
+        "ItemContextPickerID": 0,
+        "LockID": 0,
+        "MapID": 209,
+        "MaxPlayers": 1,
+        "Message_lang": "",
+        "ResetInterval": 0,
+        "WorldStateExpressionID": 0
+      }
+    }
+  ]
+}

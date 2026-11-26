@@ -68,11 +68,19 @@ def prepare(output: Path, tag: str | None = None) -> dict[str, str]:
     coverage = json.loads((ROOT / "Forever/Coverage.json").read_text())
     (output / "coverage.json").write_text(json.dumps(coverage, indent=2) + "\n", encoding="utf-8")
     evidence = {"data_build": coverage["data_build"], "client_tested": coverage["client_tested"], "dungeons": []}
-    for dungeon in coverage["included_dungeons"]:
-        path = Path(dungeon["evidence"])
-        if path.is_absolute() or ".." in path.parts or path.parts[0] != "docs":
+
+    def read_evidence(relative: str) -> dict:
+        path = Path(relative)
+        if path.is_absolute() or ".." in path.parts or path.parts[:1] != ("docs",):
             raise ValueError("Coverage evidence must be an explicit repository doc")
-        evidence["dungeons"].append({"instanceID": dungeon["instanceID"], "sources": json.loads((ROOT / path).read_text())})
+        return json.loads((ROOT / path).read_text())
+
+    if "current_build_evidence" in coverage:
+        evidence["current_build"] = read_evidence(coverage["current_build_evidence"])
+        if evidence["current_build"]["build"] != coverage["current_client_build_observed"]:
+            raise ValueError("Coverage evidence must match the observed Forever build")
+    for dungeon in coverage["included_dungeons"]:
+        evidence["dungeons"].append({"instanceID": dungeon["instanceID"], "sources": read_evidence(dungeon["evidence"])})
     (output / "source-evidence.json").write_text(json.dumps(evidence, indent=2) + "\n", encoding="utf-8")
     assets = [archive_name, "release.json", "release-notes.md", "source-evidence.json", "coverage.json"]
     checksums = [f"{hashlib.sha256((output / name).read_bytes()).hexdigest()}  {name}\n" for name in assets]

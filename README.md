@@ -15,7 +15,7 @@ Inspired by **QE Dungeon Tips** by QEdev (no longer maintained).
 | Client | Package | Downloads |
 |---|---|---|
 | Retail (Midnight) | `KwikTip` | [CurseForge](https://www.curseforge.com/wow/addons/kwiktip) · [Wago](https://addons.wago.io/addons/kwiktip) · [WoWInterface](https://www.wowinterface.com/downloads/info27074-KwikTip.html) |
-| WoW Forever — alpha `0.1.0-alpha.4` | `KwikTip_Forever` | [GitHub alpha](https://github.com/postblink/KwikTip/releases/tag/forever-v0.1.0-alpha.4) · [CurseForge alpha](https://www.curseforge.com/wow/addons/kwiktip/files) · [Wago alphas](https://addons.wago.io/addons/kwiktip/versions?stability=alpha) |
+| WoW Forever — alpha `0.1.0-alpha.7` | `KwikTip_Forever` | [GitHub alpha](https://github.com/postblink/KwikTip/releases/tag/forever-v0.1.0-alpha.7) · [CurseForge alpha](https://www.curseforge.com/wow/addons/kwiktip/files) · [Wago alphas](https://addons.wago.io/addons/kwiktip/versions?stability=alpha) |
 
 CurseForge and Wago host both versions on the existing KwikTip pages; choose a Forever file marked Alpha for the Forever client. WoWInterface currently distributes the Retail package only.
 
@@ -25,19 +25,18 @@ CurseForge and Wago host both versions on the existing KwikTip pages; choose a F
 
 ## WoW Forever Support
 
-**Forever `0.1.0-alpha.4`** contains178 records across22 runtime entries. Current-build verification and in-game acceptance remain pending.
-See [the candidate evidence](docs/FOREVER_BATCH4_20261109.md).
+The **Forever alpha** adds dungeon preparation and a manual
+pre-pull boss picker. Open `/kwik` for settings and the picker, or use `/kwik boss`
+from a supported Normal-mode dungeon. **Persistent Tip Window** shows optional
+trash and preparation advice between fights. A real boss event takes over the HUD.
 
-Optional dungeon-wide preparation overviews use **Persistent Tip Window**.
-
-This release adds BRD17, Scholomance11, ZulFarrak8, Maraudon8, Scarlet7,
-DireMaul19, Stratholme16, Temple8 and RazorfenDowns6 to the published78.
-Cathedral and Razorfen Downs tips are explicitly provisional. Shared-map wings
-are not inferred. BRS compatibility and five new dungeon slices remain pending.
-
-This is an early alpha: full dungeon coverage is still in progress, and no dungeon has completed in-game validation. Offline checks are not in-game acceptance. Other dungeons, room/pull routing, and NPC targeting are not included yet. Hall's Infurnus/Magmatus guide association remains provisional, and rare Bruegal Ironknuckle is excluded from automatic tips.
-
-The full roadmap remains all Classic dungeon units/wings plus the nine new Forever dungeons. See the [Forever README](https://github.com/postblink/KwikTip/blob/master/Forever/README.txt) for setup and testing details, or the [published coverage ledger](https://github.com/postblink/KwikTip/releases/download/forever-v0.1.0-alpha.4/coverage.json) for the exact included encounters.
+The refresh spans 28 runtime maps. The [coverage ledger](Forever/Coverage.json)
+lists included encounters and exclusions, and the [71037 build evidence](docs/FOREVER_CURRENT_IDS_71037.json)
+records checks against readable Forever 1.60.1.71037 client data and a local
+hotfix snapshot. Newer build 1.60.1.71139 is not qualified by those checks. Shared-map wings
+are labeled in the advice, not detected automatically. Some optional encounters
+remain unmapped. Coverage is partial and in-client acceptance of this alpha is
+pending; offline tests do not establish client compatibility.
 
 ---
 
@@ -152,7 +151,7 @@ The addon uses a daily cron monitor that watches method.gg and Icy Veins dungeon
 
 ### WoW Forever
 
-1. Download [the Forever alpha ZIP](https://github.com/postblink/KwikTip/releases/download/forever-v0.1.0-alpha.4/KwikTip_Forever-0.1.0-alpha.4.zip), or choose the Forever alpha on CurseForge or Wago.
+1. Download [the Forever alpha ZIP](https://github.com/postblink/KwikTip/releases/download/forever-v0.1.0-alpha.7/KwikTip_Forever-0.1.0-alpha.7.zip), or choose the Forever alpha on CurseForge or Wago.
 2. Close the game and extract the `KwikTip_Forever` folder into:
 
    ```
@@ -161,7 +160,7 @@ The addon uses a daily cron monitor that watches method.gg and Icy Veins dungeon
 
 3. Enable **KwikTip: Forever (Alpha)** in that client. Keep Retail `KwikTip` disabled there, and retain a backup of the previous addon folder when updating.
 
-Use the packaged ZIP for Forever. The repository's `Forever/` directory is source material; it does not contain the shared runtime and assets needed for installation. The published alpha targets interface `16001`; client compatibility still needs the live checks described above.
+Use the packaged ZIP for Forever. The repository's `Forever/` directory is source material; it does not contain the shared runtime and assets needed for installation. The alpha targets interface `16001`; client compatibility still needs the live checks described above.
 
 ---
 

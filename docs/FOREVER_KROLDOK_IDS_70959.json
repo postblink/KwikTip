@@ -1,0 +1,350 @@
+{
+  "build": "1.60.1.70959",
+  "schema_revision": "5ebf2124996b538d6784584e69db6fe8d6bd8d06",
+  "schema_url": "https://github.com/wowdev/WoWDBDefs/tree/5ebf2124996b538d6784584e69db6fe8d6bd8d06/definitions",
+  "guide": "https://www.method.gg/wow-forever/dungeons/kroldok-stronghold",
+  "guide_updated": "2026-11-15",
+  "client_tested": false,
+  "complete_tables": false,
+  "scope": "Positive readable rows and bounded local cache check only; not complete server hotfixes, runtime or mechanics proof.",
+  "extraction": {
+    "build": "1.60.1.70959",
+    "build_info_sha256_after": "ae5838b798ff3d56ebf2def77fc6d3a48aea09410878c05c8dbbbe55f2105216",
+    "build_info_sha256_before": "ae5838b798ff3d56ebf2def77fc6d3a48aea09410878c05c8dbbbe55f2105216",
+    "build_unchanged": true,
+    "encrypted_chunks": "explicit incomplete section inspection; no absent-row conclusions",
+    "network_fallback": false,
+    "public_key_count": 19716,
+    "public_key_snapshot_sha256": "c5354516e1bb787c9fc6982c8e82ca7d8a9ce6355484476a6e261714a61707b9",
+    "tables": {
+      "DungeonEncounter": {
+        "bytes": 16226,
+        "file_data_id": 1347279,
+        "incomplete": true,
+        "missing_chunks": [
+          {
+            "Chunk": 2,
+            "Offset": 13916,
+            "Length": 928,
+            "PublicKeyLookup": "0DA4670DB36FB2A9"
+          },
+          {
+            "Chunk": 4,
+            "Offset": 16172,
+            "Length": 54,
+            "PublicKeyLookup": "DA0E7785727A0A65"
+          }
+        ],
+        "sha256": "0f1bece58f3dc640a531039e0ab591c8d7a4493065980e27971cdac4e7a7f459"
+      },
+      "Map": {
+        "bytes": 10209,
+        "file_data_id": 1349477,
+        "incomplete": true,
+        "missing_chunks": [
+          {
+            "Chunk": 2,
+            "Offset": 9652,
+            "Length": 136,
+            "PublicKeyLookup": "0DA4670DB36FB2A9"
+          },
+          {
+            "Chunk": 4,
+            "Offset": 10138,
+            "Length": 71,
+            "PublicKeyLookup": "DA0E7785727A0A65"
+          }
+        ],
+        "sha256": "bd3f4070b140fa21a87e4231a2fbf88ef636ebec0dbdcf5c671cde7c9f519c89"
+      },
+      "MapDifficulty": {
+        "bytes": 4766,
+        "file_data_id": 1367868,
+        "incomplete": true,
+        "missing_chunks": [
+          {
+            "Chunk": 2,
+            "Offset": 4674,
+            "Length": 92,
+            "PublicKeyLookup": "0DA4670DB36FB2A9"
+          }
+        ],
+        "sha256": "bcfd494a40d6109a0addf6620a469ce21d1409a01b87f60fa6c4515fae5925c6"
+      }
+    }
+  },
+  "cache_sha256": "e9faeb92918109f7b9ece9fa0d23759eda2ea9e41a1523afc571e5a31faa04b4",
+  "tables": {
+    "Map": {
+      "layout_hash": "D43AFAC3",
+      "schema_sha256": "4e3513240065928a94d4d41be817bc54bb419fdf327891b904c2eab124db4d1d",
+      "readable_rows_sha256": "b1dbf1c8e71a863b10b16879562f8120d38317d0f0935c08a6a8336e819808a1",
+      "sections": [
+        {
+          "end": 9652,
+          "offset": 2840,
+          "public_key_lookup": "0000000000000000",
+          "readable": true,
+          "records": 73,
+          "section": 0
+        },
+        {
+          "end": 9788,
+          "offset": 9652,
+          "public_key_lookup": "0DA4670DB36FB2A9",
+          "readable": false,
+          "records": 2,
+          "section": 1
+        },
+        {
+          "end": 10138,
+          "offset": 9788,
+          "public_key_lookup": "D2C028CB7AC14D0B",
+          "readable": true,
+          "records": 5,
+          "section": 2
+        },
+        {
+          "end": 10209,
+          "offset": 10138,
+          "public_key_lookup": "DA0E7785727A0A65",
+          "readable": false,
+          "records": 1,
+          "section": 3
+        }
+      ],
+      "target_rows": [
+        {
+          "fields": {
+            "AreaTableID": 0,
+            "Corpse": [
+              0,
+              0
+            ],
+            "CorpseMapID": -1,
+            "CosmeticParentMapID": 0,
+            "Directory": "3039",
+            "ExpansionID": 0,
+            "Flags": [
+              8396381,
+              1040,
+              250080
+            ],
+            "ID": 3039,
+            "InstanceType": 1,
+            "LoadingScreenID": 694,
+            "MapDescription0_lang": "",
+            "MapDescription1_lang": "",
+            "MapName_lang": "Krol'dok Stronghold",
+            "MapType": 1,
+            "MaxPlayers": 0,
+            "MinimapIconScale": 1,
+            "NavigationMaxDistance": 0,
+            "OceanLiquidTypeID": 1250,
+            "ParentMapID": -1,
+            "PreloadFileDataID": 0,
+            "PvpLongDescription_lang": "",
+            "PvpShortDescription_lang": "",
+            "TimeOfDayOverride": -1,
+            "TimeOffset": 0,
+            "WdtFileDataID": 7540069,
+            "WindSettingsID": 136,
+            "ZmpFileDataID": 0
+          },
+          "record_id": 3039,
+          "source_section": 2
+        }
+      ],
+      "target_cache_records": []
+    },
+    "MapDifficulty": {
+      "layout_hash": "24A16AD3",
+      "schema_sha256": "0a9be8cc1b3e3bd3a80685bd97b80bb5041b6c76baa8129ade20e09fab7dc6e4",
+      "readable_rows_sha256": "11b6cc9c2175959b552e0f73f27f8106ce6cdb2c8644671de74595be8f1b44ca",
+      "sections": [
+        {
+          "end": 4674,
+          "offset": 1140,
+          "public_key_lookup": "0000000000000000",
+          "readable": true,
+          "records": 142,
+          "section": 0
+        },
+        {
+          "end": 4766,
+          "offset": 4674,
+          "public_key_lookup": "0DA4670DB36FB2A9",
+          "readable": false,
+          "records": 4,
+          "section": 1
+        }
+      ],
+      "target_rows": [
+        {
+          "fields": {
+            "ContentTuningID": 6326,
+            "DifficultyID": 1,
+            "Flags": 0,
+            "ID": 6144,
+            "ItemContext": 0,
+            "ItemContextPickerID": 0,
+            "LockID": 0,
+            "MapID": 3039,
+            "MaxPlayers": 10,
+            "Message_lang": "",
+            "ResetInterval": 0,
+            "WorldStateExpressionID": 0
+          },
+          "record_id": 6144,
+          "source_section": 0
+        },
+        {
+          "fields": {
+            "ContentTuningID": 0,
+            "DifficultyID": 201,
+            "Flags": 0,
+            "ID": 6145,
+            "ItemContext": 0,
+            "ItemContextPickerID": 0,
+            "LockID": 44,
+            "MapID": 3039,
+            "MaxPlayers": 10,
+            "Message_lang": "",
+            "ResetInterval": 1,
+            "WorldStateExpressionID": 0
+          },
+          "record_id": 6145,
+          "source_section": 0
+        }
+      ],
+      "target_cache_records": []
+    },
+    "DungeonEncounter": {
+      "layout_hash": "35863DC4",
+      "schema_sha256": "2ffede646987ab0287c147bf5c64afa30fd5c97e1f2b6a719b41d12606654177",
+      "readable_rows_sha256": "a070bb9e1b9deae1ddb2c3e96395aea77d47c3c85d7f1eb2c10c078586b826c4",
+      "sections": [
+        {
+          "end": 13916,
+          "offset": 1016,
+          "public_key_lookup": "0000000000000000",
+          "readable": true,
+          "records": 342,
+          "section": 0
+        },
+        {
+          "end": 14844,
+          "offset": 13916,
+          "public_key_lookup": "0DA4670DB36FB2A9",
+          "readable": false,
+          "records": 22,
+          "section": 1
+        },
+        {
+          "end": 16172,
+          "offset": 14844,
+          "public_key_lookup": "D2C028CB7AC14D0B",
+          "readable": true,
+          "records": 34,
+          "section": 2
+        },
+        {
+          "end": 16226,
+          "offset": 16172,
+          "public_key_lookup": "DA0E7785727A0A65",
+          "readable": false,
+          "records": 1,
+          "section": 3
+        }
+      ],
+      "target_rows": [
+        {
+          "fields": {
+            "Bit": 0,
+            "CompleteWorldStateID": 30545,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1028,
+            "ID": 3449,
+            "ItemSequenceLevel": 0,
+            "MapID": 3039,
+            "Name_lang": "Nar'gurk",
+            "OrderIndex": 4500,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3449,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 1,
+            "CompleteWorldStateID": 30547,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1028,
+            "ID": 3450,
+            "ItemSequenceLevel": 0,
+            "MapID": 3039,
+            "Name_lang": "Slavecrusher Grox",
+            "OrderIndex": 1000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3450,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 2,
+            "CompleteWorldStateID": 30549,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1028,
+            "ID": 3451,
+            "ItemSequenceLevel": 0,
+            "MapID": 3039,
+            "Name_lang": "Overseer Mugg",
+            "OrderIndex": 5000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3451,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 3,
+            "CompleteWorldStateID": 30551,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1028,
+            "ID": 3452,
+            "ItemSequenceLevel": 0,
+            "MapID": 3039,
+            "Name_lang": "Twilight Commander Zarmok",
+            "OrderIndex": 1500,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3452,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 4,
+            "CompleteWorldStateID": 30584,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1028,
+            "ID": 3453,
+            "ItemSequenceLevel": 0,
+            "MapID": 3039,
+            "Name_lang": "Handler Ashka",
+            "OrderIndex": 4000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3453,
+          "source_section": 2
+        }
+      ],
+      "target_cache_records": []
+    }
+  }
+}

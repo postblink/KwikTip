@@ -1,0 +1,150 @@
+{
+  "format_version": 9,
+  "build": 70888,
+  "total_records": 91000,
+  "tables": {
+    "Map": [
+      {
+        "record_id": 47,
+        "push_id": 112726,
+        "status": 1,
+        "payload_bytes": 104,
+        "offset": 270204
+      },
+      {
+        "record_id": 34,
+        "push_id": 112864,
+        "status": 1,
+        "payload_bytes": 100,
+        "offset": 5615051
+      },
+      {
+        "record_id": 35,
+        "push_id": 112864,
+        "status": 1,
+        "payload_bytes": 107,
+        "offset": 5615183
+      },
+      {
+        "record_id": 3217,
+        "push_id": 112864,
+        "status": 1,
+        "payload_bytes": 89,
+        "offset": 5615322
+      },
+      {
+        "record_id": 3218,
+        "push_id": 112864,
+        "status": 1,
+        "payload_bytes": 89,
+        "offset": 5615443
+      }
+    ],
+    "DungeonEncounter": [
+      {
+        "record_id": 349,
+        "push_id": 112791,
+        "status": 1,
+        "payload_bytes": 44,
+        "offset": 287080
+      },
+      {
+        "record_id": 3303,
+        "push_id": 113227,
+        "status": 1,
+        "payload_bytes": 55,
+        "offset": 992572
+      },
+      {
+        "record_id": 3354,
+        "push_id": 113227,
+        "status": 1,
+        "payload_bytes": 43,
+        "offset": 992659
+      },
+      {
+        "record_id": 3479,
+        "push_id": 113227,
+        "status": 1,
+        "payload_bytes": 54,
+        "offset": 992734,
+        "fields": {
+          "Name_lang": "Min'loth the Serpent",
+          "ID": 3479,
+          "MapID": 2970,
+          "DifficultyID": 0,
+          "OrderIndex": 6000,
+          "CompleteWorldStateID": 30733,
+          "Bit": 4,
+          "Flags": 1028,
+          "SpellIconFileID": 0,
+          "Faction": -1,
+          "ItemSequenceLevel": 0
+        },
+        "payload_hex": "4d696e276c6f7468207468652053657270656e7400970d00009a0b0000701700000d780000040404000000000000ffffffff00000000"
+      },
+      {
+        "record_id": 3411,
+        "push_id": 113478,
+        "status": 1,
+        "payload_bytes": 49,
+        "offset": 1759909
+      },
+      {
+        "record_id": 3484,
+        "push_id": 113838,
+        "status": 4,
+        "payload_bytes": 0,
+        "offset": 7084182
+      }
+    ],
+    "MapDifficulty": []
+  },
+  "cache_relative_path": "_forever_/Cache/ADB/enUS/DBCache.bin",
+  "cache_bytes": 7200540,
+  "cache_sha256": "844379f91d67f99431e08031cc5493e5086ccc6b8767e87db27abb90b8c372bd",
+  "build_info_sha256": "3c5c678ae222f8b8dde4235650b8d65c1c05f0aa0b9c24d9d89bee2f3e475c73",
+  "build_unchanged": true,
+  "reviewed_at_utc": "2026-11-11",
+  "installed_client_version": "1.60.1.70888",
+  "scope": "Historical initial hotfix-only check. Its missing-evidence list and keyless extraction limitation are superseded by FOREVER_DROWNED_CITY_IDS_70888.json.",
+  "decoder_reference": "https://github.com/wowsims/mop/blob/ec2c6c2552cc7e2a9555bb5eb89144dfb3b9c8d9/tools/db2tool/wdc/hotfix.go",
+  "definition_reference": "https://github.com/wowdev/WoWDBDefs/blob/86c0801007bbcb767f4bc275413d24bc6b2d486c/definitions/DungeonEncounter.dbd",
+  "definition_sha256": "32442d1d0e666fe5bd1e9ed0b4b826d79a86d074603677c382546c2485b18ebb",
+  "raw_table_extraction": {
+    "build": "1.60.1.70888",
+    "build_info_sha256_after": "3c5c678ae222f8b8dde4235650b8d65c1c05f0aa0b9c24d9d89bee2f3e475c73",
+    "build_info_sha256_before": "3c5c678ae222f8b8dde4235650b8d65c1c05f0aa0b9c24d9d89bee2f3e475c73",
+    "build_unchanged": true,
+    "encrypted_chunks": "fail closed",
+    "network_fallback": false,
+    "tables": {
+      "DungeonEncounter": {
+        "error": "fdid 1347279: BLTE chunk 2: encrypted BLTE chunk: local inspection refuses incomplete table output",
+        "file_data_id": 1347279
+      },
+      "Map": {
+        "error": "fdid 1349477: BLTE chunk 2: encrypted BLTE chunk: local inspection refuses incomplete table output",
+        "file_data_id": 1349477
+      },
+      "MapDifficulty": {
+        "error": "fdid 1367868: BLTE chunk 2: encrypted BLTE chunk: local inspection refuses incomplete table output",
+        "file_data_id": 1367868
+      }
+    },
+    "resources": {
+      "exit_code": 0,
+      "elapsed_seconds": 0.357,
+      "max_rss_kib": 348056,
+      "user_cpu_seconds": 0.26989599999999997,
+      "system_cpu_seconds": 0.058911
+    },
+    "limitation": "The qualified reader is intentionally keyless. Each table contains encrypted BLTE chunks. This is a decoder limitation, not proof that the installed files or publisher-released decryption keys are unavailable."
+  },
+  "missing_evidence": [
+    "Complete current-build Map row2970, including instance classification.",
+    "Current-build MapDifficulty rows for map2970 establishing supported Normal mode.",
+    "Current-build raw DungeonEncounter records for the other four staged bosses."
+  ],
+  "superseded_by": "docs/FOREVER_DROWNED_CITY_IDS_70888.json"
+}

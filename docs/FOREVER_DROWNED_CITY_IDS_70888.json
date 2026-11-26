@@ -1,0 +1,519 @@
+{
+  "reviewed_at_utc": "2026-11-11",
+  "data_build": "1.60.1.70888",
+  "current_client_build": "1.60.1.70888",
+  "scope": "Positive Drowned City rows verified in readable exact-build sections. Whole tables are incomplete; no absent-row or exhaustive-roster claim. Normal 1 only; not client tested.",
+  "instanceID": 2970,
+  "difficultyIDs": [
+    1
+  ],
+  "admitted_encounterIDs": [
+    3474,
+    3475,
+    3476,
+    3511,
+    3479
+  ],
+  "client_tested": false,
+  "complete_tables": false,
+  "target_rows_verified": true,
+  "extraction": {
+    "build": "1.60.1.70888",
+    "build_info_sha256_after": "3c5c678ae222f8b8dde4235650b8d65c1c05f0aa0b9c24d9d89bee2f3e475c73",
+    "build_info_sha256_before": "3c5c678ae222f8b8dde4235650b8d65c1c05f0aa0b9c24d9d89bee2f3e475c73",
+    "build_unchanged": true,
+    "encrypted_chunks": "explicit incomplete section inspection; no absent-row conclusions",
+    "network_fallback": false,
+    "public_key_count": 19716,
+    "public_key_snapshot_sha256": "c5354516e1bb787c9fc6982c8e82ca7d8a9ce6355484476a6e261714a61707b9",
+    "tables": {
+      "DungeonEncounter": {
+        "bytes": 16226,
+        "file_data_id": 1347279,
+        "incomplete": true,
+        "missing_chunks": [
+          {
+            "Chunk": 2,
+            "Offset": 13916,
+            "Length": 928,
+            "PublicKeyLookup": "0DA4670DB36FB2A9"
+          },
+          {
+            "Chunk": 4,
+            "Offset": 16172,
+            "Length": 54,
+            "PublicKeyLookup": "DA0E7785727A0A65"
+          }
+        ],
+        "sha256": "0f1bece58f3dc640a531039e0ab591c8d7a4493065980e27971cdac4e7a7f459"
+      },
+      "Map": {
+        "bytes": 10209,
+        "file_data_id": 1349477,
+        "incomplete": true,
+        "missing_chunks": [
+          {
+            "Chunk": 2,
+            "Offset": 9652,
+            "Length": 136,
+            "PublicKeyLookup": "0DA4670DB36FB2A9"
+          },
+          {
+            "Chunk": 4,
+            "Offset": 10138,
+            "Length": 71,
+            "PublicKeyLookup": "DA0E7785727A0A65"
+          }
+        ],
+        "sha256": "bd3f4070b140fa21a87e4231a2fbf88ef636ebec0dbdcf5c671cde7c9f519c89"
+      },
+      "MapDifficulty": {
+        "bytes": 4766,
+        "file_data_id": 1367868,
+        "incomplete": true,
+        "missing_chunks": [
+          {
+            "Chunk": 2,
+            "Offset": 4674,
+            "Length": 92,
+            "PublicKeyLookup": "0DA4670DB36FB2A9"
+          }
+        ],
+        "sha256": "bcfd494a40d6109a0addf6620a469ce21d1409a01b87f60fa6c4515fae5925c6"
+      }
+    }
+  },
+  "verified_tables": {
+    "DungeonEncounter": {
+      "decoded_rows": 376,
+      "drowned_city_rows": [
+        {
+          "fields": {
+            "Bit": 0,
+            "CompleteWorldStateID": 30695,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1028,
+            "ID": 3474,
+            "ItemSequenceLevel": 0,
+            "MapID": 2970,
+            "Name_lang": "Zul'Alai",
+            "OrderIndex": 0,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3474,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 1,
+            "CompleteWorldStateID": 30703,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 3475,
+            "ItemSequenceLevel": 0,
+            "MapID": 2970,
+            "Name_lang": "Var'Taka",
+            "OrderIndex": 1000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3475,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 2,
+            "CompleteWorldStateID": 30712,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1028,
+            "ID": 3476,
+            "ItemSequenceLevel": 0,
+            "MapID": 2970,
+            "Name_lang": "Captain Dreadrise",
+            "OrderIndex": 2000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3476,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 3,
+            "CompleteWorldStateID": 30716,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1028,
+            "ID": 3478,
+            "ItemSequenceLevel": 0,
+            "MapID": 2970,
+            "Name_lang": "Deathless Guardians",
+            "OrderIndex": 3000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3478,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 4,
+            "CompleteWorldStateID": 30733,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1028,
+            "ID": 3479,
+            "ItemSequenceLevel": 0,
+            "MapID": 2970,
+            "Name_lang": "Min'loth the Serpent",
+            "OrderIndex": 6000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3479,
+          "source_section": 2
+        },
+        {
+          "fields": {
+            "Bit": 5,
+            "CompleteWorldStateID": 31316,
+            "DifficultyID": 0,
+            "Faction": -1,
+            "Flags": 1024,
+            "ID": 3511,
+            "ItemSequenceLevel": 0,
+            "MapID": 2970,
+            "Name_lang": "Primeval Elemental",
+            "OrderIndex": 5000,
+            "SpellIconFileID": 0
+          },
+          "record_id": 3511,
+          "source_section": 2
+        }
+      ],
+      "layout_hash": "35863DC4",
+      "missing_sections": 2,
+      "schema_sha256": "32442d1d0e666fe5bd1e9ed0b4b826d79a86d074603677c382546c2485b18ebb",
+      "sections": [
+        {
+          "end": 13916,
+          "offset": 1016,
+          "public_key_lookup": "0000000000000000",
+          "readable": true,
+          "records": 342,
+          "section": 0
+        },
+        {
+          "end": 14844,
+          "offset": 13916,
+          "public_key_lookup": "0DA4670DB36FB2A9",
+          "readable": false,
+          "records": 22,
+          "section": 1
+        },
+        {
+          "end": 16172,
+          "offset": 14844,
+          "public_key_lookup": "D2C028CB7AC14D0B",
+          "readable": true,
+          "records": 34,
+          "section": 2
+        },
+        {
+          "end": 16226,
+          "offset": 16172,
+          "public_key_lookup": "DA0E7785727A0A65",
+          "readable": false,
+          "records": 1,
+          "section": 3
+        }
+      ]
+    },
+    "Map": {
+      "decoded_rows": 78,
+      "drowned_city_rows": [
+        {
+          "fields": {
+            "AreaTableID": 16550,
+            "Corpse": [
+              0,
+              0
+            ],
+            "CorpseMapID": -1,
+            "CosmeticParentMapID": -1,
+            "Directory": "2970",
+            "ExpansionID": 0,
+            "Flags": [
+              8404573,
+              1040,
+              2347232
+            ],
+            "ID": 2970,
+            "InstanceType": 1,
+            "LoadingScreenID": 695,
+            "MapDescription0_lang": "",
+            "MapDescription1_lang": "",
+            "MapName_lang": "The Drowned City",
+            "MapType": 1,
+            "MaxPlayers": 0,
+            "MinimapIconScale": 1,
+            "NavigationMaxDistance": 0,
+            "OceanLiquidTypeID": 1250,
+            "ParentMapID": -1,
+            "PreloadFileDataID": 0,
+            "PvpLongDescription_lang": "",
+            "PvpShortDescription_lang": "",
+            "TimeOfDayOverride": -1,
+            "TimeOffset": 0,
+            "WdtFileDataID": 6992746,
+            "WindSettingsID": 136,
+            "ZmpFileDataID": 0
+          },
+          "record_id": 2970,
+          "source_section": 2
+        }
+      ],
+      "layout_hash": "D43AFAC3",
+      "missing_sections": 2,
+      "schema_sha256": "d7d81ea29c26155cf1784eb06e99749e4e44d6e3f69a9c7b667652c5b0388e61",
+      "sections": [
+        {
+          "end": 9652,
+          "offset": 2840,
+          "public_key_lookup": "0000000000000000",
+          "readable": true,
+          "records": 73,
+          "section": 0
+        },
+        {
+          "end": 9788,
+          "offset": 9652,
+          "public_key_lookup": "0DA4670DB36FB2A9",
+          "readable": false,
+          "records": 2,
+          "section": 1
+        },
+        {
+          "end": 10138,
+          "offset": 9788,
+          "public_key_lookup": "D2C028CB7AC14D0B",
+          "readable": true,
+          "records": 5,
+          "section": 2
+        },
+        {
+          "end": 10209,
+          "offset": 10138,
+          "public_key_lookup": "DA0E7785727A0A65",
+          "readable": false,
+          "records": 1,
+          "section": 3
+        }
+      ]
+    },
+    "MapDifficulty": {
+      "decoded_rows": 142,
+      "drowned_city_rows": [
+        {
+          "fields": {
+            "ContentTuningID": 0,
+            "DifficultyID": 1,
+            "Flags": 0,
+            "ID": 5935,
+            "ItemContext": 0,
+            "ItemContextPickerID": 0,
+            "LockID": 0,
+            "MapID": 2970,
+            "MaxPlayers": 5,
+            "Message_lang": "",
+            "ResetInterval": 0,
+            "WorldStateExpressionID": 0
+          },
+          "record_id": 5935,
+          "source_section": 0
+        },
+        {
+          "fields": {
+            "ContentTuningID": 0,
+            "DifficultyID": 201,
+            "Flags": 0,
+            "ID": 6342,
+            "ItemContext": 0,
+            "ItemContextPickerID": 0,
+            "LockID": 43,
+            "MapID": 2970,
+            "MaxPlayers": 5,
+            "Message_lang": "",
+            "ResetInterval": 1,
+            "WorldStateExpressionID": 0
+          },
+          "record_id": 6342,
+          "source_section": 0
+        }
+      ],
+      "layout_hash": "24A16AD3",
+      "missing_sections": 1,
+      "schema_sha256": "a4d454a2ca0022e29a2daadd4549cabbee5fd0a9f56134b432b2bad8c428cc3e",
+      "sections": [
+        {
+          "end": 4674,
+          "offset": 1140,
+          "public_key_lookup": "0000000000000000",
+          "readable": true,
+          "records": 142,
+          "section": 0
+        },
+        {
+          "end": 4766,
+          "offset": 4674,
+          "public_key_lookup": "0DA4670DB36FB2A9",
+          "readable": false,
+          "records": 4,
+          "section": 1
+        }
+      ]
+    }
+  },
+  "local_hotfix_check": {
+    "format_version": 9,
+    "build": 70888,
+    "total_records": 91000,
+    "tables": {
+      "Map": [
+        {
+          "record_id": 47,
+          "push_id": 112726,
+          "status": 1,
+          "payload_bytes": 104,
+          "offset": 270204
+        },
+        {
+          "record_id": 34,
+          "push_id": 112864,
+          "status": 1,
+          "payload_bytes": 100,
+          "offset": 5615051
+        },
+        {
+          "record_id": 35,
+          "push_id": 112864,
+          "status": 1,
+          "payload_bytes": 107,
+          "offset": 5615183
+        },
+        {
+          "record_id": 3217,
+          "push_id": 112864,
+          "status": 1,
+          "payload_bytes": 89,
+          "offset": 5615322
+        },
+        {
+          "record_id": 3218,
+          "push_id": 112864,
+          "status": 1,
+          "payload_bytes": 89,
+          "offset": 5615443
+        }
+      ],
+      "DungeonEncounter": [
+        {
+          "record_id": 349,
+          "push_id": 112791,
+          "status": 1,
+          "payload_bytes": 44,
+          "offset": 287080
+        },
+        {
+          "record_id": 3303,
+          "push_id": 113227,
+          "status": 1,
+          "payload_bytes": 55,
+          "offset": 992572
+        },
+        {
+          "record_id": 3354,
+          "push_id": 113227,
+          "status": 1,
+          "payload_bytes": 43,
+          "offset": 992659
+        },
+        {
+          "record_id": 3479,
+          "push_id": 113227,
+          "status": 1,
+          "payload_bytes": 54,
+          "offset": 992734,
+          "fields": {
+            "Name_lang": "Min'loth the Serpent",
+            "ID": 3479,
+            "MapID": 2970,
+            "DifficultyID": 0,
+            "OrderIndex": 6000,
+            "CompleteWorldStateID": 30733,
+            "Bit": 4,
+            "Flags": 1028,
+            "SpellIconFileID": 0,
+            "Faction": -1,
+            "ItemSequenceLevel": 0
+          },
+          "payload_hex": "4d696e276c6f7468207468652053657270656e7400970d00009a0b0000701700000d780000040404000000000000ffffffff00000000"
+        },
+        {
+          "record_id": 3411,
+          "push_id": 113478,
+          "status": 1,
+          "payload_bytes": 49,
+          "offset": 1759909
+        },
+        {
+          "record_id": 3484,
+          "push_id": 113838,
+          "status": 4,
+          "payload_bytes": 0,
+          "offset": 7084182
+        }
+      ],
+      "MapDifficulty": []
+    },
+    "cache_relative_path": "_forever_/Cache/ADB/enUS/DBCache.bin",
+    "cache_bytes": 7200540,
+    "cache_sha256": "844379f91d67f99431e08031cc5493e5086ccc6b8767e87db27abb90b8c372bd",
+    "build_info_sha256": "3c5c678ae222f8b8dde4235650b8d65c1c05f0aa0b9c24d9d89bee2f3e475c73",
+    "build_unchanged": true
+  },
+  "sources": [
+    {
+      "name": "Local installed Blizzard wowf client",
+      "build_config": "0597e74b01a3f779d849ffe9b3270196",
+      "role": "Read-only CASC and matching hotfix cache; no network fallback or game changes."
+    },
+    {
+      "name": "WoWDBDefs exact schema",
+      "url": "https://github.com/wowdev/WoWDBDefs/tree/86c0801007bbcb767f4bc275413d24bc6b2d486c/definitions",
+      "role": "Full 1.60.1.70888 build match and per-table layout-hash match."
+    },
+    {
+      "name": "Public Blizzard-distributed content keys",
+      "url": "https://github.com/wowdev/TACTKeys/tree/1f8ba0ff780db15b1f749a4e36b8c4e2d73f44a4",
+      "role": "Public snapshot; no account credentials. GNU Nettle 4.0 already installed locally."
+    },
+    {
+      "name": "TACT and WDC decoder base",
+      "url": "https://github.com/wowsims/mop/tree/ec2c6c2552cc7e2a9555bb5eb89144dfb3b9c8d9/tools/db2tool",
+      "role": "Local source adaptation with no network fallback."
+    },
+    {
+      "name": "BLTE decryption reference",
+      "url": "https://github.com/wowdev/TACTSharp/blob/2500d6d7de737a5e14ac258045d648899e4a3d6b/TACTSharp/BLTE.cs",
+      "role": "Released-key lookup and chunk nonce semantics; missing sections accounted explicitly."
+    }
+  ],
+  "verification": [
+    "Every compressed chunk MD5 checked before interpretation.",
+    "Each missing chunk exactly matches one skipped WDC section; all selected rows come from fully readable sections.",
+    "Exact schema build and layout hashes checked. No copy-table records in these three tables.",
+    "Current cache has no Map2970 or MapDifficulty overlays; Min'loth3479 overlay agrees with all fields of its base row.",
+    "Five exact source-name strategy matches only. Deathless Guardians3478 is not aliased to Deathless Marrow.",
+    "Unrecognized names, other instances, raid mode and alternate difficulty201 remain excluded."
+  ]
+}
