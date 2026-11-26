@@ -1,9 +1,9 @@
 ## Interface: 16001
-## Title: KwikTip: Forever (Test Build)
+## Title: KwikTip: Forever (Alpha)
 ## Notes: Normal-mode dungeon preparation and boss tips; in-client validation pending.
 ## Author: Lucas Boyles
-## Version: 0.1.0-test.20261122
-## DefaultState: disabled
+## Version: 0.1.0-alpha.7
+## DefaultState: enabled
 ## OptionalDeps: LibSharedMedia-3.0
 
 ## SavedVariables: KwikTipDB

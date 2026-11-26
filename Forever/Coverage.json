@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-test.20261122",
+  "version": "0.1.0-alpha.7",
   "data_build": "1.60.1.71037 readable IDs and local-hotfix reconciliation; earlier per-entry files preserved for provenance",
   "interface": 16001,
   "client_tested": false,
@@ -731,5 +731,5 @@
   "current_client_build_observed": "1.60.1.71037",
   "current_build_ids_reverified": true,
   "current_build_evidence": "docs/FOREVER_CURRENT_IDS_71037.json",
-  "candidate_status": "Unreleased dungeon refresh; in-client acceptance pending"
+  "candidate_status": "Alpha; partial coverage; 71037 data not qualified against newer 71139; in-client acceptance pending"
 }

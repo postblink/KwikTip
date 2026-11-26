@@ -104,7 +104,7 @@ class LowerBlackrockSpireCandidateTests(unittest.TestCase):
                 self.assertIn(f"encounterID = {encounter_id},", data)
             self.assertIn("Lower: control ogre casters", data)
             self.assertIn("Upper: clear dragonkin", data)
-            self.assertIn("Unreleased", (package / "README.txt").read_text())
+            self.assertIn("0.1.0-alpha.7", (package / "README.txt").read_text())
 
 
 if __name__ == "__main__":

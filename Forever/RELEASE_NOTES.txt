@@ -1,12 +1,13 @@
-KwikTip Forever @VERSION@ — dungeon refresh test build
+KwikTip Forever @VERSION@ — dungeon refresh alpha
 
 - Dungeon preparation and trash priorities in Persistent Tip Window.
 - Manual pre-pull boss picker and /kwik boss; actual encounter tips take over.
 - Krol'dok Stronghold, additional dungeon encounters, and sharper Zul'Farrak
   and Classic-wing preparation.
-- Current readable map, Normal-mode and encounter IDs rechecked at Forever
-  1.60.1.71037. Local hotfixes did not change the checked rows.
+- Readable map, Normal-mode and encounter IDs rechecked at Forever
+  1.60.1.71037. Local hotfixes did not change the checked rows. Newer build
+  1.60.1.71139 has not been qualified by these checks.
 
 Coverage is partial. There is no automatic wing or room/pack routing, no
-alternate-mode support, and no public release or in-client acceptance implied.
+alternate-mode support, and in-client acceptance has not been established.
 See the repository coverage ledger for supported encounters and open gaps.

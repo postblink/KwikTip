@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 class KroldokCandidateTests(unittest.TestCase):
     @patch.dict(sys.modules)
-    def test_research_identity_rejects_alpha6_release_and_is_disabled(self):
+    def test_alpha_identity_rejects_other_tags_and_is_enabled(self):
         import importlib.util
         import tempfile
 
@@ -24,7 +24,7 @@ class KroldokCandidateTests(unittest.TestCase):
         release = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(release)
         version, _ = release.metadata()
-        self.assertEqual(version, "0.1.0-test.20261122")
+        self.assertEqual(version, "0.1.0-alpha.7")
         with self.assertRaises(ValueError):
             release.validate_tag("forever-v0.1.0-alpha.6", version)
         with tempfile.TemporaryDirectory() as temp:
@@ -41,8 +41,8 @@ class KroldokCandidateTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 release.prepare(target, "forever-v0.1.0-test.20261117")
             self.assertFalse(target.exists())
-            result = release.prepare(target)
-            self.assertEqual(result["archive_name"], "KwikTip_Forever-0.1.0-test.20261122.zip")
+            result = release.prepare(target, "forever-v0.1.0-alpha.7")
+            self.assertEqual(result["archive_name"], "KwikTip_Forever-0.1.0-alpha.7.zip")
             sys.modules["forever_release"] = release
             spec = importlib.util.spec_from_file_location("kroldok_marketplace_test", ROOT / "tools/forever_marketplaces.py")
             assert spec and spec.loader
@@ -51,9 +51,10 @@ class KroldokCandidateTests(unittest.TestCase):
             for tag in ("forever-v0.1.0-alpha.6", "forever-v0.1.0-test.20261117", "forever-v0.1.0-test.20261118", "forever-v0.1.0-test.20261122"):
                 with self.assertRaises(ValueError):
                     markets.verified_inputs(target, tag)
+            self.assertEqual(markets.verified_inputs(target, "forever-v0.1.0-alpha.7")[0], version)
             toc = (target / "package/KwikTip_Forever/KwikTip_Forever.toc").read_text()
-            self.assertIn("## DefaultState: disabled", toc)
-            self.assertIn("KwikTip: Forever (Test Build)", toc)
+            self.assertIn("## DefaultState: enabled", toc)
+            self.assertIn("KwikTip: Forever (Alpha)", toc)
 
     def test_identity_evidence_and_conservative_scope(self):
         evidence = json.loads((ROOT / "docs/FOREVER_KROLDOK_IDS_70959.json").read_text())
