@@ -5,6 +5,8 @@ wowi-id: 27074
 
 ignore:
   - CLAUDE.md
+  # Showcase source is for repository graphics, not the in-game addon.
+  - media
   # Forever is packaged independently; keep its new files out of Retail ZIPs.
   - Forever
   - docs/FOREVER*

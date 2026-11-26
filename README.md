@@ -1,217 +1,108 @@
 <p align="center">
-  <img src="assets/ktlogo.png" alt="KwikTip" />
+  <img src="assets/showcase/kwiktip-hero.png" alt="KwikTip: a compact dungeon HUD for World of Warcraft. Retail HUD example shown." />
 </p>
 
-<p align="center">
-  World of Warcraft: Retail (Midnight) + WoW Forever
-</p>
+# KwikTip
 
-KwikTip now supports **WoW Forever** alongside **Retail (Midnight)**, with a separate package for each client. It puts practical encounter tips in a small, unobtrusive HUD, so useful advice is close at hand during a run.
+**The right tip, right when it matters.**
 
-The Retail package covers Midnight dungeons, raids, delves, and Timewalking. The **Forever alpha** provides a growing, explicitly partial encounter dataset; see its coverage below.
+KwikTip puts short encounter reminders in a movable in-game HUD, so your group can stay focused on the fight. There are separate editions for World of Warcraft: Retail and WoW Forever.
 
-Inspired by **QE Dungeon Tips** by QEdev (no longer maintained).
+Inspired by QE Dungeon Tips by QEdev.
 
-| Client | Package | Downloads |
+## Pick your edition
+
+| | Retail | WoW Forever |
 |---|---|---|
-| Retail (Midnight) | `KwikTip` | [CurseForge](https://www.curseforge.com/wow/addons/kwiktip) · [Wago](https://addons.wago.io/addons/kwiktip) · [WoWInterface](https://www.wowinterface.com/downloads/info27074-KwikTip.html) |
-| WoW Forever — alpha `0.1.0-alpha.7` | `KwikTip_Forever` | [GitHub alpha](https://github.com/postblink/KwikTip/releases/tag/forever-v0.1.0-alpha.7) · [CurseForge alpha](https://www.curseforge.com/wow/addons/kwiktip/files) · [Wago alphas](https://addons.wago.io/addons/kwiktip/versions?stability=alpha) |
+| **Package** | `KwikTip` | `KwikTip_Forever` |
+| **Release** | v3.5.0 | 0.1.0-alpha.7 |
+| **Download** | [CurseForge](https://www.curseforge.com/wow/addons/kwiktip) · [Wago](https://addons.wago.io/addons/kwiktip) · [WoWInterface](https://www.wowinterface.com/downloads/info27074-KwikTip.html) | [GitHub](https://github.com/postblink/KwikTip/releases/tag/forever-v0.1.0-alpha.7) · [Wago alpha](https://addons.wago.io/addons/kwiktip/versions?stability=alpha) · [CurseForge files](https://www.curseforge.com/wow/addons/kwiktip/files) |
+| **Good to know** | Tips for selected dungeons, raids, delves and Timewalking content. | Partial Normal-mode dungeon coverage; the alpha is still being verified in game. |
 
-CurseForge and Wago host both versions on the existing KwikTip pages; choose a Forever file marked Alpha for the Forever client. WoWInterface currently distributes the Retail package only.
+CurseForge and Wago list the editions on the same project page. For Forever, select a file marked **Forever** and **Alpha**; CurseForge may require **Show alpha files**. WoWInterface distributes the Retail edition.
 
-![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)
+## See it in action
 
----
+### Retail
 
-## WoW Forever Support
+![Animated presentation of a Retail KwikTip HUD screenshot](assets/showcase/retail-tip-tour.gif)
 
-The **Forever alpha** adds dungeon preparation and a manual
-pre-pull boss picker. Open `/kwik` for settings and the picker, or use `/kwik boss`
-from a supported Normal-mode dungeon. **Persistent Tip Window** shows optional
-trash and preparation advice between fights. A real boss event takes over the HUD.
+*An animated presentation of a Retail screenshot, not gameplay footage.*
 
-The refresh spans 28 runtime maps. The [coverage ledger](Forever/Coverage.json)
-lists included encounters and exclusions, and the [71037 build evidence](docs/FOREVER_CURRENT_IDS_71037.json)
-records checks against readable Forever 1.60.1.71037 client data and a local
-hotfix snapshot. Newer build 1.60.1.71139 is not qualified by those checks. Shared-map wings
-are labeled in the advice, not detected automatically. Some optional encounters
-remain unmapped. Coverage is partial and in-client acceptance of this alpha is
-pending; offline tests do not establish client compatibility.
+### Forever
 
----
+![Animated presentation of a simulated Forever boss tip preview](assets/showcase/forever-tip-tour.gif)
 
-## Screenshots (Retail)
+*Rendered from the actual Forever addon in an offline simulator with synthetic dungeon state. This is not a gameplay capture.*
 
-<p align="center">
-  <img src="assets/example.png" alt="KwikTip in action" />
-</p>
+<details>
+<summary>More Retail screenshots</summary>
 
-<p align="center">
-  <img src="assets/tipwindow.png" alt="Tip HUD" />
-  &nbsp;&nbsp;
-  <img src="assets/settings.png" alt="Settings window" />
-</p>
+![Retail settings and example preview](assets/example.png)
 
----
+![Retail HUD with a boss tip and custom note](assets/tipwindow.png)
 
-## Retail Features
+</details>
 
-- **Boss tips** — concise, actionable guidance for every boss across dungeons, raids, delves, and Timewalking
-- **Trash tips** — notable trash mobs in M+ dungeons get their own contextual tips with interrupt priorities and positioning notes
-- **Sub-zone aware HUD** — the HUD updates automatically as your group moves through each area; boss room tips surface on entry before the encounter starts
-- **Role-specific notes** — tips are categorized by role (tank, healer, DPS, general) and interrupt priority, each with a distinct color and icon
-- **M+ affix display** — active keystone affix names and tips shown in the HUD between encounters
-- **Raid support** — difficulty-aware tips for all Midnight raid wings, including the Season 2 raid (Venomous Abyss — opening Aug 18, 2026). Enabled by default; tips appear automatically inside raid instances
-- **Delve support** — boss tips for all 13 Midnight delves (including 3 new Season 2 delves); opt-in via the **Enable in Delves** setting
-- **Timewalking support** — all 35 dungeons registered across six expansion pools (Burning Crusade through Legion); tips being filled pool by pool
-- **Custom notes** — save your own per-subzone notes that appear alongside tips in the HUD
-- **Persistent Tip Window** — optionally keep the HUD visible throughout a run
-- **Send to Chat** — print the current tip to Say, Instance, Party, or Raid
-- **Resizable, draggable HUD** — drag to reposition, drag corners to resize; auto-expand height keeps long tips readable
-- **LibSharedMedia-3.0 support** — font picker lists all fonts from your other addons; falls back to built-in WoW fonts
-- **German (deDE) localization** — UI, slash commands, and HUD labels fully translated (tip content stays English for accuracy)
+## Retail
 
----
+KwikTip surfaces authored tips for supported encounters and mapped areas. Depending on the content, you may see boss mechanics, trash priorities, and notes for tanks, healers or damage dealers.
 
-## Retail Coverage
+- **Mapped areas:** the HUD can change as you move through supported subzones, including some boss rooms before the pull.
+- **Mythic+:** see active affix tips and Blizzard's banked Enemy Forces progress when available.
+- **Raids and delves:** use encounter guidance in supported content; delve tips are opt-in.
+- **Timewalking:** selected tips are available across registered dungeons, but coverage is incomplete.
 
-### Season 2 Mythic+ Rotation (Current — Patch 12.1, Aug 2026)
+Retail v3.5.0 targets patch 12.1.0. Content and area detection vary by instance; not every boss or trash pack has a tip.
 
-| Dungeon | Type | Status |
-|---|---|---|
-| Altar of Fangs | New — Midnight (3 bosses) | Boss + trash tips, verified |
-| Murder Row | Promoted — Midnight | Boss + trash tips, verified |
-| Den of Nalorakk | Promoted — Midnight | Boss + trash tips, verified |
-| The Blinding Vale | Promoted — Midnight | Boss + trash tips, verified |
-| Voidscar Arena | Promoted — Midnight | Boss tips ✓ (trash pending) |
-| Kings' Rest | Legacy — Battle for Azeroth | Boss + trash tips |
-| Temple of Sethraliss | Legacy — Battle for Azeroth | Boss + trash tips, verified |
-| Ruby Life Pools | Legacy — Dragonflight | Boss + trash tips, verified |
+## WoW Forever
 
-All 8 dungeons have boss tips with role-specific notes. Trash tips are complete for 7/8. Six of eight dungeons have been cross-verified against the live method.gg Season 2 written guides; Voidscar Arena and Kings' Rest tips are sourced from Tactyks' YouTube S2 guides pending method.gg publication.
+The Forever alpha brings the same compact HUD to Normal-mode dungeons with its own encounter data. It is a separate package, not the Retail addon renamed.
 
-### Season 1 Mythic+ Rotation (Still Supported)
+- **Prepare between fights:** enable **Persistent Tip Window** to see dungeon-wide preparation and trash advice.
+- **Preview before the pull:** choose a boss in settings or use `/kwik boss` in a supported dungeon.
+- **During the fight:** a matching encounter event takes over the HUD. A manual preview clears when combat starts.
 
-| Dungeon | Type |
-|---|---|
-| Windrunner Spire | Midnight |
-| Maisara Caverns | Midnight |
-| Magisters' Terrace | Midnight (reworked) |
-| Nexus-Point Xenas | Midnight |
-| Algeth'ar Academy | Legacy |
-| Pit of Saron | Legacy |
-| Seat of the Triumvirate | Legacy |
-| Skyreach | Legacy |
+**Alpha limits:** coverage is partial and some optional encounters are not mapped. The addon does not automatically identify your wing, room or current trash pack, and it does not support alternate difficulty modes. Registered IDs were checked against readable client data from build 1.60.1.71037; those checks do not qualify newer build 1.60.1.71139. In-game display, persistence and encounter behavior have not yet been fully verified for this alpha.
 
-Full boss + trash tips. All instance IDs confirmed in-game.
+The [Forever coverage ledger](Forever/Coverage.json) lists included encounters and exclusions, with [ID evidence](docs/FOREVER_CURRENT_IDS_71037.json) for the checked build.
 
-### Raids
+## Make it yours
 
-| Raid Wing | Season | Notes |
-|---|---|---|
-| The Voidspire | S1 | 6 bosses — tips + role notes |
-| March on Quel'Danas | S1 | uiMapID pending in-game verification |
-| The Dreamrift | S1 | 1 boss — tips + role notes |
-| **Venomous Abyss** | **S2** | **8 bosses — opening Aug 18, 2026. Boss tips in development.** |
+Both editions let you move and resize the HUD, adjust its appearance, keep personal notes alongside tips, and choose a chat channel for the HUD's send button. Optional LibSharedMedia support adds fonts from your other addons; built-in fonts work without it.
 
-### Delves
-
-13 delves supported: 10 from Season 1 (boss tips for all), plus 3 new Season 2 delves on the Coiled Isle (The Ring of Glory, Gnarldor Isle, Venomfall Deeps — Nemesis). S2 delve boss tips are in development. **Opt-in** via the **Enable in Delves** setting.
-
-### Timewalking
-
-35 dungeons registered across six expansion pools: Burning Crusade, Wrath of the Lich King, Cataclysm, Mists of Pandaria, Warlords of Draenor, and Legion. Boss tips are being added pool by pool from Wowhead (primary) and warcraft.wiki.gg (secondary). To help fill out a dungeon, verify its `uiMapID` in-game with `/run print(C_Map.GetBestMapForUnit("player"))` and open a tip-suggestion issue.
-
----
-
-## Retail Limitations
-
-This is a **semi-ready** Season 2 release. Everything below works and ships in v3.0.1, but some content is still being completed for the Aug 18 S2 launch:
-
-- **4 S2 dungeon IDs are unverified** — Kings' Rest, Temple of Sethraliss, Ruby Life Pools, and Altar of Fangs still have `instanceID = 0` / `uiMapID = 0`. These will auto-fill from the in-game debug log once run with `/kwik debuglog` and `tools/sync_ids.py --apply`. Until then, detection for these dungeons falls back to `uiMapID` lookup (which is also 0 for the same four).
-- **Venomous Abyss raid** — 8-boss skeleton present, but individual boss names and tips are TODO (the raid opens Aug 18; guides are expected to publish at launch).
-- **Voidscar Arena and Kings' Rest** — tips are sourced from Tactyks' YouTube S2 previews; the written method.gg guides have not yet published (HTTP 404 as of Aug 11). Tips will be cross-verified when the guides go live.
-- **3 new Season 2 delves** — registered as stubs with `instanceID = 0` / `uiMapID = 0`; boss names and tips are TODO pending S2 delve guide publication.
-- **Timewalking boss tips** — incomplete across most pools; contributions welcome.
-
-The addon uses a daily cron monitor that watches method.gg and Icy Veins dungeon guide pages for changes. When new guides publish, the monitor auto-flags them for cross-verification — so gaps close automatically as source material appears.
-
----
+Open settings with `/kwik` or the minimap button. The bundled interface includes German localization; authored tips remain in English where a translation is unavailable.
 
 ## Installation
 
-### Retail (Midnight)
+1. Download the package for your edition from the table above.
+2. Extract the addon folder into the matching client directory:
 
-1. Download the Retail package from CurseForge, Wago, or WoWInterface.
-2. Extract the `KwikTip` folder into:
-   ```
+   ```text
    World of Warcraft/_retail_/Interface/AddOns/KwikTip
-   ```
-3. Enable the addon on the character selection screen.
-
-### WoW Forever
-
-1. Download [the Forever alpha ZIP](https://github.com/postblink/KwikTip/releases/download/forever-v0.1.0-alpha.7/KwikTip_Forever-0.1.0-alpha.7.zip), or choose the Forever alpha on CurseForge or Wago.
-2. Close the game and extract the `KwikTip_Forever` folder into:
-
-   ```
    World of Warcraft/_forever_/Interface/AddOns/KwikTip_Forever
    ```
 
-3. Enable **KwikTip: Forever (Alpha)** in that client. Keep Retail `KwikTip` disabled there, and retain a backup of the previous addon folder when updating.
+3. Enable the matching addon on the character selection screen. After updating Lua files while logged in, `/reload` normally loads the update.
 
-Use the packaged ZIP for Forever. The repository's `Forever/` directory is source material; it does not contain the shared runtime and assets needed for installation. The alpha targets interface `16001`; client compatibility still needs the live checks described above.
+For Forever, use the packaged ZIP: the repository's `Forever/` source folder alone does not contain the complete addon. An existing character can retain its previous addon enablement setting.
 
----
+## Commands
 
-## Usage
-
-| Command | Action |
+| Command | What it does |
 |---|---|
-| `/kwiktip` or `/kwik` | Open/close settings |
-| `/kwik move` | Toggle move mode (drag and resize the HUD) |
-| `/kwik debug` | Print current instance detection state to chat |
-| `/kwik debuglog` | Toggle map/mob ID logging to SavedVariables |
-| `/kwik preview` | Toggle role notes preview in the HUD |
-| `/kwik clearlog` | Clear all debug logs from SavedVariables |
-| `/kwik feedback` | Print the feedback/issue link to chat |
-| `/kwik help` | Print all available commands to chat |
+| `/kwik` or `/kwiktip` | Open settings. |
+| `/kwik move` | Show and move or resize the HUD. |
+| `/kwik preview` | Preview the role-note display. |
+| `/kwik boss` | **Forever:** list available bosses in a supported dungeon. |
+| `/kwik boss <number or name>` | **Forever:** preview a boss tip before the pull. |
+| `/kwik boss clear` | **Forever:** dismiss the manual boss preview. |
+| `/kwik debug` | Print the current instance detection state. |
+| `/kwik feedback` | Show the feedback link. |
+| `/kwik help` | List available commands. |
 
-The HUD is hidden outside of instances. Use `/kwik move` to show and reposition it at any time.
+## Feedback
 
-### Settings
+Found a missing tip or a mechanic that needs a correction? [Open an issue](https://github.com/postblink/KwikTip/issues) and include the edition, dungeon, boss, and what happened. Please don't post your full SavedVariables files; they can contain personal notes and other logs.
 
-Open the settings window (minimap button or `/kwik`) to configure:
-
-- **Persistent Tip Window** — keep the HUD visible during a run; Forever shows a dungeon-wide overview between encounters
-- **Enable Custom Notes** — show the note button so you can save personal notes
-- **Enable in Delves (Retail only)** — opt in to tips inside Delve (scenario) instances
-- **Hide HUD** — quickly hide the addon without disabling it; toggle again to show
-- **Auto-expand Height** — let the HUD grow for long tips instead of clipping
-- **Send to Chat** — choose None / Say / Instance / Party / Raid to print the current tip
-- **Font** — pick from LibSharedMedia-3.0 fonts (falls back to built-in WoW fonts)
-- **Preview** — see how role notes render without entering an instance
-
-A minimap button (when enabled) provides quick access: left-click opens settings, right-click toggles move mode, drag to reposition.
-
----
-
-## Translations
-
-The settings UI, slash help, and HUD labels are fully localizable. **German (deDE)** is bundled and maintained with each release. Tip content intentionally stays in English — mechanical accuracy is critical and mistranslations could cost your group a key.
-
-To contribute a translation for your language:
-
-1. Log in to CurseForge
-2. Go to the [KwikTip localization page](https://legacy.curseforge.com/wow/addons/kwiktip/localization)
-3. Select your language and fill in the strings
-
-Retail releases pull translations through the CurseForge packager. The Forever alpha includes the bundled UI locales; its authored tips remain in English.
-
----
-
-## Feedback & Tips
-
-Tips feel off or missing? File an issue: https://github.com/postblink/KwikTip/issues
-
-There are templates for bug reports and tip suggestions — the tip-suggestion template is the fastest way to get a correction or addition into the next release.
+KwikTip is free and open source under the [GPL-3.0 license](LICENSE).
