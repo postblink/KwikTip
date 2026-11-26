@@ -38,8 +38,11 @@ def logo():
 
 def pill(draw, xy, text):
     x,y=xy
-    draw.rounded_rectangle((x,y,x+157,y+34),radius=17,fill=(105,28,35,255),outline=(186,75,76,255),width=1)
-    draw.text((x+17,y+7),text,font=font(15,True),fill=(255,221,211,255))
+    face = font(15, True)
+    left, _, right, _ = draw.textbbox((0, 0), text, font=face)
+    width = right - left + 34
+    draw.rounded_rectangle((x,y,x+width,y+34),radius=17,fill=(105,28,35,255),outline=(186,75,76,255),width=1)
+    draw.text((x+17-left,y+7),text,font=face,fill=(255,221,211,255))
 
 def panel(im, image, xy, width):
     src=fit(image,(width,1000)); x,y=xy
